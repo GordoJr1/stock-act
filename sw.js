@@ -1,4 +1,4 @@
-const CACHE = "stock-act-v1";
+const CACHE = "stock-act-v2";
 const SHELL = [
   "./",
   "./index.html",
@@ -60,7 +60,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  const isTrade = /(?:^|\/)(trades|trades-lite|landed|heat)\.json$/.test(url.pathname)
+  const isTrade = /(?:^|\/)(trades|trades-lite|landed|heat|backtest|analysis|tells)\.json$/.test(url.pathname)
     || /\/tape\/(?:page|all|filers)\.json$/.test(url.pathname)
     || /\/tape\/kind\/[^/]+\.json$/.test(url.pathname)
     || /\/tape\/politicians\/[^/]+\.json$/.test(url.pathname)
@@ -93,7 +93,7 @@ self.addEventListener("fetch", (event) => {
   if (isTrade) {
     event.respondWith((async () => {
       try {
-        const res = await fetch(event.request);
+        const res = await fetch(event.request, { cache: "no-cache" });
         storeIfOk(res);
         return res;
       } catch (err) {
