@@ -1,2 +1,9 @@
-# stock-act
-Senate, House, and White House STOCK Act tape. Politicians site split from Quantity Capital.
+# Stock Act
+
+Senate, House, and White House STOCK Act tape.
+
+Live site: https://gordojr1.github.io/stock-act/
+
+The page chrome lives in this repo. The morning and evening collector on this PC writes the tape JSON and `prices/` through `Groks folder/collect/publish_politicians.py`. Insiders, mines, and claims stay on [quantity-capital](https://gordojr1.github.io/quantity-capital/).
+
+Not investment advice. Filings are public. Amounts are official ranges.

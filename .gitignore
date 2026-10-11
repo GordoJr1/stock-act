@@ -1,0 +1,7 @@
+.superdesign/tmp/
+qc.sqlite
+qc.sqlite-wal
+qc.sqlite-shm
+qc.sqlite.tmp
+.cache/
+*.xlsx
