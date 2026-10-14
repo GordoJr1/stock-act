@@ -2475,13 +2475,6 @@
     const select = opts.select;
     if (!search || !rowSel || typeof select !== "function") return;
 
-    if (!search.parentNode || !search.parentNode.querySelector(":scope > .qc-keys-hint")) {
-      const hint = document.createElement("p");
-      hint.className = "qc-keys-hint";
-      hint.textContent = "/ to search · j/k to move";
-      search.insertAdjacentElement("afterend", hint);
-    }
-
     if (bindTapeKeys._bound) return;
     bindTapeKeys._bound = true;
     document.addEventListener("keydown", function (e) {
