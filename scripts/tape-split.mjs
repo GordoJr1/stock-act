@@ -1,5 +1,3 @@
-// Split trades.json / trades-lite.json into the files the pages fetch.
-// Enrichment uses qc.js so code, company, and industry match the site.
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";

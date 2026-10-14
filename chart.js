@@ -1,16 +1,3 @@
-/**
- * Quantity Capital — Neon Glass Interactive Chart Engine (Option 2)
- *
- * Features:
- * - Smooth Catmull-Rom cubic spline interpolation for organic price curves
- * - Dual-phase neon gradient (ice platinum -> electric cyan) with a thin glowing blur underlayer
- * - Integrated Politician and Insider transaction pins snapped directly onto the price spline
- * - High-clarity, large luminous typography for Y-axis price levels and X-axis date intervals
- * - 60 FPS interactive pointer scrubber (mouse hover & mobile touch)
- * - Vertical crosshair line, snapped active node, attached price pill, and bottom date chip
- * - Zero external dependencies, pure native SVG + DOM, fully responsive
- */
-
 function axisPrice(n) {
   if (n >= 1000) return "$" + Math.round(n / 1000) + "k";
   if (Math.abs(n) >= 10 || Math.abs(n - Math.round(n)) < 1e-8) return "$" + Math.round(n);
@@ -137,9 +124,6 @@ function tradeValue(m) {
   return 10000;
 }
 
-/**
- * Generate a smooth cubic Catmull-Rom spline path string for SVG
- */
 function createSplinePath(pts) {
   if (!pts || pts.length < 2) return "";
   let d = "M " + pts[0].x.toFixed(1) + " " + pts[0].y.toFixed(1);
@@ -161,7 +145,6 @@ function createSplinePath(pts) {
   return d;
 }
 
-// Built-in color palettes for chart spline and accents
 const CHART_PALETTES = {
   emerald: {
     name: "Emerald Matrix",
@@ -260,9 +243,6 @@ const CHART_PALETTES = {
   }
 };
 
-/**
- * Main drawChart routine
- */
 function drawChart(points, marks, opts) {
   opts = opts || {};
   const wrap = document.getElementById("chart-wrap");
@@ -271,7 +251,6 @@ function drawChart(points, marks, opts) {
   const xBox = document.getElementById("chart-x");
   if (!svg || !points || points.length < 2) return [];
 
-  // Dimensions & Padding
   const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 820px)").matches;
   const w = 840;
   const cssH = Math.round(svg.clientHeight || 0);
@@ -294,7 +273,6 @@ function drawChart(points, marks, opts) {
   }
   svg.setAttribute("viewBox", "0 0 " + w + " " + h);
 
-  // Full height for price curve
   const priceTop = pad.t;
   const priceBot = h - pad.b;
   const priceH = priceBot - priceTop;
@@ -312,11 +290,9 @@ function drawChart(points, marks, opts) {
   const xAt = (i) => pad.l + (i / Math.max(1, points.length - 1)) * (w - pad.l - pad.r);
   const yAt = (px) => priceTop + (1 - (px - min) / span) * priceH;
 
-  // Active color theme (defaults to cyan)
   const themeKey = (opts.theme && CHART_PALETTES[opts.theme]) ? opts.theme : (window.QC_CHART_THEME || "cyan");
   const palette = CHART_PALETTES[themeKey] || CHART_PALETTES.cyan;
 
-  // Build screen coordinates for each price bar
   const pts = points.map((p, i) => ({
     x: xAt(i),
     y: yAt(p[1]),
@@ -337,8 +313,6 @@ function drawChart(points, marks, opts) {
     return idx;
   };
 
-  // Optional shaded area under curve - disabled per user request
-  // (area shading removed for crisp, clean price curve visibility)
   let areaPath = "";
   if (opts.showArea) {
     const buys = (marks || []).filter((m) => m.side !== "sale" && m.side !== "sale_post" && m.date);
@@ -355,8 +329,7 @@ function drawChart(points, marks, opts) {
     }
   }
 
-  // Y-axis grid lines on whole-dollar nice ticks.
-  // Labels are HTML (not SVG text) so preserveAspectRatio="none" cannot stretch them.
+  // Y labels are HTML, not SVG text, so preserveAspectRatio="none" cannot stretch them.
   const yTicks = scale.ticks;
   const gridLines = yTicks.map((px) => {
     const y = yAt(px).toFixed(1);
@@ -364,12 +337,10 @@ function drawChart(points, marks, opts) {
       "\" stroke=\"rgba(255,255,255,0.08)\" stroke-width=\"1\" stroke-dasharray=\"3 4\" />";
   }).join("");
 
-  // Visible marks along the spline
   const firstDate = points[0][0];
   const lastDate = points[points.length - 1][0];
   const visibleMarks = (marks || []).filter((m) => m.date >= firstDate && m.date <= lastDate);
 
-  // Cluster overlapping trade marks for clean pins
   const hit = [];
 
   function clusterByDate(arr) {
@@ -444,7 +415,6 @@ function drawChart(points, marks, opts) {
     const n = cluster.items.length;
     const marksList = cluster.items.map((row) => row.mark);
     const mid = cluster.items[Math.floor((n - 1) / 2)];
-    // Snap dead-center onto the price line at this date
     const cy = yAt(points[mid.i][1]);
     const politician = family === "politician";
     const color = sale ? "#f87171" : "#22c55e";
@@ -497,7 +467,6 @@ function drawChart(points, marks, opts) {
                         polBuyClusters.map((c) => drawCluster(c, false, "politician")).join("") +
                         polSellClusters.map((c) => drawCluster(c, true, "politician")).join("");
 
-  // Render complete SVG
   const gradStopsHtml = palette.gradStops.map((s) =>
     "<stop offset=\"" + s.offset + "\" stop-color=\"" + s.color + "\" />"
   ).join("");
@@ -519,19 +488,12 @@ function drawChart(points, marks, opts) {
         "<stop offset=\"100%\" stop-color=\"" + palette.primary + "\" stop-opacity=\"0.01\" />" +
       "</linearGradient>" +
     "</defs>" +
-    // Y Grid lines
     gridLines +
-    // Area fill if explicitly enabled
     (areaPath ? "<path d=\"" + areaPath + "\" fill=\"url(#qc-sub-area)\" />" : "") +
-    // Glowing underlayer (delicate, refined blur)
     "<path d=\"" + spline + "\" fill=\"none\" stroke=\"url(#underGlow)\" stroke-width=\"" + (opts.glowWidth || 5.5) + "\" opacity=\"0.55\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />" +
-    // Crisp foreground spline (sleek, precision 2.2px line)
     "<path class=\"qc-spline-main\" d=\"" + spline + "\" fill=\"none\" stroke=\"url(#neonGradient)\" stroke-width=\"" + (opts.lineWidth || 2.2) + "\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"filter:" + palette.glowFilter + ";\" />" +
-    // Terminal point dot
     "<circle cx=\"" + lastPt.x.toFixed(1) + "\" cy=\"" + lastPt.y.toFixed(1) + "\" r=\"5.2\" fill=\"" + palette.light + "\" stroke=\"#ffffff\" stroke-width=\"1.7\" />" +
-    // Interactive Trade Pins
     tradePinsHtml +
-    // Scrubber elements (updated dynamically on pointermove)
     "<g id=\"qc-scrubber-g\" style=\"display:none; pointer-events:none;\">" +
       "<line id=\"qc-scrub-line\" x1=\"0\" y1=\"" + pad.t + "\" x2=\"0\" y2=\"" + priceBot + "\" stroke=\"rgba(255,255,255,0.22)\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\" />" +
       "<circle id=\"qc-scrub-halo\" cx=\"0\" cy=\"0\" r=\"7.5\" fill=\"rgba(255,255,255,0.24)\" />" +
@@ -540,7 +502,6 @@ function drawChart(points, marks, opts) {
 
   paintYAxisLabels(wrap, svg, yBox, yTicks, yAt, w, h, pad);
 
-  // Bottom X-axis labels
   if (xBox) {
     const last = points.length - 1;
     const spots = [0, Math.round(last / 4), Math.round(last / 2), Math.round((3 * last) / 4), last];
@@ -550,10 +511,9 @@ function drawChart(points, marks, opts) {
     xBox.style.paddingLeft = pad.l + "px";
   }
 
-  // Hover badges (no end-of-chart last-price pill — last price lives in the page header)
+  // Last price lives in the page header — do not draw an end-of-chart pill.
   ensureInteractiveDomElements(wrap, palette);
 
-  // Hook up mark click events
   svg.querySelectorAll(".chart-mark").forEach((el) => {
     el.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -563,7 +523,6 @@ function drawChart(points, marks, opts) {
     });
   });
 
-  // Canvas click to dismiss trade popover if clicked outside marks
   svg.addEventListener("click", (e) => {
     if (!e.target.closest(".chart-mark")) {
       const pop = wrap.querySelector("#mark-pop");
@@ -571,7 +530,6 @@ function drawChart(points, marks, opts) {
     }
   });
 
-  // Attach Pointer Scrubbing
   attachScrubberEvents(svg, wrap, pts, w, h);
 
   if (svgRect.width <= 2) {
@@ -583,23 +541,17 @@ function drawChart(points, marks, opts) {
   return hit;
 }
 
-/**
- * Ensure hover badges exist in the chart-wrap.
- * Last price is already on the ticker page — do not draw an end-of-chart pill.
- */
 function ensureInteractiveDomElements(wrap, palette) {
   if (!wrap) return;
 
   const leftoverTerm = wrap.querySelector(".qc-terminal-pill");
   if (leftoverTerm) leftoverTerm.remove();
 
-  // Update mark-pop box-shadow if active
   const pop = wrap.querySelector("#mark-pop");
   if (pop && palette && palette.popShadow) {
     pop.style.boxShadow = palette.popShadow;
   }
 
-  // Attached price pill on cursor
   let hoverPricePill = wrap.querySelector(".qc-hover-price-pill");
   if (!hoverPricePill) {
     hoverPricePill = document.createElement("div");
@@ -608,7 +560,6 @@ function ensureInteractiveDomElements(wrap, palette) {
     wrap.appendChild(hoverPricePill);
   }
 
-  // Bottom date chip on cursor
   let hoverDatePill = wrap.querySelector(".qc-hover-date-pill");
   if (!hoverDatePill) {
     hoverDatePill = document.createElement("div");
@@ -687,9 +638,6 @@ function hideChartHoverUi(wrap, svg) {
   if (scrubG) scrubG.style.display = "none";
 }
 
-/**
- * Handle 60 FPS pointer tracking across mouse and touch devices
- */
 function attachScrubberEvents(svg, wrap, pts, w, h) {
   const scrubG = svg.querySelector("#qc-scrubber-g");
   const scrubLine = svg.querySelector("#qc-scrub-line");
@@ -713,7 +661,6 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
     const relX = clientX - sr.left;
     const svgX = (relX / sr.width) * w;
 
-    // Binary search or linear closest search on points
     let closestIdx = 0;
     let minDist = Infinity;
     for (let i = 0; i < pts.length; i++) {
@@ -726,7 +673,6 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
     const pt = pts[closestIdx];
     if (!pt) return;
 
-    // Show scrubber elements
     if (scrubG) scrubG.style.display = "";
     if (scrubLine) {
       scrubLine.setAttribute("x1", pt.x.toFixed(1));
@@ -746,7 +692,6 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
     const screenX = (pt.x * scaleX) + (sr.left - wr.left);
     const screenY = (pt.y * scaleY) + (sr.top - wr.top);
 
-    // Attached Price Pill
     if (hoverPricePill) {
       hoverPricePill.style.display = "block";
       let pillLeft = screenX + 10;
@@ -758,7 +703,6 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
       hoverPricePill.textContent = quotePrice(pt.px);
     }
 
-    // Bottom Date Pill
     if (hoverDatePill) {
       hoverDatePill.style.display = "block";
       hoverDatePill.style.left = screenX + "px";
@@ -956,7 +900,6 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
   pop.style.transform = "none";
 }
 
-// Export palettes globally
 if (typeof window !== "undefined") {
   window.CHART_PALETTES = CHART_PALETTES;
   window.hideChartHoverUi = hideChartHoverUi;

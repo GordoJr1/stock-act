@@ -1,4 +1,3 @@
-/* Shared tape helpers for Quantity Capital pages. */
 (function (global) {
   const BAD_TICKERS = { LLC: 1, THE: 1, AND: 1, INC: 1, CORP: 1, CLASS: 1, NONE: 1, NA: 1, CMN: 1, COM: 1, NPV: 1, ETF: 1, FUND: 1 };
   // Words OCR'd or parsed as the underlying on option rows. Not blanked on stock rows (EXP and ING are real tickers).
@@ -100,7 +99,6 @@
     return "";
   }
 
-  // Last plausible day of a raw expiry ("03/14/2026", "2026-03-14", "03/2026", "Mar 26"), or null.
   function optionExpLastDay(raw) {
     const s = String(raw || "").trim();
     let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
@@ -601,7 +599,6 @@
     s = s.replace(/^(?:account(?:\s*#\s*\d+)?|uma account(?:\s*#\s*\d+)?)\b[\s,:-]*/i, "");
     s = s.replace(/^#\s*\d+\s+/, "");
     s = s.replace(/^\d{2,5}\s+/, "");
-    // "Chris IRA …", "Kevin Hern Traditional IRA …", "Sarah Landsman Traditional IRA …"
     s = s.replace(/^(?:[A-Za-z][A-Za-z.'\u2019-]*\s+){1,4}(?:(?:traditional|roth|rollover|sep|simple|inherited|spousal)\s+)?(?:IRA|401\(?k\)?)\s+/i, "");
     s = s.replace(/^(?:tacs r3k)\s+/i, "");
     s = s.replace(/^\$[\d,]+(?:\.\d+)?\s+(?:F\s+S:\s*Amended\s+\S+\s+)?/i, "");
@@ -2464,10 +2461,8 @@
     });
   }
 
-  // Tape / Insiders: / focuses search, j/k move the visible row (same as a click), Escape blurs search.
-  // Ignored while typing (input/select/textarea/contenteditable), during IME, or with Ctrl/Alt/Meta.
-  // Shift is ignored for j/k but not for / (layouts that type / with Shift). j/k only at 900px+, with the row highlight.
-  // Phone More+Escape stays in bootMoreMenu.
+  // Shift+/ still focuses search (some layouts type / with Shift). j/k only at 900px+.
+  // Escape for the More menu stays in bootMoreMenu.
   function bindTapeKeys(opts) {
     opts = opts || {};
     const search = typeof opts.search === "string" ? document.querySelector(opts.search) : opts.search;
@@ -2524,8 +2519,7 @@
     });
   }
 
-  // Phone header "More" menu (static <details class="qc-more"> in each page header):
-  // close it on an outside tap or Escape. It still works without this script.
+  // The More <details> still works without this closer.
   function bootMoreMenu() {
     document.addEventListener("click", function (e) {
       document.querySelectorAll("details.qc-more[open]").forEach(function (d) {
