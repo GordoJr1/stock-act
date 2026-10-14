@@ -64,7 +64,6 @@ html {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-/* The header now carries the inset; drop the older per-page body padding so it is not doubled. */
 body { padding-top: 0 !important; }
 .qc-header-inner {
   display: flex;
@@ -1662,7 +1661,6 @@ summary:focus-visible,
 }
 .ident-nav .back { color: var(--teal, #36999d); text-decoration: none; }
 @media (max-width: 820px) {
-  /* Hit area only. Negative margin cancels the padding so the line stays the text height. */
   a.back,
   .ident-nav .back {
     display: inline-block;
@@ -2115,7 +2113,6 @@ body.qc-v2 .qc-plan-tag { color: var(--paper, #d8dde3); border-color: var(--v2-b
   body.qc-v2 .picker input, body.qc-v2 .picker select, body.qc-v2 .filters input, body.qc-v2 .filters select { min-height: 44px; }
   body.qc-v2 .holdings .focus .range button { min-height: 44px; min-width: 44px; }
   body.qc-v2 .rep-wrap { border-top-left-radius: 0; border-bottom-left-radius: 0; }
-  /* tiny close "x" on chart popovers: invisible 44px hit area, same look */
   body.qc-v2 .holdings .focus .mark-pop .pop-close { position: relative; }
   body.qc-v2 .holdings .focus .mark-pop .pop-close::after { content: ""; position: absolute; inset: -11px; }
   body.qc-v2 #search-form input, body.qc-v2 #search-form button, body.qc-v2 #search { min-height: 44px; }
@@ -2219,8 +2216,6 @@ body.qc-v2 .qc-plan-tag { color: var(--paper, #d8dde3); border-color: var(--v2-b
   .qc-keys-hint { display: block; }
 }
 
-/* Politician member page only: Tape/Insiders desk — list left, sticky chart right.
-   Scoped to .qc-member-desk so Tape, Insiders, ticker, and officer pages stay put. */
 @media (min-width: 821px) {
   .qc-member-desk {
     display: grid;
@@ -2267,9 +2262,6 @@ body.qc-v2 .qc-plan-tag { color: var(--paper, #d8dde3); border-color: var(--v2-b
     overflow-y: auto;
   }
   .qc-member-desk .tape-head { margin: 0 0 8px; }
-  /* One shared track for date and amount so the header and every row line up.
-     Name and company shrink. 8rem fits "Aug 14, 2026" plus a gap; 7.6rem fits
-     $100K–$250K / $1M–$5M in the hero mono. */
   .qc-member-desk .qc-txn-list.qc-tape-list > .qc-txn-tape .qc-txn-hero,
   .qc-member-desk .qc-txn-list.qc-tape-list > .qc-txn-cols .qc-txn-hero,
   .qc-member-desk .qc-txn-list.qc-tape-list > .qc-txn-cols-phone .qc-txn-hero {
@@ -2291,9 +2283,6 @@ body.qc-v2 .qc-plan-tag { color: var(--paper, #d8dde3); border-color: var(--v2-b
       grid-template-columns: var(--qc-desk-date-short) minmax(0, 1.4fr) var(--qc-desk-chip) var(--qc-desk-hero);
     }
   }
-  /* Half-width list: drop Strike/Exp columns so the amount stays on screen.
-     Option contract goes on its own line under the ticker. Stock rows stay
-     one line. */
   @media (min-width: 900px) {
     .qc-member-desk .qc-txn-list.qc-show-opt.qc-tape-list > .qc-txn-cols,
     .qc-member-desk .qc-show-opt .qc-txn-tape {

@@ -2849,7 +2849,6 @@
       return map[cls] || String(side || "").split(/\s+/)[0] || "";
     }
 
-    /* Full side label stays for screen readers; the visible word is the short Buy/Sell tag. */
     function wireRowHtml(t) {
       const code = shownCode(t);
       const optMode = document.body.classList.contains("tape-opt");
@@ -2883,7 +2882,6 @@
       let optLine = "";
       if (optMode && isOptionLike(t)) {
         const o = optionMeta(t);
-        // Always show both fields on the options desk; "—" when the filing gives none we can read.
         const bits = ["Strike " + (o.strike ? "$" + o.strike : "\u2014"), "Exp " + (o.exp || "\u2014")];
         const tipOpt = (!o.strike || !o.exp) ? " title=\"Not stated or unreadable in the filing\"" : "";
         optLine = "<div class=\"w-opt\"" + tipOpt + ">" + escapeHtml(bits.join(" \u00b7 ")) + "</div>";
@@ -2937,7 +2935,6 @@
         let out = "";
         for (const w of words) { const nx = out ? out + " " + w : w; if (nx.length > W1_CO_MAX) break; out = nx; }
         out = out.replace(/\s*[&\-\/]$/, "");
-        /* keep the word cut when it still says enough (>= 8 chars); otherwise hard cut at 13 + "…" */
         abbr = out.length >= 8 ? out : clean.slice(0, W1_CO_MAX - 1).replace(/\s+$/, "") + "\u2026";
       }
       return { full, abbr };
@@ -2996,7 +2993,6 @@
       let optLine = "";
       if (document.body.classList.contains("tape-opt") && isOptionLike(t)) {
         const o = optionMeta(t);
-        // Always show both fields on the options desk; "—" when the filing gives none we can read.
         const bits = ["Strike " + (o.strike ? "$" + o.strike : "\u2014"), "Exp " + (o.exp || "\u2014")];
         const tipOpt = (!o.strike || !o.exp) ? " title=\"Not stated or unreadable in the filing\"" : "";
         optLine = "<div class=\"w1-opt\"" + tipOpt + ">" + escapeHtml(bits.join(" \u00b7 ")) + "</div>";
@@ -3038,7 +3034,6 @@
           "<ol class=\"w1-rows\">" + g.rows.map(w1RowHtml).join("") + "</ol></li>";
       }).join("");
     }
-    /* Name gives way first (ellipsis). A few px short: tighten gaps. Squeezed under ~5 chars: the key chip collapses to "+N". */
     function w1Fit(box) {
       if (!box) return;
       box.querySelectorAll(".w1.tight, .w1.snug").forEach((r) => r.classList.remove("tight", "snug"));
@@ -3179,9 +3174,6 @@
       if (pop) pop.hidden = true;
     }
 
-    /* v2: the trade card sits in a headroom band above the plot (CHART_POP_BAND, passed to
-       drawChart as pad.t), centred on the pin's x, with a dashed line down to the pin. It never
-       covers the price line or the pin. */
     const CHART_POP_BAND = 92;
     function dockPop(pop, wrap, svg, rec, buy) {
       if (!pop || !wrap || !svg || !rec) return;
@@ -3380,10 +3372,8 @@
           filer: t.filer,
           amount: t.amount
         }];
-        // Phones: short chart in the opened strip, so no reserved band for the trade card and no auto-open (tap the mark to see it).
         const roomy = DESK_MQ.matches;
         if (roomy) {
-          // Back from the phone strip's 170px chart: let the desktop CSS height apply again.
           const svgEl = document.getElementById("chart-svg");
           if (svgEl) svgEl.style.height = "";
         }

@@ -376,7 +376,6 @@ function drawChart(points, marks, opts) {
   const polBuyClusters = clusterByDate(visibleMarks.filter((m) => markFamily(m) === "politician" && !isSaleMark(m)));
   const polSellClusters = clusterByDate(visibleMarks.filter((m) => markFamily(m) === "politician" && isSaleMark(m)));
 
-  // If two clusters land on the same date/spot, nudge them apart so both stay on the curve.
   function separateClusters(aList, bList, minDist) {
     const gap = minDist == null ? 16 : minDist;
     aList.forEach((ac) => {
@@ -511,7 +510,6 @@ function drawChart(points, marks, opts) {
     xBox.style.paddingLeft = pad.l + "px";
   }
 
-  // Last price lives in the page header — do not draw an end-of-chart pill.
   ensureInteractiveDomElements(wrap, palette);
 
   svg.querySelectorAll(".chart-mark").forEach((el) => {
@@ -817,7 +815,6 @@ function sampleSplineInWrap(svg, wrap) {
   return pts;
 }
 
-/** Flip the trade popup above/below or left/right of the pin to avoid the price path when we can. */
 function placeMarkPop(pop, wrap, svg, rec, opts) {
   if (!pop || !wrap || !rec) return;
   opts = opts || {};

@@ -121,7 +121,6 @@
     return null;
   }
 
-  // An option cannot expire before it trades, and listed/FLEX options run at most a few years.
   function plausibleOptionExp(raw, tradeDate) {
     const last = optionExpLastDay(raw);
     if (!last || isNaN(last.getTime())) return true;
@@ -562,7 +561,6 @@
   const SHARE_TAIL = /\s+(?:Common Stock.*|Class [A-Z].*|Ordinary Shares?.*|American Depositary Shares?.*|\bADS\b.*|Registered Shares.*|Common Shares.*|New York Registry Shares.*|Common Units(?: Representing.*)?|\bVoting\b.*|Series [A-Z]\b.*|\bCMN\b.*)$/i;
   const DESK_NOTE = /^(?:Dividend Reinvestment|Portfolio Rebalance|Account Closing|FULL LIQUIDATION\.?|Professionally managed account\.?|Sold entire holding\.?|Corporate bond|Municipal bond|Treasury bond|Sell to close\.?|Revocabl\w*)(?:\.\s*|\s+)/i;
 
-  /* Company after a PTR "D:" note, or the text before "D:" when the note has no issuer. */
   function takeAfterDeskNote(text) {
     const t = String(text || "");
     if (!/\bD:\s*/i.test(t)) return t;
@@ -2048,7 +2046,6 @@
       if (!ov) return;
       t.plan = !!ov.plan;
       t.planWhy = ov.why || "";
-      // Fill gaps only. Do not overwrite tape shares / shares_after / held_pct.
       if (emptyNum(t.shares) && ov.shares != null) t.shares = ov.shares;
       if (emptyNum(t.shares_after) && (ov.shares_held != null || ov.after != null)) {
         t.shares_after = ov.shares_held != null ? ov.shares_held : ov.after;
@@ -2462,7 +2459,6 @@
   }
 
   // Shift+/ still focuses search (some layouts type / with Shift). j/k only at 900px+.
-  // Escape for the More menu stays in bootMoreMenu.
   function bindTapeKeys(opts) {
     opts = opts || {};
     const search = typeof opts.search === "string" ? document.querySelector(opts.search) : opts.search;
@@ -2519,7 +2515,6 @@
     });
   }
 
-  // The More <details> still works without this closer.
   function bootMoreMenu() {
     document.addEventListener("click", function (e) {
       document.querySelectorAll("details.qc-more[open]").forEach(function (d) {
