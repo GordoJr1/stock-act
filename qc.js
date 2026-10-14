@@ -1,4 +1,3 @@
-/* Shared tape helpers for Quantity Capital pages. */
 (function (global) {
   const BAD_TICKERS = { LLC: 1, THE: 1, AND: 1, INC: 1, CORP: 1, CLASS: 1, NONE: 1, NA: 1, CMN: 1, COM: 1, NPV: 1, ETF: 1, FUND: 1 };
   // Words OCR'd or parsed as the underlying on option rows. Not blanked on stock rows (EXP and ING are real tickers).
@@ -100,7 +99,6 @@
     return "";
   }
 
-  // Last plausible day of a raw expiry ("03/14/2026", "2026-03-14", "03/2026", "Mar 26"), or null.
   function optionExpLastDay(raw) {
     const s = String(raw || "").trim();
     let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
@@ -123,7 +121,6 @@
     return null;
   }
 
-  // An option cannot expire before it trades, and listed/FLEX options run at most a few years.
   function plausibleOptionExp(raw, tradeDate) {
     const last = optionExpLastDay(raw);
     if (!last || isNaN(last.getTime())) return true;
@@ -564,7 +561,6 @@
   const SHARE_TAIL = /\s+(?:Common Stock.*|Class [A-Z].*|Ordinary Shares?.*|American Depositary Shares?.*|\bADS\b.*|Registered Shares.*|Common Shares.*|New York Registry Shares.*|Common Units(?: Representing.*)?|\bVoting\b.*|Series [A-Z]\b.*|\bCMN\b.*)$/i;
   const DESK_NOTE = /^(?:Dividend Reinvestment|Portfolio Rebalance|Account Closing|FULL LIQUIDATION\.?|Professionally managed account\.?|Sold entire holding\.?|Corporate bond|Municipal bond|Treasury bond|Sell to close\.?|Revocabl\w*)(?:\.\s*|\s+)/i;
 
-  /* Company after a PTR "D:" note, or the text before "D:" when the note has no issuer. */
   function takeAfterDeskNote(text) {
     const t = String(text || "");
     if (!/\bD:\s*/i.test(t)) return t;
@@ -601,7 +597,6 @@
     s = s.replace(/^(?:account(?:\s*#\s*\d+)?|uma account(?:\s*#\s*\d+)?)\b[\s,:-]*/i, "");
     s = s.replace(/^#\s*\d+\s+/, "");
     s = s.replace(/^\d{2,5}\s+/, "");
-    // "Chris IRA …", "Kevin Hern Traditional IRA …", "Sarah Landsman Traditional IRA …"
     s = s.replace(/^(?:[A-Za-z][A-Za-z.'\u2019-]*\s+){1,4}(?:(?:traditional|roth|rollover|sep|simple|inherited|spousal)\s+)?(?:IRA|401\(?k\)?)\s+/i, "");
     s = s.replace(/^(?:tacs r3k)\s+/i, "");
     s = s.replace(/^\$[\d,]+(?:\.\d+)?\s+(?:F\s+S:\s*Amended\s+\S+\s+)?/i, "");
@@ -2051,7 +2046,6 @@
       if (!ov) return;
       t.plan = !!ov.plan;
       t.planWhy = ov.why || "";
-      // Fill gaps only. Do not overwrite tape shares / shares_after / held_pct.
       if (emptyNum(t.shares) && ov.shares != null) t.shares = ov.shares;
       if (emptyNum(t.shares_after) && (ov.shares_held != null || ov.after != null)) {
         t.shares_after = ov.shares_held != null ? ov.shares_held : ov.after;
@@ -2464,10 +2458,7 @@
     });
   }
 
-  // Tape / Insiders: / focuses search, j/k move the visible row (same as a click), Escape blurs search.
-  // Ignored while typing (input/select/textarea/contenteditable), during IME, or with Ctrl/Alt/Meta.
-  // Shift is ignored for j/k but not for / (layouts that type / with Shift). j/k only at 900px+, with the row highlight.
-  // Phone More+Escape stays in bootMoreMenu.
+  // Shift+/ still focuses search (some layouts type / with Shift). j/k only at 900px+.
   function bindTapeKeys(opts) {
     opts = opts || {};
     const search = typeof opts.search === "string" ? document.querySelector(opts.search) : opts.search;
@@ -2524,8 +2515,6 @@
     });
   }
 
-  // Phone header "More" menu (static <details class="qc-more"> in each page header):
-  // close it on an outside tap or Escape. It still works without this script.
   function bootMoreMenu() {
     document.addEventListener("click", function (e) {
       document.querySelectorAll("details.qc-more[open]").forEach(function (d) {
