@@ -2466,13 +2466,6 @@
     const select = opts.select;
     if (!search || !rowSel || typeof select !== "function") return;
 
-    if (!search.parentNode || !search.parentNode.querySelector(":scope > .qc-keys-hint")) {
-      const hint = document.createElement("p");
-      hint.className = "qc-keys-hint";
-      hint.textContent = "/ to search · j/k to move";
-      search.insertAdjacentElement("afterend", hint);
-    }
-
     if (bindTapeKeys._bound) return;
     bindTapeKeys._bound = true;
     document.addEventListener("keydown", function (e) {
@@ -2493,6 +2486,7 @@
         return;
       }
       if (e.shiftKey) return;
+      if (document.activeElement && document.activeElement.closest(".picker-menu")) return;
       if (key !== "j" && key !== "k" && key !== "J" && key !== "K") return;
       if (!deskRowKeysOn()) return;
       const rows = visibleTapeRows(rowSel);

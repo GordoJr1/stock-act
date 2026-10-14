@@ -283,6 +283,7 @@
 
     .picker {
       position: relative;
+      z-index: 16;
       max-width: 420px;
       margin: 0 0 18px;
       min-width: 0;
@@ -453,19 +454,6 @@
     }
     table.tape-table tr.has-err td:nth-child(2) { box-shadow: inset 3px 0 0 var(--red); }
     table.tape-table tr.just-in td:first-child { box-shadow: inset 3px 0 0 var(--caution); }
-    .check-landed {
-      display: flex;
-      align-items: flex-end;
-    }
-    .check-landed label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      margin: 0;
-      height: 42px;
-    }
-    .check-landed input { width: auto; accent-color: var(--caution); }
     .count { color: var(--mute); font-size: 0.85rem; margin: 0; padding: 0 0 10px; }
     .more-row { margin: 14px 0 0; }
 
@@ -536,20 +524,39 @@
 
     @media (min-width: 821px) {
       .filter-row {
-        display: grid;
-        grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
-        gap: 12px 16px;
-        align-items: end;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
       }
       .filter-fold .picker {
         max-width: none;
         margin: 0;
       }
       .filter-fold .filters {
-        margin: 0;
+        display: flex;
+        align-items: flex-end;
+        margin: 8px 0 0;
         gap: 10px 12px;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        flex-wrap: wrap;
       }
+      .filter-fold .filters > div {
+        flex: 1 1 0;
+        min-width: 108px;
+      }
+      .filter-fold .filters .seg-field { flex: 1.4 1 168px; }
+      .filter-fold .filters .seg-field-side {
+        flex: 0 0 auto;
+        min-width: 0;
+      }
+      .filter-fold .filters .filter-clear-wrap {
+        flex: 0 0 auto;
+        min-width: 0;
+      }
+      .filter-fold .filters .filter-clear-wrap { margin-left: auto; }
+    }
+    @media (min-width: 1100px) {
+      .filter-fold .filters { flex-wrap: nowrap; }
     }
 
     @media (max-width: 820px), (orientation: landscape) and (max-height: 620px) {
@@ -1050,9 +1057,10 @@
         gap: 14px 22px;
         margin: 0 0 12px;
         padding: 8px 0;
-        border-top: 1px solid #3a4452;
+        border-top: 0;
         border-bottom: 1px solid #3a4452;
       }
+      .desk-status:empty { display: none; }
       .desk-status b {
         font-family: "Barlow Condensed", sans-serif;
         font-size: 1.35rem;
@@ -1925,18 +1933,191 @@
     }
 
     @media (min-width: 821px) { #tape { padding-top: 24px; } }
-    .picker label, .filters label, .check-landed label {
-      color: var(--v2-sub); font-weight: 600; font-size: 14px; letter-spacing: 0.08em;
+    .filter-fold .picker label,
+    .filter-fold .filters label,
+    .filter-fold .filter-label {
+      display: block;
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--v2-sub);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0;
+      text-transform: none;
+      margin-bottom: 6px;
+      line-height: 1.2;
     }
-    .picker input, .filters input, .filters select {
-      min-height: 42px; background-color: var(--v2-card); border: 1px solid var(--v2-border);
+    .vh {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .picker input, .filters input, .filters select, .seg {
+      min-height: 34px; height: 34px; background-color: var(--v2-card); border: 1px solid var(--v2-border);
       border-radius: 10px; color: var(--white); font-family: "IBM Plex Sans", sans-serif; font-size: 15px;
     }
+    .filters select { padding-top: 0; padding-bottom: 0; line-height: 32px; }
     .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--caution); outline-offset: 1px; }
     .picker-menu { border-radius: 10px; background: #18202b; border-color: var(--v2-border); }
-    .check-landed input { accent-color: var(--v2-buy-bar); width: 18px; height: 18px; }
+    .tape-search { max-width: none; width: 100%; margin: 0; }
+    .tape-search-field { position: relative; }
+    .tape-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--mute);
+      pointer-events: none;
+    }
+    .tape-search-slash {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      border: 1px solid var(--v2-border);
+      border-radius: 4px;
+      color: var(--mute);
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 20px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .tape-search-field.is-on .tape-search-slash { display: none; }
+    .tape-search-field input {
+      width: 100%;
+      height: auto;
+      min-height: 48px;
+      padding: 12px 40px 12px 42px;
+    }
+    .seg {
+      display: none;
+      align-items: stretch;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+    }
+    .seg button {
+      flex: 1 1 0;
+      min-width: 0;
+      border: 0;
+      border-right: 1px solid var(--v2-border);
+      background: transparent;
+      color: var(--mute);
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      cursor: pointer;
+      padding: 0 6px;
+    }
+    .seg button:last-child { border-right: 0; }
+    .seg button.on {
+      background: rgba(238, 242, 245, 0.06);
+      color: var(--white);
+    }
+    .seg.is-on button.on {
+      background: rgba(227, 180, 26, 0.12);
+      color: var(--caution);
+    }
+    .filter-clear-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .filter-clear {
+      height: 34px;
+      min-height: 34px;
+      padding: 0 2px;
+      border: 0;
+      background: transparent;
+      color: var(--caution);
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      white-space: nowrap;
+    }
+    .filter-clear-wrap[hidden] { display: none; }
+    .tape-search-field.is-on input,
+    .filters select.is-on,
+    .seg.is-on {
+      border-color: var(--caution);
+    }
+    .picker-menu {
+      max-height: 280px;
+      margin-top: 4px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+    .picker-menu[hidden] { display: none !important; }
+    .picker-menu button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: "IBM Plex Sans", sans-serif;
+      letter-spacing: 0;
+      text-transform: none;
+      font-size: 14px;
+    }
+    .picker-menu .hit-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .picker-menu .hit-sub {
+      color: var(--mute);
+      font-weight: 400;
+      margin-left: 8px;
+    }
+    .picker-menu .hit-tag {
+      flex: 0 0 auto;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--v2-sub);
+      border: 1px solid var(--v2-border);
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+    @media (min-width: 821px) {
+      .tape-search { margin: 0; }
+      .tape-search-field input { min-height: 52px; font-size: 16px; }
+      .seg { display: flex; }
+      .seg-fallback { display: none !important; }
+      .filter-clear-wrap { height: auto; }
+      .seg[data-seg="side"] { width: auto; }
+      .seg[data-seg="side"] button {
+        flex: 0 0 80px;
+        width: 80px;
+      }
+      .filter-fold .filters select,
+      .filter-fold .seg,
+      .filter-fold .filter-clear {
+        height: 34px;
+        min-height: 34px;
+      }
+    }
     @media (max-width: 820px) {
-      .filters input, .filters select, .picker input { font-size: 16px; min-height: 44px; }
+      .filters input, .filters select, .picker input { font-size: 16px; min-height: 44px; height: 44px; }
+      .tape-search-field input { min-height: 48px; height: auto; }
+      .tape-search-slash { display: none; }
+      .filter-clear { min-height: 44px; height: 44px; }
+      .seg-fallback { display: block; width: 100%; }
     }
 
     .wire-kicker,
@@ -2327,35 +2508,48 @@
       <details class="filter-fold" open>
         <summary>Search &amp; filters <span class="fold-teaser" id="filter-teaser"></span></summary>
         <div class="filter-row">
-        <div class="picker">
-          <label for="who-search">Look up a politician</label>
-          <input id="who-search" type="search" placeholder="Type a name…" autocomplete="off" />
-          <div class="picker-menu" id="who-menu"></div>
+        <div class="picker tape-search">
+          <label class="vh" for="filter-company">Search</label>
+          <div class="tape-search-field">
+            <svg class="tape-search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M15.5 15.5L21 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input id="filter-company" type="search" placeholder="Politician, company, or ticker" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="who-menu" aria-autocomplete="list" />
+            <kbd class="tape-search-slash" aria-hidden="true">/</kbd>
+          </div>
+          <div class="picker-menu" id="who-menu" role="listbox" hidden></div>
         </div>
         <div class="filters">
-          <div>
-            <label for="filter-company">Company</label>
-            <input id="filter-company" type="search" placeholder="Name or ticker…" />
-            <p class="qc-keys-hint">/ to search · j/k to move</p>
-          </div>
           <div>
             <label for="filter-industry">Sector</label>
             <select id="filter-industry">
               <option value="">All sectors</option>
             </select>
           </div>
-          <div>
-            <label for="filter-kind">Stocks / bonds</label>
-            <select id="filter-kind">
+          <div class="seg-field">
+            <span class="filter-label" id="filter-kind-label">Asset type</span>
+            <div class="seg" role="group" aria-labelledby="filter-kind-label" data-seg="kind">
+              <button type="button" data-value="">All</button>
+              <button type="button" data-value="stock">Stocks</button>
+              <button type="button" data-value="option">Options</button>
+              <button type="button" data-value="bond">Bonds</button>
+            </div>
+            <select id="filter-kind" class="seg-fallback">
+              <option value="">All</option>
               <option value="stock" selected>Stocks</option>
               <option value="option">Options</option>
               <option value="bond">Bonds</option>
-              <option value="">All</option>
             </select>
           </div>
-          <div>
-            <label for="filter-side">Buy / Sell</label>
-            <select id="filter-side">
+          <div class="seg-field seg-field-side">
+            <span class="filter-label" id="filter-side-label">Buy / Sell</span>
+            <div class="seg" role="group" aria-labelledby="filter-side-label" data-seg="side">
+              <button type="button" data-value="">All</button>
+              <button type="button" data-value="purchase">Buy</button>
+              <button type="button" data-value="sale">Sell</button>
+            </div>
+            <select id="filter-side" class="seg-fallback">
               <option value="">All</option>
               <option value="purchase">Buy</option>
               <option value="sale">Sell</option>
@@ -2370,11 +2564,8 @@
               <option value="White House">White House</option>
             </select>
           </div>
-          <div class="check-landed">
-            <label for="filter-landed">
-              <input id="filter-landed" type="checkbox" />
-              Just filed
-            </label>
+          <div class="filter-clear-wrap" hidden>
+            <button type="button" class="filter-clear" id="filter-clear">Clear filters</button>
           </div>
         </div>
         </div>
@@ -2440,7 +2631,7 @@
   <div class="stripe" hidden></div>
   </div>
 
-  <script src="qc.js?v=137"></script>
+  <script src="qc.js?v=139"></script>
   <script src="chart.js?v=123"></script>
   <script>
     function escapeHtml(s) {
@@ -2533,22 +2724,76 @@
       return parts.every((part) => companyWordPrefix(name, part));
     }
 
+    let urlLanded = false;
+
     function filterActiveCount() {
       const company = document.getElementById("filter-company");
       const industry = document.getElementById("filter-industry");
       const kind = document.getElementById("filter-kind");
       const side = document.getElementById("filter-side");
       const chamber = document.getElementById("filter-chamber");
-      const landed = document.getElementById("filter-landed");
       if (!company) return 0;
       let n = 0;
       if (company.value.trim()) n++;
       if (industry && industry.value) n++;
-      if (kind && kind.value && kind.value !== "stock") n++;
+      if (kind && kind.value !== "stock") n++;
       if (side && side.value) n++;
       if (chamber && chamber.value) n++;
-      if (landed && landed.checked) n++;
+      if (urlLanded) n++;
       return n;
+    }
+
+    function syncSegs() {
+      const kind = document.getElementById("filter-kind");
+      const side = document.getElementById("filter-side");
+      document.querySelectorAll(".seg[data-seg] button").forEach((btn) => {
+        const which = btn.parentElement.getAttribute("data-seg");
+        const sel = which === "kind" ? kind : side;
+        const on = !!sel && btn.getAttribute("data-value") === sel.value;
+        btn.classList.toggle("on", on);
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+
+    function bindFilterSegs() {
+      document.querySelectorAll(".seg[data-seg]").forEach((seg) => {
+        seg.addEventListener("click", (e) => {
+          const btn = e.target.closest("button");
+          if (!btn) return;
+          const id = seg.getAttribute("data-seg") === "kind" ? "filter-kind" : "filter-side";
+          const sel = document.getElementById(id);
+          if (!sel) return;
+          sel.value = btn.getAttribute("data-value");
+          sel.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+      });
+    }
+
+    function paintFilterState() {
+      const company = document.getElementById("filter-company");
+      const industry = document.getElementById("filter-industry");
+      const kind = document.getElementById("filter-kind");
+      const side = document.getElementById("filter-side");
+      const chamber = document.getElementById("filter-chamber");
+      const clear = document.getElementById("filter-clear");
+      const searchField = document.querySelector(".tape-search-field");
+      if (searchField) searchField.classList.toggle("is-on", !!(company && company.value.trim()));
+      if (industry) industry.classList.toggle("is-on", !!industry.value);
+      const kindOn = !!(kind && kind.value !== "stock");
+      if (kind) kind.classList.toggle("is-on", kindOn);
+      const kindSeg = document.querySelector('.seg[data-seg="kind"]');
+      if (kindSeg) kindSeg.classList.toggle("is-on", kindOn);
+      const sideOn = !!(side && side.value);
+      if (side) side.classList.toggle("is-on", sideOn);
+      const sideSeg = document.querySelector('.seg[data-seg="side"]');
+      if (sideSeg) sideSeg.classList.toggle("is-on", sideOn);
+      if (chamber) chamber.classList.toggle("is-on", !!chamber.value);
+      const n = filterActiveCount();
+      if (clear) {
+        clear.hidden = n === 0;
+        const wrap = clear.closest(".filter-clear-wrap");
+        if (wrap) wrap.hidden = n === 0;
+      }
     }
 
     function paintTeasers(boards) {
@@ -2582,30 +2827,140 @@
       return Array.from(map, ([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    function bindPicker(filers) {
-      const input = document.getElementById("who-search");
+    function tickerCatalog(boards) {
+      const map = new Map();
+      ((boards && boards.stocks) || []).forEach((r) => {
+        const code = String(r.code || "").trim();
+        if (!code || code === "—" || code === "-") return;
+        const key = code.toUpperCase();
+        if (!map.has(key)) map.set(key, { code: key, name: r.name || "" });
+      });
+      return Array.from(map.values());
+    }
+
+    const tapeSearchIndex = { people: [], tickers: [] };
+
+    function matchTickers(q) {
+      q = String(q || "").trim().toLowerCase();
+      const tix = tapeSearchIndex.tickers || [];
+      if (!q) return tix.slice(0, 8);
+      const exact = [];
+      const prefix = [];
+      const named = [];
+      tix.forEach((t) => {
+        const code = t.code.toLowerCase();
+        if (code === q) exact.push(t);
+        else if (code.indexOf(q) === 0) prefix.push(t);
+        else {
+          const name = t.name || "";
+          const parts = q.split(/\s+/).filter(Boolean);
+          if (q.length <= 3 || /^[a-z0-9]{1,5}$/.test(q)) {
+            if (companyWholeWord(name, q)) named.push(t);
+          } else if (parts.every((part) => companyWordPrefix(name, part))) {
+            named.push(t);
+          }
+        }
+      });
+      return exact.concat(prefix, named).slice(0, 12);
+    }
+
+    function personEnterHint(raw) {
+      const q = String(raw || "").trim().toLowerCase();
+      if (!q) return "";
+      const peeps = (tapeSearchIndex.people || []).filter((p) => p.name.toLowerCase().includes(q));
+      if (!peeps.length) return "";
+      if (matchTickers(q).length) return "";
+      return "Press Enter to open " + peeps[0].name;
+    }
+
+    function bindTapeSearch(filers, tickers, onPickTicker) {
+      const input = document.getElementById("filter-company");
       const menu = document.getElementById("who-menu");
       if (!input || !menu) return;
+      const people = filers || [];
+      tapeSearchIndex.people = people;
+      tapeSearchIndex.tickers = tickers || [];
 
-      function show(list) {
-        menu.innerHTML = list.map((p) =>
-          '<button type="button" data-id="' + p.id + '">' + escapeHtml(p.name) + '</button>'
-        ).join("");
-        menu.classList.toggle("open", list.length > 0);
+      function matchPeople(q) {
+        if (!q) return people;
+        return people.filter((p) => p.name.toLowerCase().includes(q));
       }
 
-      input.addEventListener("focus", () => show(filers));
-      input.addEventListener("input", () => {
-        const q = input.value.trim().toLowerCase();
-        show(filers.filter((p) => p.name.toLowerCase().includes(q)));
+      function rowPerson(p) {
+        return '<button type="button" role="option" data-kind="person" data-id="' + p.id + '">' +
+          '<span class="hit-name">' + escapeHtml(p.name) + '</span>' +
+          '<span class="hit-tag">Politician</span></button>';
+      }
+
+      function rowTicker(t) {
+        const sub = t.name ? '<span class="hit-sub">' + escapeHtml(t.name) + '</span>' : "";
+        return '<button type="button" role="option" data-kind="ticker" data-code="' + escapeHtml(t.code) + '">' +
+          '<span class="hit-name">' + escapeHtml(t.code) + sub + '</span>' +
+          '<span class="hit-tag">Ticker</span></button>';
+      }
+
+      function setMenuOpen(open) {
+        menu.hidden = !open;
+        menu.classList.toggle("open", !!open);
+        input.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
+      function show(raw) {
+        const q = String(raw || "").trim().toLowerCase();
+        const peeps = q ? matchPeople(q).slice(0, 16) : people;
+        const hits = matchTickers(q);
+        const tickerFirst = !q || /^[a-z0-9]{1,5}$/.test(q);
+        const html = tickerFirst
+          ? hits.map(rowTicker).concat(peeps.map(rowPerson))
+          : peeps.map(rowPerson).concat(hits.map(rowTicker));
+        menu.innerHTML = html.join("");
+        setMenuOpen(html.length > 0);
+      }
+
+      input.addEventListener("focus", () => show(input.value));
+      input.addEventListener("input", () => show(input.value));
+      input.addEventListener("keydown", (e) => {
+        const btns = [...menu.querySelectorAll("button[data-kind]")];
+        const i = btns.indexOf(document.activeElement);
+        if (e.key === "ArrowDown" && btns.length) {
+          e.preventDefault();
+          setMenuOpen(true);
+          btns[Math.min(i + 1, btns.length - 1)].focus();
+        } else if (e.key === "Enter" && btns[0] && btns[0].dataset.kind === "person" && !matchTickers(input.value).length) {
+          e.preventDefault();
+          btns[0].click();
+        } else if (e.key === "Escape") {
+          menu.hidden = true;
+          menu.classList.remove("open");
+          input.setAttribute("aria-expanded", "false");
+        }
+      });
+      menu.addEventListener("keydown", (e) => {
+        const btns = [...menu.querySelectorAll("button[data-kind]")], i = btns.indexOf(document.activeElement);
+        if (e.key === "ArrowDown") { e.preventDefault(); (btns[i + 1] || btns[i]).focus(); }
+        if (e.key === "ArrowUp") { e.preventDefault(); (btns[i - 1] || input).focus(); }
+        if (e.key === "Escape") {
+          menu.hidden = true;
+          menu.classList.remove("open");
+          input.setAttribute("aria-expanded", "false");
+          input.focus();
+        }
       });
       menu.addEventListener("click", (e) => {
         const btn = e.target.closest("button");
         if (!btn) return;
-        location.href = "politician.html?id=" + encodeURIComponent(btn.dataset.id);
+        if (btn.dataset.kind === "person") {
+          location.href = "politician.html?id=" + encodeURIComponent(btn.dataset.id);
+          return;
+        }
+        if (btn.dataset.kind === "ticker") {
+          input.value = btn.dataset.code;
+          setMenuOpen(false);
+          if (typeof onPickTicker === "function") onPickTicker();
+        }
       });
       document.addEventListener("click", (e) => {
-        if (!e.target.closest(".picker")) menu.classList.remove("open");
+        if (!e.target.closest(".picker")) setMenuOpen(false);
       });
     }
 
@@ -3072,7 +3427,9 @@
       }
       if (!box) return;
       if (!deskRows.length) {
-        box.innerHTML = "<li class=\"muted\">No trades match these filters.</li>";
+        const qEl = document.getElementById("filter-company");
+        const hint = personEnterHint(qEl && qEl.value);
+        box.innerHTML = "<li class=\"muted\">" + escapeHtml(hint || "No trades match these filters.") + "</li>";
         if (window.QC && QC.restoreScroll) QC.restoreScroll();
         return;
       }
@@ -3772,7 +4129,6 @@
           return fullPromise;
         }
 
-        bindPicker(data.filers || []);
         bindDesk();
 
         function fillIndustries() {
@@ -3801,7 +4157,7 @@
           if (chamber) p.set("chamber", chamber);
           if (industry) p.set("industry", industry);
           if (company) p.set("q", company);
-          if (document.getElementById("filter-landed").checked) p.set("landed", "1");
+          if (urlLanded) p.set("landed", "1");
           const qs = p.toString();
           history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
         }
@@ -3819,7 +4175,7 @@
           if (p.get("chamber")) document.getElementById("filter-chamber").value = p.get("chamber");
           if (p.get("q")) document.getElementById("filter-company").value = p.get("q");
           if (p.get("industry")) document.getElementById("filter-industry").value = p.get("industry");
-          if (p.get("landed") === "1") document.getElementById("filter-landed").checked = true;
+          urlLanded = p.get("landed") === "1";
         }
 
         async function apply() {
@@ -3828,7 +4184,7 @@
           const industry = document.getElementById("filter-industry").value;
           const side = document.getElementById("filter-side").value;
           const chamber = document.getElementById("filter-chamber").value;
-          const onlyLanded = document.getElementById("filter-landed").checked;
+          const onlyLanded = urlLanded;
           const kind = document.getElementById("filter-kind").value;
           const needsFull = showAll || !!side || !!chamber || !!industry || !!companyQ || onlyLanded;
           let sourceRows;
@@ -3861,8 +4217,12 @@
           renderDesk(filtered);
           renderTape(filtered);
           paintTeasers(lastBoards);
+          syncSegs();
+          paintFilterState();
         }
 
+        bindTapeSearch(data.filers || [], tickerCatalog(data.boards || {}), () => { showAll = false; apply(); });
+        bindFilterSegs();
         document.getElementById("filter-company").addEventListener("input", () => { showAll = false; apply(); });
         document.getElementById("filter-industry").addEventListener("change", () => { showAll = false; apply(); });
         document.getElementById("filter-kind").addEventListener("change", () => {
@@ -3872,7 +4232,17 @@
         });
         document.getElementById("filter-side").addEventListener("change", () => { showAll = false; apply(); });
         document.getElementById("filter-chamber").addEventListener("change", () => { showAll = false; apply(); });
-        document.getElementById("filter-landed").addEventListener("change", () => { showAll = false; apply(); });
+        document.getElementById("filter-clear").addEventListener("click", () => {
+          document.getElementById("filter-company").value = "";
+          document.getElementById("filter-industry").value = "";
+          document.getElementById("filter-kind").value = KIND_DEFAULT;
+          document.getElementById("filter-side").value = "";
+          document.getElementById("filter-chamber").value = "";
+          urlLanded = false;
+          showAll = false;
+          fillIndustries();
+          apply();
+        });
         document.getElementById("show-all").addEventListener("click", () => {
           showAll = !showAll;
           apply();
@@ -3889,7 +4259,7 @@
           renderTape(lastFiltered);
         });
       } catch (err) {
-        bindPicker([]);
+        bindTapeSearch([], []);
         markTapeReady();
         box.innerHTML = "<tr><td colspan=\"9\">Could not load tape/page.json. Open <a href=\"http://127.0.0.1:8000/index.html\">http://127.0.0.1:8000/index.html</a> — double-clicking the HTML file will not load the list.</td></tr>";
       }
