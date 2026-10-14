@@ -88,6 +88,8 @@ self.addEventListener("fetch", (event) => {
     }
     return res;
   }
+  // Trade files are network-first. A cached body must not win, and a failed
+  // response must not be stored.
   if (isTrade) {
     event.respondWith((async () => {
       try {
