@@ -1986,6 +1986,7 @@
       min-height: 34px; height: 34px; background-color: var(--v2-card); border: 1px solid var(--v2-border);
       border-radius: 10px; color: var(--white); font-family: "IBM Plex Sans", sans-serif; font-size: 15px;
     }
+    .filters select { padding-top: 0; padding-bottom: 0; line-height: 32px; }
     .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--caution); outline-offset: 1px; }
     .picker-menu { border-radius: 10px; background: #18202b; border-color: var(--v2-border); }
     .check-landed {
@@ -1995,22 +1996,13 @@
       justify-content: flex-end;
     }
     .check-ctl {
-      display: flex;
+      align-self: flex-end;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: 0;
-      padding: 0 12px;
-      min-width: 34px;
-      cursor: pointer;
-      box-sizing: border-box;
+      gap: 6px;
       white-space: nowrap;
-      font-family: "IBM Plex Sans", sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--v2-sub);
-      letter-spacing: 0;
-      text-transform: none;
+      padding: 0 10px;
+      cursor: pointer;
     }
     .check-landed input { accent-color: var(--v2-buy-bar); width: 16px; height: 16px; }
     .tape-search { max-width: none; width: 100%; margin: 0; }
