@@ -2495,6 +2495,7 @@
         return;
       }
       if (e.shiftKey) return;
+      if (document.activeElement && document.activeElement.closest(".picker-menu")) return;
       if (key !== "j" && key !== "k" && key !== "J" && key !== "K") return;
       if (!deskRowKeysOn()) return;
       const rows = visibleTapeRows(rowSel);
