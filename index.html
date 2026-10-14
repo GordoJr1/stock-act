@@ -283,6 +283,7 @@
 
     .picker {
       position: relative;
+      z-index: 16;
       max-width: 420px;
       margin: 0 0 18px;
       min-width: 0;
@@ -1981,6 +1982,7 @@
       justify-content: center;
       margin: 0;
       padding: 0 12px;
+      min-width: 42px;
       cursor: pointer;
       box-sizing: border-box;
     }
@@ -2025,6 +2027,10 @@
     }
     .seg button:last-child { border-right: 0; }
     .seg button.on {
+      background: rgba(238, 242, 245, 0.06);
+      color: var(--white);
+    }
+    .seg.is-on button.on {
       background: rgba(227, 180, 26, 0.12);
       color: var(--caution);
     }
@@ -2056,6 +2062,8 @@
     }
     .picker-menu {
       max-height: 280px;
+      margin-top: 4px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
     }
     .picker-menu button {
       display: flex;
@@ -2848,6 +2856,14 @@
         if (!map.has(key)) map.set(key, { code: key, name: r.name || "" });
       });
       return Array.from(map.values());
+    }
+
+    function syncSearchPlaceholder() {
+      const input = document.getElementById("filter-company");
+      if (!input) return;
+      input.placeholder = window.matchMedia("(min-width: 821px)").matches
+        ? "Politician, company, or ticker — / to search · j/k to move"
+        : "Politician, company, or ticker";
     }
 
     function bindTapeSearch(filers, tickers, onPickTicker) {
@@ -4202,6 +4218,8 @@
           paintFilterState();
         }
 
+        syncSearchPlaceholder();
+        window.matchMedia("(min-width: 821px)").addEventListener("change", syncSearchPlaceholder);
         bindTapeSearch(data.filers || [], tickerCatalog(data.boards || {}), () => { showAll = false; apply(); });
         bindFilterSegs();
         document.getElementById("filter-company").addEventListener("input", () => { showAll = false; apply(); });
@@ -4241,11 +4259,13 @@
           renderTape(lastFiltered);
         });
       } catch (err) {
+        syncSearchPlaceholder();
         bindTapeSearch([], []);
         markTapeReady();
         box.innerHTML = "<tr><td colspan=\"9\">Could not load tape/page.json. Open <a href=\"http://127.0.0.1:8000/index.html\">http://127.0.0.1:8000/index.html</a> — double-clicking the HTML file will not load the list.</td></tr>";
       }
     }
+    syncSearchPlaceholder();
     if (window.QC && QC.bindTapeKeys) {
       QC.bindTapeKeys({
         search: document.getElementById("filter-company"),
