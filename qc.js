@@ -1231,6 +1231,28 @@
     return Math.max(0, Math.round((a.getTime() - tr.getTime()) / 86400000));
   }
 
+  function paintSenateBanner(data) {
+    const status = data && data.senate_status;
+    const date = data && data.senate_last_good_date;
+    const show = status === "stale" && typeof date === "string" && date.length > 0;
+    let el = document.getElementById("senate-banner");
+    if (!show) {
+      if (el) el.hidden = true;
+      return;
+    }
+    if (!el) {
+      el = document.createElement("p");
+      el.id = "senate-banner";
+      el.className = "senate-banner";
+      el.setAttribute("role", "status");
+      const header = document.querySelector(".qc-header");
+      if (header) header.appendChild(el);
+      else document.body.insertBefore(el, document.body.firstChild);
+    }
+    el.hidden = false;
+    el.textContent = "Senate data as of " + date;
+  }
+
   function asOfLabel(iso) {
     if (!iso) return "";
     const d = new Date(iso);
@@ -2615,6 +2637,7 @@
     tickerInfo: tickerInfo,
     resolveTickerFromName: resolveTickerFromName,
     asOfLabel: asOfLabel,
+    paintSenateBanner: paintSenateBanner,
     parseAdded: parseAdded,
     isLanded: isLanded,
     lagDays: lagDays,
