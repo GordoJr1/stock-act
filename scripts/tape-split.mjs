@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { senateFields } from "./senate-fields.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -50,16 +51,6 @@ function writeJson(rel, obj) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(obj));
   return fs.statSync(file).size;
-}
-
-function senateFields(source) {
-  const out = {};
-  const keys = ["senate_status", "senate_last_good_date", "senate_handoff_date"];
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    if (source && Object.prototype.hasOwnProperty.call(source, key)) out[key] = source[key];
-  }
-  return out;
 }
 
 function stamp(t, file) {
@@ -675,7 +666,4 @@ function buildTape() {
   }));
 }
 
-const entry = process.argv[1] ? path.resolve(process.argv[1]) : "";
-if (entry === fileURLToPath(import.meta.url)) buildTape();
-
-export { senateFields };
+buildTape();

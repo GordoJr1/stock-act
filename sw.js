@@ -1,4 +1,4 @@
-const CACHE = "stock-act-v7";
+const CACHE = "stock-act-v8";
 const SHELL = [
   "./",
   "./index.html",

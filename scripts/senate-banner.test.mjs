@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
-import { senateFields } from "./tape-split.mjs";
+import { senateFields } from "./senate-fields.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const date = "2026-10-13";
@@ -114,8 +114,20 @@ check(
 state = paint({ senate_status: "blocked", senate_last_good_date: "2026-13-40" });
 check("blocked with an impossible date uses the fallback", state.shown && state.text === fallback, state.text);
 
+state = paint({ senate_status: "Blocked", senate_last_good_date: date });
+check("Blocked still shows the banner", state.shown && state.text === asOf, state.text);
+
 state = paint({ senate_status: "clear", senate_last_good_date: date });
 check("clear hides the banner", !state.shown, state.shown ? state.text : "hidden");
+
+state = paint({ senate_status: "CLEAR", senate_last_good_date: date });
+check("CLEAR hides the banner", !state.shown, state.shown ? state.text : "hidden");
+
+state = paint({ senate_status: "OK", senate_last_good_date: date });
+check("OK hides the banner", !state.shown, state.shown ? state.text : "hidden");
+
+state = paint({ senate_status: "" });
+check("empty senate_status hides the banner", !state.shown, state.shown ? state.text : "hidden");
 
 state = paint({ senate_status: "blocked", senate_last_good_date: date });
 state = paint({ senate_status: "ok", senate_last_good_date: date });
@@ -143,6 +155,11 @@ check("missing senate fields copy nothing", JSON.stringify(senateFields({ collec
 const split = fs.readFileSync(path.join(root, "scripts/tape-split.mjs"), "utf8");
 const copies = (split.match(/senateFields\(full\)/g) || []).length;
 check("tape split copies the fields into page, all, filers, politicians, and tickers", copies === 5, String(copies) + " sites");
+check(
+  "tape split calls buildTape unconditionally and imports senateFields",
+  split.includes('from "./senate-fields.mjs"') && /buildTape\(\);\s*$/.test(split) && !split.includes("if (entry ==="),
+  ""
+);
 
 const pages = ["index.html", "politician.html", "ticker.html", "signals.html", "landed.html", "paper.html", "tells.html"];
 const versions = pages.map((name) => {
