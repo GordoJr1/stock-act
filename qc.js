@@ -1234,7 +1234,7 @@
   function paintSenateBanner(data) {
     const status = data && data.senate_status;
     const date = data && data.senate_last_good_date;
-    const show = status === "stale" && typeof date === "string" && date.length > 0;
+    const show = typeof status === "string" && status.length > 0 && status !== "clear" && status !== "ok" && typeof date === "string" && date.length > 0;
     let el = document.getElementById("senate-banner");
     if (!show) {
       if (el) el.hidden = true;
