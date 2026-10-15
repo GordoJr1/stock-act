@@ -1231,10 +1231,18 @@
     return Math.max(0, Math.round((a.getTime() - tr.getTime()) / 86400000));
   }
 
+  function senateDateOk(value) {
+    if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+    const year = Number(value.slice(0, 4));
+    const month = Number(value.slice(5, 7));
+    const day = Number(value.slice(8, 10));
+    const dt = new Date(Date.UTC(year, month - 1, day));
+    return dt.getUTCFullYear() === year && dt.getUTCMonth() === month - 1 && dt.getUTCDate() === day;
+  }
+
   function paintSenateBanner(data) {
     const status = data && data.senate_status;
-    const date = data && data.senate_last_good_date;
-    const show = typeof status === "string" && status.length > 0 && status !== "clear" && status !== "ok" && typeof date === "string" && date.length > 0;
+    const show = typeof status === "string" && status.length > 0 && status !== "clear" && status !== "ok";
     let el = document.getElementById("senate-banner");
     if (!show) {
       if (el) el.hidden = true;
@@ -1249,8 +1257,10 @@
       if (header) header.appendChild(el);
       else document.body.insertBefore(el, document.body.firstChild);
     }
+    el.setAttribute("aria-live", "polite");
     el.hidden = false;
-    el.textContent = "Senate data as of " + date;
+    const date = data && data.senate_last_good_date;
+    el.textContent = senateDateOk(date) ? "Senate data as of " + date : "Senate data may be out of date";
   }
 
   function asOfLabel(iso) {
