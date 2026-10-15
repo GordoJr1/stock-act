@@ -580,7 +580,7 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=181" />
+  <link rel="stylesheet" href="shell.css?v=182" />
   <style>
     .qc-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
     .qc-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
@@ -654,7 +654,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=137"></script>
+  <script src="qc.js?v=143"></script>
   <script src="chart.js?v=123"></script>
   <script>
     const params = new URLSearchParams(location.search);
@@ -913,6 +913,7 @@
     ]).then(([data, prices]) => {
       const asof = document.getElementById("asof");
       if (asof) asof.textContent = QC.asOfLabel(data.collected);
+      if (window.QC && QC.paintSenateBanner) QC.paintSenateBanner(data);
       const deals = (data.trades || []).filter((t) => {
         if ((t.side !== "purchase" && t.side !== "sale") || isBond(t)) return false;
         if (new Date(t.trade_date) < cutoff) return false;

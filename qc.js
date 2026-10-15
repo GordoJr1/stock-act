@@ -1231,6 +1231,39 @@
     return Math.max(0, Math.round((a.getTime() - tr.getTime()) / 86400000));
   }
 
+  function senateDateOk(value) {
+    if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+    const year = Number(value.slice(0, 4));
+    const month = Number(value.slice(5, 7));
+    const day = Number(value.slice(8, 10));
+    const dt = new Date(Date.UTC(year, month - 1, day));
+    return dt.getUTCFullYear() === year && dt.getUTCMonth() === month - 1 && dt.getUTCDate() === day;
+  }
+
+  function paintSenateBanner(data) {
+    const rawStatus = data && data.senate_status;
+    const status = typeof rawStatus === "string" ? rawStatus.toLowerCase() : "";
+    const show = status.length > 0 && status !== "clear" && status !== "ok";
+    let el = document.getElementById("senate-banner");
+    if (!show) {
+      if (el) el.hidden = true;
+      return;
+    }
+    if (!el) {
+      el = document.createElement("p");
+      el.id = "senate-banner";
+      el.className = "senate-banner";
+      el.setAttribute("role", "status");
+      const header = document.querySelector(".qc-header");
+      if (header) header.appendChild(el);
+      else document.body.insertBefore(el, document.body.firstChild);
+    }
+    el.setAttribute("aria-live", "polite");
+    el.hidden = false;
+    const date = data && data.senate_last_good_date;
+    el.textContent = senateDateOk(date) ? "Senate data as of " + date : "Senate data may be out of date";
+  }
+
   function asOfLabel(iso) {
     if (!iso) return "";
     const d = new Date(iso);
@@ -2615,6 +2648,7 @@
     tickerInfo: tickerInfo,
     resolveTickerFromName: resolveTickerFromName,
     asOfLabel: asOfLabel,
+    paintSenateBanner: paintSenateBanner,
     parseAdded: parseAdded,
     isLanded: isLanded,
     lagDays: lagDays,

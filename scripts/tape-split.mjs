@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { senateFields } from "./senate-fields.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -502,158 +503,167 @@ function replaceDir(rel, entries) {
   return bytes;
 }
 
-const lite = readJson("trades-lite.json");
-const full = readJson("trades.json");
-const tickerFile = readJson("tickers.json");
-const bios = readJson("bios.json");
-const traders = readJson("traders.json");
-const now = Date.now();
-const generated = new Date(now).toISOString();
-const cutoff = rollingCutoff();
+function buildTape() {
+  const lite = readJson("trades-lite.json");
+  const full = readJson("trades.json");
+  const tickerFile = readJson("tickers.json");
+  const bios = readJson("bios.json");
+  const traders = readJson("traders.json");
+  const now = Date.now();
+  const generated = new Date(now).toISOString();
+  const cutoff = rollingCutoff();
 
-const liteRows = (lite.trades || []).map((t) => stamp(t, tickerFile));
-const fullRows = (full.trades || []).map((t) => stamp(t, tickerFile));
-assertNoSource(liteRows, "lite");
-assertNoSource(fullRows, "full");
+  const liteRows = (lite.trades || []).map((t) => stamp(t, tickerFile));
+  const fullRows = (full.trades || []).map((t) => stamp(t, tickerFile));
+  assertNoSource(liteRows, "lite");
+  assertNoSource(fullRows, "full");
 
-const totals = {
-  stock: liteRows.filter((t) => kindAllows("stock", t)).length,
-  option: liteRows.filter((t) => kindAllows("option", t)).length,
-  bond: liteRows.filter((t) => kindAllows("bond", t)).length,
-  all: liteRows.length
-};
+  const totals = {
+    stock: liteRows.filter((t) => kindAllows("stock", t)).length,
+    option: liteRows.filter((t) => kindAllows("option", t)).length,
+    bond: liteRows.filter((t) => kindAllows("bond", t)).length,
+    all: liteRows.length
+  };
 
-const pools = {};
-for (const kind of ["stock", "option", "bond", ""]) {
-  const key = kind === "" ? "all" : kind;
-  const subset = kind === "" ? liteRows : liteRows.filter((t) => kindAllows(kind, t));
-  const pool = minimalPool(subset);
-  if (sliceIds(pool, false) !== sliceIds(subset, false) || sliceIds(pool, true) !== sliceIds(subset, true)) {
-    throw new Error("pool mismatch for kind " + key);
+  const pools = {};
+  for (const kind of ["stock", "option", "bond", ""]) {
+    const key = kind === "" ? "all" : kind;
+    const subset = kind === "" ? liteRows : liteRows.filter((t) => kindAllows(kind, t));
+    const pool = minimalPool(subset);
+    if (sliceIds(pool, false) !== sliceIds(subset, false) || sliceIds(pool, true) !== sliceIds(subset, true)) {
+      throw new Error("pool mismatch for kind " + key);
+    }
+    pools[key] = pool;
+    console.error("pool", key, pool.length, "of", subset.length);
   }
-  pools[key] = pool;
-  console.error("pool", key, pool.length, "of", subset.length);
-}
 
-const filers = uniqueFilers(fullRows, bios);
-const rawIds = new Set(Object.keys((bios && bios.people) || {}));
-fullRows.forEach((t) => { if (t.filer_id) rawIds.add(t.filer_id); });
-const boards = buildBoards(liteRows, bios, traders);
+  const filers = uniqueFilers(fullRows, bios);
+  const rawIds = new Set(Object.keys((bios && bios.people) || {}));
+  fullRows.forEach((t) => { if (t.filer_id) rawIds.add(t.filer_id); });
+  const boards = buildBoards(liteRows, bios, traders);
 
-const pageBytes = writeJson("tape/page.json", {
-  collected: lite.collected || "",
-  generated,
-  totals,
-  filers,
-  boards,
-  trades: pools.stock
-});
-let kindBytes = 0;
-for (const key of ["option", "bond", "all"]) {
-  kindBytes += writeJson("tape/kind/" + key + ".json", { trades: pools[key] });
-}
-const allBytes = writeJson("tape/all.json", {
-  collected: lite.collected || "",
-  generated,
-  trades: liteRows
-});
-const filerBytes = writeJson("tape/filers.json", {
-  collected: full.collected || lite.collected || "",
-  generated,
-  filers,
-  ids: Array.from(rawIds).sort()
-});
-
-const byFiler = new Map();
-fullRows.forEach((t) => {
-  const id = safeFile(t.filer_id);
-  if (!id) return;
-  if (!onOrAfter(t.trade_date, cutoff)) return;
-  if (!byFiler.has(id)) byFiler.set(id, []);
-  byFiler.get(id).push(t);
-});
-const politicianEntries = [];
-byFiler.forEach((trades, id) => {
-  trades.sort((a, b) => String(b.trade_date || "").localeCompare(String(a.trade_date || "")) || String(b.id || "").localeCompare(String(a.id || "")));
-  politicianEntries.push([id + ".json", {
-    collected: full.collected || "",
+  const pageBytes = writeJson("tape/page.json", {
+    collected: lite.collected || "",
     generated,
-    filer_id: id,
-    trades
-  }]);
-});
-const politicianBytes = replaceDir("tape/politicians", politicianEntries);
-
-const byTicker = new Map();
-fullRows.forEach((t) => {
-  const code = safeFile(tradeCode(t, tickerFile));
-  if (!code) return;
-  if (!onOrAfter(t.trade_date, cutoff)) return;
-  if (!byTicker.has(code)) byTicker.set(code, []);
-  byTicker.get(code).push(t);
-});
-const tickerEntries = [];
-byTicker.forEach((trades, code) => {
-  trades.sort((a, b) => String(b.trade_date || "").localeCompare(String(a.trade_date || "")) || String(b.id || "").localeCompare(String(a.id || "")));
-  tickerEntries.push([tickerFilename(code), {
-    collected: full.collected || "",
+    ...senateFields(full),
+    totals,
+    filers,
+    boards,
+    trades: pools.stock
+  });
+  let kindBytes = 0;
+  for (const key of ["option", "bond", "all"]) {
+    kindBytes += writeJson("tape/kind/" + key + ".json", { trades: pools[key] });
+  }
+  const allBytes = writeJson("tape/all.json", {
+    collected: lite.collected || "",
     generated,
-    ticker: code,
-    trades
-  }]);
-});
-const tickerBytes = replaceDir("tape/tickers", tickerEntries);
+    ...senateFields(full),
+    trades: liteRows
+  });
+  const filerBytes = writeJson("tape/filers.json", {
+    collected: full.collected || lite.collected || "",
+    generated,
+    ...senateFields(full),
+    filers,
+    ids: Array.from(rawIds).sort()
+  });
 
-const landedRows = liteRows.filter((t) => QC.isLanded(t, 336));
-const landedCheck = (lite.trades || []).filter((t) => QC.isLanded(t, 336)).map((t) => t.id).sort().join("\n");
-const landedGot = landedRows.map((t) => t.id).sort().join("\n");
-if (landedCheck !== landedGot) throw new Error("landed id mismatch");
-const landedBytes = writeJson("landed.json", {
-  collected: lite.collected || "",
-  generated,
-  hours: 336,
-  trades: landedRows
-});
+  const byFiler = new Map();
+  fullRows.forEach((t) => {
+    const id = safeFile(t.filer_id);
+    if (!id) return;
+    if (!onOrAfter(t.trade_date, cutoff)) return;
+    if (!byFiler.has(id)) byFiler.set(id, []);
+    byFiler.get(id).push(t);
+  });
+  const politicianEntries = [];
+  byFiler.forEach((trades, id) => {
+    trades.sort((a, b) => String(b.trade_date || "").localeCompare(String(a.trade_date || "")) || String(b.id || "").localeCompare(String(a.id || "")));
+    politicianEntries.push([id + ".json", {
+      collected: full.collected || "",
+      generated,
+      ...senateFields(full),
+      filer_id: id,
+      trades
+    }]);
+  });
+  const politicianBytes = replaceDir("tape/politicians", politicianEntries);
 
-const heatWindows = {};
-for (const win of [14, 30, 90]) {
-  const ranked = scoreRows(lite.trades || [], tickerFile, bios, now, win);
-  ranked.forEach((row) => {
-    const again = heatOf(row, now);
-    if (Math.abs(again - row.heat) > 1e-6) {
-      throw new Error("heat recompute mismatch " + row.code + " " + win + " " + again + " vs " + row.heat);
+  const byTicker = new Map();
+  fullRows.forEach((t) => {
+    const code = safeFile(tradeCode(t, tickerFile));
+    if (!code) return;
+    if (!onOrAfter(t.trade_date, cutoff)) return;
+    if (!byTicker.has(code)) byTicker.set(code, []);
+    byTicker.get(code).push(t);
+  });
+  const tickerEntries = [];
+  byTicker.forEach((trades, code) => {
+    trades.sort((a, b) => String(b.trade_date || "").localeCompare(String(a.trade_date || "")) || String(b.id || "").localeCompare(String(a.id || "")));
+    tickerEntries.push([tickerFilename(code), {
+      collected: full.collected || "",
+      generated,
+      ...senateFields(full),
+      ticker: code,
+      trades
+    }]);
+  });
+  const tickerBytes = replaceDir("tape/tickers", tickerEntries);
+
+  const landedRows = liteRows.filter((t) => QC.isLanded(t, 336));
+  const landedCheck = (lite.trades || []).filter((t) => QC.isLanded(t, 336)).map((t) => t.id).sort().join("\n");
+  const landedGot = landedRows.map((t) => t.id).sort().join("\n");
+  if (landedCheck !== landedGot) throw new Error("landed id mismatch");
+  const landedBytes = writeJson("landed.json", {
+    collected: lite.collected || "",
+    generated,
+    hours: 336,
+    trades: landedRows
+  });
+
+  const heatWindows = {};
+  for (const win of [14, 30, 90]) {
+    const ranked = scoreRows(lite.trades || [], tickerFile, bios, now, win);
+    ranked.forEach((row) => {
+      const again = heatOf(row, now);
+      if (Math.abs(again - row.heat) > 1e-6) {
+        throw new Error("heat recompute mismatch " + row.code + " " + win + " " + again + " vs " + row.heat);
+      }
+    });
+    heatWindows[String(win)] = ranked;
+  }
+  const issuers = {};
+  liteRows.forEach((t) => {
+    const code = String(t.code || "");
+    if (!QC.isChartTicker(code)) return;
+    const name = t.company || "";
+    if (!name || name === "—") return;
+    if (!issuers[code] || QC.isWeakIssuer(code, issuers[code])) {
+      if (!QC.isWeakIssuer(code, name)) issuers[code] = name;
     }
   });
-  heatWindows[String(win)] = ranked;
-}
-const issuers = {};
-liteRows.forEach((t) => {
-  const code = String(t.code || "");
-  if (!QC.isChartTicker(code)) return;
-  const name = t.company || "";
-  if (!name || name === "—") return;
-  if (!issuers[code] || QC.isWeakIssuer(code, issuers[code])) {
-    if (!QC.isWeakIssuer(code, name)) issuers[code] = name;
-  }
-});
-const heatBytes = writeJson("heat.json", {
-  collected: lite.collected || "",
-  generated,
-  issuers,
-  windows: heatWindows
-});
+  const heatBytes = writeJson("heat.json", {
+    collected: lite.collected || "",
+    generated,
+    issuers,
+    windows: heatWindows
+  });
 
-console.error(JSON.stringify({
-  pageBytes,
-  kindBytes,
-  allBytes,
-  filerBytes,
-  politicianBytes,
-  politicianFiles: politicianEntries.length,
-  tickerBytes,
-  tickerFiles: tickerEntries.length,
-  landedBytes,
-  landedRows: landedRows.length,
-  heatBytes,
-  heat90: heatWindows["90"].length
-}));
+  console.error(JSON.stringify({
+    pageBytes,
+    kindBytes,
+    allBytes,
+    filerBytes,
+    politicianBytes,
+    politicianFiles: politicianEntries.length,
+    tickerBytes,
+    tickerFiles: tickerEntries.length,
+    landedBytes,
+    landedRows: landedRows.length,
+    heatBytes,
+    heat90: heatWindows["90"].length
+  }));
+}
+
+buildTape();
