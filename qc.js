@@ -1939,7 +1939,8 @@
     return politicianTapeColsHtml(opts) + blocks.join("");
   }
 
-  const RETURN_KEY = "qc:return";
+  const RETURN_KEY = "sa:return";
+  const RETURN_KEY_OLD = "qc:return";
   let replaceWrapped = false;
   const PAGE_LABELS = {
     "index.html": "Tape",
@@ -1948,19 +1949,8 @@
     "tells.html": "Patterns",
     "signals.html": "Heat",
     "paper.html": "Paper",
-    "insiders.html": "Insiders",
-    "insider-landed.html": "Filed",
-    "insider-signals.html": "Heat",
-    "insider-board.html": "Leaders",
-    "insider-checks.html": "Checks",
     "politician.html": "Politician",
-    "ticker.html": "Ticker",
-    "insider.html": "Insider",
-    "insider-ticker.html": "Ticker",
-    "overlap.html": "Overlap",
-    "claims.html": "Claims",
-    "beta.html": "Beta",
-    "canada.html": "Canada"
+    "ticker.html": "Ticker"
   };
   const LIST_FILES = {
     "index.html": 1,
@@ -1968,26 +1958,14 @@
     "filed.html": 1,
     "tells.html": 1,
     "signals.html": 1,
-    "paper.html": 1,
-    "insiders.html": 1,
-    "insider-landed.html": 1,
-    "insider-signals.html": 1,
-    "insider-board.html": 1,
-    "insider-checks.html": 1,
-    "overlap.html": 1,
-    "claims.html": 1,
-    "beta.html": 1,
-    "canada.html": 1,
-    "contracts.html": 1
+    "paper.html": 1
   };
   if (LIST_FILES[pageFile(location.pathname)] && "scrollRestoration" in history) {
     history.scrollRestoration = "manual";
   }
   const DRILL_FILES = {
     "politician.html": 1,
-    "ticker.html": 1,
-    "insider.html": 1,
-    "insider-ticker.html": 1
+    "ticker.html": 1
   };
 
   function pageFile(pathname) {
@@ -2026,7 +2004,42 @@
   }
 
   const SCROLL_PREFIX = "qc:sy:";
-  const SCROLL_BACK = "qc:scroll-back";
+  const SCROLL_BACK = "sa:scroll-back";
+  const SCROLL_BACK_OLD = "qc:scroll-back";
+
+  // One read of the pre-split key. A hit is copied onto the new key and the old key is removed.
+  function readMovedKey(key, oldKey) {
+    const stores = [];
+    try { stores.push(sessionStorage); } catch (e) {}
+    try { stores.push(localStorage); } catch (e) {}
+    for (let i = 0; i < stores.length; i++) {
+      let current = null;
+      try {
+        current = stores[i].getItem(key);
+      } catch (e) {
+        continue;
+      }
+      if (current != null) return current;
+      let previous = null;
+      try {
+        previous = stores[i].getItem(oldKey);
+      } catch (e) {
+        continue;
+      }
+      if (previous == null) continue;
+      const home = stores[0] || stores[i];
+      try {
+        home.setItem(key, previous);
+      } catch (e) {
+        return previous;
+      }
+      for (let j = 0; j < stores.length; j++) {
+        try { stores[j].removeItem(oldKey); } catch (e) {}
+      }
+      return previous;
+    }
+    return null;
+  }
   let scrollSaveTimer = 0;
   let scrollArmed = false;
   let scrollYTarget = 0;
@@ -2086,7 +2099,7 @@
 
   function shouldRestoreScroll() {
     try {
-      if (sessionStorage.getItem(SCROLL_BACK) === location.pathname + location.search) return true;
+      if (readMovedKey(SCROLL_BACK, SCROLL_BACK_OLD) === location.pathname + location.search) return true;
     } catch (e) {}
     return navIsBack();
   }
@@ -2172,7 +2185,7 @@
 
   function storedReturn() {
     try {
-      const v = sessionStorage.getItem(RETURN_KEY);
+      const v = readMovedKey(RETURN_KEY, RETURN_KEY_OLD);
       if (!v || !isQcHref(v)) return "";
       const u = new URL(v, location.href);
       if (pageFile(u.pathname) === pageFile(location.pathname)) return "";
@@ -2193,7 +2206,7 @@
   function isPersonPage(href) {
     try {
       const file = pageFile(new URL(href, location.href).pathname);
-      return file === "politician.html" || file === "insider.html";
+      return file === "politician.html";
     } catch (e) {
       return false;
     }

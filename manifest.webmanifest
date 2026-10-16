@@ -1,6 +1,6 @@
 {
-  "name": "Quantity Capital Tape",
-  "short_name": "QC Tape",
+  "name": "Stock Act Tape",
+  "short_name": "Stock Act",
   "description": "Official Senate, House, and White House STOCK Act / OGE 278-T tape.",
   "start_url": "./",
   "scope": "./",

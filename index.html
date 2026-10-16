@@ -7,13 +7,13 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="QC Tape" />
+  <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
-  <title>Quantity Capital</title>
+  <title>Stock Act</title>
   <meta name="description" content="Official Senate, House, and White House STOCK Act / OGE 278-T tape. Amounts are ranges, not share counts." />
-  <meta property="og:title" content="Quantity Capital" />
+  <meta property="og:title" content="Stock Act" />
   <meta property="og:description" content="Official Senate, House, and White House STOCK Act / OGE 278-T tape." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -2415,7 +2415,7 @@
   <a class="qc-skip" href="#main">Skip to content</a>
   <header class="qc-header">
     <div class="wrap qc-header-inner">
-      <a class="mark" href="index.html">Quantity <span>Capital</span></a>
+      <a class="mark" href="index.html">Stock <span>Act</span></a>
       <nav class="qc-nav" aria-label="Politician tape">
         <a href="index.html" class="on" aria-current="page" title="Live politician trades">Tape</a>
         <a href="landed.html" title="New public filings">Filed</a>
@@ -2624,14 +2624,14 @@
   </div>
   <footer hidden>
     <div class="wrap">
-      <span>© Quantity Capital</span>
+      <span>© Stock Act</span>
       <a href="mailto:gordojr@proton.me">Transmit</a>
     </div>
   </footer>
   <div class="stripe" hidden></div>
   </div>
 
-  <script src="qc.js?v=144"></script>
+  <script src="qc.js?v=145"></script>
   <script src="chart.js?v=124"></script>
   <script>
     function escapeHtml(s) {
@@ -3062,7 +3062,7 @@
         const bad = isFilingError(t);
         const fresh = QC.isLanded(t, 72);
         const flag = (bad ? errBadge() : "") +
-          (fresh ? "<span class=\"landed-tag\" title=\"This print was added to Quantity Capital recently — the trade itself may be older.\">New</span>" : "");
+          (fresh ? "<span class=\"landed-tag\" title=\"This print was added to Stock Act recently — the trade itself may be older.\">New</span>" : "");
         const co = displayCompany(t.company, t.code);
         const sym = shownCode(t);
         const meta = [co || sym, t.industry || "—", t.owner].join(" · ");

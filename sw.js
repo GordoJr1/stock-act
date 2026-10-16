@@ -1,4 +1,4 @@
-const CACHE = "stock-act-v9";
+const CACHE = "stock-act-v10";
 const SHELL = [
   "./",
   "./index.html",
@@ -23,20 +23,6 @@ const SHELL = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting())
-  );
-});
-
-self.addEventListener("notificationclick", (event) => {
-  event.notification.close();
-  const dest = (event.notification.data && event.notification.data.url) || "./index.html";
-  event.waitUntil(
-    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
-      for (let i = 0; i < list.length; i++) {
-        const client = list[i];
-        if (client.url && client.url.indexOf(dest) >= 0 && "focus" in client) return client.focus();
-      }
-      if (self.clients.openWindow) return self.clients.openWindow(dest);
-    })
   );
 });
 
