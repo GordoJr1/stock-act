@@ -352,7 +352,7 @@
     function filerCard(g) {
       const lag = g.lag;
       const lagHtml = lag == null
-        ? ""
+        ? "<div class=\"lag\"><b>—</b><span>lag unknown</span></div>"
         : lag
           ? "<div class=\"lag\"><b>" + lag + "d</b><span>after the trade</span></div>"
           : "<div class=\"lag\"><b>0d</b><span>same-day print</span></div>";

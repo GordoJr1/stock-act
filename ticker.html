@@ -912,7 +912,13 @@
       });
     }
 
-    if (ticker) Promise.all([
+    if (!ticker) {
+      const note = document.getElementById("note");
+      if (note) {
+        note.hidden = false;
+        note.textContent = "No ticker in this link.";
+      }
+    } else Promise.all([
       fetch("tape/tickers/" + encodeURIComponent(ticker) + (/^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/.test(ticker) ? "_" : "") + ".json").then((r) => r.ok ? r.json() : { trades: [] }),
       fetch("prices/" + encodeURIComponent(ticker) + ".json").then((r) => r.ok ? r.json() : null).catch(() => null)
     ]).then(([data, prices]) => {

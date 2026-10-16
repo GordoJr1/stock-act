@@ -4265,7 +4265,7 @@
         bindTapeSearch([], []);
         markTapeReady();
         const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-        box.innerHTML = "<tr><td colspan=\"9\">Could not load tape/page.json. " + (isLocal
+        box.innerHTML = "<tr><td colspan=\"9\">Could not load the tape. " + (isLocal
           ? "Open <a href=\"http://127.0.0.1:8000/index.html\">http://127.0.0.1:8000/index.html</a> — double-clicking the HTML file will not load the list."
           : "Check your connection and reload.") + "</td></tr>";
       }

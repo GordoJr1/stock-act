@@ -530,9 +530,13 @@
     function setAsof(iso) {
       const asof = document.getElementById("asof");
       if (!asof || !iso) return;
-      const cur = asof.getAttribute("data-ts") || "";
       const val = String(iso);
-      if (val <= cur) return;
+      const next = Date.parse(val);
+      const cur = asof.getAttribute("data-ts") || "";
+      const prev = cur ? Date.parse(cur) : NaN;
+      if (!isNaN(next) && !isNaN(prev)) {
+        if (next <= prev) return;
+      } else if (val <= cur) return;
       asof.setAttribute("data-ts", val);
       asof.textContent = asOfHeat(iso);
     }

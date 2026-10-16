@@ -1775,8 +1775,8 @@
     }
 
     function showMissing(want, suggestions) {
-      document.getElementById("who").textContent = "Not found";
-      document.title = "Not found - Quantity Capital";
+      document.getElementById("who").textContent = want ? "Not found" : "Pick a member";
+      document.title = (want ? "Not found" : "Politician") + " - Quantity Capital";
       const kickers = document.querySelectorAll(".kicker");
       if (kickers[0]) kickers[0].textContent = "No member";
       if (kickers[1]) kickers[1].hidden = true;
@@ -1793,7 +1793,9 @@
       if (tapeHead) tapeHead.hidden = true;
       const list = document.getElementById("rows");
       if (list) list.hidden = true;
-      let html = "<p class=\"muted\">No filer matches <span class=\"missing-id\">" + esc(want) + "</span> on the official tape.</p>";
+      let html = want
+        ? "<p class=\"muted\">No filer matches <span class=\"missing-id\">" + esc(want) + "</span> on the official tape.</p>"
+        : "<p class=\"muted\">Open a member from the tape.</p>";
       suggestions.forEach((s) => {
         html += "<p><a class=\"did-mean\" href=\"politician.html?id=" + encodeURIComponent(s.id) + "\">Did you mean " + esc(s.name) + "?</a></p>";
       });
@@ -1809,7 +1811,10 @@
       fetch("bios.json").then((r) => r.json()).catch(() => ({ people: {} })),
       fetch("tape/filers.json").then((r) => r.ok ? r.json() : { filers: [], ids: [] })
     ]).then(async ([bios, filerIndex]) => {
-      if (!id) return;
+      if (!id) {
+        showMissing("", []);
+        return;
+      }
       const aliases = (bios && bios.aliases) || {};
       if (aliases[id]) {
         id = aliases[id];

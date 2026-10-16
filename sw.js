@@ -52,13 +52,14 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
-  const isTrade = /(?:^|\/)(trades|trades-lite|landed|heat|backtest|analysis|tells)\.json$/.test(url.pathname)
+  // tickers.json stamps filtered rows in the browser, so a stale copy would mis-name the tape.
+  const isTrade = /(?:^|\/)(trades|trades-lite|tickers|landed|heat|backtest|analysis|tells)\.json$/.test(url.pathname)
     || /\/tape\/(?:page|filers)\.json$/.test(url.pathname)
     || /\/tape\/kind\/[^/]+\.json$/.test(url.pathname)
     || /\/tape\/politicians\/[^/]+\.json$/.test(url.pathname)
     || /\/tape\/tickers\/[^/]+\.json$/.test(url.pathname);
   const isData = isTrade
-    || /(?:^|\/)(bios|tickers|traders|filing-notes)\.json$/.test(url.pathname)
+    || /(?:^|\/)(bios|traders|filing-notes)\.json$/.test(url.pathname)
     || /(?:^|\/)prices\/[^/]+\.json$/.test(url.pathname);
   const isDoc = event.request.mode === "navigate"
     || url.pathname.endsWith(".html")
@@ -94,11 +95,22 @@ self.addEventListener("fetch", (event) => {
   if (isData) {
     event.respondWith((async () => {
       const cached = await caches.match(event.request);
-      const network = fetch(event.request).then((res) => {
-        storeIfOk(res, event);
+      const update = fetch(event.request).then((res) => {
+        if (res && res.ok) {
+          const copy = res.clone();
+          return caches.open(CACHE).then((cache) => cache.put(event.request, copy)).then(() => res);
+        }
         return res;
-      }).catch(() => cached);
-      return cached || network;
+      }).catch(() => null);
+      if (cached) {
+        event.waitUntil(update.then(() => {}));
+        return cached;
+      }
+      const res = await update;
+      if (res) return res;
+      const loose = await caches.match(event.request, { ignoreSearch: true });
+      if (loose) return loose;
+      throw new Error("data");
     })());
     return;
   }

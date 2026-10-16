@@ -600,14 +600,18 @@
       state.showAll = !state.showAll;
       paint();
     });
+    function toggleCard(id) {
+      state.open = state.open === id ? "" : id;
+      paint();
+      writeUrl();
+      const top = document.querySelector(".card[data-open=\"" + CSS.escape(id) + "\"] .card-top");
+      if (top) top.focus();
+    }
     document.getElementById("board").addEventListener("click", (e) => {
       if (e.target.closest("a")) return;
       const card = e.target.closest(".card[data-open]");
       if (!card) return;
-      const id = card.getAttribute("data-open");
-      state.open = state.open === id ? "" : id;
-      paint();
-      writeUrl();
+      toggleCard(card.getAttribute("data-open"));
     });
     document.getElementById("board").addEventListener("keydown", (e) => {
       if (e.key !== "Enter" && e.key !== " ") return;
@@ -616,10 +620,7 @@
       const card = top && top.closest(".card[data-open]");
       if (!card) return;
       e.preventDefault();
-      const id = card.getAttribute("data-open");
-      state.open = state.open === id ? "" : id;
-      paint();
-      writeUrl();
+      toggleCard(card.getAttribute("data-open"));
     });
 
     fetch("backtest.json").then((r) => {
