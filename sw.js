@@ -1,4 +1,4 @@
-const CACHE = "stock-act-v8";
+const CACHE = "stock-act-v9";
 const SHELL = [
   "./",
   "./index.html",
@@ -43,7 +43,7 @@ self.addEventListener("notificationclick", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))
+      Promise.all(keys.filter((key) => key !== CACHE && key.indexOf("stock-act-") === 0).map((key) => caches.delete(key)))
     ).then(() => self.clients.claim())
   );
 });
@@ -52,25 +52,14 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
-  // PMTiles needs Range requests. Do not put the gitignored archive in the shell cache.
-  if (url.pathname.includes("/claims/tiles/") || url.pathname.endsWith(".pmtiles") || url.pathname.endsWith(".pmtiles.png") || url.pathname.includes("/.build/") || url.pathname.includes("/.db/")) {
-    return;
-  }
-  if (/\/insider-(signals|signals-ledger|basket-tags|warnings|warning-tags)\.json$/.test(url.pathname) || url.pathname.includes("/insider-track/") || url.pathname.includes("/insider-history/")) {
-    return;
-  }
-
   const isTrade = /(?:^|\/)(trades|trades-lite|landed|heat|backtest|analysis|tells)\.json$/.test(url.pathname)
-    || /\/tape\/(?:page|all|filers)\.json$/.test(url.pathname)
+    || /\/tape\/(?:page|filers)\.json$/.test(url.pathname)
     || /\/tape\/kind\/[^/]+\.json$/.test(url.pathname)
     || /\/tape\/politicians\/[^/]+\.json$/.test(url.pathname)
-    || /\/tape\/tickers\/[^/]+\.json$/.test(url.pathname)
-    || /\/research\/sectors\.json$/.test(url.pathname);
+    || /\/tape\/tickers\/[^/]+\.json$/.test(url.pathname);
   const isData = isTrade
-    || /(?:^|\/)(trades|trades-lite|bios|tickers|traders|analysis|tells|backtest|contracts|insider-trades|insider-trades-lite|insider-analysis|insider-companies|insider-repeatable|insider-repeatable-scorecard|insider-follow|price-checks|politician-insider-overlap|filing-notes)\.json$/.test(url.pathname)
-    || /(?:^|\/)prices\/[^/]+\.json$/.test(url.pathname)
-    || /(?:^|\/)beta\/[^/]+\.json$/.test(url.pathname)
-    || /(?:^|\/)canada\/[^/]+\.json$/.test(url.pathname);
+    || /(?:^|\/)(bios|tickers|traders|filing-notes)\.json$/.test(url.pathname)
+    || /(?:^|\/)prices\/[^/]+\.json$/.test(url.pathname);
   const isDoc = event.request.mode === "navigate"
     || url.pathname.endsWith(".html")
     || url.pathname.endsWith("/")
@@ -78,13 +67,11 @@ self.addEventListener("fetch", (event) => {
     || url.pathname.endsWith("/sw.js")
     || url.pathname.endsWith("/shell.css")
     || url.pathname.endsWith("/qc.js")
-    || url.pathname.endsWith("/chart.js")
-    || url.pathname.endsWith("/insider-track.js")
-    || url.pathname.endsWith("/insider-track.css");
-  function storeIfOk(res) {
+    || url.pathname.endsWith("/chart.js");
+  function storeIfOk(res, event) {
     if (res && res.ok) {
       const copy = res.clone();
-      caches.open(CACHE).then((cache) => cache.put(event.request, copy));
+      event.waitUntil(caches.open(CACHE).then((cache) => cache.put(event.request, copy)));
     }
     return res;
   }
@@ -94,7 +81,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith((async () => {
       try {
         const res = await fetch(event.request, { cache: "no-cache" });
-        storeIfOk(res);
+        storeIfOk(res, event);
         return res;
       } catch (err) {
         const cached = await caches.match(event.request);
@@ -108,7 +95,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith((async () => {
       const cached = await caches.match(event.request);
       const network = fetch(event.request).then((res) => {
-        storeIfOk(res);
+        storeIfOk(res, event);
         return res;
       }).catch(() => cached);
       return cached || network;
@@ -122,10 +109,11 @@ self.addEventListener("fetch", (event) => {
       fetch(event.request, { cache: "no-cache" })
         .catch(() => fetch(event.request))
         .then((res) => {
-          storeIfOk(res);
+          storeIfOk(res, event);
           return res;
         })
-        .catch(() => caches.match(event.request))
+        // A versioned ?v= URL must still find the plain cached copy when offline.
+        .catch(() => caches.match(event.request, { ignoreSearch: true }))
     );
     return;
   }
@@ -133,13 +121,9 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
-      return fetch(event.request).then((res) => {
-        if (res.ok) {
-          const copy = res.clone();
-          caches.open(CACHE).then((cache) => cache.put(event.request, copy));
-        }
-        return res;
-      });
+      return fetch(event.request)
+        .then((res) => storeIfOk(res, event))
+        .catch(() => caches.match(event.request, { ignoreSearch: true }));
     })
   );
 });

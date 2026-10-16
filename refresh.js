@@ -12,7 +12,8 @@
     ".ptr-mark{width:14px;height:14px;border:2px solid #e3b41a;border-right-color:transparent;border-radius:50%;",
     "flex:0 0 14px;opacity:.85;}",
     ".ptr.busy .ptr-mark{animation:ptr-spin .7s linear infinite;}",
-    "@keyframes ptr-spin{to{transform:rotate(360deg);}}"
+    "@keyframes ptr-spin{to{transform:rotate(360deg);}}",
+    "@media (prefers-reduced-motion: reduce){.ptr.busy .ptr-mark{animation:none;}}"
   ].join("");
   document.head.appendChild(style);
 
@@ -54,9 +55,9 @@
         const reg = await navigator.serviceWorker.getRegistration();
         if (reg) await reg.update();
       }
-      if (window.caches) {
+      if (window.caches && navigator.onLine) {
         const keys = await caches.keys();
-        await Promise.all(keys.map((key) => caches.delete(key)));
+        await Promise.all(keys.filter((key) => key.indexOf("stock-act-") === 0).map((key) => caches.delete(key)));
       }
     } catch (err) {}
     location.reload();
