@@ -457,7 +457,7 @@
 
   function prettyDate(iso) {
     const d = new Date(String(iso || "") + "T00:00:00");
-    if (isNaN(d.getTime())) return iso || "—";
+    if (isNaN(d.getTime())) return "—";
     return d.toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric" });
   }
 
@@ -465,7 +465,7 @@
     const m = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})/);
     if (m) return m[2] + "/" + m[3];
     const d = new Date(String(iso || "") + "T00:00:00");
-    if (isNaN(d.getTime())) return iso || "—";
+    if (isNaN(d.getTime())) return "—";
     const mm = String(d.getMonth() + 1).padStart(2, "0");
     const dd = String(d.getDate()).padStart(2, "0");
     return mm + "/" + dd;
@@ -1197,6 +1197,13 @@
     };
   }
 
+  function stampTapeRow(t, file) {
+    const row = enrich(t, file);
+    delete row.source;
+    delete row.option;
+    return row;
+  }
+
   function tickerInfo(t, file) {
     const lookup = (file && file.tickers) || {};
     const extra = ((file && file.assets) || {})[t.asset] || {};
@@ -1713,7 +1720,9 @@
     return "<li class=\"qc-txn qc-txn-tape" + (cls ? " " + cls : "") + extraCls + "\"" +
       (t && t.id ? " data-id=\"" + esc(t.id) + "\"" : "") +
       (opts.holdKey ? " data-key=\"" + esc(opts.holdKey) + "\"" : "") +
-      " tabindex=\"0\" role=\"button\" aria-pressed=\"" + (opts.selected ? "true" : "false") + "\">" +
+      (opts.interactive === false
+        ? ""
+        : " tabindex=\"0\" role=\"button\" aria-pressed=\"" + (opts.selected ? "true" : "false") + "\"") + ">" +
       when +
       tapeWhoLineHtml(t, { nameHref: nameHref, hideWhoLine: !!opts.hideWhoLine }) +
       "<div class=\"qc-txn-id\"><div class=\"qc-txn-id-line\">" +
@@ -1921,175 +1930,13 @@
           showHoldings: !!opts.showHoldings,
           showOptionMeta: !!opts.showOptionMeta,
           companyFirst: !!opts.companyFirst,
-          hideWhoLine: !!opts.nameSelf
+          hideWhoLine: !!opts.nameSelf,
+          interactive: opts.interactive
         });
       }).join("");
       return "<li class=\"day\"><h2>" + esc(filedHeading(g.key)) + "</h2></li>" + rowHtml;
     });
     return politicianTapeColsHtml(opts) + blocks.join("");
-  }
-
-  const FOLLOW_SEEN_KEY = "qc-follow-seen";
-  const FOLLOW_NOTIFIED_KEY = "qc-follow-notified";
-
-  function followById(payload) {
-    const ids = {};
-    ((payload && payload.follow) || []).forEach((row) => {
-      if (row && row.id) ids[row.id] = row;
-    });
-    return ids;
-  }
-
-  function readIdList(key) {
-    try {
-      const raw = JSON.parse(localStorage.getItem(key) || "[]");
-      return Array.isArray(raw) ? raw.filter(Boolean) : [];
-    } catch (err) {
-      return [];
-    }
-  }
-
-  function unreadFollowAlerts(payload) {
-    const seen = {};
-    readIdList(FOLLOW_SEEN_KEY).forEach((id) => { seen[id] = 1; });
-    return ((payload && payload.alerts) || []).filter((a) => a && a.id && !seen[a.id]);
-  }
-
-  function markFollowAlertsSeen(payload) {
-    const ids = ((payload && payload.alerts) || []).map((a) => a && a.id).filter(Boolean);
-    try { localStorage.setItem(FOLLOW_SEEN_KEY, JSON.stringify(ids)); } catch (err) {}
-  }
-
-  function followAlertLine(a) {
-    const name = titleCaseName(a.filer || "");
-    const side = a.side === "sale" ? "sold" : "bought";
-    const when = prettyDate(a.filed_date || a.trade_date || "");
-    const hero = a.amount || (a.value != null ? formatMoney(a.value) : "");
-    const plan = a.plan ? "plan" : "";
-    return [name, side, a.ticker || "", when, hero, plan].filter(Boolean).join(" · ");
-  }
-
-  function followAlertsHtml(payload) {
-    const alerts = unreadFollowAlerts(payload);
-    if (!alerts.length) return "";
-    const n = alerts.length;
-    const rows = alerts.map((a) => {
-      const href = a.filer_id
-        ? "insider.html?id=" + encodeURIComponent(a.filer_id)
-        : "insider-board.html?b=follow";
-      const sideCls = a.side === "sale" ? "down" : "up";
-      const plan = a.plan ? "<span class=\"qc-plan-tag\">Plan</span>" : "";
-      return "<a class=\"hit\" href=\"" + esc(href) + "\">" +
-        "<span class=\"who\">" + esc(titleCaseName(a.filer || "")) + plan + "</span>" +
-        "<span class=\"side " + sideCls + "\">" + (a.side === "sale" ? "Sold" : "Bought") + "</span>" +
-        "<span class=\"tk\">" + esc(a.ticker || "") + "</span>" +
-        "<span class=\"when\">" + esc(prettyDate(a.filed_date || "")) + "</span></a>";
-    }).join("");
-    const notify = ("Notification" in window)
-      ? "<button type=\"button\" class=\"ghost\" data-follow-notify>Notify</button>"
-      : "";
-    return "<div class=\"qc-follow-alerts\" role=\"status\">" +
-      "<div class=\"hd\">" +
-        "<span>" + n + " follow print" + (n === 1 ? "" : "s") + "</span>" +
-        "<span class=\"acts\">" +
-          "<a href=\"insider-board.html?b=follow\">Best list</a>" +
-          notify +
-          "<button type=\"button\" class=\"ghost\" data-follow-dismiss>Dismiss</button>" +
-        "</span></div>" +
-      "<div class=\"list\">" + rows + "</div></div>";
-  }
-
-  function maybeNotifyFollow(payload) {
-    if (!("Notification" in window) || Notification.permission !== "granted") return;
-    const have = {};
-    readIdList(FOLLOW_NOTIFIED_KEY).forEach((id) => { have[id] = 1; });
-    const fresh = unreadFollowAlerts(payload).filter((a) => !have[a.id]);
-    if (!fresh.length) return;
-    const show = (reg) => {
-      fresh.forEach((a) => {
-        const title = titleCaseName(a.filer || "Follow print");
-        const body = followAlertLine(a);
-        const url = a.filer_id
-          ? "insider.html?id=" + encodeURIComponent(a.filer_id)
-          : "insider-board.html?b=follow";
-        const opts = { body: body, tag: a.id || a.key, data: { url: url } };
-        if (reg && reg.showNotification) reg.showNotification(title, opts);
-        else {
-          try { new Notification(title, opts); } catch (err) {}
-        }
-      });
-    };
-    if (navigator.serviceWorker) {
-      navigator.serviceWorker.ready.then(show).catch(() => show(null));
-    } else show(null);
-    const notified = readIdList(FOLLOW_NOTIFIED_KEY).concat(fresh.map((a) => a.id));
-    try { localStorage.setItem(FOLLOW_NOTIFIED_KEY, JSON.stringify(notified.slice(-80))); } catch (err) {}
-  }
-
-  function requestFollowNotify(payload) {
-    if (!("Notification" in window)) return Promise.resolve("unsupported");
-    const go = () => { maybeNotifyFollow(payload); };
-    if (Notification.permission === "granted") {
-      go();
-      return Promise.resolve("granted");
-    }
-    if (Notification.permission === "denied") return Promise.resolve("denied");
-    return Notification.requestPermission().then((perm) => {
-      if (perm === "granted") go();
-      return perm;
-    });
-  }
-
-  function mountFollowAlerts(host, payload) {
-    if (!host) return;
-    host._followPayload = payload;
-    host.innerHTML = followAlertsHtml(payload);
-    if (!host._followBound) {
-      host._followBound = true;
-      host.addEventListener("click", (e) => {
-        const data = host._followPayload;
-        if (e.target.closest("[data-follow-dismiss]")) {
-          markFollowAlertsSeen(data);
-          host.innerHTML = "";
-        } else if (e.target.closest("[data-follow-notify]")) {
-          requestFollowNotify(data);
-        }
-      });
-    }
-    maybeNotifyFollow(payload);
-  }
-
-  function loadFollow() {
-    return fetch("insider-follow.json").then((r) => r.json());
-  }
-
-  function loadForm4() {
-    return fetch("insider-form4.json").then((r) => r.ok ? r.json() : null).catch(() => null);
-  }
-
-  function emptyNum(v) {
-    return v == null || v === "";
-  }
-
-  function applyForm4(trades, payload) {
-    const map = (payload && payload.trades) || {};
-    (trades || []).forEach((t) => {
-      if (!t || !t.id) return;
-      const ov = map[t.id];
-      if (!ov) return;
-      t.plan = !!ov.plan;
-      t.planWhy = ov.why || "";
-      if (emptyNum(t.shares) && ov.shares != null) t.shares = ov.shares;
-      if (emptyNum(t.shares_after) && (ov.shares_held != null || ov.after != null)) {
-        t.shares_after = ov.shares_held != null ? ov.shares_held : ov.after;
-      }
-      if (emptyNum(t.held_pct) && ov.pct_held != null) t.held_pct = ov.pct_held;
-      if (ov.vs != null) t.vsStake = ov.vs;
-      if (ov.held != null) t.heldAfter = ov.held;
-      if (emptyNum(t.shares_held)) t.shares_held = ov.shares_held != null ? ov.shares_held : t.shares_after;
-      if (emptyNum(t.pct_held)) t.pct_held = ov.pct_held != null ? ov.pct_held : t.held_pct;
-    });
-    return trades;
   }
 
   const RETURN_KEY = "qc:return";
@@ -2645,6 +2492,7 @@
     SECTORS: SECTORS,
     sectorOf: sectorOf,
     enrich: enrich,
+    stampTapeRow: stampTapeRow,
     tickerInfo: tickerInfo,
     resolveTickerFromName: resolveTickerFromName,
     asOfLabel: asOfLabel,
@@ -2652,15 +2500,6 @@
     parseAdded: parseAdded,
     isLanded: isLanded,
     lagDays: lagDays,
-    followById: followById,
-    unreadFollowAlerts: unreadFollowAlerts,
-    markFollowAlertsSeen: markFollowAlertsSeen,
-    followAlertsHtml: followAlertsHtml,
-    mountFollowAlerts: mountFollowAlerts,
-    requestFollowNotify: requestFollowNotify,
-    loadFollow: loadFollow,
-    loadForm4: loadForm4,
-    applyForm4: applyForm4,
     rememberReturn: rememberReturn,
     restoreScroll: restoreScroll,
     bindBack: bindBack,

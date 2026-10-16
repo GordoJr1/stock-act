@@ -54,10 +54,7 @@ function writeJson(rel, obj) {
 }
 
 function stamp(t, file) {
-  const row = QC.enrich(t, file);
-  delete row.source;
-  delete row.option;
-  return row;
+  return QC.stampTapeRow(t, file);
 }
 
 function kindAllows(kind, t) {
@@ -555,12 +552,6 @@ function buildTape() {
   for (const key of ["option", "bond", "all"]) {
     kindBytes += writeJson("tape/kind/" + key + ".json", { trades: pools[key] });
   }
-  const allBytes = writeJson("tape/all.json", {
-    collected: lite.collected || "",
-    generated,
-    ...senateFields(full),
-    trades: liteRows
-  });
   const filerBytes = writeJson("tape/filers.json", {
     collected: full.collected || lite.collected || "",
     generated,
@@ -653,7 +644,6 @@ function buildTape() {
   console.error(JSON.stringify({
     pageBytes,
     kindBytes,
-    allBytes,
     filerBytes,
     politicianBytes,
     politicianFiles: politicianEntries.length,

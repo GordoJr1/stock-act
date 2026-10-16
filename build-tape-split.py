@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Derive page JSON from trades.json / trades-lite.json via qc.js so names and order match the site.
 
-Outputs: tape/{page,all,filers}.json, tape/kind/*, tape/politicians/*, tape/tickers/*, landed.json, heat.json.
+Outputs: tape/{page,filers}.json, tape/kind/*, tape/politicians/*, tape/tickers/*, landed.json, heat.json.
 """
 
 from __future__ import annotations

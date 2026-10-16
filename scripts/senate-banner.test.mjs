@@ -154,7 +154,7 @@ check("missing senate fields copy nothing", JSON.stringify(senateFields({ collec
 
 const split = fs.readFileSync(path.join(root, "scripts/tape-split.mjs"), "utf8");
 const copies = (split.match(/senateFields\(full\)/g) || []).length;
-check("tape split copies the fields into page, all, filers, politicians, and tickers", copies === 5, String(copies) + " sites");
+check("tape split copies the fields into page, filers, politicians, and tickers", copies === 4, String(copies) + " sites");
 check(
   "tape split calls buildTape unconditionally and imports senateFields",
   split.includes('from "./senate-fields.mjs"') && /buildTape\(\);\s*$/.test(split) && !split.includes("if (entry ==="),
