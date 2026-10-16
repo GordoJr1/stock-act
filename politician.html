@@ -7,11 +7,11 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="QC Tape" />
+  <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
-  <title>Quantity Capital</title>
+  <title>Stock Act</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet" />
@@ -663,7 +663,7 @@
   <a class="qc-skip" href="#main">Skip to content</a>
   <header class="qc-header">
     <div class="wrap qc-header-inner">
-      <a class="mark" href="index.html">Quantity <span>Capital</span></a>
+      <a class="mark" href="index.html">Stock <span>Act</span></a>
       <nav class="qc-nav" aria-label="Politician tape">
         <a href="index.html" title="Live politician trades">Tape</a>
         <a href="landed.html" title="New public filings">Filed</a>
@@ -746,7 +746,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=144"></script>
+  <script src="qc.js?v=145"></script>
   <script src="chart.js?v=124"></script>
   <script>
     const isOptionLike = QC.isOptionLike;
@@ -1776,7 +1776,7 @@
 
     function showMissing(want, suggestions) {
       document.getElementById("who").textContent = want ? "Not found" : "Pick a member";
-      document.title = (want ? "Not found" : "Politician") + " - Quantity Capital";
+      document.title = (want ? "Not found" : "Politician") + " - Stock Act";
       const kickers = document.querySelectorAll(".kicker");
       if (kickers[0]) kickers[0].textContent = "No member";
       if (kickers[1]) kickers[1].hidden = true;
@@ -1850,7 +1850,7 @@
         || "";
       if (shown) {
         document.getElementById("who").textContent = shown;
-        document.title = shown + " - Quantity Capital";
+        document.title = shown + " - Stock Act";
       }
     }).catch(() => {
       document.getElementById("rows").innerHTML =
