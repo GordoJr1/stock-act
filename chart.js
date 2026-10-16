@@ -46,7 +46,6 @@ function niceAxisScale(dataMin, dataMax) {
   const rawSpan = (dataMax - dataMin) || Math.max(Math.abs(dataMax) * 0.25, dataMax < 1 ? 0.2 : 1);
   let lo = dataMin;
   let hi = dataMax;
-  if (lo < 0 && dataMin >= 0) lo = 0;
   let step = dataMax >= 5
     ? Math.max(1, Math.round(niceNum(rawSpan / 4, true)) || 1)
     : pickCheapStep(rawSpan, dataMax);
@@ -121,7 +120,7 @@ function tradeValue(m) {
     const value = QC.amountHigh(m.amount);
     if (value > 0) return value;
   }
-  return 10000;
+  return null;
 }
 
 function createSplinePath(pts) {
@@ -242,6 +241,19 @@ const CHART_PALETTES = {
     popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(168, 85, 247, 0.12)"
   }
 };
+
+function rebindChartEvents(el) {
+  if (el.__qcUnbind) el.__qcUnbind();
+  const cleanups = [];
+  el.__qcUnbind = () => {
+    cleanups.forEach((fn) => fn());
+    el.__qcUnbind = null;
+  };
+  return (type, fn, opts) => {
+    el.addEventListener(type, fn, opts);
+    cleanups.push(() => el.removeEventListener(type, fn, opts));
+  };
+}
 
 function drawChart(points, marks, opts) {
   opts = opts || {};
@@ -521,14 +533,15 @@ function drawChart(points, marks, opts) {
     });
   });
 
-  svg.addEventListener("click", (e) => {
+  const bind = rebindChartEvents(svg);
+  bind("click", (e) => {
     if (!e.target.closest(".chart-mark")) {
       const pop = wrap.querySelector("#mark-pop");
       if (pop) pop.hidden = true;
     }
   });
 
-  attachScrubberEvents(svg, wrap, pts, w, h);
+  attachScrubberEvents(svg, wrap, pts, w, h, bind);
 
   if (svgRect.width <= 2) {
     requestAnimationFrame(function () {
@@ -636,7 +649,7 @@ function hideChartHoverUi(wrap, svg) {
   if (scrubG) scrubG.style.display = "none";
 }
 
-function attachScrubberEvents(svg, wrap, pts, w, h) {
+function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
   const scrubG = svg.querySelector("#qc-scrubber-g");
   const scrubLine = svg.querySelector("#qc-scrub-line");
   const scrubDot = svg.querySelector("#qc-scrub-dot");
@@ -738,16 +751,16 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
     return !!(t && t.closest && t.closest(".chart-mark"));
   }
 
-  svg.addEventListener("mousemove", (e) => {
+  bind("mousemove", (e) => {
     if (recentTouch() || isTouchScrubbing) return;
     onPointerMove(e);
   });
-  svg.addEventListener("mouseleave", () => {
+  bind("mouseleave", () => {
     if (recentTouch() || isTouchScrubbing) return;
     onPointerLeave();
   });
 
-  svg.addEventListener("touchstart", (e) => {
+  bind("touchstart", (e) => {
     lastTouchAt = Date.now();
     isTouchScrubbing = true;
     didTouchMove = false;
@@ -756,7 +769,7 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
     // Wait for an actual drag before showing hover pills so a tap does not flash them.
   }, { passive: true });
 
-  svg.addEventListener("touchmove", (e) => {
+  bind("touchmove", (e) => {
     if (!isTouchScrubbing || e.touches.length !== 1) return;
     lastTouchAt = Date.now();
     didTouchMove = true;
@@ -765,7 +778,7 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
     onPointerMove(e);
   }, { passive: false });
 
-  svg.addEventListener("touchend", (e) => {
+  bind("touchend", (e) => {
     lastTouchAt = Date.now();
     if (!isTouchScrubbing) return;
     isTouchScrubbing = false;
@@ -781,7 +794,7 @@ function attachScrubberEvents(svg, wrap, pts, w, h) {
     }, 1800);
   });
 
-  svg.addEventListener("touchcancel", () => {
+  bind("touchcancel", () => {
     lastTouchAt = Date.now();
     isTouchScrubbing = false;
     touchStartedOnMark = false;

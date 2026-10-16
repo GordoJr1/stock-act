@@ -7,7 +7,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Quantity" />
+  <meta name="apple-mobile-web-app-title" content="QC Tape" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
@@ -670,17 +670,17 @@
         <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
         <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
         <a href="paper.html" title="Copy on the filed date">Paper</a>
-        <a href="overlap.html" title="Congress and a company insider, same week">Overlap</a>
+        <a href="https://gordojr1.github.io/quantity-capital/overlap.html" title="Congress and a company insider, same week">Overlap</a>
       </nav>
       <div class="qc-modes">
         <a class="qc-mode" href="https://gordojr1.github.io/quantity-capital/insiders.html" title="Officer and director trades">Insiders</a>
         <details class="qc-more">
           <summary class="qc-mode" title="Mines, Claims, Canada and Research">More</summary>
           <div class="qc-more-menu">
-            <a href="beta.html" title="Issuer mine profiles">Mines</a>
-            <a href="claims.html" title="Mining claims map">Claims</a>
-            <a href="canada.html" title="Canadian mining totals">Canada</a>
-            <a href="research.html" title="What our studies found">Research</a>
+            <a href="https://gordojr1.github.io/quantity-capital/beta.html" title="Issuer mine profiles">Mines</a>
+            <a href="https://gordojr1.github.io/quantity-capital/claims.html" title="Mining claims map">Claims</a>
+            <a href="https://gordojr1.github.io/quantity-capital/canada.html" title="Canadian mining totals">Canada</a>
+            <a href="https://gordojr1.github.io/quantity-capital/research.html" title="What our studies found">Research</a>
           </div>
         </details>
       </div>
@@ -746,8 +746,8 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=143"></script>
-  <script src="chart.js?v=123"></script>
+  <script src="qc.js?v=144"></script>
+  <script src="chart.js?v=124"></script>
   <script>
     const isOptionLike = QC.isOptionLike;
     const isBond = QC.isBond;
@@ -870,18 +870,20 @@
         if (bio.chamber) line1.push(esc(bio.chamber));
       }
       const line2 = [];
-      if (bio.first_elected_senate) line2.push("First elected " + bio.first_elected_senate);
-      else if (bio.first_elected_house) line2.push("First elected " + bio.first_elected_house);
-      if (bio.term_start && bio.term_end) line2.push("Term " + bio.term_start + "–" + bio.term_end);
+      if (bio.first_elected_senate) line2.push("First elected " + esc(bio.first_elected_senate));
+      else if (bio.first_elected_house) line2.push("First elected " + esc(bio.first_elected_house));
+      if (bio.term_start && bio.term_end) line2.push("Term " + esc(bio.term_start) + "–" + esc(bio.term_end));
       if (!line1.length && !line2.length) {
         box.hidden = true;
         box.innerHTML = "";
         return;
       }
       box.hidden = false;
-      box.innerHTML = line1.length
+      box.innerHTML = (line1.length
         ? "<span class=\"hero-line\">" + line1.join(" · ") + "</span>"
-        : "";
+        : "") + (line2.length
+          ? "<span class=\"hero-line\">" + line2.join(" · ") + "</span>"
+          : "");
     }
 
     function paintBio(bio, overlaps) {
@@ -897,7 +899,7 @@
       if ((bio.chamber || "") === "White House") {
         box.innerHTML =
           "<article class=\"office\"><h3>Office</h3><p><strong>" + esc(bio.display || bio.name) + "</strong>" + esc(party) + "<br>" +
-          esc(bio.title || "White House") + "<br>White House" + term + "</p></article>" +
+          esc(bio.title || "White House") + "<br>White House" + esc(term) + "</p></article>" +
           "<article class=\"economy\"><h3>Agency</h3><p>" + esc(bio.agency || "White House") + "</p></article>" +
           "<article class=\"committees\"><h3>Committees</h3>" +
           "<p class=\"muted\">White House officials do not sit on congressional committees.</p></article>" +
@@ -915,7 +917,7 @@
         "<article class=\"office\"><h3>Office</h3><p><strong>" + esc(bio.display || bio.name) + "</strong>" + esc(party) + "<br>" +
         "State: " + esc(bio.state) +
         (bio.district ? "-" + esc(String(bio.district).padStart(2, "0")) : "") +
-        (bio.chamber ? " · " + esc(bio.chamber) : "") + "<br>" + elected + term + "</p></article>" +
+        (bio.chamber ? " · " + esc(bio.chamber) : "") + "<br>" + esc(elected) + esc(term) + "</p></article>" +
         "<article class=\"economy\"><h3>State economy</h3><p>" + esc(bio.state_economy || "—") + "</p></article>" +
         "<article class=\"committees\"><h3>Committees</h3>" + listHtml(bio.committees) + "</article>" +
         "<article class=\"overlap\"><h3>Conflicts</h3>" +
@@ -1046,9 +1048,19 @@
       return (book.positions || []).find((p) => p.key === key) || null;
     }
 
+    let rowsByKey = null;
     function tradesForKey(key) {
       if (!key) return [];
-      return tapeRows.filter((t) => holdingIdentity(t, tickerLookup).key === key);
+      if (!rowsByKey) {
+        rowsByKey = new Map();
+        tapeRows.forEach((t) => {
+          const k = holdingIdentity(t, tickerLookup).key;
+          if (!k) return;
+          if (!rowsByKey.has(k)) rowsByKey.set(k, []);
+          rowsByKey.get(k).push(t);
+        });
+      }
+      return rowsByKey.get(key) || [];
     }
 
     function pickTradeForKey(key) {
@@ -1067,8 +1079,14 @@
       return tapeRows.find((t) => t.id === tid) || null;
     }
 
+    let bookCache = null;
+    let bookCacheRange = "";
     function currentBook() {
-      return buildHoldings(rowsForRange(allRows, bookRange), tickerLookup);
+      if (!bookCache || bookCacheRange !== bookRange) {
+        bookCache = buildHoldings(rowsForRange(allRows, bookRange), tickerLookup);
+        bookCacheRange = bookRange;
+      }
+      return bookCache;
     }
 
     function orderPositions(positions) {
@@ -1238,7 +1256,7 @@
       const m = marks[0] || {};
       const buy = (rec.side || m.side) !== "sale";
       const amt = m.amount ? QC.formatAmountRange(m.amount) : "";
-      const mDate = m.date ? prettyDate(m.date) : "";
+      const mDate = m.date ? esc(prettyDate(m.date)) : "";
       const title = m.filer || m.label || "";
       pop.innerHTML =
         "<div class=\"pop-header\">" +
@@ -1658,6 +1676,7 @@
           if (!row) return;
           const link = e.target.closest("a");
           if (link) {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
             const href = link.getAttribute("href") || "";
             const pin = /ticker\.html/.test(href) ||
               link.classList.contains("qc-txn-company") ||
@@ -1756,8 +1775,8 @@
     }
 
     function showMissing(want, suggestions) {
-      document.getElementById("who").textContent = "Not found";
-      document.title = "Not found - Quantity Capital";
+      document.getElementById("who").textContent = want ? "Not found" : "Pick a member";
+      document.title = (want ? "Not found" : "Politician") + " - Quantity Capital";
       const kickers = document.querySelectorAll(".kicker");
       if (kickers[0]) kickers[0].textContent = "No member";
       if (kickers[1]) kickers[1].hidden = true;
@@ -1774,7 +1793,9 @@
       if (tapeHead) tapeHead.hidden = true;
       const list = document.getElementById("rows");
       if (list) list.hidden = true;
-      let html = "<p class=\"muted\">No filer matches <span class=\"missing-id\">" + esc(want) + "</span> on the official tape.</p>";
+      let html = want
+        ? "<p class=\"muted\">No filer matches <span class=\"missing-id\">" + esc(want) + "</span> on the official tape.</p>"
+        : "<p class=\"muted\">Open a member from the tape.</p>";
       suggestions.forEach((s) => {
         html += "<p><a class=\"did-mean\" href=\"politician.html?id=" + encodeURIComponent(s.id) + "\">Did you mean " + esc(s.name) + "?</a></p>";
       });
@@ -1790,6 +1811,10 @@
       fetch("bios.json").then((r) => r.json()).catch(() => ({ people: {} })),
       fetch("tape/filers.json").then((r) => r.ok ? r.json() : { filers: [], ids: [] })
     ]).then(async ([bios, filerIndex]) => {
+      if (!id) {
+        showMissing("", []);
+        return;
+      }
       const aliases = (bios && bios.aliases) || {};
       if (aliases[id]) {
         id = aliases[id];
@@ -1833,7 +1858,7 @@
     });
 
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js", { updateViaCache: "none" });
+      navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).catch(() => {});
     }
   </script>
   <script src="refresh.js"></script>
@@ -1843,7 +1868,7 @@
     <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
     <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
     <a href="paper.html" title="Copy on the filed date">Paper</a>
-    <a href="overlap.html" title="Congress and a company insider, same week">Overlap</a>
+    <a href="https://gordojr1.github.io/quantity-capital/overlap.html" title="Congress and a company insider, same week">Overlap</a>
   </nav>
 </body>
 </html>

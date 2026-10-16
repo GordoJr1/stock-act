@@ -7,7 +7,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Quantity" />
+  <meta name="apple-mobile-web-app-title" content="QC Tape" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
@@ -2422,17 +2422,17 @@
         <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
         <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
         <a href="paper.html" title="Copy on the filed date">Paper</a>
-        <a href="overlap.html" title="Congress and a company insider, same week">Overlap</a>
+        <a href="https://gordojr1.github.io/quantity-capital/overlap.html" title="Congress and a company insider, same week">Overlap</a>
       </nav>
       <div class="qc-modes">
         <a class="qc-mode" href="https://gordojr1.github.io/quantity-capital/insiders.html" title="Officer and director trades">Insiders</a>
         <details class="qc-more">
           <summary class="qc-mode" title="Mines, Claims, Canada and Research">More</summary>
           <div class="qc-more-menu">
-            <a href="beta.html" title="Issuer mine profiles">Mines</a>
-            <a href="claims.html" title="Mining claims map">Claims</a>
-            <a href="canada.html" title="Canadian mining totals">Canada</a>
-            <a href="research.html" title="What our studies found">Research</a>
+            <a href="https://gordojr1.github.io/quantity-capital/beta.html" title="Issuer mine profiles">Mines</a>
+            <a href="https://gordojr1.github.io/quantity-capital/claims.html" title="Mining claims map">Claims</a>
+            <a href="https://gordojr1.github.io/quantity-capital/canada.html" title="Canadian mining totals">Canada</a>
+            <a href="https://gordojr1.github.io/quantity-capital/research.html" title="What our studies found">Research</a>
           </div>
         </details>
       </div>
@@ -2631,8 +2631,8 @@
   <div class="stripe" hidden></div>
   </div>
 
-  <script src="qc.js?v=143"></script>
-  <script src="chart.js?v=123"></script>
+  <script src="qc.js?v=144"></script>
+  <script src="chart.js?v=124"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, (c) => ({
@@ -4119,11 +4119,14 @@
         function ensureFull() {
           if (fullRows) return Promise.resolve(fullRows);
           if (!fullPromise) {
-            fullPromise = fetch("tape/all.json", { credentials: "omit" }).then((fullRes) => {
-              if (!fullRes.ok) throw new Error("tape");
-              return fullRes.json();
-            }).then((fullData) => {
-              fullRows = fullData.trades || [];
+            fullPromise = Promise.all([
+              fetch("trades-lite.json", { credentials: "omit" }),
+              fetch("tickers.json", { credentials: "omit" })
+            ]).then(([liteRes, tickerRes]) => {
+              if (!liteRes.ok || !tickerRes.ok) throw new Error("tape");
+              return Promise.all([liteRes.json(), tickerRes.json()]);
+            }).then(([liteData, tickerFile]) => {
+              fullRows = (liteData.trades || []).map((t) => QC.stampTapeRow(t, tickerFile));
               return fullRows;
             });
           }
@@ -4250,7 +4253,6 @@
         });
         fillIndustries();
         readFilters();
-        fillIndustries();
         await apply();
         bindBoard(data.boards || { activity: [], traders: [], conflicts: [], stocks: [] });
         markTapeReady();
@@ -4262,7 +4264,10 @@
       } catch (err) {
         bindTapeSearch([], []);
         markTapeReady();
-        box.innerHTML = "<tr><td colspan=\"9\">Could not load tape/page.json. Open <a href=\"http://127.0.0.1:8000/index.html\">http://127.0.0.1:8000/index.html</a> — double-clicking the HTML file will not load the list.</td></tr>";
+        const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+        box.innerHTML = "<tr><td colspan=\"9\">Could not load the tape. " + (isLocal
+          ? "Open <a href=\"http://127.0.0.1:8000/index.html\">http://127.0.0.1:8000/index.html</a> — double-clicking the HTML file will not load the list."
+          : "Check your connection and reload.") + "</td></tr>";
       }
     }
     if (window.QC && QC.bindTapeKeys) {
@@ -4307,7 +4312,7 @@
     })();
 
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js", { updateViaCache: "none" });
+      navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).catch(() => {});
     }
   </script>
   <script src="refresh.js"></script>
@@ -4317,7 +4322,7 @@
     <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
     <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
     <a href="paper.html" title="Copy on the filed date">Paper</a>
-    <a href="overlap.html" title="Congress and a company insider, same week">Overlap</a>
+    <a href="https://gordojr1.github.io/quantity-capital/overlap.html" title="Congress and a company insider, same week">Overlap</a>
   </nav>
 </body>
 </html>

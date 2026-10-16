@@ -1,0 +1,31 @@
+name: pr-check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax-check scripts
+        run: |
+          node --check qc.js
+          node --check chart.js
+          node --check sw.js
+          node --check refresh.js
+          node --check scripts/tape-split.mjs
+      - name: Validate JSON
+        run: |
+          for f in tape/page.json tape/filers.json tape/kind/*.json trades-lite.json trades.json bios.json tickers.json traders.json analysis.json tells.json backtest.json landed.json heat.json; do
+            python3 -c "import json,sys; json.load(open(sys.argv[1], encoding='utf-8'))" "$f"
+          done
+      - name: Tests
+        run: |
+          node scripts/senate-banner.test.mjs
+          node scripts/nav-links.test.mjs
+          node scripts/html-scripts.test.mjs

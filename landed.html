@@ -7,7 +7,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Quantity" />
+  <meta name="apple-mobile-web-app-title" content="QC Tape" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
@@ -242,17 +242,17 @@
         <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
         <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
         <a href="paper.html" title="Copy on the filed date">Paper</a>
-        <a href="overlap.html" title="Congress and a company insider, same week">Overlap</a>
+        <a href="https://gordojr1.github.io/quantity-capital/overlap.html" title="Congress and a company insider, same week">Overlap</a>
       </nav>
       <div class="qc-modes">
         <a class="qc-mode" href="https://gordojr1.github.io/quantity-capital/insiders.html" title="Officer and director trades">Insiders</a>
         <details class="qc-more">
           <summary class="qc-mode" title="Mines, Claims, Canada and Research">More</summary>
           <div class="qc-more-menu">
-            <a href="beta.html" title="Issuer mine profiles">Mines</a>
-            <a href="claims.html" title="Mining claims map">Claims</a>
-            <a href="canada.html" title="Canadian mining totals">Canada</a>
-            <a href="research.html" title="What our studies found">Research</a>
+            <a href="https://gordojr1.github.io/quantity-capital/beta.html" title="Issuer mine profiles">Mines</a>
+            <a href="https://gordojr1.github.io/quantity-capital/claims.html" title="Mining claims map">Claims</a>
+            <a href="https://gordojr1.github.io/quantity-capital/canada.html" title="Canadian mining totals">Canada</a>
+            <a href="https://gordojr1.github.io/quantity-capital/research.html" title="What our studies found">Research</a>
           </div>
         </details>
       </div>
@@ -279,7 +279,7 @@
       <a href="mailto:gordojr@proton.me">Transmit</a>
     </div>
   </footer>
-  <script src="qc.js?v=143"></script>
+  <script src="qc.js?v=144"></script>
   <script>
     const WINDOWS = [72, 168, 336];
     const params = new URLSearchParams(location.search);
@@ -324,10 +324,10 @@
       const map = new Map();
       rows.forEach((t) => {
         const id = t.filer_id || t.filer;
-        const rec = map.get(id) || { id: t.filer_id, name: t.filer, chamber: t.chamber, rows: [], lag: 0 };
+        const rec = map.get(id) || { id: t.filer_id, name: t.filer, chamber: t.chamber, rows: [], lag: null };
         rec.rows.push(t);
         const lag = QC.lagDays(t);
-        if (lag != null && lag > rec.lag) rec.lag = lag;
+        if (lag != null && (rec.lag == null || lag > rec.lag)) rec.lag = lag;
         map.set(id, rec);
       });
       return Array.from(map.values()).sort((a, b) => b.rows.length - a.rows.length || a.name.localeCompare(b.name));
@@ -351,9 +351,11 @@
 
     function filerCard(g) {
       const lag = g.lag;
-      const lagHtml = lag
-        ? "<div class=\"lag\"><b>" + lag + "d</b><span>after the trade</span></div>"
-        : "<div class=\"lag\"><b>0d</b><span>same-day print</span></div>";
+      const lagHtml = lag == null
+        ? "<div class=\"lag\"><b>—</b><span>lag unknown</span></div>"
+        : lag
+          ? "<div class=\"lag\"><b>" + lag + "d</b><span>after the trade</span></div>"
+          : "<div class=\"lag\"><b>0d</b><span>same-day print</span></div>";
       const cap = 12;
       const extra = g.rows.length > cap;
       const vis = extra ? g.rows.slice(0, cap) : g.rows;
@@ -403,18 +405,22 @@
 
     function paintWindows() {
       document.getElementById("windows").innerHTML = WINDOWS.map((h) =>
-        "<button type=\"button\" class=\"chip" + (h === hours ? " on" : "") + "\" data-h=\"" + h + "\">" +
+        "<button type=\"button\" class=\"chip" + (h === hours ? " on" : "") + "\" aria-pressed=\"" + (h === hours ? "true" : "false") + "\" data-h=\"" + h + "\">" +
           labelHours(h) + "</button>"
       ).join("");
     }
 
+    let landedFile = null;
     async function run() {
       paintWindows();
       document.getElementById("board").innerHTML = "<p class=\"muted\">Reading the tape…</p>";
-      const tape = await fetch("landed.json").then((r) => {
-        if (!r.ok) throw new Error("landed");
-        return r.json();
-      });
+      if (!landedFile) {
+        landedFile = await fetch("landed.json").then((r) => {
+          if (!r.ok) throw new Error("landed");
+          return r.json();
+        });
+      }
+      const tape = landedFile;
       const asof = document.getElementById("asof");
       if (asof && tape.collected) {
         asof.textContent = QC.asOfLabel(tape.collected);
@@ -439,7 +445,7 @@
     run().catch(() => {
       document.getElementById("board").innerHTML = "<p class=\"muted\">Could not load the tape.</p>";
     });
-    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js", { updateViaCache: "none" });
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).catch(() => {});
   </script>
   <script src="refresh.js"></script>
   <nav class="tabbar" aria-label="Politician tape">
@@ -448,7 +454,7 @@
     <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
     <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
     <a href="paper.html" title="Copy on the filed date">Paper</a>
-    <a href="overlap.html" title="Congress and a company insider, same week">Overlap</a>
+    <a href="https://gordojr1.github.io/quantity-capital/overlap.html" title="Congress and a company insider, same week">Overlap</a>
   </nav>
 </body>
 </html>
