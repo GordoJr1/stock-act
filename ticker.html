@@ -7,7 +7,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Quantity" />
+  <meta name="apple-mobile-web-app-title" content="QC Tape" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
@@ -654,8 +654,8 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=143"></script>
-  <script src="chart.js?v=123"></script>
+  <script src="qc.js?v=144"></script>
+  <script src="chart.js?v=124"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();
@@ -778,13 +778,18 @@
 
       let contentHtml = "";
       if (marks.length > 1) {
-        const total = marks.reduce((s, m) => s + tradeValue(m), 0);
-        const dateStr = marks[0].date ? prettyDate(marks[0].date) : "";
+        let total = 0;
+        let known = 0;
+        marks.forEach((m) => {
+          const v = tradeValue(m);
+          if (v != null) { total += v; known += 1; }
+        });
+        const dateStr = marks[0].date ? esc(prettyDate(marks[0].date)) : "";
         contentHtml =
           "<div class=\"pop-header\">" +
             "<div class=\"pop-title-wrap\">" +
               "<span class=\"pop-badge " + (buy ? "buy" : "sell") + "\">" + marks.length + (buy ? " BUYS" : " SELLS") + "</span>" +
-              "<div class=\"pop-title\">" + formatVol(total) + " Total</div>" +
+              "<div class=\"pop-title\">" + (known ? formatVol(total) + (known < marks.length ? "+" : "") : "—") + " Total</div>" +
             "</div>" +
             "<button type=\"button\" class=\"pop-close\" aria-label=\"Close popover\">✕</button>" +
           "</div>" +
@@ -794,7 +799,7 @@
           "<div class=\"pop-list\">" +
             marks.slice(0, maxItems).map((m) => {
               const amt = getAmt(m);
-              const mDate = m.date ? prettyDate(m.date) : "";
+              const mDate = m.date ? esc(prettyDate(m.date)) : "";
               return "<div class=\"pop-item\">" +
                 "<span class=\"pop-item-filer\" title=\"" + esc(m.filer || "Tape") + "\">" + esc(m.filer || "Tape") + "</span>" +
                 "<span class=\"pop-item-right\">" +
@@ -810,7 +815,7 @@
       } else {
         const m = marks[0];
         const amt = getAmt(m);
-        const mDate = m.date ? prettyDate(m.date) : "";
+        const mDate = m.date ? esc(prettyDate(m.date)) : "";
         contentHtml =
           "<div class=\"pop-header\">" +
             "<div class=\"pop-title-wrap\">" +
@@ -907,7 +912,7 @@
       });
     }
 
-    Promise.all([
+    if (ticker) Promise.all([
       fetch("tape/tickers/" + encodeURIComponent(ticker) + (/^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/.test(ticker) ? "_" : "") + ".json").then((r) => r.ok ? r.json() : { trades: [] }),
       fetch("prices/" + encodeURIComponent(ticker) + ".json").then((r) => r.ok ? r.json() : null).catch(() => null)
     ]).then(([data, prices]) => {
@@ -939,7 +944,8 @@
           nameSelf: !!filerId,
           filerId: filerId,
           empty: "No stock trades on this ticker in the last three years.",
-          limit: showAllTape ? 0 : page
+          limit: showAllTape ? 0 : page,
+          interactive: false
         });
         const count = document.getElementById("tape-count");
         const moreRow = document.getElementById("tape-more-row");
@@ -966,12 +972,10 @@
           : "No daily prices on file for " + ticker + ".";
         const buys = stockDeals.filter((t) => t.side === "purchase").length;
         const sells = stockDeals.filter((t) => t.side === "sale").length;
-        if (!filerId) {
-          document.getElementById("stats").innerHTML =
-            "<div class=\"stat\"><b>" + buys + "</b><span>buys</span></div>" +
-            "<div class=\"stat\"><b>" + sells + "</b><span>sells</span></div>" +
-            "<div class=\"stat\"><b>—</b><span>close</span></div>";
-        }
+        document.getElementById("stats").innerHTML =
+          "<div class=\"stat\"><b>" + buys + "</b><span>buys</span></div>" +
+          "<div class=\"stat\"><b>" + sells + "</b><span>sells</span></div>" +
+          "<div class=\"stat\"><b>—</b><span>close</span></div>";
         return;
       }
       allPoints = prices.c;
@@ -1023,7 +1027,7 @@
       hidePop();
     });
 
-    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js", { updateViaCache: "none" });
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).catch(() => {});
   </script>
   <script src="refresh.js"></script>
   <nav class="tabbar" aria-label="Politician tape">
