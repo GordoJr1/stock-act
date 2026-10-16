@@ -83,6 +83,7 @@ self.addEventListener("fetch", (event) => {
       try {
         const res = await fetch(event.request, { cache: "no-cache" });
         storeIfOk(res, event);
+        if(!res.ok){const c=await caches.match(event.request); if(c) return c;}
         return res;
       } catch (err) {
         const cached = await caches.match(event.request);
