@@ -746,7 +746,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=145"></script>
+  <script src="qc.js?v=146"></script>
   <script src="chart.js?v=124"></script>
   <script>
     const isOptionLike = QC.isOptionLike;
@@ -1829,9 +1829,6 @@
       } catch (e) {}
       const asof = document.getElementById("asof");
       if (asof) asof.textContent = QC.asOfLabel(data.collected || filerIndex.collected);
-      if (window.QC && QC.paintSenateBanner) {
-        QC.paintSenateBanner(data && data.senate_status ? data : filerIndex);
-      }
       const rows = threeYearRows(data);
       const bio = (bios.people || {})[id] || null;
       const fromTrades = (data.trades || []).find((t) => t.filer_id === id);

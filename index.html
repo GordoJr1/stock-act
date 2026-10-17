@@ -2631,7 +2631,7 @@
   <div class="stripe" hidden></div>
   </div>
 
-  <script src="qc.js?v=145"></script>
+  <script src="qc.js?v=146"></script>
   <script src="chart.js?v=124"></script>
   <script>
     function escapeHtml(s) {
@@ -4092,7 +4092,6 @@
         const res = await fetch("tape/page.json", { credentials: "omit" });
         if (!res.ok) throw new Error("page");
         const data = await res.json();
-        if (window.QC && QC.paintSenateBanner) QC.paintSenateBanner(data);
         const asof = document.getElementById("asof");
         if (asof && data.collected) {
           asof.textContent = QC.asOfLabel(data.collected);
