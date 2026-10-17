@@ -1,8 +1,22 @@
-function axisPrice(n) {
-  if (n >= 1000) return "$" + Math.round(n / 1000) + "k";
-  if (Math.abs(n) >= 10 || Math.abs(n - Math.round(n)) < 1e-8) return "$" + Math.round(n);
-  if (Math.abs(n) >= 1) return "$" + n.toFixed(1).replace(/\.0$/, "");
-  return "$" + n.toFixed(2);
+function axisDecimals(step) {
+  if (typeof QC !== "undefined" && typeof QC.axisDecimals === "function") return QC.axisDecimals(step);
+  const s = Math.abs(Number(step));
+  if (!isFinite(s) || s === 0) return 2;
+  let scaled = s;
+  let d = 0;
+  while (d < 6) {
+    const nearest = Math.round(scaled);
+    if (Math.abs(scaled - nearest) <= 1e-6 * Math.max(1, Math.abs(nearest))) return d;
+    scaled *= 10;
+    d += 1;
+  }
+  return d;
+}
+
+function axisPrice(n, step) {
+  if (typeof QC !== "undefined" && typeof QC.formatAxisPrice === "function") return QC.formatAxisPrice(n, step);
+  const dec = axisDecimals(step);
+  return "$" + Number(n).toFixed(dec);
 }
 
 function quotePrice(n) {
@@ -31,7 +45,7 @@ function niceNum(range, round) {
 }
 
 function snapAxisTick(v, step) {
-  const decimals = step >= 1 ? 0 : (step >= 0.1 ? 1 : 2);
+  const decimals = axisDecimals(step);
   return Number((Math.round(v / step) * step).toFixed(decimals));
 }
 
@@ -63,7 +77,7 @@ function niceAxisScale(dataMin, dataMax) {
     ticks = [];
     for (let v = niceMin; v <= niceMax + step * 0.0001; v += step) ticks.push(snapAxisTick(v, step));
   }
-  return { min: niceMin, max: niceMax, ticks: ticks };
+  return { min: niceMin, max: niceMax, ticks: ticks, step: step };
 }
 
 function axisDate(iso, isShortSpan) {
@@ -296,8 +310,12 @@ function drawChart(points, marks, opts) {
   const min = scale.min;
   const max = scale.max;
   const span = max - min || 1;
-  const labelWide = scale.ticks.some((t) => axisPrice(t).length >= 5);
-  if (!isMobile && labelWide && !(opts.pad && opts.pad.l != null)) pad.l = 44;
+  const axisStep = scale.step;
+  const longestLabel = scale.ticks.reduce((n, t) => Math.max(n, axisPrice(t, axisStep).length), 0);
+  if (!isMobile) {
+    const need = longestLabel >= 7 ? 72 : longestLabel >= 6 ? 62 : longestLabel >= 5 ? 54 : 34;
+    pad.l = Math.max(pad.l, need);
+  }
 
   const xAt = (i) => pad.l + (i / Math.max(1, points.length - 1)) * (w - pad.l - pad.r);
   const yAt = (px) => priceTop + (1 - (px - min) / span) * priceH;
@@ -511,7 +529,7 @@ function drawChart(points, marks, opts) {
       "<circle id=\"qc-scrub-dot\" cx=\"0\" cy=\"0\" r=\"3.8\" fill=\"#ffffff\" stroke=\"#0d141f\" stroke-width=\"2\" />" +
     "</g>";
 
-  paintYAxisLabels(wrap, svg, yBox, yTicks, yAt, w, h, pad);
+  paintYAxisLabels(wrap, svg, yBox, yTicks, yAt, w, h, pad, axisStep);
 
   if (xBox) {
     const last = points.length - 1;
@@ -611,7 +629,7 @@ function syncYAxisOverlayBox(yBox, wrap, svg) {
   }
 }
 
-function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad) {
+function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad, step) {
   if (!wrap || !svg || !ticks || !ticks.length) return;
   if (!yBox) {
     yBox = wrap.querySelector("#chart-y");
@@ -627,7 +645,7 @@ function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad) {
   yBox.setAttribute("aria-hidden", "true");
   yBox.innerHTML = ticks.map((px) => {
     const topPct = (yAt(px) / h) * 100;
-    return "<span style=\"top:" + topPct.toFixed(2) + "%\">" + axisPrice(px) + "</span>";
+    return "<span style=\"top:" + topPct.toFixed(2) + "%\">" + axisPrice(px, step) + "</span>";
   }).join("");
   syncYAxisOverlayBox(yBox, wrap, svg);
 

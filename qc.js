@@ -394,6 +394,46 @@
     });
   }
 
+  function axisDecimals(step) {
+    const s = Math.abs(Number(step));
+    if (!isFinite(s) || s === 0) return 2;
+    let scaled = s;
+    let d = 0;
+    while (d < 6) {
+      const nearest = Math.round(scaled);
+      if (Math.abs(scaled - nearest) <= 1e-6 * Math.max(1, Math.abs(nearest))) return d;
+      scaled *= 10;
+      d += 1;
+    }
+    return d;
+  }
+
+  function formatAxisPrice(n, step) {
+    const x = Number(n);
+    if (!isFinite(x)) return "";
+    const abs = Math.abs(x);
+    const sign = x < 0 ? "-" : "";
+    const s = Math.abs(Number(step));
+    const stepOk = isFinite(s) && s > 0;
+    if (stepOk && abs >= 1000) {
+      const units = [
+        { div: 1e6, suffix: "M" },
+        { div: 1e3, suffix: "k" }
+      ];
+      for (let i = 0; i < units.length; i++) {
+        const u = units[i];
+        if (abs < u.div) continue;
+        const dec = axisDecimals(s / u.div);
+        if (dec <= 2) return sign + "$" + (abs / u.div).toFixed(dec) + u.suffix;
+      }
+    }
+    const dec = stepOk ? axisDecimals(s) : (abs >= 10 ? 0 : (abs >= 1 ? 2 : 4));
+    return sign + "$" + abs.toLocaleString("en-US", {
+      minimumFractionDigits: dec,
+      maximumFractionDigits: dec
+    });
+  }
+
   function lastCloseFromFile(data) {
     if (!data || data.missing) return null;
     const px = Number(data.px);
@@ -2454,6 +2494,8 @@
     formatAmountRange: formatAmountRange,
     formatMoney: formatMoney,
     formatQuote: formatQuote,
+    axisDecimals: axisDecimals,
+    formatAxisPrice: formatAxisPrice,
     lastCloseFromFile: lastCloseFromFile,
     lastCloseLookup: lastCloseLookup,
     lastCloseHtml: lastCloseHtml,
