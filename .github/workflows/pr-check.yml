@@ -26,6 +26,7 @@ jobs:
           done
       - name: Tests
         run: |
-          node scripts/senate-banner.test.mjs
+          node scripts/senate-fields.test.mjs
+          node scripts/axis-labels.test.mjs
           node scripts/nav-links.test.mjs
           node scripts/html-scripts.test.mjs
