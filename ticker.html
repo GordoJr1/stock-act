@@ -654,7 +654,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=145"></script>
+  <script src="qc.js?v=146"></script>
   <script src="chart.js?v=124"></script>
   <script>
     const params = new URLSearchParams(location.search);
@@ -924,7 +924,6 @@
     ]).then(([data, prices]) => {
       const asof = document.getElementById("asof");
       if (asof) asof.textContent = QC.asOfLabel(data.collected);
-      if (window.QC && QC.paintSenateBanner) QC.paintSenateBanner(data);
       const deals = (data.trades || []).filter((t) => {
         if ((t.side !== "purchase" && t.side !== "sale") || isBond(t)) return false;
         if (new Date(t.trade_date) < cutoff) return false;
