@@ -580,7 +580,7 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=184" />
+  <link rel="stylesheet" href="shell.css?v=185" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
@@ -641,23 +641,23 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="stock-act.js?v=150"></script>
-  <script src="chart.js?v=125"></script>
+  <script src="stock-act.js?v=151"></script>
+  <script src="chart.js?v=126"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();
     const filerId = params.get("id") || "";
     if (!ticker) location.replace("index.html");
 
-    const esc = QC.esc;
-    const amountHigh = QC.amountHigh;
-    const isBond = QC.isBond;
-    const isOptionLike = QC.isOptionLike;
-    const optionMeta = QC.optionMeta;
-    const formatMoney = QC.formatMoney;
-    const formatQuote = QC.formatQuote;
-    const signedMoney = QC.signedMoney;
-    const prettyDate = QC.prettyDate;
+    const esc = SA.esc;
+    const amountHigh = SA.amountHigh;
+    const isBond = SA.isBond;
+    const isOptionLike = SA.isOptionLike;
+    const optionMeta = SA.optionMeta;
+    const formatMoney = SA.formatMoney;
+    const formatQuote = SA.formatQuote;
+    const signedMoney = SA.signedMoney;
+    const prettyDate = SA.prettyDate;
     function nearestClose(points, date) {
       if (!points || !points.length) return null;
       let pick = points[0];
@@ -710,7 +710,7 @@
         back.textContent = "← Politician";
       }
       back.setAttribute("data-stock-act-back-fallback", back.getAttribute("href") || "index.html");
-      if (window.QC) QC.bindBack(back);
+      if (window.SA) SA.bindBack(back);
     }
 
     const cutoff = new Date();
@@ -747,7 +747,7 @@
 
       function getAmt(m) {
         if (m.amount) {
-          const r = QC.formatAmountRange(m.amount);
+          const r = SA.formatAmountRange(m.amount);
           if (r) return esc(r);
         }
         if (m.shares && m.price) {
@@ -910,7 +910,7 @@
       fetch("prices/" + encodeURIComponent(ticker) + ".json").then((r) => r.ok ? r.json() : null).catch(() => null)
     ]).then(([data, prices]) => {
       const asof = document.getElementById("asof");
-      if (asof) asof.textContent = QC.asOfLabel(data.collected);
+      if (asof) asof.textContent = SA.asOfLabel(data.collected);
       const deals = (data.trades || []).filter((t) => {
         if ((t.side !== "purchase" && t.side !== "sale") || isBond(t)) return false;
         if (new Date(t.trade_date) < cutoff) return false;
@@ -927,11 +927,11 @@
         document.title = ticker + " — " + who + " — Stock Act";
       }
 
-      const tape = deals.map((t) => (t && t.code && t.company) ? t : QC.enrich(t, {}));
+      const tape = deals.map((t) => (t && t.code && t.company) ? t : SA.enrich(t, {}));
       let showAllTape = false;
       function paintMarks() {
-        const page = QC.TAPE_PAGE;
-        document.getElementById("marks").innerHTML = QC.politicianTapeListHtml(tape, {
+        const page = SA.TAPE_PAGE;
+        document.getElementById("marks").innerHTML = SA.politicianTapeListHtml(tape, {
           tickerSelf: true,
           nameSelf: !!filerId,
           filerId: filerId,

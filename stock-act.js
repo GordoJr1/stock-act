@@ -1415,7 +1415,7 @@
   }
 
   function emptyFilingsBadgeHtml() {
-    return "<span class=\"stock-act-empty-filings\" title=\"On the insider universe; no Form 4 / SEDI prints on the tape yet\">No filings yet</span>";
+    return "<span class=\"stock-act-empty-filings\" title=\"No Senate, House, or White House filings on the tape yet\">No filings yet</span>";
   }
 
   function tradeTickerSet(trades) {
@@ -1986,7 +1986,7 @@
     return path.slice(0, i + 1);
   }
 
-  function isQcHref(href) {
+  function isSaHref(href) {
     if (!href) return false;
     try {
       const u = new URL(href, location.href);
@@ -2010,7 +2010,7 @@
     return location.pathname + location.search + location.hash;
   }
 
-  const SCROLL_PREFIX = "qc:sy:";
+  const SCROLL_PREFIX = "sa:sy:";
   const SCROLL_BACK = "sa:scroll-back";
   const SCROLL_BACK_OLD = "qc:scroll-back";
 
@@ -2193,7 +2193,7 @@
   function storedReturn() {
     try {
       const v = readMovedKey(RETURN_KEY, RETURN_KEY_OLD);
-      if (!v || !isQcHref(v)) return "";
+      if (!v || !isSaHref(v)) return "";
       const u = new URL(v, location.href);
       if (pageFile(u.pathname) === pageFile(location.pathname)) return "";
       return u.pathname + u.search + u.hash;
@@ -2240,7 +2240,7 @@
   function resolveDest(fallbackHref) {
     const stored = storedReturn();
     const ref = document.referrer;
-    const fromRef = (ref && isQcHref(ref)) ? toLocal(ref) : "";
+    const fromRef = (ref && isSaHref(ref)) ? toLocal(ref) : "";
     const fallback = fallbackHref || "index.html";
     let dest = fallback;
     if (fromRef) {
@@ -2263,7 +2263,7 @@
 
   function canHistoryBack(ref, dest) {
     if (history.length < 2) return false;
-    if (!ref || !dest || !isQcHref(ref)) return false;
+    if (!ref || !dest || !isSaHref(ref)) return false;
     const r = parseHref(ref);
     const d = parseHref(dest);
     if (!r || !d) return false;
@@ -2285,12 +2285,12 @@
     const fallbackHref = el.getAttribute("data-stock-act-back-fallback") || "index.html";
     const fallbackLabel = el.getAttribute("data-stock-act-back-label") || "← Back";
     const dest = resolveDest(fallbackHref);
-    if (isQcHref(dest) || dest === fallbackHref) {
+    if (isSaHref(dest) || dest === fallbackHref) {
       el.href = dest;
       el.textContent = labelFor(dest, fallbackLabel);
     }
-    if (el.dataset.qcBack === "1") return;
-    el.dataset.qcBack = "1";
+    if (el.dataset.saBack === "1") return;
+    el.dataset.saBack = "1";
     el.addEventListener("click", function (e) {
       if (e.defaultPrevented) return;
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -2444,7 +2444,7 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootNav);
   else bootNav();
 
-  global.QC = {
+  global.SA = {
     esc: esc,
     isBond: isBond,
     isOptionLike: isOptionLike,

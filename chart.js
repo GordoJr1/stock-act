@@ -1,5 +1,5 @@
 function axisDecimals(step) {
-  if (typeof QC !== "undefined" && typeof QC.axisDecimals === "function") return QC.axisDecimals(step);
+  if (typeof SA !== "undefined" && typeof SA.axisDecimals === "function") return SA.axisDecimals(step);
   const s = Math.abs(Number(step));
   if (!isFinite(s) || s === 0) return 2;
   let scaled = s;
@@ -14,7 +14,7 @@ function axisDecimals(step) {
 }
 
 function axisPrice(n, step) {
-  if (typeof QC !== "undefined" && typeof QC.formatAxisPrice === "function") return QC.formatAxisPrice(n, step);
+  if (typeof SA !== "undefined" && typeof SA.formatAxisPrice === "function") return SA.formatAxisPrice(n, step);
   const dec = axisDecimals(step);
   return "$" + Number(n).toFixed(dec);
 }
@@ -130,8 +130,8 @@ function tradeValue(m) {
   if (m.shares != null && m.price != null && m.shares > 0 && m.price > 0) {
     return Number(m.shares) * Number(m.price);
   }
-  if (m.amount && typeof QC !== "undefined" && QC.amountHigh) {
-    const value = QC.amountHigh(m.amount);
+  if (m.amount && typeof SA !== "undefined" && SA.amountHigh) {
+    const value = SA.amountHigh(m.amount);
     if (value > 0) return value;
   }
   return null;
@@ -257,11 +257,11 @@ const CHART_PALETTES = {
 };
 
 function rebindChartEvents(el) {
-  if (el.__qcUnbind) el.__qcUnbind();
+  if (el.__saUnbind) el.__saUnbind();
   const cleanups = [];
-  el.__qcUnbind = () => {
+  el.__saUnbind = () => {
     cleanups.forEach((fn) => fn());
-    el.__qcUnbind = null;
+    el.__saUnbind = null;
   };
   return (type, fn, opts) => {
     el.addEventListener(type, fn, opts);
@@ -320,7 +320,7 @@ function drawChart(points, marks, opts) {
   const xAt = (i) => pad.l + (i / Math.max(1, points.length - 1)) * (w - pad.l - pad.r);
   const yAt = (px) => priceTop + (1 - (px - min) / span) * priceH;
 
-  const themeKey = (opts.theme && CHART_PALETTES[opts.theme]) ? opts.theme : (window.QC_CHART_THEME || "cyan");
+  const themeKey = (opts.theme && CHART_PALETTES[opts.theme]) ? opts.theme : (window.SA_CHART_THEME || "cyan");
   const palette = CHART_PALETTES[themeKey] || CHART_PALETTES.cyan;
 
   const pts = points.map((p, i) => ({
@@ -396,7 +396,7 @@ function drawChart(points, marks, opts) {
   }
 
   function markFamily(m) {
-    return m && m.family === "politician" ? "politician" : "insider";
+    return m && m.family === "politician" ? "politician" : "filing";
   }
   function isSaleMark(m) {
     return !!(m && (m.side === "sale" || m.side === "sale_post"));
@@ -468,7 +468,7 @@ function drawChart(points, marks, opts) {
       mark: marksList[0],
       marks: marksList,
       side: sale ? "sale" : "purchase",
-      family: politician ? "politician" : "insider",
+      family: politician ? "politician" : "filing",
       x: x,
       y: cy,
       xPct: x / w,
@@ -480,7 +480,7 @@ function drawChart(points, marks, opts) {
       ? "<polygon points=\"0,-" + pinRpx + " " + pinRpx + ",0 0," + pinRpx + " -" + pinRpx + ",0\" fill=\"" + color + "\" stroke=\"#090d14\" stroke-width=\"1.6\" />"
       : "<circle cx=\"0\" cy=\"0\" r=\"" + pinRpx + "\" fill=\"" + color + "\" stroke=\"#090d14\" stroke-width=\"1.5\" />";
 
-    return "<g class=\"chart-mark" + (selected ? " is-selected" : "") + "\" data-i=\"" + id + "\" data-family=\"" + (politician ? "politician" : "insider") + "\" style=\"cursor:pointer\">" +
+    return "<g class=\"chart-mark" + (selected ? " is-selected" : "") + "\" data-i=\"" + id + "\" data-family=\"" + (politician ? "politician" : "filing") + "\" style=\"cursor:pointer\">" +
       "<circle cx=\"" + x.toFixed(1) + "\" cy=\"" + cy.toFixed(1) + "\" r=\"" + (isMobile ? 26 : 20) + "\" fill=\"transparent\" />" +
       "<g transform=\"translate(" + x.toFixed(1) + " " + cy.toFixed(1) + ") " + pinScale + "\">" +
         (selected ? "<circle cx=\"0\" cy=\"0\" r=\"" + (haloRpx + 4) + "\" fill=\"none\" stroke=\"#e3b41a\" stroke-width=\"2.4\" />" : "") +
@@ -491,8 +491,8 @@ function drawChart(points, marks, opts) {
     "</g>";
   }
 
-  const tradePinsHtml = buyClusters.map((c) => drawCluster(c, false, "insider")).join("") +
-                        sellClusters.map((c) => drawCluster(c, true, "insider")).join("") +
+  const tradePinsHtml = buyClusters.map((c) => drawCluster(c, false, "filing")).join("") +
+                        sellClusters.map((c) => drawCluster(c, true, "filing")).join("") +
                         polBuyClusters.map((c) => drawCluster(c, false, "politician")).join("") +
                         polSellClusters.map((c) => drawCluster(c, true, "politician")).join("");
 
@@ -606,8 +606,8 @@ function syncYAxisOverlayBox(yBox, wrap, svg) {
   const wr = wrap.getBoundingClientRect();
   const sr = svg.getBoundingClientRect();
   if (sr.width < 2 || sr.height < 2) return;
-  const pad = wrap._qcYPad;
-  const vw = wrap._qcYW;
+  const pad = wrap._saYPad;
+  const vw = wrap._saYW;
   if (!pad || !vw) return;
   // Left gutter only: wrap padding-box left → plot pad.l. Height matches the SVG.
   const originX = wr.left + wrap.clientLeft;
@@ -640,8 +640,8 @@ function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad, step) {
       wrap.appendChild(yBox);
     }
   }
-  wrap._qcYPad = pad;
-  wrap._qcYW = w;
+  wrap._saYPad = pad;
+  wrap._saYW = w;
   yBox.setAttribute("aria-hidden", "true");
   yBox.innerHTML = ticks.map((px) => {
     const topPct = (yAt(px) / h) * 100;
@@ -649,12 +649,12 @@ function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad, step) {
   }).join("");
   syncYAxisOverlayBox(yBox, wrap, svg);
 
-  if (!wrap._qcYAxisRO && typeof ResizeObserver !== "undefined") {
-    wrap._qcYAxisRO = new ResizeObserver(function () {
+  if (!wrap._saYAxisRO && typeof ResizeObserver !== "undefined") {
+    wrap._saYAxisRO = new ResizeObserver(function () {
       syncYAxisOverlayBox(yBox, wrap, svg);
     });
-    wrap._qcYAxisRO.observe(svg);
-    wrap._qcYAxisRO.observe(wrap);
+    wrap._saYAxisRO.observe(svg);
+    wrap._saYAxisRO.observe(wrap);
   }
 }
 

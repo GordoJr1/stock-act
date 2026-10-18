@@ -23,8 +23,8 @@ sandbox.window = sandbox;
 sandbox.global = sandbox;
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(path.join(root, "stock-act.js"), "utf8"), sandbox, { filename: "stock-act.js" });
-const QC = sandbox.QC;
-if (!QC || !QC.enrich) throw new Error("stock-act.js did not export QC");
+const SA = sandbox.SA;
+if (!SA || !SA.enrich) throw new Error("stock-act.js did not export SA");
 
 const MEGA = {
   AAPL: 1, MSFT: 1, NVDA: 1, AMZN: 1, GOOGL: 1, GOOG: 1, META: 1, TSLA: 1,
@@ -54,11 +54,11 @@ function writeJson(rel, obj) {
 }
 
 function stamp(t, file) {
-  return QC.stampTapeRow(t, file);
+  return SA.stampTapeRow(t, file);
 }
 
 function kindAllows(kind, t) {
-  const k = QC.assetKind(t);
+  const k = SA.assetKind(t);
   if (kind === "stock") return k === "stock" || k === "option";
   if (kind === "option") return k === "option";
   if (kind === "bond") return k === "bond";
@@ -80,15 +80,15 @@ function sliceOpts(desktop) {
 }
 
 function sliceIds(rows, desktop) {
-  return QC.sliceTapeRows(rows, sliceOpts(desktop)).rows.map((t) => t.id).join("\n");
+  return SA.sliceTapeRows(rows, sliceOpts(desktop)).rows.map((t) => t.id).join("\n");
 }
 
 function minimalPool(rows) {
   const wantPhone = sliceIds(rows, false);
   const wantDesk = sliceIds(rows, true);
-  const landed = rows.filter((t) => QC.isLanded(t, 72));
+  const landed = rows.filter((t) => SA.isLanded(t, 72));
   const landedIds = new Set(landed.map((t) => t.id));
-  const rest = rows.filter((t) => !landedIds.has(t.id)).sort(QC.compareFiledDesc);
+  const rest = rows.filter((t) => !landedIds.has(t.id)).sort(SA.compareFiledDesc);
   let n = Math.min(rest.length, 250);
   while (n <= rest.length) {
     const pool = landed.concat(rest.slice(0, n));
@@ -166,7 +166,7 @@ function buildBoards(trades, bios, tradersFile) {
   trades.forEach((t) => {
     const fid = canonFilerId(t.filer_id, bios);
     if (!fid || new Date(t.trade_date) < cutoff) return;
-    if ((t.side !== "purchase" && t.side !== "sale") || QC.isBond(t) || QC.isOptionLike(t) || !QC.isChartTicker(t.code)) return;
+    if ((t.side !== "purchase" && t.side !== "sale") || SA.isBond(t) || SA.isOptionLike(t) || !SA.isChartTicker(t.code)) return;
     const code = t.code.toUpperCase();
     const prev = byTicker.get(code) || { code, name: t.company || code, buys: 0, sells: 0, people: new Set() };
     if (t.side === "purchase") prev.buys += 1;
@@ -198,13 +198,13 @@ function findOverlaps(bio, rows) {
   const seats = [].concat((bio && bio.committees) || []).concat((bio && bio.subcommittees) || []);
   if (!seats.length) return [];
   const byCode = new Map();
-  rows.filter((t) => t.side === "purchase" && !QC.isBond(t) && !QC.isOptionLike(t)).forEach((t) => {
+  rows.filter((t) => t.side === "purchase" && !SA.isBond(t) && !SA.isOptionLike(t)).forEach((t) => {
     const code = t.code || "—";
     const industry = t.industry || "";
     seats.forEach((seat) => {
-      QC.OVERLAP_RULES.forEach((rule) => {
+      SA.OVERLAP_RULES.forEach((rule) => {
         if (!rule.seat.test(seat.name || "")) return;
-        if (!QC.overlapHit(rule, code, t.company || t.asset || "", industry)) return;
+        if (!SA.overlapHit(rule, code, t.company || t.asset || "", industry)) return;
         const prev = byCode.get(code);
         if (!prev) {
           byCode.set(code, { code, why: rule.why });
@@ -219,7 +219,7 @@ function findOverlaps(bio, rows) {
 
 function tickerSector(list, code) {
   const hit = list.find((t) => (t.code || "").toUpperCase() === code);
-  return QC.sectorOf(hit && hit.industry) || "Industrials";
+  return SA.sectorOf(hit && hit.industry) || "Industrials";
 }
 
 function traderSectors(list, overlaps, tickers) {
@@ -236,7 +236,7 @@ function traderSectors(list, overlaps, tickers) {
       if (w && conflictBy[sec].indexOf(w) === -1) conflictBy[sec].push(w);
     });
   });
-  const names = QC.SECTORS.filter((s) => pnlBy[s] || conflictBy[s]);
+  const names = SA.SECTORS.filter((s) => pnlBy[s] || conflictBy[s]);
   names.sort((a, b) => Math.abs(pnlBy[b] || 0) - Math.abs(pnlBy[a] || 0) || a.localeCompare(b));
   return names.map((name) => ({
     name,
@@ -282,26 +282,26 @@ function parenTicker(asset) {
 
 function resolveInfo(t, tickerFile) {
   const fake = Object.assign({}, t);
-  if (!QC.isChartTicker(fake.ticker)) {
+  if (!SA.isChartTicker(fake.ticker)) {
     const p = parenTicker(fake.asset);
     if (p) fake.ticker = p;
   }
-  return QC.tickerInfo(fake, tickerFile);
+  return SA.tickerInfo(fake, tickerFile);
 }
 
 function isPublicStock(t, info) {
   if (SKIP[info.code]) return false;
   const type = (t.asset_type || "").toLowerCase();
   if (/non-public|municipal|corporate bond|\bbond\b|other/.test(type)) return false;
-  if (QC.isBond(t) || QC.isOptionLike(t) || QC.isFilingError(t)) return false;
+  if (SA.isBond(t) || SA.isOptionLike(t) || SA.isFilingError(t)) return false;
   const blob = ((info.name || "") + " " + (info.industry || "") + " " + (t.asset || "")).toLowerCase();
   if (/exchange traded|\betf\b|space exploration technologies|mandatory convertible|private equity|pooled investment|successor agency/.test(blob)) return false;
-  return QC.isChartTicker(info.code);
+  return SA.isChartTicker(info.code);
 }
 
 function scoreRows(trades, tickerFile, bios, now, win) {
   const cut = isoDay(now - win * 86400000);
-  const baseCut = isoDay(QC.threeYearCutoff().getTime());
+  const baseCut = isoDay(SA.threeYearCutoff().getTime());
   const by = new Map();
   trades.forEach((t) => {
     if (t.side !== "purchase" && t.side !== "sale") return;
@@ -311,7 +311,7 @@ function scoreRows(trades, tickerFile, bios, now, win) {
       code: info.code,
       name: info.name,
       industry: info.industry,
-      sector: (info.industry && info.industry !== "—") ? QC.sectorOf(info.industry) : "",
+      sector: (info.industry && info.industry !== "—") ? SA.sectorOf(info.industry) : "",
       buys: [],
       sells: [],
       histBuys: 0
@@ -319,7 +319,7 @@ function scoreRows(trades, tickerFile, bios, now, win) {
     if (info.name && info.name !== "—") rec.name = info.name;
     if (info.industry && info.industry !== "—") {
       rec.industry = info.industry;
-      rec.sector = QC.sectorOf(info.industry);
+      rec.sector = SA.sectorOf(info.industry);
     }
     const when = t.trade_date || "";
     if (when >= baseCut && t.side === "purchase") rec.histBuys += 1;
@@ -335,7 +335,7 @@ function scoreRows(trades, tickerFile, bios, now, win) {
     if (!rec.buys.length) return;
     const filers = new Map();
     function touch(t, side) {
-      const hi = QC.amountHigh(t.amount);
+      const hi = SA.amountHigh(t.amount);
       const prev = filers.get(t.filer_id) || {
         name: t.filer, id: t.filer_id, buyHigh: 0, sellHigh: 0,
         lastBuy: "", lastSell: "", filed: "", nBuys: 0, conflict: false
@@ -381,9 +381,9 @@ function scoreRows(trades, tickerFile, bios, now, win) {
       const bio = (bios.people || {})[b.id];
       const seats = [].concat((bio && bio.committees) || []).concat((bio && bio.subcommittees) || []);
       seats.forEach((seat) => {
-        QC.OVERLAP_RULES.forEach((rule) => {
+        SA.OVERLAP_RULES.forEach((rule) => {
           if (!rule.seat.test(seat.name || "")) return;
-          if (QC.overlapHit(rule, rec.code, rec.name, rec.industry)) {
+          if (SA.overlapHit(rule, rec.code, rec.name, rec.industry)) {
             b.conflict = true;
             conflict = true;
           }
@@ -395,7 +395,7 @@ function scoreRows(trades, tickerFile, bios, now, win) {
     const lastFiled = buyers.reduce((m, b) => (b.filed || "") > m ? b.filed : m, buyers[0].filed || "");
     const nBuyers = buyers.length;
     const nPrints = buyers.reduce((n, b) => n + b.nBuys, 0);
-    const months = Math.max(1, (now - QC.threeYearCutoff().getTime()) / (86400000 * 30));
+    const months = Math.max(1, (now - SA.threeYearCutoff().getTime()) / (86400000 * 30));
     const burst = 1 + Math.min(2, nBuyers / Math.max(0.35, rec.histBuys / months));
     const mixed = sellHigh > 0 ? 0.82 : 1;
     const mega = MEGA[rec.code] ? 0.8 : 1;
@@ -433,7 +433,7 @@ function heatOf(row, now) {
   });
   recency += 0.1 * Math.max(0, buyers.reduce((n, b) => n + b.nBuys, 0) - buyers.length);
   const nBuyers = buyers.length;
-  const months = Math.max(1, (now - QC.threeYearCutoff().getTime()) / (86400000 * 30));
+  const months = Math.max(1, (now - SA.threeYearCutoff().getTime()) / (86400000 * 30));
   const burst = 1 + Math.min(2, nBuyers / Math.max(0.35, (row.histBuys || 0) / months));
   const mixed = row.sellHigh > 0 ? 0.82 : 1;
   const conflict = buyers.some((b) => b.conflict);
@@ -443,7 +443,7 @@ function heatOf(row, now) {
 
 function tradeCode(t, tickerFile) {
   const extra = ((tickerFile && tickerFile.assets) || {})[t.asset] || {};
-  const opt = QC.optionMeta(t);
+  const opt = SA.optionMeta(t);
   return String(t.ticker || extra.ticker || opt.under || "").toUpperCase();
 }
 
@@ -602,8 +602,8 @@ function buildTape() {
   });
   const tickerBytes = replaceDir("tape/tickers", tickerEntries);
 
-  const landedRows = liteRows.filter((t) => QC.isLanded(t, 336));
-  const landedCheck = (lite.trades || []).filter((t) => QC.isLanded(t, 336)).map((t) => t.id).sort().join("\n");
+  const landedRows = liteRows.filter((t) => SA.isLanded(t, 336));
+  const landedCheck = (lite.trades || []).filter((t) => SA.isLanded(t, 336)).map((t) => t.id).sort().join("\n");
   const landedGot = landedRows.map((t) => t.id).sort().join("\n");
   if (landedCheck !== landedGot) throw new Error("landed id mismatch");
   const landedBytes = writeJson("landed.json", {
@@ -627,11 +627,11 @@ function buildTape() {
   const issuers = {};
   liteRows.forEach((t) => {
     const code = String(t.code || "");
-    if (!QC.isChartTicker(code)) return;
+    if (!SA.isChartTicker(code)) return;
     const name = t.company || "";
     if (!name || name === "—") return;
-    if (!issuers[code] || QC.isWeakIssuer(code, issuers[code])) {
-      if (!QC.isWeakIssuer(code, name)) issuers[code] = name;
+    if (!issuers[code] || SA.isWeakIssuer(code, issuers[code])) {
+      if (!SA.isWeakIssuer(code, name)) issuers[code] = name;
     }
   });
   const heatBytes = writeJson("heat.json", {

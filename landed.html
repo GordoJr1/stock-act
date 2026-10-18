@@ -229,7 +229,7 @@
       h1 { font-size: 1.35rem; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=184" />
+  <link rel="stylesheet" href="shell.css?v=185" />
 </head>
 <body class="stock-act-v2 stock-act-v2-cards">
   <a class="stock-act-skip" href="#main">Skip to content</a>
@@ -266,7 +266,7 @@
       <a href="mailto:gordojr@proton.me">Transmit</a>
     </div>
   </footer>
-  <script src="stock-act.js?v=150"></script>
+  <script src="stock-act.js?v=151"></script>
   <script>
     const WINDOWS = [72, 168, 336];
     const params = new URLSearchParams(location.search);
@@ -313,7 +313,7 @@
         const id = t.filer_id || t.filer;
         const rec = map.get(id) || { id: t.filer_id, name: t.filer, chamber: t.chamber, rows: [], lag: null };
         rec.rows.push(t);
-        const lag = QC.lagDays(t);
+        const lag = SA.lagDays(t);
         if (lag != null && (rec.lag == null || lag > rec.lag)) rec.lag = lag;
         map.set(id, rec);
       });
@@ -324,15 +324,15 @@
       const cls = t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : "";
       const code = t.code && t.code !== "—" ? t.code : "";
       const hasTk = !!code;
-      const tk = !hasTk ? "" : (QC.isChartTicker(code)
-        ? "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(code) + "\">" + QC.esc(code) + "</a>"
-        : "<span class=\"tk\">" + QC.esc(code) + "</span>");
+      const tk = !hasTk ? "" : (SA.isChartTicker(code)
+        ? "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(code) + "\">" + SA.esc(code) + "</a>"
+        : "<span class=\"tk\">" + SA.esc(code) + "</span>");
       return "<li" + (hasTk ? "" : " class=\"no-tk\"") + ">" +
-        "<span class=\"side " + cls + "\">" + QC.esc(QC.sideLabel(t.side)) + "</span>" +
+        "<span class=\"side " + cls + "\">" + SA.esc(SA.sideLabel(t.side)) + "</span>" +
         tk +
-        "<span class=\"co\">" + QC.esc(t.company || t.asset || "—") + QC.optionTag(t) +
-          " · traded " + QC.esc(QC.prettyDate(t.trade_date)) + "</span>" +
-        "<span class=\"amt\">" + QC.esc(QC.formatAmountRange(t.amount)) + "</span>" +
+        "<span class=\"co\">" + SA.esc(t.company || t.asset || "—") + SA.optionTag(t) +
+          " · traded " + SA.esc(SA.prettyDate(t.trade_date)) + "</span>" +
+        "<span class=\"amt\">" + SA.esc(SA.formatAmountRange(t.amount)) + "</span>" +
       "</li>";
     }
 
@@ -350,8 +350,8 @@
       return "<article class=\"card\">" +
         "<div class=\"card-top\">" +
           "<div>" +
-            "<a class=\"who\" href=\"politician.html?id=" + encodeURIComponent(g.id) + "\">" + QC.esc(g.name) + "</a>" +
-            "<div class=\"muted\">" + QC.esc(g.chamber || "") + " · " + g.rows.length + " ticket" + (g.rows.length === 1 ? "" : "s") + "</div>" +
+            "<a class=\"who\" href=\"politician.html?id=" + encodeURIComponent(g.id) + "\">" + SA.esc(g.name) + "</a>" +
+            "<div class=\"muted\">" + SA.esc(g.chamber || "") + " · " + g.rows.length + " ticket" + (g.rows.length === 1 ? "" : "s") + "</div>" +
           "</div>" + lagHtml +
         "</div>" +
         "<ul class=\"tickets\">" + vis.map(ticketLine).join("") + "</ul>" +
@@ -365,7 +365,7 @@
     function paint(rows) {
       const drops = groupDrops(rows);
       const people = new Set(rows.map((t) => t.filer_id));
-      const laggy = rows.filter((t) => (QC.lagDays(t) || 0) >= 7).length;
+      const laggy = rows.filter((t) => (SA.lagDays(t) || 0) >= 7).length;
       document.getElementById("stats").innerHTML =
         "<div class=\"stat\"><b>" + rows.length + "</b><span>prints in window</span></div>" +
         "<div class=\"stat\"><b>" + people.size + "</b><span>filers</span></div>" +
@@ -373,21 +373,21 @@
       if (!rows.length) {
         document.getElementById("board").innerHTML =
           "<p class=\"muted\">Nothing new has landed in this window. Morning and 6 PM drops show up here.</p>";
-        if (window.QC && QC.restoreScroll) QC.restoreScroll();
+        if (window.SA && SA.restoreScroll) SA.restoreScroll();
         return;
       }
       document.getElementById("board").innerHTML = drops.map((d) => {
         const chambers = Array.from(new Set(d.rows.map((t) => t.chamber).filter(Boolean))).join(" · ");
         return "<section class=\"drop\">" +
           "<div class=\"drop-head\">" +
-            "<div class=\"gate\">Drop · " + QC.esc(dropTitle(d.added)) + "</div>" +
+            "<div class=\"gate\">Drop · " + SA.esc(dropTitle(d.added)) + "</div>" +
             "<div class=\"drop-meta\">" + d.rows.length + " ticket" + (d.rows.length === 1 ? "" : "s") +
-              (chambers ? " · " + QC.esc(chambers) : "") + "</div>" +
+              (chambers ? " · " + SA.esc(chambers) : "") + "</div>" +
           "</div>" +
           groupFilers(d.rows).map(filerCard).join("") +
         "</section>";
       }).join("");
-      if (window.QC && QC.restoreScroll) QC.restoreScroll();
+      if (window.SA && SA.restoreScroll) SA.restoreScroll();
     }
 
     function paintWindows() {
@@ -410,10 +410,10 @@
       const tape = landedFile;
       const asof = document.getElementById("asof");
       if (asof && tape.collected) {
-        asof.textContent = QC.asOfLabel(tape.collected);
+        asof.textContent = SA.asOfLabel(tape.collected);
       }
       const rows = (tape.trades || [])
-        .filter((t) => QC.isLanded(t, hours))
+        .filter((t) => SA.isLanded(t, hours))
         .sort((a, b) => String(b.added || "").localeCompare(String(a.added || "")) ||
           (b.trade_date || "").localeCompare(a.trade_date || ""));
       paint(rows);

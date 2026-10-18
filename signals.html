@@ -444,7 +444,7 @@
       h1 { font-size: 1.35rem; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=184" />
+  <link rel="stylesheet" href="shell.css?v=185" />
 </head>
 <body class="stock-act-v2">
   <a class="stock-act-skip" href="#main">Skip to content</a>
@@ -488,7 +488,7 @@
       <a href="mailto:gordojr@proton.me">Transmit</a>
     </div>
   </footer>
-  <script src="stock-act.js?v=150"></script>
+  <script src="stock-act.js?v=151"></script>
   <script>
     const HALF = 10;
     const WINDOWS = [14, 30, 90];
@@ -512,7 +512,7 @@
       return "Watch";
     }
     function asOfHeat(iso) {
-      return QC.asOfLabel(iso);
+      return SA.asOfLabel(iso);
     }
     function setAsof(iso) {
       const asof = document.getElementById("asof");
@@ -556,9 +556,9 @@
         hits.push("Just filed" + (row.lagDays != null ? " · " + row.lagDays + "-day filing lag" : ""));
       }
       if (row.whale) {
-        hits.push("Whale print · " + QC.formatMoney(row.buyHigh) + " high-end" + (who ? " · " + who : ""));
+        hits.push("Whale print · " + SA.formatMoney(row.buyHigh) + " high-end" + (who ? " · " + who : ""));
       } else if (row.cluster && row.nBuyers > 1) {
-        hits.push("Cluster · " + row.nBuyers + " buyers" + (row.buyHigh ? " · " + QC.formatMoney(row.buyHigh) + " high-end" : ""));
+        hits.push("Cluster · " + row.nBuyers + " buyers" + (row.buyHigh ? " · " + SA.formatMoney(row.buyHigh) + " high-end" : ""));
       }
       if (row.conflict && (row.conflictWhy || []).length) {
         hits.push("Committee overlap · " + (row.conflictWhy || []).join(", "));
@@ -584,23 +584,23 @@
       const chg = row.chgSinceBuy;
       const chgHtml = chg == null ? "" : " · " + signedPct(chg, false).replace(/^<b/, "<span").replace(/<\/b>$/, "</span>") + " since last buy";
       const people = (row.buyers || []).map((b) =>
-        "<a href=\"politician.html?id=" + encodeURIComponent(b.id) + "\">" + QC.esc(b.name) + "</a>"
+        "<a href=\"politician.html?id=" + encodeURIComponent(b.id) + "\">" + SA.esc(b.name) + "</a>"
       ).join(" · ");
       const tags = (row.flags || []).map((f) => "<span class=\"tag" +
         (/washout|landed|whale/i.test(f) ? " hot" : /conflict|cluster/i.test(f) ? " hit" : /ran|extended/i.test(f) ? " warn" : "") +
-        "\">" + QC.esc(f) + "</span>").join("");
+        "\">" + SA.esc(f) + "</span>").join("");
       const hits = positiveSignals(row);
       const hitList = hits.length
         ? "<div class=\"explain\"><h3>Positive signals</h3><ul>" +
-          hits.map((h) => "<li>" + QC.esc(h) + "</li>").join("") + "</ul></div>"
+          hits.map((h) => "<li>" + SA.esc(h) + "</li>").join("") + "</ul></div>"
         : "";
       const action = /^(buy-dip|avoid|watch)$/.test(String(row.action || "")) ? row.action : "watch";
       return "<article class=\"play " + action + "\">" +
         "<div class=\"play-top\">" +
           "<div class=\"rank\">" + String(row.rank).padStart(2, "0") + "</div>" +
           "<div class=\"play-id\">" +
-            "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(row.code) + "\">" + QC.esc(row.code) + "</a>" +
-            "<div class=\"co\">" + QC.esc(row.name || "—") + "</div>" +
+            "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(row.code) + "\">" + SA.esc(row.code) + "</a>" +
+            "<div class=\"co\">" + SA.esc(row.name || "—") + "</div>" +
           "</div>" +
           "<div class=\"action " + action + "\">" + actionLabel(action) + "</div>" +
         "</div>" +
@@ -614,17 +614,17 @@
         "<div class=\"grid\">" +
           cell("Landed", "<b>" + (row.landed ? (row.lagDays != null ? row.lagDays + "d lag" : "Yes") : "No") + "</b>") +
           cell("Signal heat", "<b>#" + (row.heatRank || "—") + "</b>") +
-          cell("Buyers / high-end", "<b>" + row.nBuyers + " · " + QC.formatMoney(row.buyHigh || 0) + "</b>") +
-          cell("Conflict", "<b>" + (row.conflict ? QC.esc((row.conflictWhy || []).join(", ") || "Yes") : "No") + "</b>") +
-          cell("Last buy", "<b>" + QC.esc(QC.prettyDate(row.lastBuy)) + (row.buyPx != null ? " @ $" + row.buyPx.toFixed(2) : "") + "</b>") +
+          cell("Buyers / high-end", "<b>" + row.nBuyers + " · " + SA.formatMoney(row.buyHigh || 0) + "</b>") +
+          cell("Conflict", "<b>" + (row.conflict ? SA.esc((row.conflictWhy || []).join(", ") || "Yes") : "No") + "</b>") +
+          cell("Last buy", "<b>" + SA.esc(SA.prettyDate(row.lastBuy)) + (row.buyPx != null ? " @ $" + row.buyPx.toFixed(2) : "") + "</b>") +
           cell("Weekly RSI", "<b>" + (w.rsi != null ? w.rsi.toFixed(1) : "—") + "</b>") +
-          cell("Weekly trend", "<b class=\"" + (w.trend === "UP" ? "up" : w.trend === "DOWN" ? "down" : "") + "\">" + QC.esc(w.trend || "—") + "</b>") +
+          cell("Weekly trend", "<b class=\"" + (w.trend === "UP" ? "up" : w.trend === "DOWN" ? "down" : "") + "\">" + SA.esc(w.trend || "—") + "</b>") +
           cell("vs 20-week", signedPct(w.vs20, true)) +
           cell("20w / 40w", "<b>" + (w.sma20 != null ? w.sma20.toFixed(2) : "—") + " / " + (w.sma40 != null ? w.sma40.toFixed(2) : "—") + "</b>") +
           cell("4-week / 13-week", (w.ret4w == null ? "<b>—</b>" : signedPct(w.ret4w, true)) + " <span style=\"color:#8b96a3\">/</span> " + (w.ret13w == null ? "<b>—</b>" : signedPct(w.ret13w, true))) +
           cell("Off 20w high", signedPct(w.fromHigh, true)) +
           cell("Monthly RSI", "<b>" + (m.rsi != null ? m.rsi.toFixed(1) : "—") + "</b>") +
-          cell("Monthly trend", "<b class=\"" + (m.trend === "UP" ? "up" : m.trend === "DOWN" ? "down" : "") + "\">" + QC.esc(m.trend || "—") + "</b>") +
+          cell("Monthly trend", "<b class=\"" + (m.trend === "UP" ? "up" : m.trend === "DOWN" ? "down" : "") + "\">" + SA.esc(m.trend || "—") + "</b>") +
           cell("vs 10-month", signedPct(m.vs10, true)) +
           cell("Invalidation", "<b>" + (row.invalidation != null ? "$" + Number(row.invalidation).toFixed(2) : "—") + "</b>") +
         "</div>" +
@@ -635,9 +635,9 @@
       return "<article class=\"avoid-row\">" +
         "<div class=\"rank\">" + String(row.rank).padStart(2, "0") + "</div>" +
         "<div class=\"avoid-body\">" +
-          "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(row.code) + "\">" + QC.esc(row.code) + "</a>" +
-          "<span class=\"co\">" + QC.esc(row.name || "") + "</span>" +
-          "<p class=\"why\">" + QC.esc(row.why || "") + "</p>" +
+          "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(row.code) + "\">" + SA.esc(row.code) + "</a>" +
+          "<span class=\"co\">" + SA.esc(row.name || "") + "</span>" +
+          "<p class=\"why\">" + SA.esc(row.why || "") + "</p>" +
         "</div>" +
       "</article>";
     }
@@ -662,7 +662,7 @@
       });
       recency += 0.1 * Math.max(0, buyers.reduce((n, b) => n + (b.nBuys || 0), 0) - buyers.length);
       const nBuyers = buyers.length;
-      const months = Math.max(1, (now - QC.threeYearCutoff().getTime()) / (86400000 * 30));
+      const months = Math.max(1, (now - SA.threeYearCutoff().getTime()) / (86400000 * 30));
       const burst = 1 + Math.min(2, nBuyers / Math.max(0.35, (row.histBuys || 0) / months));
       const mixed = row.sellHigh > 0 ? 0.82 : 1;
       const conflict = buyers.some((b) => b.conflict);
@@ -670,9 +670,9 @@
     }
     function resolveAnalysisName(row, issuers) {
       const named = (issuers || {})[row.code] || "";
-      const name = QC.displayIssuer(row.code, row.name, named);
-      if (name && !QC.isWeakIssuer(row.code, name)) return name;
-      if (named && !QC.isWeakIssuer(row.code, named)) return named;
+      const name = SA.displayIssuer(row.code, row.name, named);
+      if (name && !SA.isWeakIssuer(row.code, name)) return name;
+      if (named && !SA.isWeakIssuer(row.code, named)) return named;
       return name || row.name || row.code;
     }
     async function paintAnalysis() {
@@ -802,7 +802,7 @@
 
     function peopleHtml(row) {
       const people = row.buyers.slice(0, 6).map((b) =>
-        "<a href=\"politician.html?id=" + encodeURIComponent(b.id) + "\">" + QC.esc(b.name) + "</a>" +
+        "<a href=\"politician.html?id=" + encodeURIComponent(b.id) + "\">" + SA.esc(b.name) + "</a>" +
         (b.conflict ? " · conflict" : "")
       ).join(" · ");
       const more = row.buyers.length > 6 ? " · +" + (row.buyers.length - 6) : "";
@@ -817,16 +817,16 @@
       return "<li class=\"card" + cls + "\">" +
         "<div class=\"rank\">" + String(i + 1).padStart(2, "0") + "</div>" +
         "<div>" +
-          "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(row.code) + "\">" + QC.esc(row.code) + "</a>" +
-          "<div class=\"co\">" + QC.esc(name) + (row.sector ? " · " + QC.esc(row.sector) : "") + "</div>" +
+          "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(row.code) + "\">" + SA.esc(row.code) + "</a>" +
+          "<div class=\"co\">" + SA.esc(name) + (row.sector ? " · " + SA.esc(row.sector) : "") + "</div>" +
           "<div class=\"bar\"><i style=\"width:" + width + "%\"></i></div>" +
           "<div class=\"meta\">" +
             "<span><b>" + row.nBuyers + "</b> buyer" + (row.nBuyers === 1 ? "" : "s") + "</span>" +
-            "<span><b>" + QC.formatMoney(row.buyHigh) + "</b> buy high-end</span>" +
-            "<span>last buy <b>" + QC.esc(QC.prettyDate(row.lastBuy)) + "</b></span>" +
+            "<span><b>" + SA.formatMoney(row.buyHigh) + "</b> buy high-end</span>" +
+            "<span>last buy <b>" + SA.esc(SA.prettyDate(row.lastBuy)) + "</b></span>" +
             bits.pct +
           "</div>" +
-          "<p class=\"why\">" + QC.esc(whyLine(row, now)) + "</p>" +
+          "<p class=\"why\">" + SA.esc(whyLine(row, now)) + "</p>" +
           (tagsFor(row).length ? "<div class=\"tags\">" + tagsFor(row).join("") + "</div>" : "") +
           "<div class=\"who-list\">" + peopleHtml(row) + "</div>" +
         "</div>" + bits.spark +
@@ -853,7 +853,7 @@
       paintStats(ranked);
       if (!ranked.length) {
         heat.innerHTML = "<li class=\"muted\">No listed-stock buys in this window. Filings lag the trade — try 90 days.</li>";
-        if (window.QC && QC.restoreScroll) QC.restoreScroll();
+        if (window.SA && SA.restoreScroll) SA.restoreScroll();
         return;
       }
       const top = ranked.slice(0, 36);
@@ -869,7 +869,7 @@
       heat.innerHTML = rest.length
         ? rest.map((row, i) => cardHtml(row, i, maxHeat, now, prices[row.code])).join("")
         : "";
-      if (window.QC && QC.restoreScroll) QC.restoreScroll();
+      if (window.SA && SA.restoreScroll) SA.restoreScroll();
     }
 
     document.getElementById("windows").addEventListener("click", (e) => {

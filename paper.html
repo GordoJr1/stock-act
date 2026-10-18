@@ -217,7 +217,7 @@
       .kicker { margin: 8px 0 4px; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=184" />
+  <link rel="stylesheet" href="shell.css?v=185" />
 </head>
 <body class="stock-act-v2 stock-act-v2-cards">
   <a class="stock-act-skip" href="#main">Skip to content</a>
@@ -276,7 +276,7 @@
       <a href="mailto:gordojr@proton.me">Transmit</a>
     </div>
   </footer>
-  <script src="stock-act.js?v=150"></script>
+  <script src="stock-act.js?v=151"></script>
   <script>
     if (window.matchMedia("(max-width: 820px)").matches) {
       const f = document.querySelector(".paper-filters");
@@ -330,8 +330,8 @@
     function chips(el, items, value, key) {
       el.innerHTML = items.map((it) => {
         const on = it.value === value ? " on" : "";
-        return "<button type=\"button\" class=\"chip" + on + "\" data-k=\"" + key + "\" data-v=\"" + QC.esc(String(it.value)) + "\">" +
-          QC.esc(it.label) + "</button>";
+        return "<button type=\"button\" class=\"chip" + on + "\" data-k=\"" + key + "\" data-v=\"" + SA.esc(String(it.value)) + "\">" +
+          SA.esc(it.label) + "</button>";
       }).join("");
     }
     function rowWindow(row) {
@@ -369,17 +369,17 @@
       const w = legWindow(leg);
       if (!w) return "";
       const down = (w.ret || 0) < 0 ? " down" : "";
-      const filed = QC.prettyDate(leg.filed);
-      const entryD = QC.prettyDate(leg.inD || leg.filed);
+      const filed = SA.prettyDate(leg.filed);
+      const entryD = SA.prettyDate(leg.inD || leg.filed);
       const exitRaw = state.h ? w.outD : (w.outD || data.priceAsof);
-      const exitD = QC.prettyDate(exitRaw);
-      const amtBit = leg.amt ? QC.formatAmountRange(leg.amt) : "";
+      const exitD = SA.prettyDate(exitRaw);
+      const amtBit = leg.amt ? SA.formatAmountRange(leg.amt) : "";
       const whoBit = who
-        ? "<a class=\"tk\" href=\"politician.html?id=" + encodeURIComponent(who.id) + "\">" + QC.esc(who.name) + "</a>"
-        : "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(leg.t) + "\">" + QC.esc(leg.t) + "</a>";
-      const dateBit = who ? QC.esc(filed) : "filed " + QC.esc(filed);
-      const exitLabel = QC.esc(exitD);
-      const entryLabel = QC.esc(entryD);
+        ? "<a class=\"tk\" href=\"politician.html?id=" + encodeURIComponent(who.id) + "\">" + SA.esc(who.name) + "</a>"
+        : "<a class=\"tk\" href=\"ticker.html?t=" + encodeURIComponent(leg.t) + "\">" + SA.esc(leg.t) + "</a>";
+      const dateBit = who ? SA.esc(filed) : "filed " + SA.esc(filed);
+      const exitLabel = SA.esc(exitD);
+      const entryLabel = SA.esc(entryD);
       let pxBit;
       if (state.h) {
         pxBit = who
@@ -394,7 +394,7 @@
         ? "<span class=\"dot\"> · </span><span>vs SPY " + pct(w.xs) + "</span>"
         : "";
       const amtHtml = amtBit
-        ? "<span class=\"dot\"> · </span><span class=\"leg-amt\">" + QC.esc(amtBit) + "</span>"
+        ? "<span class=\"dot\"> · </span><span class=\"leg-amt\">" + SA.esc(amtBit) + "</span>"
         : "";
       return "<li>" + whoBit +
         "<span class=\"co\">" +
@@ -415,12 +415,12 @@
       const legs = (state.open === f.id ? (f.legs || []) : [])
         .filter((leg) => legWindow(leg))
         .map((leg) => legLine(leg, null)).join("");
-      return "<article class=\"card" + open + "\" data-open=\"" + QC.esc(f.id) + "\">" +
+      return "<article class=\"card" + open + "\" data-open=\"" + SA.esc(f.id) + "\">" +
         "<div class=\"card-top\" role=\"button\" tabindex=\"0\" aria-expanded=\"" + (open ? "true" : "false") + "\">" +
           "<div>" +
             "<span class=\"rank\">" + String(i + 1).padStart(2, "0") + "</span>" +
-            "<a class=\"who\" href=\"politician.html?id=" + encodeURIComponent(f.id) + "\">" + QC.esc(f.name) + "</a>" +
-            "<div class=\"muted\">" + QC.esc(f.chamber || "") + " · " + w.n + " priced buy" + (w.n === 1 ? "" : "s") +
+            "<a class=\"who\" href=\"politician.html?id=" + encodeURIComponent(f.id) + "\">" + SA.esc(f.name) + "</a>" +
+            "<div class=\"muted\">" + SA.esc(f.chamber || "") + " · " + w.n + " priced buy" + (w.n === 1 ? "" : "s") +
               skip + " · " + w.win + " up" + meanBits(w) + "</div>" +
           "</div>" +
           "<div class=\"rate\"><b class=\"" + cls + "\">" + pct(w.med) + "</b><span>median</span></div>" +
@@ -437,12 +437,12 @@
         ? tickerLegs(t.t).map((row) => legLine(row.leg, row.filer)).join("")
         : "";
       const peopleBit = state.h ? "" : " · " + t.people + " filer" + (t.people === 1 ? "" : "s");
-      return "<article class=\"card" + open + "\" data-open=\"" + QC.esc(t.t) + "\">" +
+      return "<article class=\"card" + open + "\" data-open=\"" + SA.esc(t.t) + "\">" +
         "<div class=\"card-top\" role=\"button\" tabindex=\"0\" aria-expanded=\"" + (open ? "true" : "false") + "\">" +
           "<div>" +
             "<span class=\"rank\">" + String(i + 1).padStart(2, "0") + "</span>" +
-            "<a class=\"tk-title\" href=\"ticker.html?t=" + encodeURIComponent(t.t) + "\">" + QC.esc(t.t) + "</a>" +
-            "<div class=\"muted\">" + QC.esc(t.name || t.t) + " · " + w.n + " cop" + (w.n === 1 ? "y" : "ies") +
+            "<a class=\"tk-title\" href=\"ticker.html?t=" + encodeURIComponent(t.t) + "\">" + SA.esc(t.t) + "</a>" +
+            "<div class=\"muted\">" + SA.esc(t.name || t.t) + " · " + w.n + " cop" + (w.n === 1 ? "y" : "ies") +
               peopleBit + " · " + w.win + " up" + meanBits(w) + "</div>" +
           "</div>" +
           "<div class=\"rate\"><b class=\"" + cls + "\">" + pct(w.med) + "</b><span>median</span></div>" +
@@ -506,7 +506,7 @@
       document.getElementById("board").innerHTML = visible.length
         ? visible.map((row, i) => state.board === "tickers" ? tickerCard(row, i) : filerCard(row, i)).join("")
         : "<p class=\"muted\">Nothing cleared the bar. Drop the minimum legs or clear the search.</p>";
-      if (window.QC && QC.restoreScroll) QC.restoreScroll();
+      if (window.SA && SA.restoreScroll) SA.restoreScroll();
       document.querySelectorAll(".board-tabs button").forEach((btn) => {
         const on = btn.dataset.board === state.board;
         btn.classList.toggle("on", on);
@@ -615,7 +615,7 @@
       return r.json();
     }).then((file) => {
       data = file;
-      document.getElementById("asof").textContent = QC.asOfLabel(file.generated);
+      document.getElementById("asof").textContent = SA.asOfLabel(file.generated);
       const s = file.stats || {};
       function statCount(key) {
         const n = Number(s[key]);

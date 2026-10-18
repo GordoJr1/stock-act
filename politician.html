@@ -649,7 +649,7 @@
       font-family: "IBM Plex Sans", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=184" />
+  <link rel="stylesheet" href="shell.css?v=185" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
@@ -733,26 +733,26 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="stock-act.js?v=150"></script>
-  <script src="chart.js?v=125"></script>
+  <script src="stock-act.js?v=151"></script>
+  <script src="chart.js?v=126"></script>
   <script>
-    const isOptionLike = QC.isOptionLike;
-    const isBond = QC.isBond;
-    const issuerName = QC.issuerName;
-    const OVERLAP_RULES = QC.OVERLAP_RULES;
-    const overlapHit = QC.overlapHit;
+    const isOptionLike = SA.isOptionLike;
+    const isBond = SA.isBond;
+    const issuerName = SA.issuerName;
+    const OVERLAP_RULES = SA.OVERLAP_RULES;
+    const overlapHit = SA.overlapHit;
     function tickerInfo(t, file) {
       if (t && t.code && t.company) {
         return { code: t.code, name: t.company, industry: t.industry || "—" };
       }
-      return QC.tickerInfo(t, file);
+      return SA.tickerInfo(t, file);
     }
-    const cleanAsset = QC.cleanAsset;
-    const amountHigh = QC.amountHigh;
-    const formatMoney = QC.formatMoney;
-    const signedMoney = QC.signedMoney;
-    const prettyDate = QC.prettyDate;
-    const esc = QC.esc;
+    const cleanAsset = SA.cleanAsset;
+    const amountHigh = SA.amountHigh;
+    const formatMoney = SA.formatMoney;
+    const signedMoney = SA.signedMoney;
+    const prettyDate = SA.prettyDate;
+    const esc = SA.esc;
 
     let id = new URLSearchParams(location.search).get("id");
     if (!id) {
@@ -920,11 +920,11 @@
         .sort((a, b) => b.trade_date.localeCompare(a.trade_date));
     }
 
-    const BAD_TICKERS = QC.BAD_TICKERS;
+    const BAD_TICKERS = SA.BAD_TICKERS;
     const SLICE = ["#e3b41a", "#3db8c4", "#1e4b8a", "#7dcf7a", "#ef7a74", "#9b7ed9", "#e08a4a", "#6b7582"];
     const BOOK_RANGES = ["3m", "1y", "3y"];
     const RANGE_LABEL = { "3m": "3-month", "1y": "1-year", "3y": "3-year" };
-    const isChartTicker = QC.isChartTicker;
+    const isChartTicker = SA.isChartTicker;
 
     let allRows = [];
     let tapeRows = [];
@@ -1176,7 +1176,7 @@
         if (pos.buys) bits.push((pos.buys === 1 ? "1 buy" : pos.buys + " buys"));
         bits.push(formatMoney(pos.value));
       }
-      if (t) bits.push("marked " + prettyDate(t.trade_date) + " " + QC.sideLabel(t.side).toLowerCase());
+      if (t) bits.push("marked " + prettyDate(t.trade_date) + " " + SA.sideLabel(t.side).toLowerCase());
       label.innerHTML = bits.join(" · ");
       if (dot) dot.style.background = colorForKey(key, book.positions);
     }
@@ -1242,7 +1242,7 @@
       const marks = (rec.marks && rec.marks.length) ? rec.marks : [rec.mark || {}];
       const m = marks[0] || {};
       const buy = (rec.side || m.side) !== "sale";
-      const amt = m.amount ? QC.formatAmountRange(m.amount) : "";
+      const amt = m.amount ? SA.formatAmountRange(m.amount) : "";
       const mDate = m.date ? esc(prettyDate(m.date)) : "";
       const title = m.filer || m.label || "";
       pop.innerHTML =
@@ -1520,10 +1520,10 @@
       if (!list) return;
       const key = selectedKey;
       const full = key ? tradesForKey(key) : tapeRows;
-      const page = QC.TAPE_PAGE;
+      const page = SA.TAPE_PAGE;
       const limit = showAllTape ? 0 : page;
       list.hidden = false;
-      list.innerHTML = QC.politicianTapeListHtml(full, {
+      list.innerHTML = SA.politicianTapeListHtml(full, {
         nameSelf: true,
         tickerSelf: true,
         filerId: id,
@@ -1700,7 +1700,7 @@
     function paint(rows, lookup) {
       tickerLookup = lookup || {};
       allRows = rows || [];
-      tapeRows = (rows || []).map((t) => (t && t.code && t.company) ? t : QC.enrich(t, tickerLookup));
+      tapeRows = (rows || []).map((t) => (t && t.code && t.company) ? t : SA.enrich(t, tickerLookup));
       if (rows[0]) document.getElementById("who").textContent = rows[0].filer;
       const stats = document.getElementById("stats");
       if (stats) {
@@ -1815,7 +1815,7 @@
         if (personRes.ok) data = await personRes.json();
       } catch (e) {}
       const asof = document.getElementById("asof");
-      if (asof) asof.textContent = QC.asOfLabel(data.collected || filerIndex.collected);
+      if (asof) asof.textContent = SA.asOfLabel(data.collected || filerIndex.collected);
       const rows = threeYearRows(data);
       const bio = (bios.people || {})[id] || null;
       const fromTrades = (data.trades || []).find((t) => t.filer_id === id);
@@ -1824,7 +1824,7 @@
         return;
       }
       paint(rows, {});
-      QC.loadFilingNotes().then(() => { if (tapeRows.length) paintTape(); });
+      SA.loadFilingNotes().then(() => { if (tapeRows.length) paintTape(); });
       paintHeroFacts(bio);
       paintBio(bio, findOverlaps(bio, rows, {}));
       const bioPerson = (bios.people || {})[id] || {};
