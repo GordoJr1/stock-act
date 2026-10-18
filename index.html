@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#251b15" />
+  <meta name="theme-color" content="#1a1d26" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=5" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=5" />
   <title>Stock Act</title>
   <meta name="description" content="Official Senate, House, and White House STOCK Act / OGE 278-T tape. Amounts are ranges, not share counts." />
   <meta property="og:title" content="Stock Act" />
@@ -18,19 +18,19 @@
   <meta property="og:type" content="website" />
   <style>
     :root {
-      --steel: #2d2219;
-      --panel: #3f2f24;
-      --paper: #deddda;
-      --white: #f2f2f0;
-      --fed: #53417e;
-      --red: #ba3b2d;
-      --caution: #e4b350;
-      --mute: #9a948b;
-      --ink: #251b15;
-      --copper: #c97646;
-      --navy: #322849;
-      --buy: #369d4b;
-      --sell: #cf5f52;
+      --surface: #1c2430;
+      --panel: #2a3340;
+      --paper: #d8dde3;
+      --white: #eef2f5;
+      --fed: #1e4b8a;
+      --red: #c2302a;
+      --gold: #e3b41a;
+      --mute: #a7b1bd;
+      --ink: #1a1d26;
+      --accent: #36999d;
+      --navy: #1c2d4e;
+      --buy: #2f9e4a;
+      --sell: #d45a55;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,7 +55,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(45, 34, 25, 0.9);
+      background: rgba(28, 36, 48, 0.9);
     }
 
     .bay-left {
@@ -77,7 +77,7 @@
       background: repeating-linear-gradient(
         -45deg,
         var(--ink) 0 10px,
-        var(--copper) 10px 20px
+        var(--accent) 10px 20px
       );
     }
 
@@ -96,7 +96,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 16px 0;
-      border-bottom: 2px solid var(--copper);
+      border-bottom: 2px solid var(--accent);
     }
 
     .mark {
@@ -107,7 +107,7 @@
       font-size: 1rem;
     }
 
-    .mark span { color: var(--copper); }
+    .mark span { color: var(--accent); }
 
     nav {
       display: flex;
@@ -121,13 +121,13 @@
 
     a.mark { color: inherit; text-decoration: none; }
     nav a { color: var(--paper); text-decoration: none; }
-    nav a:hover, nav a.on { color: var(--caution); }
+    nav a:hover, nav a.on { color: var(--gold); }
 
     .kicker {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       font-size: 0.9rem;
       margin-bottom: 10px;
     }
@@ -158,7 +158,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       font-size: 0.88rem;
     }
 
@@ -172,13 +172,13 @@
       font-weight: 600;
       font-size: 0.95rem;
       padding: 10px 16px;
-      border: 2px solid var(--caution);
-      color: var(--caution);
+      border: 2px solid var(--gold);
+      color: var(--gold);
     }
 
     /* Buttons (e.g. "Show full list") had the browser's gray button fill under amber text (2.74:1). */
     button.btn { background: transparent; }
-    .btn.fill { background: var(--caution); color: #1b1305; }
+    .btn.fill { background: var(--gold); color: #1a1404; }
     .btn.red { border-color: var(--red); color: var(--white); background: var(--red); }
     .btn:hover { opacity: 0.88; }
 
@@ -192,14 +192,14 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       margin-bottom: 14px;
       font-size: 1.1rem;
     }
 
     .card {
       background: var(--panel);
-      border: 1px solid #5b534a;
+      border: 1px solid #4a5563;
       border-left: 6px solid var(--fed);
       padding: 22px;
     }
@@ -239,13 +239,13 @@
       gap: 14px;
       align-items: center;
       background: var(--panel);
-      border: 1px solid #5b534a;
+      border: 1px solid #4a5563;
       padding: 14px 16px;
       text-decoration: none;
       color: inherit;
     }
 
-    .tape-item:hover { border-color: var(--caution); }
+    .tape-item:hover { border-color: var(--gold); }
 
     .pill {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
@@ -257,8 +257,8 @@
       border: 1px solid currentColor;
     }
 
-    .pill.buy { color: #83cc91; }
-    .pill.sell { color: #e38177; }
+    .pill.buy { color: #7dcf7a; }
+    .pill.sell { color: #ef7a74; }
 
     .tape-item h3 {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
@@ -271,7 +271,7 @@
     .tape-item p { color: var(--mute); font-size: 0.9rem; }
     .tape-item .amt {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      color: var(--caution);
+      color: var(--gold);
       letter-spacing: 0.04em;
       text-align: right;
     }
@@ -289,27 +289,27 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       margin-bottom: 6px;
       font-size: 0.9rem;
     }
 
     .picker input {
       width: 100%;
-      background: #221913;
-      border: 1px solid #5b534a;
+      background: #151b24;
+      border: 1px solid #4a5563;
       color: var(--white);
       padding: 10px 12px;
       font: inherit;
     }
 
-    .picker input:focus { outline: 1px solid var(--caution); }
+    .picker input:focus { outline: 1px solid var(--gold); }
 
     .picker-menu {
       position: absolute;
       left: 0; right: 0; top: 100%;
-      background: #221913;
-      border: 1px solid #5b534a;
+      background: #151b24;
+      border: 1px solid #4a5563;
       max-height: 220px;
       overflow: auto;
       z-index: 12;
@@ -324,7 +324,7 @@
       text-align: left;
       background: transparent;
       border: 0;
-      border-bottom: 1px solid #403024;
+      border-bottom: 1px solid #2c3440;
       color: var(--paper);
       padding: 10px 12px;
       cursor: pointer;
@@ -333,7 +333,7 @@
       text-transform: uppercase;
     }
 
-    .picker-menu button:hover { background: rgba(228, 179, 80, 0.12); color: var(--caution); }
+    .picker-menu button:hover { background: rgba(227, 180, 26, 0.12); color: var(--gold); }
 
     .filters {
       display: grid;
@@ -347,15 +347,15 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       margin-bottom: 6px;
       font-size: 0.85rem;
     }
 
     .filters input, .filters select {
       width: 100%;
-      background: #221913;
-      border: 1px solid #5b534a;
+      background: #151b24;
+      border: 1px solid #4a5563;
       color: var(--white);
       padding: 10px 12px;
       font: inherit;
@@ -373,7 +373,7 @@
     table.tape-table th, table.tape-table td {
       text-align: left;
       padding: 10px 12px;
-      border-bottom: 1px solid #49433c;
+      border-bottom: 1px solid #3a4452;
       vertical-align: top;
     }
 
@@ -390,29 +390,29 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       font-weight: 600;
       position: sticky;
       top: var(--tape-lock-h, 0px);
       z-index: 14;
       background: var(--panel);
-      box-shadow: 0 1px 0 #49433c;
+      box-shadow: 0 1px 0 #3a4452;
     }
 
     .tix-meta, .tix-stamp { display: none; }
 
     table.tape-table a { color: inherit; text-decoration: none; }
-    table.tape-table a:hover { color: var(--caution); }
-    .buy { color: #83cc91; }
-    .sell { color: #e38177; }
+    table.tape-table a:hover { color: var(--gold); }
+    .buy { color: #7dcf7a; }
+    .sell { color: #ef7a74; }
     .opt-tag {
       display: inline-block;
       margin-left: 6px;
       padding: 0 5px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--gold);
+      color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
@@ -438,8 +438,8 @@
       display: inline-block;
       margin-left: 6px;
       padding: 1px 6px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--gold);
+      color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
@@ -448,7 +448,7 @@
       white-space: nowrap;
     }
     table.tape-table tr.has-err td:nth-child(2) { box-shadow: inset 3px 0 0 var(--red); }
-    table.tape-table tr.just-in td:first-child { box-shadow: inset 3px 0 0 var(--caution); }
+    table.tape-table tr.just-in td:first-child { box-shadow: inset 3px 0 0 var(--gold); }
     .count { color: var(--mute); font-size: 0.85rem; margin: 0; padding: 0 0 10px; }
     .more-row { margin: 14px 0 0; }
 
@@ -461,14 +461,14 @@
     table.hist th, table.hist td {
       text-align: left;
       padding: 10px 8px;
-      border-bottom: 1px solid #49433c;
+      border-bottom: 1px solid #3a4452;
     }
 
     table.hist th {
       font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       font-weight: 600;
       font-size: 12px;
     }
@@ -476,7 +476,7 @@
     footer {
       position: relative;
       z-index: 1;
-      border-top: 2px solid var(--caution);
+      border-top: 2px solid var(--gold);
       background: var(--ink);
     }
 
@@ -490,7 +490,7 @@
       color: var(--mute);
     }
 
-    footer a { color: var(--caution); }
+    footer a { color: var(--gold); }
 
     .filter-fold > summary,
     .board-fold > summary {
@@ -562,8 +562,8 @@
       #tape { padding-top: 8px; }
       .filter-fold,
       .board-fold {
-        border: 1px solid #5b534a;
-        background: #221913;
+        border: 1px solid #4a5563;
+        background: #151b24;
         margin: 0 0 8px;
       }
       .filter-fold > summary,
@@ -573,7 +573,7 @@
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--caution);
+        color: var(--gold);
         cursor: pointer;
         list-style: none;
         min-height: 44px;
@@ -585,7 +585,7 @@
       .filter-fold[open] > summary::before,
       .board-fold[open] > summary::before { content: "▾ "; }
       .filter-fold[open] > summary,
-      .board-fold[open] > summary { border-bottom: 1px solid #49433c; }
+      .board-fold[open] > summary { border-bottom: 1px solid #3a4452; }
       .filter-fold .picker, .filter-fold .filters { padding: 10px 12px 12px; }
       .board-fold[open] .board-teaser { display: none; }
       .board-fold > h2 { display: none; }
@@ -618,7 +618,7 @@
           "stamp meta meta";
         gap: 3px 10px;
         margin: 0 0 8px;
-        border: 1px solid #5b534a;
+        border: 1px solid #4a5563;
         background: var(--panel);
         padding: 10px 12px;
       }
@@ -636,13 +636,13 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-right: 1px solid #49433c;
+        border-right: 1px solid #3a4452;
         padding-right: 8px;
         text-align: center;
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       }
       table.tape-table .tix-stamp .mon {
-        color: var(--caution);
+        color: var(--gold);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         font-size: 0.72rem;
@@ -672,7 +672,7 @@
       table.tape-table .tix-amt {
         grid-area: amt;
         text-align: left;
-        color: var(--caution);
+        color: var(--gold);
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-size: 1.05rem;
       }
@@ -700,7 +700,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       flex: 0 0 auto;
     }
     .board-peek {
@@ -715,8 +715,8 @@
     @media (max-width: 820px) {
       #board { padding: 8px 0 4px; }
       .board-fold {
-        border: 1px solid #5b534a;
-        background: #221913;
+        border: 1px solid #4a5563;
+        background: #151b24;
         margin: 0 0 8px;
       }
       .board-fold > summary.board-strip {
@@ -746,7 +746,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       background: transparent;
-      border: 1px solid #5b534a;
+      border: 1px solid #4a5563;
       color: var(--mute);
       padding: 8px 4px;
       min-height: 44px;
@@ -757,14 +757,14 @@
       cursor: pointer;
     }
     .board-tabs button.on {
-      border-color: var(--caution);
-      color: var(--caution);
+      border-color: var(--gold);
+      color: var(--gold);
     }
-    .board-note { color: #c3c0ba; font-size: calc(0.82rem + 1px); margin: 0 0 12px; line-height: 1.4; }
+    .board-note { color: #b7c1cc; font-size: calc(0.82rem + 1px); margin: 0 0 12px; line-height: 1.4; }
     .board-col-title { display: none; }
     .board-col { display: none; padding: 0; }
     .board-col.on { display: block; }
-    .board-list { list-style: none; border: 1px solid #5b534a; background: var(--panel); }
+    .board-list { list-style: none; border: 1px solid #4a5563; background: var(--panel); }
     @media (min-width: 821px) {
       #board .board-list, #tape .table-wrap { max-width: 1040px; }
     }
@@ -773,8 +773,8 @@
     body.is-ready .board-grid { min-height: 0; }
     @media (min-width: 1000px) {
       #board {
-        border: 1px solid #5b534a;
-        background: rgba(34, 25, 19, 0.78);
+        border: 1px solid #4a5563;
+        background: rgba(21, 27, 36, 0.78);
         padding: 14px 16px 16px;
       }
       #board h2 { margin-bottom: 12px; }
@@ -791,7 +791,7 @@
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: var(--caution);
+        color: var(--gold);
         font-size: 0.78rem;
         font-weight: 600;
         margin: 0 0 6px;
@@ -822,7 +822,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 0.68rem;
+        font-size: 0.6875rem;
       }
       #board .board-co { font-size: 0.72rem; }
       #board .board-rank { font-size: 0.78rem; }
@@ -836,7 +836,7 @@
     .board-list li.skel::after {
       content: "";
       display: block;
-      background: #49433c;
+      background: #3a4452;
       border-radius: 2px;
     }
     .board-list li.skel::before {
@@ -854,7 +854,7 @@
       gap: 6px 10px;
       align-items: baseline;
       padding: 7px 10px;
-      border-bottom: 1px solid #49433c;
+      border-bottom: 1px solid #3a4452;
     }
     .board-list li:last-child { border-bottom: 0; }
     .board-list li.board-trader {
@@ -868,14 +868,14 @@
       grid-template-areas:
         "rank name val"
         "sec sec sec";
-      background: rgba(228, 179, 80, 0.05);
+      background: rgba(227, 180, 26, 0.05);
     }
     .board-sectors {
       grid-area: sec;
       list-style: none;
       margin: 4px 0 2px;
       padding: 6px 0 0;
-      border-top: 1px solid #49433c;
+      border-top: 1px solid #3a4452;
       display: none;
     }
     .board-list li.board-trader.open .board-sectors { display: block; }
@@ -892,16 +892,16 @@
     .board-flag {
       display: inline-block;
       padding: 1px 6px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--gold);
+      color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
     }
-    .board-val.up { color: #83cc91; }
-    .board-val.down { color: #e38177; }
+    .board-val.up { color: #7dcf7a; }
+    .board-val.down { color: #ef7a74; }
     .board-val.flat { color: var(--mute); }
     .board-stock {
       display: flex;
@@ -926,7 +926,7 @@
       color: var(--mute);
       letter-spacing: 0.06em;
     }
-    .board-list li:first-child .board-rank { color: var(--caution); }
+    .board-list li:first-child .board-rank { color: var(--gold); }
     .board-list a {
       color: var(--white);
       text-decoration: none;
@@ -935,11 +935,11 @@
       text-transform: none;
       font-weight: 600;
     }
-    .board-list a:hover { color: var(--caution); }
-    .board-why { display: block; color: #c3c0ba; font-size: calc(0.75rem + 1px); text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; }
+    .board-list a:hover { color: var(--gold); }
+    .board-why { display: block; color: #b7c1cc; font-size: calc(0.75rem + 1px); text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; }
     .board-val {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      color: var(--caution);
+      color: var(--gold);
       font-size: 1.05rem;
       white-space: nowrap;
     }
@@ -947,9 +947,9 @@
       color: inherit;
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: #5b534a;
+      text-decoration-color: #4a5563;
     }
-    .tk-link:hover { color: var(--caution); }
+    .tk-link:hover { color: var(--gold); }
     .board-list a.tk-link {
       color: var(--white);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
@@ -959,7 +959,7 @@
     .chart-back {
       position: fixed;
       inset: 0;
-      background: rgba(15, 11, 9, 0.72);
+      background: rgba(10, 12, 16, 0.72);
       z-index: 80;
     }
     .chart-panel {
@@ -970,16 +970,16 @@
       width: min(760px, calc(100% - 24px));
       max-height: 88vh;
       overflow: auto;
-      background: #221913;
-      border: 1px solid #5b534a;
+      background: #151b24;
+      border: 1px solid #4a5563;
       z-index: 81;
       padding: 16px 18px 20px;
     }
     .chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
     .chart-close {
       background: transparent;
-      border: 1px solid #5b534a;
-      color: var(--caution);
+      border: 1px solid #4a5563;
+      color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -993,23 +993,23 @@
       gap: 8px;
       margin: 12px 0;
     }
-    .chart-pnl div { background: var(--panel); border: 1px solid #49433c; padding: 8px 10px; }
+    .chart-pnl div { background: var(--panel); border: 1px solid #3a4452; padding: 8px 10px; }
     .chart-pnl b {
       display: block;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.2rem;
-      color: var(--caution);
+      color: var(--gold);
     }
     .chart-pnl span { color: var(--mute); font-size: 0.75rem; }
     .chart-frame {
       display: grid;
       grid-template-columns: 52px 1fr;
       grid-template-rows: 220px 22px;
-      background: #1a130f;
+      background: #10151c;
       padding: 6px 8px 4px 0;
     }
     #chart-svg { width: 100%; height: 220px; display: block; background: transparent; }
-    .chart-y, .chart-x { color: var(--mute); font-size: 0.68rem; line-height: 1; }
+    .chart-y, .chart-x { color: var(--mute); font-size: 0.6875rem; line-height: 1; }
     .chart-y {
       display: flex;
       flex-direction: column;
@@ -1031,11 +1031,11 @@
       justify-content: space-between;
       gap: 10px;
       padding: 7px 0;
-      border-bottom: 1px solid #403024;
+      border-bottom: 1px solid #2c3440;
       font-size: 0.88rem;
     }
     .chart-marks a { color: var(--white); text-decoration: none; }
-    .chart-marks a:hover { color: var(--caution); }
+    .chart-marks a:hover { color: var(--gold); }
     @media (max-width: 820px) {
       .chart-pnl { grid-template-columns: 1fr; }
       .chart-panel { top: 2vh; max-height: 96vh; }
@@ -1052,7 +1052,7 @@
         margin: 0 0 12px;
         padding: 8px 0;
         border-top: 0;
-        border-bottom: 1px solid #49433c;
+        border-bottom: 1px solid #3a4452;
       }
       .desk-status:empty { display: none; }
       .desk-status b {
@@ -1069,9 +1069,9 @@
         color: var(--mute);
         font-size: 0.7rem;
       }
-      .desk-status .hot b { color: var(--caution); }
-      .desk-status .up b { color: #83cc91; }
-      .desk-status .down b { color: #e38177; }
+      .desk-status .hot b { color: var(--gold); }
+      .desk-status .up b { color: #7dcf7a; }
+      .desk-status .down b { color: #ef7a74; }
       .desk {
         display: grid;
         grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.82fr);
@@ -1142,12 +1142,12 @@
     .desk .wire-day0 { margin-top: 0; }
     .desk .wire-day0:empty,
     .desk .wire-day0[hidden] { display: none; }
-    #wire li.day.fresh h2 { color: var(--caution); }
+    #wire li.day.fresh h2 { color: var(--gold); }
     .desk .day h2 {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--gold);
       font-size: 0.92rem;
       font-weight: 600;
       margin: 0;
@@ -1167,9 +1167,9 @@
         "stamp asset pay";
       gap: 4px 12px;
       align-items: center;
-      background: rgba(55, 42, 31, 0.92);
-      border: 1px solid #49433c;
-      border-left: 4px solid #6c6359;
+      background: rgba(37, 45, 56, 0.92);
+      border: 1px solid #3a4452;
+      border-left: 4px solid #5b6573;
       padding: 10px 12px;
       margin: 0 0 8px;
       color: inherit;
@@ -1181,23 +1181,23 @@
     .desk .print.buy { border-left-color: var(--buy); }
     .desk .print.sell { border-left-color: var(--sell); }
     .desk .print.fresh {
-      background: rgba(228, 179, 80, 0.06);
-      border-top-color: rgba(228, 179, 80, 0.45);
-      border-right-color: rgba(228, 179, 80, 0.35);
-      border-bottom-color: rgba(228, 179, 80, 0.35);
+      background: rgba(227, 180, 26, 0.06);
+      border-top-color: rgba(227, 180, 26, 0.45);
+      border-right-color: rgba(227, 180, 26, 0.35);
+      border-bottom-color: rgba(227, 180, 26, 0.35);
     }
     .desk .print.on {
-      border-color: var(--caution);
-      background: rgba(228, 179, 80, 0.1);
+      border-color: var(--gold);
+      background: rgba(227, 180, 26, 0.1);
     }
-    .desk .print:hover { border-right-color: var(--caution); }
+    .desk .print:hover { border-right-color: var(--gold); }
     .desk .stamp {
       grid-area: stamp;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-right: 1px solid #49433c;
+      border-right: 1px solid #3a4452;
       padding-right: 10px;
       min-height: 52px;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
@@ -1205,10 +1205,10 @@
       align-self: stretch;
     }
     .desk .stamp .mon {
-      color: var(--caution);
+      color: var(--gold);
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
     }
     .desk .stamp .dayn { font-size: 1.55rem; line-height: 0.9; font-weight: 700; }
     .desk .body { grid-area: story; min-width: 0; }
@@ -1234,21 +1234,21 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .desk .who:hover { color: var(--copper); }
+    .desk .who:hover { color: #8fdde0; }
     .desk .ch {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
       padding: 2px 7px;
-      border: 1px solid #6c6359;
+      border: 1px solid #5b6573;
       color: var(--paper);
       white-space: nowrap;
     }
-    .desk .ch.sen { border-color: var(--copper); color: var(--copper); }
-    .desk .ch.wh { border-color: var(--caution); color: var(--caution); }
-    .desk .ch.hot { border-color: var(--caution); color: var(--caution); }
-    .desk .ch.bad { border-color: #e38177; color: #e38177; }
+    .desk .ch.sen { border-color: #36999d; color: #8fdde0; }
+    .desk .ch.wh { border-color: var(--gold); color: var(--gold); }
+    .desk .ch.hot { border-color: var(--gold); color: var(--gold); }
+    .desk .ch.bad { border-color: #ef7a74; color: #ef7a74; }
     .desk .asset {
       grid-area: asset;
       margin: 0;
@@ -1271,9 +1271,9 @@
       text-decoration: none;
       margin-right: 6px;
     }
-    .desk .asset a:hover { color: var(--copper); }
+    .desk .asset a:hover { color: #8fdde0; }
     .desk .meta {
-      color: #c3c0ba;
+      color: #b7c1cc;
       font-size: calc(0.75rem + 1px);
       margin-top: 2px;
       letter-spacing: 0;
@@ -1291,7 +1291,7 @@
     .desk .print .pill {
       border: 0;
       border-radius: 0;
-      color: #dfddda;
+      color: #d7dee6;
       font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-weight: 700;
       font-size: 0.74rem;
@@ -1302,12 +1302,12 @@
       text-align: center;
       background: transparent;
     }
-    .desk .print.buy .pill { background: transparent; color: #83cc91; }
-    .desk .print.sell .pill { background: transparent; color: #f0bab4; }
+    .desk .print.buy .pill { background: transparent; color: #7dcf7a; }
+    .desk .print.sell .pill { background: transparent; color: #ffb4ae; }
     .desk .hero {
       font-weight: 700;
       font-size: 1.22rem;
-      color: #f2f2f0;
+      color: #eef2f5;
       letter-spacing: -0.02em;
       line-height: 1.15;
       font-variant-numeric: tabular-nums;
@@ -1320,10 +1320,10 @@
       margin: 0;
       max-width: none;
       padding: 1px 6px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--gold);
+      color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      font-size: 0.66rem;
+      font-size: 0.6875rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       line-height: 1.2;
@@ -1333,8 +1333,8 @@
     .focus {
       position: sticky;
       top: calc(var(--site-header-h, 62px) + 8px);
-      background: rgba(34, 25, 19, 0.94);
-      border: 1px solid #5b534a;
+      background: rgba(21, 27, 36, 0.94);
+      border: 1px solid #4a5563;
       padding: 12px 12px 14px;
     }
     .focus .who {
@@ -1345,7 +1345,7 @@
     }
     .focus .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
     .focus .asset { white-space: normal; display: block; margin: 0 0 2px; font-size: 0.95rem; }
-    .focus .quiet { color: #c3c0ba; font-size: calc(0.76rem + 1px); margin: 0 0 8px; }
+    .focus .quiet { color: #b7c1cc; font-size: calc(0.76rem + 1px); margin: 0 0 8px; }
     .focus .cta { margin-top: 0; }
     .focus .btn {
       display: inline-flex;
@@ -1361,8 +1361,8 @@
       gap: 3px;
       width: fit-content;
       max-width: 100%;
-      background: rgba(26, 20, 38, 0.72);
-      border: 1px solid rgba(255, 255, 254, 0.1);
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 999px;
       padding: 3px 5px;
       margin: 0 0 10px;
@@ -1371,7 +1371,7 @@
       flex: 0 0 auto;
       background: transparent;
       border: 0;
-      color: #a7a199;
+      color: #94a3b8;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -1381,19 +1381,19 @@
       border-radius: 999px;
       cursor: pointer;
     }
-    .focus .range button:hover { color: #fffffe; background: rgba(255, 255, 254, 0.08); }
+    .focus .range button:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
     .focus .range button.on {
-      color: #251b15;
-      background: #e4b350;
-      box-shadow: none;
+      color: #03140a;
+      background: #22c55e;
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.45);
       font-weight: 800;
     }
     .focus .chart-wrap {
       position: relative;
-      background: rgba(22, 17, 32, 0.72);
+      background: rgba(13, 20, 31, 0.72);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(255, 255, 254, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 16px;
       padding: 10px 8px 10px 44px;
       overflow: hidden;
@@ -1427,12 +1427,12 @@
       }
     }
     .focus .stock-act-spline-main {
-      filter: drop-shadow(0 0 5px rgba(231, 145, 96, 0.45)) drop-shadow(0 0 10px rgba(231, 145, 96, 0.22));
+      filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22));
     }
     .focus .stock-act-hover-price-pill {
       position: absolute;
-      background: #fffffe;
-      color: #120f1b;
+      background: #ffffff;
+      color: #0b111a;
       font-size: 12px;
       font-weight: 700;
       font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
@@ -1446,9 +1446,9 @@
     .focus .stock-act-hover-date-pill {
       position: absolute;
       bottom: 4px;
-      background: #171322;
-      border: 1px solid rgba(255, 255, 254, 0.2);
-      color: #e9e8e5;
+      background: #0d1522;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e2e8f0;
       font-size: 12px;
       font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-weight: 700;
@@ -1462,14 +1462,14 @@
     .focus .mark-pop {
       position: absolute;
       z-index: 70;
-      background: rgba(22, 17, 32, 0.94);
-      border: 1px solid rgba(255, 255, 254, 0.15);
+      background: rgba(13, 20, 32, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
       padding: 10px 12px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(231, 145, 96, 0.16);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(6, 182, 212, 0.16);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      color: #e9e8e5;
+      color: #e2e8f0;
       box-sizing: border-box;
       pointer-events: auto;
       animation: popFade 0.14s ease-out;
@@ -1482,7 +1482,7 @@
       gap: 8px;
       margin-bottom: 6px;
       padding-bottom: 6px;
-      border-bottom: 1px solid rgba(255, 255, 254, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .focus .mark-pop .pop-title-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
     .focus .mark-pop .pop-badge {
@@ -1499,31 +1499,32 @@
       flex-shrink: 0;
     }
     .focus .mark-pop .pop-badge.buy {
-      background: rgba(49, 196, 79, 0.2);
-      color: #31c44f;
-      border: 1px solid rgba(49, 196, 79, 0.5);
-      box-shadow: 0 0 10px rgba(49, 196, 79, 0.3);
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
     }
     .focus .mark-pop .pop-badge.sell {
-      background: rgba(227, 128, 116, 0.2);
-      color: #e38074;
-      border: 1px solid rgba(227, 128, 116, 0.5);
-      box-shadow: 0 0 10px rgba(227, 128, 116, 0.3);
+      background: rgba(248, 113, 113, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      box-shadow: 0 0 10px rgba(248, 113, 113, 0.3);
     }
     .focus .mark-pop .pop-title {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.02rem;
       font-weight: 700;
-      color: #fffffe;
+      color: #ffffff;
       letter-spacing: 0.04em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .focus .mark-pop .pop-close {
-      background: rgba(255, 255, 254, 0.08);
-      border: 1px solid rgba(255, 255, 254, 0.12);
-      color: #a7a199;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       width: 22px;
       height: 22px;
       border-radius: 50%;
@@ -1536,7 +1537,7 @@
       padding: 0;
       flex-shrink: 0;
     }
-    .focus .mark-pop .pop-close:hover { background: rgba(255, 255, 254, 0.2); color: #fffffe; }
+    .focus .mark-pop .pop-close:hover { background: rgba(255, 255, 255, 0.2); color: #ffffff; }
     .focus .mark-pop .pop-single-detail {
       display: flex;
       align-items: center;
@@ -1546,9 +1547,9 @@
       font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-size: 11.5px;
     }
-    .focus .mark-pop .pop-single-amt { color: #fffffe; font-weight: 700; }
-    .focus .mark-pop .pop-dot { color: #9a948b; margin: 0 1px; }
-    .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 600; }
+    .focus .mark-pop .pop-single-amt { color: #ffffff; font-weight: 700; }
+    .focus .mark-pop .pop-dot { color: #94a3b8; margin: 0 1px; }
+    .focus .mark-pop .pop-single-date { color: #38bdf8; font-weight: 600; }
     .focus .chart-y {
       position: absolute;
       left: 0;
@@ -1571,7 +1572,7 @@
       padding-right: 6px;
       padding-left: 2px;
       box-sizing: border-box;
-      color: #e9e8e5;
+      color: #e2e8f0;
       font-size: 12px;
       font-weight: 700;
       font-family: "Figtree", "Figtree Fallback", sans-serif;
@@ -1583,7 +1584,7 @@
       display: flex;
       justify-content: space-between;
       padding: 8px 16px 0 28px;
-      color: #e9e8e5;
+      color: #e2e8f0;
       font-size: 11.5px;
       font-weight: 700;
       font-family: "Figtree", "Figtree Fallback", sans-serif;
@@ -1598,15 +1599,15 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=189" />
+  <link rel="stylesheet" href="shell.css?v=193" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
     .stock-act-txn-end { grid-area: end; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: max-content; }
-    .stock-act-txn-chip { border: 0; border-radius: 0; background: transparent; color: #dfddda; text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; padding: 0; }
-    .stock-act-txn.buy .stock-act-txn-chip { background: transparent; color: #83cc91; }
-    .stock-act-txn.sell .stock-act-txn-chip { background: transparent; color: #f0bab4; }
-    .stock-act-txn-hero, .stock-act-txn .stock-act-txn-hero { color: #f2f2f0; }
+    .stock-act-txn-chip { border: 0; border-radius: 0; background: transparent; color: #d7dee6; text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; padding: 0; }
+    .stock-act-txn.buy .stock-act-txn-chip { background: transparent; color: #7dcf7a; }
+    .stock-act-txn.sell .stock-act-txn-chip { background: transparent; color: #ffb4ae; }
+    .stock-act-txn-hero, .stock-act-txn .stock-act-txn-hero { color: #eef2f5; }
     .stock-act-txn-hero { font-weight: 700; font-family: "Figtree", "Figtree Fallback", sans-serif; }
     .stock-act-txn-id-line { display: flex; align-items: baseline; min-width: 0; max-width: 100%; overflow: hidden; }
     .stock-act-txn-id-line .stock-act-txn-role { display: none; }
@@ -1615,7 +1616,7 @@
     .stock-act-txn-tape.stock-act-txn-co-first { grid-template-areas: "when when" "co end" "id id"; }
     .stock-act-txn-sub { grid-area: sub; display: none; }
     .stock-act-txn-who { display: flex; flex-wrap: nowrap; align-items: center; min-width: 0; }
-    .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.32rem; color: #f2f2f0; font-weight: 700; }
+    .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.32rem; color: #eef2f5; font-weight: 700; }
     @media (max-width: 560px) {
       .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.22rem; }
     }
@@ -1628,7 +1629,7 @@
       .stock-act-txn-tape .stock-act-txn-date { grid-area: date; }
       .stock-act-txn-tape .stock-act-txn-hero { grid-area: hero; }
       .stock-act-txn-tape .stock-act-txn-company,
-      .stock-act-txn-tape a.stock-act-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #f2f2f0); font-size: 0.84rem; font-weight: 600; font-family: "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
+      .stock-act-txn-tape a.stock-act-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #eef2f5); font-size: 0.84rem; font-weight: 600; font-family: "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
       .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-cols .stock-act-txn-company { display: block; grid-area: co; }
       .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-tk,
       .stock-act-txn-tape .stock-act-txn-company a.stock-act-txn-tk { flex: 0 0 auto; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.05em; color: inherit; }
@@ -1654,7 +1655,7 @@
       .desk .stock-act-txn-tape .stock-act-txn-company { display: contents; }
       .desk .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-tk { grid-area: co; }
       .desk .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-co-name {
-        display: block; grid-area: coname; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: calc(0.82rem + 1px); font-weight: 500; color: #c3c0ba;
+        display: block; grid-area: coname; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: calc(0.82rem + 1px); font-weight: 500; color: #b7c1cc;
       }
       .desk .stock-act-txn-cols .stock-act-txn-coname { grid-area: coname; display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .desk .stock-act-txn-cols .stock-act-txn-hero,
@@ -1663,16 +1664,16 @@
         grid-area: hero; justify-self: end; text-align: right;
       }
       .desk .stock-act-txn-tape .stock-act-txn-hero {
-        font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace; font-variant-numeric: tabular-nums; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.01em; color: #f2f2f0;
+        font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace; font-variant-numeric: tabular-nums; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.01em; color: #eef2f5;
         min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       }
       .desk .stock-act-txn-tape .stock-act-txn-hero.is-empty {
         font-family: "Figtree", "Figtree Fallback", sans-serif;
-        color: var(--mute, #9a948b);
+        color: var(--mute, #8b96a3);
       }
       .desk .stock-act-txn-tape { cursor: pointer; }
-      .desk .stock-act-txn-tape.on { border-color: var(--caution); background: rgba(228, 179, 80, 0.1); }
-      .desk .stock-act-txn-tape:hover { background: rgba(228, 179, 80, 0.05); }
+      .desk .stock-act-txn-tape.on { border-color: var(--gold); background: rgba(227, 180, 26, 0.1); }
+      .desk .stock-act-txn-tape:hover { background: rgba(227, 180, 26, 0.05); }
       .desk .stock-act-txn-list.stock-act-tape-list .day { padding: 0 12px; }
 
       body.tape-opt .desk {
@@ -1708,7 +1709,7 @@
         min-width: 0;
         white-space: nowrap;
         font-variant-numeric: tabular-nums;
-        color: var(--paper, #deddda);
+        color: var(--paper, #d8dde3);
       }
       body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-exp,
       body.tape-opt .desk .stock-act-txn-exp {
@@ -1718,7 +1719,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: var(--paper, #deddda);
+        color: var(--paper, #d8dde3);
       }
       body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-strike,
       body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-exp {
@@ -1732,9 +1733,9 @@
       }
     }
     .stock-act-txn .opt-tag.opt-call,
-    .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
+    .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
     .stock-act-txn .opt-tag.opt-put,
-    .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }
+    .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
     @media (max-width: 899px) {
       body.tape-opt .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .opt-tag {
         display: inline-block !important;
@@ -1747,18 +1748,18 @@
   </style>
   <style id="stock-act-v2-look">
     :root {
-      --v2-card: #34271d;
-      --v2-chart: #271e16;
-      --v2-line: #453e38;
-      --v2-border: #49433c;
-      --v2-sub: #c3c0ba;
-      --v2-sell-text: #f0bab4;
-      --v2-buy-text: #83cc91;
-      --v2-sell-bar: #db675a;
-      --v2-buy-bar: #47b25c;
-      --v2-chip-fg: #e4b350;
-      --v2-chip-bg: #433225;
-      --v2-chip-bd: #776d62;
+      --v2-card: #222a36;
+      --v2-chart: #18202b;
+      --v2-line: #344050;
+      --v2-border: #3a4452;
+      --v2-sub: #b7c1cc;
+      --v2-sell-text: #ffb4ae;
+      --v2-buy-text: #7dcf7a;
+      --v2-sell-bar: #e0625c;
+      --v2-buy-bar: #3fb35c;
+      --v2-chip-fg: #9be3a2;
+      --v2-chip-bg: #1f3b2c;
+      --v2-chip-bd: #3f7a52;
     }
     .sr-only {
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -1774,10 +1775,10 @@
     .board-more {
       background: transparent; border: 0; padding: 8px 0; min-height: 40px; cursor: pointer;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--caution); white-space: nowrap;
+      text-transform: uppercase; color: var(--v2-buy-text); white-space: nowrap;
     }
-    .board-more:hover { color: var(--caution); }
-    .board-more:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
+    .board-more:hover { color: #a9e8a6; }
+    .board-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     .board-more[hidden] { display: none !important; }
     .board-more-foot { display: none; }
     #board .board-grid {
@@ -1795,7 +1796,7 @@
     .board-chip {
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
       line-height: 1; padding: 4px 7px; border-radius: 6px; text-transform: none;
-      color: var(--caution); background: rgba(228, 179, 80, 0.12); border: 1px solid var(--caution);
+      color: var(--v2-chip-fg); background: var(--v2-chip-bg); border: 1px solid var(--v2-chip-bd);
     }
     .board-desc { margin: 8px 0 10px; color: var(--v2-sub); font-size: 14px; line-height: 1.45; }
     #board .board-list { list-style: none; margin: 0; padding: 0; border: 0; background: transparent; max-width: none; }
@@ -1805,7 +1806,7 @@
     }
     #board .board-list > li.board-trader { grid-template-areas: "rank name val"; }
     #board .board-list > li.board-trader.open {
-      grid-template-areas: "rank name val" "sec sec sec"; background: rgba(201, 118, 70, 0.08);
+      grid-template-areas: "rank name val" "sec sec sec"; background: rgba(54, 153, 157, 0.08);
     }
     #board .board-rank,
     #board .board-list > li:first-child .board-rank {
@@ -1818,7 +1819,7 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 600; font-size: 15px; line-height: 1.3;
       letter-spacing: 0; text-transform: none; color: var(--white); text-decoration: none;
     }
-    #board .board-list a:hover { color: #eacab7; }
+    #board .board-list a:hover { color: #8fdde0; }
     #board .board-stock a.tk-link { display: inline; font-weight: 700; letter-spacing: 0.03em; text-decoration: none; }
     #board .board-val {
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; font-size: 15px; color: var(--white);
@@ -1851,7 +1852,7 @@
         text-transform: uppercase; color: var(--white);
       }
       .board-fold > summary::before,
-      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8"; }
+      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8"; }
       .board-fold[open] > summary::before,
       .filter-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary,
@@ -1895,7 +1896,7 @@
       }
       .board-fold > summary.board-strip::-webkit-details-marker { display: none; }
       .board-fold > summary::before {
-        grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8";
+        grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8";
       }
       .board-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary {
@@ -1956,8 +1957,8 @@
       border-radius: 10px; color: var(--white); font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 15px;
     }
     .filters select { padding-top: 0; padding-bottom: 0; line-height: 32px; }
-    .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--caution); outline-offset: 1px; }
-    .picker-menu { border-radius: 10px; background: #271e16; border-color: var(--v2-border); }
+    .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+    .picker-menu { border-radius: 10px; background: #18202b; border-color: var(--v2-border); }
     .tape-search { max-width: none; width: 100%; margin: 0; }
     .tape-search-field { position: relative; }
     .tape-search-icon {
@@ -2017,12 +2018,12 @@
     }
     .seg button:last-child { border-right: 0; }
     .seg button.on {
-      background: #e4b350;
-      color: #251b15;
+      background: rgba(238, 242, 245, 0.06);
+      color: var(--white);
     }
     .seg.is-on button.on {
-      background: #e4b350;
-      color: #251b15;
+      background: rgba(227, 180, 26, 0.12);
+      color: var(--gold);
     }
     .filter-clear-wrap {
       display: flex;
@@ -2035,7 +2036,7 @@
       padding: 0 2px;
       border: 0;
       background: transparent;
-      color: var(--caution);
+      color: var(--gold);
       font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 13px;
       font-weight: 600;
@@ -2048,7 +2049,7 @@
     .tape-search-field.is-on input,
     .filters select.is-on,
     .seg.is-on {
-      border-color: var(--caution);
+      border-color: var(--gold);
     }
     .picker-menu {
       max-height: 280px;
@@ -2144,21 +2145,21 @@
       margin: 0; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 17px;
       letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper);
     }
-    #wire > li.day.fresh h2 { color: var(--caution); }
+    #wire > li.day.fresh h2 { color: var(--v2-buy-text); }
     #wire > li.w-row {
       position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
       align-items: start; padding: 14px 4px 14px 26px; border-bottom: 1px solid var(--v2-line); outline: none;
     }
     #wire > li.w-row::before {
-      content: ""; position: absolute; left: 4px; top: 14px; bottom: 14px; width: 7px; border-radius: 4px; background: #7e7367;
+      content: ""; position: absolute; left: 4px; top: 14px; bottom: 14px; width: 7px; border-radius: 4px; background: #6b7582;
     }
     #wire > li.w-row.sell::before { background: var(--v2-sell-bar); }
     #wire > li.w-row.buy::before { background: var(--v2-buy-bar); }
-    #wire > li.w-row.postex::before { background: #c2746b; }
-    #wire > li.w-row.exercise::before { background: #96522b; }
-    #wire > li.w-row.award::before { background: #94887d; }
-    #wire > li.w-row.exch::before { background: #7e7367; }
-    #wire > li.w-row:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
+    #wire > li.w-row.postex::before { background: #c5726b; }
+    #wire > li.w-row.exercise::before { background: #2a6d72; }
+    #wire > li.w-row.award::before { background: #9a8a4a; }
+    #wire > li.w-row.exch::before { background: #6b7582; }
+    #wire > li.w-row:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     #wire .w-main { min-width: 0; }
     #wire .w-head { font-size: 17px; font-weight: 600; line-height: 1.35; color: var(--white); overflow-wrap: anywhere; }
     #wire .w-title { color: inherit; text-decoration: none; }
@@ -2180,8 +2181,8 @@
     #wire .stock-act-file-note,
     #wire .stock-act-file-note-more {
       display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      border: 1px solid var(--v2-border); border-radius: 6px; padding: 2px 9px; background: rgba(22, 17, 13, 0.45);
-      color: #cfcdc8; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+      border: 1px solid var(--v2-border); border-radius: 6px; padding: 2px 9px; background: rgba(15, 18, 24, 0.45);
+      color: #c5ced6; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
     }
     #wire .stock-act-file-note.is-extra { display: none !important; }
     #wire .stock-act-file-note-more { display: inline-block !important; }
@@ -2212,9 +2213,9 @@
       .desk .wire { grid-column: 1; grid-row: 4; }
       .desk .focus { grid-column: 2; grid-row: 3 / -1; }
       #wire > li.w-row { cursor: pointer; border-radius: 10px; }
-      #wire > li.w-row:hover { background: rgba(255, 255, 254, 0.03); }
+      #wire > li.w-row:hover { background: rgba(255, 255, 255, 0.03); }
       #wire > li.w-row.on {
-        background: rgba(201, 118, 70, 0.11); box-shadow: inset 0 0 0 1px rgba(216, 156, 122, 0.45);
+        background: rgba(54, 153, 157, 0.11); box-shadow: inset 0 0 0 1px rgba(79, 185, 189, 0.45);
         border-bottom-color: transparent;
       }
     }
@@ -2232,11 +2233,11 @@
     .desk .focus .ch {
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; line-height: 1;
       padding: 5px 8px; border: 1px solid var(--v2-border); border-radius: 6px; color: var(--paper);
-      background: rgba(22, 17, 13, 0.35);
+      background: rgba(15, 18, 24, 0.35);
     }
-    .desk .focus .ch.sen { color: #eacab7; border-color: #98542c; }
-    .desk .focus .ch.hot { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
-    .desk .focus .ch.bad { color: #e38177; border-color: #e38177; }
+    .desk .focus .ch.sen { color: #8fdde0; border-color: #2d6f73; }
+    .desk .focus .ch.hot { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
+    .desk .focus .ch.bad { color: #ef7a74; border-color: #ef7a74; }
     .desk .focus .asset { margin: 0 0 2px; font-size: 16px; color: var(--white); overflow-wrap: anywhere; }
     .desk .focus .asset a {
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; letter-spacing: 0.03em; text-transform: none; margin-right: 4px;
@@ -2244,7 +2245,7 @@
     .focus .quiet { margin: 0 0 14px; color: var(--v2-sub); font-size: 14px; }
     .focus .range { background: var(--v2-chart); border: 1px solid var(--v2-line); padding: 3px; margin: 0 0 12px; }
     .focus .range button { color: var(--v2-sub); font-size: 14px; padding: 5px 12px; }
-    .focus .range button.on { color: #251b15; background: #e4b350; box-shadow: none; }
+    .focus .range button.on { color: #04140a; background: var(--v2-buy-bar); box-shadow: none; }
     .focus .chart-wrap {
       background: var(--v2-chart); border: 1px solid var(--v2-line); border-radius: 14px;
       padding: 14px 14px 10px 52px; backdrop-filter: none; -webkit-backdrop-filter: none; margin-bottom: 14px;
@@ -2254,7 +2255,7 @@
     .focus .chart-x { color: var(--v2-sub); font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; }
     .focus .chart-note { color: var(--v2-sub); font-size: 15px; }
     .focus .mark-pop {
-      width: max-content; background: #1a130f; border: 1px solid var(--v2-border); border-radius: 12px;
+      width: max-content; background: #0f151e; border: 1px solid var(--v2-border); border-radius: 12px;
       padding: 9px 12px 10px; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55); backdrop-filter: none; -webkit-backdrop-filter: none;
     }
     .focus .mark-pop .pop-header { margin: 0; padding: 0; border: 0; align-items: flex-start; }
@@ -2265,8 +2266,8 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
       padding: 3px 7px; border-radius: 6px; box-shadow: none;
     }
-    .focus .mark-pop .pop-badge.sell { color: var(--v2-sell-text); background: rgba(207, 95, 82, 0.16); border: 1px solid rgba(219, 103, 90, 0.45); }
-    .focus .mark-pop .pop-badge.buy { color: var(--v2-buy-text); background: rgba(54, 157, 75, 0.16); border: 1px solid rgba(71, 178, 92, 0.45); }
+    .focus .mark-pop .pop-badge.sell { color: var(--v2-sell-text); background: rgba(212, 90, 85, 0.16); border: 1px solid rgba(224, 98, 92, 0.45); }
+    .focus .mark-pop .pop-badge.buy { color: var(--v2-buy-text); background: rgba(47, 158, 74, 0.16); border: 1px solid rgba(63, 179, 92, 0.45); }
     .focus .mark-pop .pop-title {
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0;
       white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; color: var(--white);
@@ -2274,18 +2275,18 @@
     .focus .mark-pop .pop-close { width: 22px; height: 22px; margin-left: 4px; }
     .focus .mark-pop .pop-single-detail { margin: 4px 0 0; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 14px; gap: 4px; }
     .focus .mark-pop .pop-single-amt { color: var(--paper); font-weight: 600; }
-    .focus .mark-pop .pop-dot { color: #9a948b; }
-    .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 400; }
+    .focus .mark-pop .pop-dot { color: var(--v2-sub); }
+    .focus .mark-pop .pop-single-date { color: var(--v2-sub); font-weight: 400; }
     .focus .mark-pop .pop-link {
-      position: absolute; top: 100%; width: 0; border-left: 1.5px dashed rgba(240, 186, 180, 0.6); pointer-events: none;
+      position: absolute; top: 100%; width: 0; border-left: 1.5px dashed rgba(255, 180, 174, 0.6); pointer-events: none;
     }
-    .focus .mark-pop .pop-link.buy { border-left-color: rgba(131, 204, 145, 0.6); }
+    .focus .mark-pop .pop-link.buy { border-left-color: rgba(125, 207, 122, 0.6); }
     .focus .cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
     .focus .btn {
       border-radius: 10px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 15px;
       letter-spacing: 0.1em; padding: 10px 16px; color: var(--white); border: 1px solid var(--v2-border); background: transparent;
     }
-    .focus .btn.fill { background: #e4b350; border-color: #e4b350; color: #251b15; }
+    .focus .btn.fill { background: var(--v2-buy-bar); border-color: var(--v2-buy-bar); color: #04140a; }
 
     /* .chart-top is display:contents on desktop so the card itself is the sticky grid item. */
     .strip-toggle, .spark { display: none; }
@@ -2310,8 +2311,8 @@
       .chart-top #focus-foot { display: none; }
       .chart-top .strip-toggle {
         display: inline-flex; align-items: center; gap: 6px; position: absolute; top: 10px; right: 10px; z-index: 2;
-        font: 600 12px/1 "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0.05em; color: var(--v2-sub, #c3c0ba);
-        padding: 6px 9px; border: 1px solid var(--v2-border, #49433c); border-radius: 6px; background: rgba(22, 17, 13, 0.35); cursor: pointer;
+        font: 600 12px/1 "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0.05em; color: var(--v2-sub, #b7c1cc);
+        padding: 6px 9px; border: 1px solid var(--v2-border, #3a4452); border-radius: 6px; background: rgba(15, 18, 24, 0.35); cursor: pointer;
       }
       .chart-top .strip-toggle::after { content: "\25BE"; font-size: 11px; }
       .chart-top .focus.open .strip-toggle::after { content: "\25B4"; }
@@ -2322,14 +2323,14 @@
       .chart-top .focus:not(.open) .spark { display: block; }
       .chart-top .spark { height: 52px; }
       .chart-top .spark svg { display: block; width: 100%; height: 52px; }
-      .chart-top .spark-note { display: block; line-height: 52px; color: var(--v2-sub, #c3c0ba); font-size: 13px; }
+      .chart-top .spark-note { display: block; line-height: 52px; color: var(--v2-sub, #b7c1cc); font-size: 13px; }
     }
-    .spark .spark-line { fill: none; stroke: #f4cfb9; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
-    .spark .spark-area { fill: rgba(244, 207, 185, 0.10); stroke: none; }
-    .spark .spark-dot { fill: #eecf92; stroke: #16110d; stroke-width: 2; }
-    .spark .spark-dot.buy { fill: var(--v2-buy-bar, #47b25c); }
-    .spark .spark-dot.sell { fill: var(--v2-sell-bar, #db675a); }
-    .spark .spark-end { fill: #faf9fc; }
+    .spark .spark-line { fill: none; stroke: #67e8f9; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+    .spark .spark-area { fill: rgba(103, 232, 249, 0.10); stroke: none; }
+    .spark .spark-dot { fill: #f0d078; stroke: #0f1218; stroke-width: 2; }
+    .spark .spark-dot.buy { fill: var(--v2-buy-bar, #3fb35c); }
+    .spark .spark-dot.sell { fill: var(--v2-sell-bar, #e0625c); }
+    .spark .spark-end { fill: #f8fafc; }
   </style>
   <style id="stock-act-tape-2b">
     @media (max-width: 899px) {
@@ -2345,25 +2346,25 @@
       #wire .w1-rows { list-style: none; margin: 0; padding: 0; }
       #wire .w1-chip {
         display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-        border: 1px solid var(--v2-border); border-radius: 6px; padding: 1px 8px; background: rgba(22, 17, 13, 0.45);
-        color: #cfcdc8; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+        border: 1px solid var(--v2-border); border-radius: 6px; padding: 1px 8px; background: rgba(15, 18, 24, 0.45);
+        color: #c5ced6; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
       }
-      #wire .w1-clus { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
+      #wire .w1-clus { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
       #wire li.w1 {
-        position: relative; min-height: 44px; padding: 4px 2px 4px 20px; border-top: 1px solid rgba(69, 62, 56, 0.55);
+        position: relative; min-height: 44px; padding: 4px 2px 4px 20px; border-top: 1px solid rgba(52, 64, 80, 0.55);
         display: flex; flex-direction: column; justify-content: center; outline: none;
       }
       #wire li.w1:first-child { border-top: 0; }
-      #wire li.w1:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
+      #wire li.w1:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
       #wire li.w1::before {
-        content: ""; position: absolute; left: 2px; top: 9px; bottom: 9px; width: 6px; border-radius: 4px; background: #7e7367;
+        content: ""; position: absolute; left: 2px; top: 9px; bottom: 9px; width: 6px; border-radius: 4px; background: #6b7582;
       }
       #wire li.w1.sell::before { background: var(--v2-sell-bar); }
       #wire li.w1.buy::before { background: var(--v2-buy-bar); }
-      #wire li.w1.postex::before { background: #c2746b; }
-      #wire li.w1.exercise::before { background: #96522b; }
-      #wire li.w1.award::before { background: #94887d; }
-      #wire li.w1.exch::before { background: #7e7367; }
+      #wire li.w1.postex::before { background: #c5726b; }
+      #wire li.w1.exercise::before { background: #2a6d72; }
+      #wire li.w1.award::before { background: #9a8a4a; }
+      #wire li.w1.exch::before { background: #6b7582; }
       #wire .w1-line { display: flex; align-items: center; min-width: 0; }
       #wire .w1-tk {
         flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-width: 0;
@@ -2613,7 +2614,7 @@
   </div>
 
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=129"></script>
+  <script src="chart.js?v=130"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, (c) => ({
