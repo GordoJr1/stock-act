@@ -36,7 +36,7 @@ function loadQC() {
   sandbox.window = sandbox;
   sandbox.global = sandbox;
   vm.createContext(sandbox);
-  vm.runInContext(fs.readFileSync(path.join(root, "qc.js"), "utf8"), sandbox, { filename: "qc.js" });
+  vm.runInContext(fs.readFileSync(path.join(root, "stock-act.js"), "utf8"), sandbox, { filename: "stock-act.js" });
   return sandbox.QC;
 }
 

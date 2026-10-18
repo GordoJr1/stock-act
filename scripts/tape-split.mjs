@@ -22,9 +22,9 @@ const sandbox = {
 sandbox.window = sandbox;
 sandbox.global = sandbox;
 vm.createContext(sandbox);
-vm.runInContext(fs.readFileSync(path.join(root, "qc.js"), "utf8"), sandbox, { filename: "qc.js" });
+vm.runInContext(fs.readFileSync(path.join(root, "stock-act.js"), "utf8"), sandbox, { filename: "stock-act.js" });
 const QC = sandbox.QC;
-if (!QC || !QC.enrich) throw new Error("qc.js did not export QC");
+if (!QC || !QC.enrich) throw new Error("stock-act.js did not export QC");
 
 const MEGA = {
   AAPL: 1, MSFT: 1, NVDA: 1, AMZN: 1, GOOGL: 1, GOOG: 1, META: 1, TSLA: 1,

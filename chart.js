@@ -512,21 +512,21 @@ function drawChart(points, marks, opts) {
       "<linearGradient id=\"underGlow\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\">" +
         glowStopsHtml +
       "</linearGradient>" +
-      "<linearGradient id=\"qc-sub-area\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">" +
+      "<linearGradient id=\"stock-act-sub-area\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">" +
         "<stop offset=\"0%\" stop-color=\"" + palette.primary + "\" stop-opacity=\"0.18\" />" +
         "<stop offset=\"100%\" stop-color=\"" + palette.primary + "\" stop-opacity=\"0.01\" />" +
       "</linearGradient>" +
     "</defs>" +
     gridLines +
-    (areaPath ? "<path d=\"" + areaPath + "\" fill=\"url(#qc-sub-area)\" />" : "") +
+    (areaPath ? "<path d=\"" + areaPath + "\" fill=\"url(#stock-act-sub-area)\" />" : "") +
     "<path d=\"" + spline + "\" fill=\"none\" stroke=\"url(#underGlow)\" stroke-width=\"" + (opts.glowWidth || 5.5) + "\" opacity=\"0.55\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />" +
-    "<path class=\"qc-spline-main\" d=\"" + spline + "\" fill=\"none\" stroke=\"url(#neonGradient)\" stroke-width=\"" + (opts.lineWidth || 2.2) + "\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"filter:" + palette.glowFilter + ";\" />" +
+    "<path class=\"stock-act-spline-main\" d=\"" + spline + "\" fill=\"none\" stroke=\"url(#neonGradient)\" stroke-width=\"" + (opts.lineWidth || 2.2) + "\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"filter:" + palette.glowFilter + ";\" />" +
     "<circle cx=\"" + lastPt.x.toFixed(1) + "\" cy=\"" + lastPt.y.toFixed(1) + "\" r=\"5.2\" fill=\"" + palette.light + "\" stroke=\"#ffffff\" stroke-width=\"1.7\" />" +
     tradePinsHtml +
-    "<g id=\"qc-scrubber-g\" style=\"display:none; pointer-events:none;\">" +
-      "<line id=\"qc-scrub-line\" x1=\"0\" y1=\"" + pad.t + "\" x2=\"0\" y2=\"" + priceBot + "\" stroke=\"rgba(255,255,255,0.22)\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\" />" +
-      "<circle id=\"qc-scrub-halo\" cx=\"0\" cy=\"0\" r=\"7.5\" fill=\"rgba(255,255,255,0.24)\" />" +
-      "<circle id=\"qc-scrub-dot\" cx=\"0\" cy=\"0\" r=\"3.8\" fill=\"#ffffff\" stroke=\"#0d141f\" stroke-width=\"2\" />" +
+    "<g id=\"stock-act-scrubber-g\" style=\"display:none; pointer-events:none;\">" +
+      "<line id=\"stock-act-scrub-line\" x1=\"0\" y1=\"" + pad.t + "\" x2=\"0\" y2=\"" + priceBot + "\" stroke=\"rgba(255,255,255,0.22)\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\" />" +
+      "<circle id=\"stock-act-scrub-halo\" cx=\"0\" cy=\"0\" r=\"7.5\" fill=\"rgba(255,255,255,0.24)\" />" +
+      "<circle id=\"stock-act-scrub-dot\" cx=\"0\" cy=\"0\" r=\"3.8\" fill=\"#ffffff\" stroke=\"#0d141f\" stroke-width=\"2\" />" +
     "</g>";
 
   paintYAxisLabels(wrap, svg, yBox, yTicks, yAt, w, h, pad, axisStep);
@@ -573,7 +573,7 @@ function drawChart(points, marks, opts) {
 function ensureInteractiveDomElements(wrap, palette) {
   if (!wrap) return;
 
-  const leftoverTerm = wrap.querySelector(".qc-terminal-pill");
+  const leftoverTerm = wrap.querySelector(".stock-act-terminal-pill");
   if (leftoverTerm) leftoverTerm.remove();
 
   const pop = wrap.querySelector("#mark-pop");
@@ -581,23 +581,23 @@ function ensureInteractiveDomElements(wrap, palette) {
     pop.style.boxShadow = palette.popShadow;
   }
 
-  let hoverPricePill = wrap.querySelector(".qc-hover-price-pill");
+  let hoverPricePill = wrap.querySelector(".stock-act-hover-price-pill");
   if (!hoverPricePill) {
     hoverPricePill = document.createElement("div");
-    hoverPricePill.className = "qc-hover-price-pill";
+    hoverPricePill.className = "stock-act-hover-price-pill";
     hoverPricePill.style.display = "none";
     wrap.appendChild(hoverPricePill);
   }
 
-  let hoverDatePill = wrap.querySelector(".qc-hover-date-pill");
+  let hoverDatePill = wrap.querySelector(".stock-act-hover-date-pill");
   if (!hoverDatePill) {
     hoverDatePill = document.createElement("div");
-    hoverDatePill.className = "qc-hover-date-pill";
+    hoverDatePill.className = "stock-act-hover-date-pill";
     hoverDatePill.style.display = "none";
     wrap.appendChild(hoverDatePill);
   }
 
-  const leftoverHud = wrap.querySelector(".qc-glass-hud");
+  const leftoverHud = wrap.querySelector(".stock-act-glass-hud");
   if (leftoverHud) leftoverHud.remove();
 }
 
@@ -659,21 +659,21 @@ function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad, step) {
 }
 
 function hideChartHoverUi(wrap, svg) {
-  const hoverPricePill = wrap && wrap.querySelector(".qc-hover-price-pill");
-  const hoverDatePill = wrap && wrap.querySelector(".qc-hover-date-pill");
-  const scrubG = svg && svg.querySelector("#qc-scrubber-g");
+  const hoverPricePill = wrap && wrap.querySelector(".stock-act-hover-price-pill");
+  const hoverDatePill = wrap && wrap.querySelector(".stock-act-hover-date-pill");
+  const scrubG = svg && svg.querySelector("#stock-act-scrubber-g");
   if (hoverPricePill) hoverPricePill.style.display = "none";
   if (hoverDatePill) hoverDatePill.style.display = "none";
   if (scrubG) scrubG.style.display = "none";
 }
 
 function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
-  const scrubG = svg.querySelector("#qc-scrubber-g");
-  const scrubLine = svg.querySelector("#qc-scrub-line");
-  const scrubDot = svg.querySelector("#qc-scrub-dot");
-  const scrubHalo = svg.querySelector("#qc-scrub-halo");
-  const hoverPricePill = wrap.querySelector(".qc-hover-price-pill");
-  const hoverDatePill = wrap.querySelector(".qc-hover-date-pill");
+  const scrubG = svg.querySelector("#stock-act-scrubber-g");
+  const scrubLine = svg.querySelector("#stock-act-scrub-line");
+  const scrubDot = svg.querySelector("#stock-act-scrub-dot");
+  const scrubHalo = svg.querySelector("#stock-act-scrub-halo");
+  const hoverPricePill = wrap.querySelector(".stock-act-hover-price-pill");
+  const hoverDatePill = wrap.querySelector(".stock-act-hover-date-pill");
 
   function onPointerMove(e) {
     const pop = wrap.querySelector("#mark-pop");
@@ -824,7 +824,7 @@ function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
 function sampleSplineInWrap(svg, wrap) {
   const pts = [];
   if (!svg || !wrap || !svg.querySelector) return pts;
-  const path = svg.querySelector(".qc-spline-main");
+  const path = svg.querySelector(".stock-act-spline-main");
   if (!path || typeof path.getTotalLength !== "function") return pts;
   const wr = wrap.getBoundingClientRect();
   const sr = svg.getBoundingClientRect();
