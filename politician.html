@@ -3,41 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1a1d26" />
+  <meta name="theme-color" content="#251b15" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
   <title>Stock Act</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=Red+Hat+Mono:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --steel: #1c2430;
-      --panel: #2a3340;
-      --paper: #d8dde3;
-      --white: #eef2f5;
-      --fed: #1e4b8a;
-      --red: #c2302a;
-      --caution: #e3b41a;
-      --mute: #8b96a3;
-      --ink: #1a1d26;
-      --teal: #36999d;
-      --navy: #1c2d4e;
-      --buy: #2f9e4a;
-      --sell: #d45a55;
+      --steel: #2d2219;
+      --panel: #3f2f24;
+      --paper: #deddda;
+      --white: #f2f2f0;
+      --fed: #53417e;
+      --red: #ba3b2d;
+      --caution: #e4b350;
+      --mute: #9a948b;
+      --ink: #251b15;
+      --teal: #c97646;
+      --navy: #322849;
+      --buy: #369d4b;
+      --sell: #cf5f52;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
-    body { font-family: "IBM Plex Sans", sans-serif; color: var(--white); background: var(--steel); }
+    body { font-family: "Figtree", sans-serif; color: var(--white); background: var(--steel); }
     @media (min-width: 821px) {
       body {
         background:
-          linear-gradient(180deg, rgba(26, 29, 38, 0.94), rgba(28, 36, 48, 0.97)),
+          linear-gradient(180deg, rgba(37, 27, 21, 0.94), rgba(45, 34, 25, 0.97)),
           url("city.jpg?v=15") 50% 30% / cover fixed;
         min-height: 100vh;
       }
@@ -55,11 +55,11 @@
       padding: 16px 0; border-bottom: 2px solid var(--teal);
     }
     .mark, h1, h2, th, .kicker, .back {
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
     }
     .mark { font-weight: 700; letter-spacing: 0.18em; color: inherit; text-decoration: none; }
     .mark span { color: var(--teal); }
-    nav { display: flex; gap: 14px; font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
+    nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--caution); }
     .back { color: var(--teal); text-decoration: none; }
@@ -93,11 +93,11 @@
     .hero-party { color: var(--caution); font-weight: 600; }
     .bio-wrap {
       margin: 4px 0 12px;
-      border: 1px solid #4a5563;
-      background: #151b24;
+      border: 1px solid #5b534a;
+      background: #221913;
     }
     .bio-wrap > summary {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--caution);
@@ -112,7 +112,7 @@
     .bio-wrap[open] > summary::before {
       content: "▾ ";
     }
-    .bio-wrap > summary:hover { background: rgba(227, 180, 26, 0.08); }
+    .bio-wrap > summary:hover { background: rgba(228, 179, 80, 0.08); }
     .bio {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -134,12 +134,12 @@
     .bio .overlap strong {
       color: var(--white);
       margin-right: 6px;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.06em;
     }
     .bio .overlap .why { color: var(--caution); font-size: 0.88rem; }
     .bio .subhead {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -150,12 +150,12 @@
     .bio .subs ul { margin-bottom: 4px; }
     .bio article {
       background: var(--panel);
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       border-left: 6px solid var(--fed);
       padding: 16px 18px;
     }
     .bio h3 {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -189,8 +189,8 @@
 
     .holdings {
       margin: 0 0 22px;
-      border: 1px solid #4a5563;
-      background: #151b24;
+      border: 1px solid #5b534a;
+      background: #221913;
       padding: 8px 16px 10px;
     }
     .holdings > .kicker { margin: 0 0 2px; }
@@ -201,8 +201,8 @@
     .hold-stage > .link-bar { margin-bottom: 0; }
     .sel-chip {
       display: none; align-items: center; gap: 8px;
-      background: rgba(227, 180, 26, 0.12);
-      border: 1px solid rgba(227, 180, 26, 0.55);
+      background: rgba(228, 179, 80, 0.12);
+      border: 1px solid rgba(228, 179, 80, 0.55);
       color: var(--white);
       padding: 6px 10px 6px 8px;
       border-radius: 999px;
@@ -210,20 +210,20 @@
     }
     .sel-chip.show { display: inline-flex; }
     .sel-chip b {
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.08em;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--caution);
     }
     .sel-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
     .clear-btn, .hint {
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
     }
     .clear-btn {
       display: none;
-      background: transparent; border: 1px solid #4a5563; color: var(--caution);
+      background: transparent; border: 1px solid #5b534a; color: var(--caution);
       padding: 7px 12px; min-height: 36px; cursor: pointer;
     }
     .clear-btn.show { display: inline-flex; align-items: center; }
-    .clear-btn:hover { background: rgba(227, 180, 26, 0.08); }
+    .clear-btn:hover { background: rgba(228, 179, 80, 0.08); }
     .hint { color: var(--mute); font-size: 0.78rem; margin-left: auto; }
     .hold-stage {
       display: flex;
@@ -232,8 +232,8 @@
       min-height: 0;
     }
     .allocator {
-      border: 1px solid #4a5563;
-      background: rgba(21, 27, 36, 0.6);
+      border: 1px solid #5b534a;
+      background: rgba(34, 25, 19, 0.6);
       padding: 10px 10px 8px;
       display: flex;
       flex-direction: column;
@@ -249,7 +249,7 @@
       margin-bottom: 8px;
     }
     .alloc-kicker {
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.12em;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--mute); font-size: 0.72rem; margin: 0;
     }
     .alloc-total {
@@ -257,7 +257,7 @@
       margin: 0;
     }
     .alloc-total b {
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.04em;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.04em;
       color: var(--caution); font-size: 1.2rem; line-height: 1;
     }
     .alloc-total span { color: var(--mute); font-size: 0.72rem; }
@@ -269,7 +269,7 @@
       margin: 0 0 8px;
     }
     .alloc-sort-label {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--caution);
@@ -281,10 +281,10 @@
       flex-wrap: wrap;
     }
     .alloc-sort button {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid #4a5563;
+      background: rgba(255, 255, 254, 0.04);
+      border: 1px solid #5b534a;
       color: var(--paper);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-size: 0.82rem;
@@ -292,9 +292,9 @@
       min-height: 34px;
       cursor: pointer;
     }
-    .alloc-sort button:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
+    .alloc-sort button:hover { color: #fffffe; background: rgba(255, 255, 254, 0.08); }
     .alloc-sort button.on {
-      color: #1a1d26;
+      color: #251b15;
       background: var(--caution);
       border-color: var(--caution);
       font-weight: 800;
@@ -313,9 +313,9 @@
     }
     .hold-tile {
       box-sizing: border-box;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,254,0.08);
       border-left-width: 4px;
-      background: #1b2330;
+      background: #2b2018;
       color: inherit;
       text-align: left;
       padding: 7px 8px 6px;
@@ -335,7 +335,7 @@
       outline-offset: -2px;
     }
     .hold-tile .tk {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-size: 0.95rem;
@@ -350,15 +350,15 @@
       margin-top: 6px;
     }
     .hold-tile .amt {
-      font-family: "Barlow Condensed", sans-serif; color: var(--caution); font-size: 0.95rem;
+      font-family: "Big Shoulders Display", sans-serif; color: var(--caution); font-size: 0.95rem;
     }
     .hold-tile .pct { color: var(--mute); font-size: 0.7rem; }
     .hold-more { margin-top: 8px; }
     .hold-toggle {
       background: transparent;
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 8px 10px;
@@ -366,10 +366,10 @@
       min-height: 36px;
       width: 100%;
     }
-    .hold-toggle:hover { background: rgba(227, 180, 26, 0.08); }
+    .hold-toggle:hover { background: rgba(228, 179, 80, 0.08); }
     .holdings .focus {
-      background: rgba(21, 27, 36, 0.94);
-      border: 1px solid #4a5563;
+      background: rgba(34, 25, 19, 0.94);
+      border: 1px solid #5b534a;
       padding: 8px 10px 6px;
       display: flex;
       flex-direction: column;
@@ -387,8 +387,8 @@
     }
     .holdings .focus .range {
       display: flex; width: fit-content; gap: 3px;
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(26, 20, 38, 0.72);
+      border: 1px solid rgba(255, 255, 254, 0.1);
       border-radius: 999px; padding: 3px 5px; margin: 0; flex: 0 0 auto;
     }
     .holdings .focus .chart-pnl {
@@ -397,7 +397,7 @@
       gap: 6px;
       min-width: 0;
       margin-left: auto;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-weight: 800;
@@ -406,8 +406,8 @@
       color: var(--paper);
     }
     .holdings .focus .chart-pnl[hidden] { display: none; }
-    .holdings .focus .chart-pnl.up { color: #7dcf7a; }
-    .holdings .focus .chart-pnl.down { color: #ef7a74; }
+    .holdings .focus .chart-pnl.up { color: #83cc91; }
+    .holdings .focus .chart-pnl.down { color: #e38177; }
     .holdings .focus .chart-pnl .pnl-amt { white-space: nowrap; }
     .holdings .focus .chart-pnl .pnl-lbl {
       color: var(--mute);
@@ -416,8 +416,8 @@
       letter-spacing: 0.1em;
     }
     .holdings .focus .range button {
-      background: transparent; border: 0; color: #94a3b8;
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.1em;
+      background: transparent; border: 0; color: #a7a199;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em;
       text-transform: uppercase; font-size: 0.78rem; font-weight: 700;
       padding: 4px 10px; border-radius: 999px; cursor: pointer;
     }
@@ -427,17 +427,17 @@
         padding: 8px 12px;
       }
     }
-    .holdings .focus .range button:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
+    .holdings .focus .range button:hover { color: #fffffe; background: rgba(255, 255, 254, 0.08); }
     .holdings .focus .range button.on {
-      color: #03140a; background: #22c55e;
-      box-shadow: 0 0 16px rgba(34, 197, 94, 0.45); font-weight: 800;
+      color: #051408; background: #31c44f;
+      box-shadow: 0 0 16px rgba(49, 196, 79, 0.45); font-weight: 800;
     }
     .holdings .focus .chart-wrap {
       position: relative;
-      background: rgba(13, 20, 31, 0.72);
+      background: rgba(22, 17, 32, 0.72);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 254, 0.09);
       border-radius: 16px;
       padding: 6px 6px 4px 10px;
       overflow: hidden;
@@ -470,15 +470,15 @@
       .stock-act-member-desk .holdings .focus #chart-svg { height: 300px; flex-basis: 300px; }
     }
     .holdings .focus .stock-act-spline-main {
-      filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22));
+      filter: drop-shadow(0 0 5px rgba(231, 145, 96, 0.45)) drop-shadow(0 0 10px rgba(231, 145, 96, 0.22));
     }
     .holdings .focus .stock-act-hover-price-pill {
       position: absolute;
-      background: #ffffff;
-      color: #0b111a;
+      background: #fffffe;
+      color: #120f1b;
       font-size: 12px;
       font-weight: 700;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", monospace;
       padding: 3px 8px;
       border-radius: 5px;
       pointer-events: none;
@@ -489,11 +489,11 @@
     .holdings .focus .stock-act-hover-date-pill {
       position: absolute;
       bottom: 4px;
-      background: #0d1522;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #e2e8f0;
+      background: #171322;
+      border: 1px solid rgba(255, 255, 254, 0.2);
+      color: #e9e8e5;
       font-size: 12px;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", monospace;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 5px;
@@ -505,62 +505,62 @@
     .holdings .focus .mark-pop {
       position: absolute;
       z-index: 70;
-      background: rgba(13, 20, 32, 0.94);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(22, 17, 32, 0.94);
+      border: 1px solid rgba(255, 255, 254, 0.15);
       border-radius: 12px;
       padding: 10px 12px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 20px rgba(6, 182, 212, 0.16);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 20px rgba(231, 145, 96, 0.16);
       backdrop-filter: blur(20px);
-      color: #e2e8f0;
+      color: #e9e8e5;
       box-sizing: border-box;
     }
     .holdings .focus .mark-pop .pop-header {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
-      margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 254, 0.08);
     }
     .holdings .focus .mark-pop .pop-title-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
     .holdings .focus .mark-pop .pop-badge {
       display: inline-flex; align-items: center; justify-content: center;
-      font-family: "Barlow Condensed", sans-serif; font-weight: 800; font-size: 11px;
+      font-family: "Big Shoulders Display", sans-serif; font-weight: 800; font-size: 11px;
       letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px;
     }
     .holdings .focus .mark-pop .pop-badge.buy {
-      background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.5);
+      background: rgba(49, 196, 79, 0.2); color: #31c44f; border: 1px solid rgba(49, 196, 79, 0.5);
     }
     .holdings .focus .mark-pop .pop-badge.sell {
-      background: rgba(248, 113, 113, 0.2); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.5);
+      background: rgba(227, 128, 116, 0.2); color: #e38074; border: 1px solid rgba(227, 128, 116, 0.5);
     }
     .holdings .focus .mark-pop .pop-title {
-      font-family: "Barlow Condensed", sans-serif; font-size: 1.02rem; font-weight: 700;
-      color: #ffffff; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-family: "Big Shoulders Display", sans-serif; font-size: 1.02rem; font-weight: 700;
+      color: #fffffe; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .holdings .focus .mark-pop .pop-close {
-      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #94a3b8; width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(255, 255, 254, 0.08); border: 1px solid rgba(255, 255, 254, 0.12);
+      color: #a7a199; width: 22px; height: 22px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center; cursor: pointer;
       font-size: 11.5px; line-height: 1; padding: 0;
     }
     .holdings .focus .mark-pop .pop-single-detail {
       display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 5px 0 2px;
-      font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+      font-family: "Red Hat Mono", monospace; font-size: 11.5px;
     }
-    .holdings .focus .mark-pop .pop-single-amt { color: #ffffff; font-weight: 700; }
-    .holdings .focus .mark-pop .pop-dot { color: #64748b; }
-    .holdings .focus .mark-pop .pop-single-date { color: #38bdf8; font-weight: 600; }
+    .holdings .focus .mark-pop .pop-single-amt { color: #fffffe; font-weight: 700; }
+    .holdings .focus .mark-pop .pop-dot { color: #7d7166; }
+    .holdings .focus .mark-pop .pop-single-date { color: #eaa076; font-weight: 600; }
     .holdings .focus .chart-y {
       position: absolute; left: 0; pointer-events: none; z-index: 4;
     }
     .holdings .focus .chart-y span {
       position: absolute; left: 0; right: 0; width: 100%; text-align: right;
       transform: translateY(-50%); padding-right: 6px; padding-left: 2px;
-      color: #e2e8f0; font-size: 12px; font-weight: 700;
-      font-family: "IBM Plex Sans", sans-serif; line-height: 1; white-space: nowrap;
+      color: #e9e8e5; font-size: 12px; font-weight: 700;
+      font-family: "Figtree", sans-serif; line-height: 1; white-space: nowrap;
     }
     .holdings .focus .chart-x {
       display: flex; justify-content: space-between;
       padding: 4px 8px 0 8px;
-      color: #e2e8f0; font-size: 11.5px; font-weight: 700;
-      font-family: "IBM Plex Sans", sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+      color: #e9e8e5; font-size: 11.5px; font-weight: 700;
+      font-family: "Figtree", sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
     }
     .holdings .focus .chart-note {
       color: var(--mute); font-size: 0.8rem; padding: 28px 8px; text-align: center;
@@ -572,8 +572,8 @@
     .tape-head .count { color: var(--mute); font-size: 0.82rem; }
     .stock-act-pol-desk .stock-act-txn-tape { cursor: pointer; }
     .stock-act-pol-desk .stock-act-txn-tape.on {
-      background: rgba(227, 180, 26, 0.1);
-      box-shadow: inset 0 0 0 1px rgba(227, 180, 26, 0.35);
+      background: rgba(228, 179, 80, 0.1);
+      box-shadow: inset 0 0 0 1px rgba(228, 179, 80, 0.35);
     }
     @media (max-width: 820px) {
       .holdings .focus .chart-wrap { height: 364px; }
@@ -583,11 +583,11 @@
       .tile-board.expanded { grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); }
       .hint { margin-left: 0; width: 100%; }
     }
-    .buy { color: #7dcf7a; }
-    .sell { color: #ef7a74; }
+    .buy { color: #83cc91; }
+    .sell { color: #e38177; }
     footer {
       border-top: 2px solid var(--caution); margin-top: 40px; padding: 18px 0 36px;
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
     }
     .tk-link {
       background: none;
@@ -600,7 +600,7 @@
       cursor: pointer;
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: #4a5563;
+      text-decoration-color: #5b534a;
     }
     .tk-link:hover { color: var(--caution); }
 
@@ -624,7 +624,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", sans-serif;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         font-size: 0.85rem;
@@ -646,13 +646,13 @@
       color: var(--mute);
       font-size: 0.82rem;
       margin: 0;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=186" />
+  <link rel="stylesheet" href="shell.css?v=187" />
   <style>
-    .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
-    .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
+    .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
+    .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }
     @media (max-width: 899px) {
       .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .opt-tag { display: inline-block !important; flex: 0 0 auto; }
       .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-tk:has(.opt-tag) .stock-act-txn-kind { display: none !important; }
@@ -734,7 +734,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=126"></script>
+  <script src="chart.js?v=127"></script>
   <script>
     const isOptionLike = SA.isOptionLike;
     const isBond = SA.isBond;
@@ -921,7 +921,7 @@
     }
 
     const BAD_TICKERS = SA.BAD_TICKERS;
-    const SLICE = ["#e3b41a", "#3db8c4", "#1e4b8a", "#7dcf7a", "#ef7a74", "#9b7ed9", "#e08a4a", "#6b7582"];
+    const SLICE = ["#e4b350", "#d89b77", "#53417e", "#83cc91", "#e38177", "#c2769a", "#e1894f", "#7e7367"];
     const BOOK_RANGES = ["3m", "1y", "3y"];
     const RANGE_LABEL = { "3m": "3-month", "1y": "1-year", "3y": "3-year" };
     const isChartTicker = SA.isChartTicker;

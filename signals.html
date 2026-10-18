@@ -3,40 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1a1d26" />
+  <meta name="theme-color" content="#251b15" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
   <title>Heat — Stock Act</title>
   <meta name="description" content="Recency-weighted politician buy heat from official STOCK Act / OGE 278-T tape." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --steel: #1c2430;
-      --panel: #2a3340;
-      --paper: #d8dde3;
-      --white: #eef2f5;
-      --fed: #1e4b8a;
-      --red: #c2302a;
-      --caution: #e3b41a;
-      --mute: #8b96a3;
-      --ink: #1a1d26;
-      --teal: #36999d;
-      --navy: #1c2d4e;
+      --steel: #2d2219;
+      --panel: #3f2f24;
+      --paper: #deddda;
+      --white: #f2f2f0;
+      --fed: #53417e;
+      --red: #ba3b2d;
+      --caution: #e4b350;
+      --mute: #9a948b;
+      --ink: #251b15;
+      --teal: #c97646;
+      --navy: #322849;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
     body {
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
       color: var(--white);
       background:
-        linear-gradient(180deg, rgba(26, 29, 38, 0.94), rgba(28, 36, 48, 0.97)),
+        linear-gradient(180deg, rgba(37, 27, 21, 0.94), rgba(45, 34, 25, 0.97)),
         url("city.jpg?v=15") 50% 30% / cover fixed;
       min-height: 100vh;
     }
@@ -50,7 +50,7 @@
       padding: 16px 0; border-bottom: 2px solid var(--teal);
     }
     .mark, h1, h2, .kicker, nav, .chip, .rank, .tk {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -74,7 +74,7 @@
       color: var(--mute);
       font-size: 0.82rem;
       margin: 0;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
     }
     .muted { color: var(--mute); font-size: 0.88rem; line-height: 1.45; }
     .blotter {
@@ -85,13 +85,13 @@
     }
     .play {
       background: var(--panel);
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       border-left: 6px solid var(--teal);
       padding: 10px 12px 8px;
     }
-    .play.buy-dip { border-left-color: #7dcf7a; }
+    .play.buy-dip { border-left-color: #83cc91; }
     .play.watch { border-left-color: var(--caution); }
-    .play.avoid { border-left-color: #ef7a74; }
+    .play.avoid { border-left-color: #e38177; }
     .play-top {
       display: grid;
       grid-template-columns: 36px minmax(0, 1fr) auto;
@@ -102,46 +102,46 @@
     .play .tk { font-size: 1.7rem; line-height: 1; }
     .play .rank { font-size: 1.35rem; padding-top: 2px; }
     .action {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-size: 0.78rem;
       padding: 4px 8px;
-      border: 1px solid #6b7582;
+      border: 1px solid #7e7367;
       white-space: nowrap;
       justify-self: end;
       align-self: start;
     }
-    .action.buy-dip { color: #7dcf7a; border-color: #7dcf7a; }
+    .action.buy-dip { color: #83cc91; border-color: #83cc91; }
     .action.watch { color: var(--caution); border-color: var(--caution); }
-    .action.avoid { color: #ef7a74; border-color: #ef7a74; }
+    .action.avoid { color: #e38177; border-color: #e38177; }
     .pxline { margin-top: 4px; color: var(--paper); font-size: 0.88rem; }
     .play .pxline,
     .play .tags,
     .play .who-list,
     .play .play-more { margin-left: 46px; }
-    .pxline .up { color: #7dcf7a; }
-    .pxline .down { color: #ef7a74; }
+    .pxline .up { color: #83cc91; }
+    .pxline .down { color: #e38177; }
     .grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1px;
-      background: #3a4452;
-      border: 1px solid #3a4452;
+      background: #49433c;
+      border: 1px solid #49433c;
       margin-top: 14px;
     }
-    .cell { background: #151b24; padding: 8px 10px; }
+    .cell { background: #221913; padding: 8px 10px; }
     .cell span {
       display: block;
       color: var(--mute);
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
     }
     .cell b { color: var(--white); font-weight: 600; font-size: 0.92rem; }
-    .cell b.up { color: #7dcf7a; }
-    .cell b.down { color: #ef7a74; }
+    .cell b.up { color: #83cc91; }
+    .cell b.down { color: #e38177; }
     .avoid-row {
       display: grid;
       grid-template-columns: 52px minmax(0, 1fr);
@@ -149,8 +149,8 @@
       gap: 8px 14px;
       padding: 12px 16px;
       background: var(--panel);
-      border: 1px solid #4a5563;
-      border-left: 6px solid #ef7a74;
+      border: 1px solid #5b534a;
+      border-left: 6px solid #e38177;
       margin: 0 0 8px;
     }
     .avoid-row .rank { grid-area: rank; }
@@ -173,14 +173,14 @@
     .heat-kicker { margin-top: 8px; }
     .windows { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
     .chip {
-      background: #151b24;
-      border: 1px solid #4a5563;
+      background: #221913;
+      border: 1px solid #5b534a;
       color: var(--paper);
       padding: 8px 14px;
       cursor: pointer;
       font-size: 0.9rem;
     }
-    .chip.on { border-color: var(--caution); color: var(--caution); background: rgba(227, 180, 26, 0.08); }
+    .chip.on { border-color: var(--caution); color: var(--caution); background: rgba(228, 179, 80, 0.08); }
     .desk {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -190,12 +190,12 @@
     .lead {
       padding: 16px 18px;
       background: var(--panel);
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       border-top: 4px solid var(--teal);
       min-width: 0;
     }
     .lead.conflict { border-top-color: var(--caution); }
-    .lead.cluster { border-top-color: #7dcf7a; }
+    .lead.cluster { border-top-color: #83cc91; }
     .lead-top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
     .lead .tk { font-size: 2.2rem; }
     .ago {
@@ -205,7 +205,7 @@
     }
     .ago b {
       display: block;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       font-size: 2rem;
       letter-spacing: 0.04em;
     }
@@ -219,7 +219,7 @@
     }
     .why { color: var(--paper); margin: 8px 0 0; font-size: 0.9rem; line-height: 1.4; }
     .subhead {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--mute);
@@ -229,14 +229,14 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       margin: 0 0 28px;
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       background: var(--panel);
     }
-    .stat { padding: 12px 14px; border-right: 1px solid #3a4452; }
+    .stat { padding: 12px 14px; border-right: 1px solid #49433c; }
     .stat:last-child { border-right: 0; }
     .stat b {
       display: block;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       font-size: 1.6rem;
       color: var(--caution);
       letter-spacing: 0.06em;
@@ -254,11 +254,11 @@
       gap: 8px 14px;
       padding: 14px 16px;
       background: var(--panel);
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       border-left: 6px solid var(--teal);
     }
     .card.conflict { border-left-color: var(--caution); }
-    .card.cluster { border-left-color: #7dcf7a; }
+    .card.cluster { border-left-color: #83cc91; }
     .rank { color: var(--caution); font-size: 1.5rem; line-height: 1; padding-top: 4px; }
     .tk {
       font-size: 1.7rem;
@@ -270,7 +270,7 @@
     .co { color: var(--paper); font-size: 0.92rem; }
     .bar {
       height: 4px;
-      background: #151b24;
+      background: #221913;
       margin: 8px 0 10px;
     }
     .bar > i {
@@ -286,33 +286,33 @@
       font-size: 0.82rem;
     }
     .meta b { color: var(--white); font-weight: 600; }
-    .pct.up { color: #7dcf7a; }
-    .pct.down { color: #ef7a74; }
+    .pct.up { color: #83cc91; }
+    .pct.down { color: #e38177; }
     .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
     .tag {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-size: 0.72rem;
       padding: 2px 7px;
-      border: 1px solid #6b7582;
-      color: #c5cdd6;
+      border: 1px solid #7e7367;
+      color: #cecbc7;
     }
     .tag.hot { border-color: var(--caution); color: var(--caution); }
-    .tag.hit { border-color: #7dcf7a; color: #7dcf7a; }
+    .tag.hit { border-color: #83cc91; color: #83cc91; }
     .tag.warn { border-color: var(--caution); color: var(--caution); }
     .spark { width: 88px; height: 42px; align-self: start; }
     .who-list { margin-top: 4px; color: var(--paper); font-size: 0.82rem; line-height: 1.35; }
     .who-list a { color: inherit; text-decoration: none; }
     .who-list a:hover { color: var(--caution); }
     .explain {
-      background: #151b24;
-      border: 1px solid #3a4452;
+      background: #221913;
+      border: 1px solid #49433c;
       padding: 12px 14px;
       margin-top: 14px;
     }
     .explain h3 {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--caution);
@@ -340,12 +340,12 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #7dcf7a;
+      background: #83cc91;
     }
 
     .play-more { margin-top: 2px; }
     .play-more > summary {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--caution);
@@ -360,14 +360,14 @@
     .play-more[open] > summary::before { content: "▾ "; }
     details.how {
       margin: 0 0 12px;
-      border: 1px solid #4a5563;
-      background: #151b24;
+      border: 1px solid #5b534a;
+      background: #221913;
     }
     details.how summary {
       cursor: pointer;
       padding: 12px 16px;
       color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       list-style: none;
@@ -381,7 +381,7 @@
     footer .wrap {
       display: flex; justify-content: space-between;
       padding: 18px 0 36px;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--mute);
@@ -430,7 +430,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", sans-serif;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         font-size: 0.78rem;
@@ -444,7 +444,7 @@
       h1 { font-size: 1.35rem; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=186" />
+  <link rel="stylesheet" href="shell.css?v=187" />
 </head>
 <body class="stock-act-v2">
   <a class="stock-act-skip" href="#main">Skip to content</a>
@@ -621,7 +621,7 @@
           cell("Weekly trend", "<b class=\"" + (w.trend === "UP" ? "up" : w.trend === "DOWN" ? "down" : "") + "\">" + SA.esc(w.trend || "—") + "</b>") +
           cell("vs 20-week", signedPct(w.vs20, true)) +
           cell("20w / 40w", "<b>" + (w.sma20 != null ? w.sma20.toFixed(2) : "—") + " / " + (w.sma40 != null ? w.sma40.toFixed(2) : "—") + "</b>") +
-          cell("4-week / 13-week", (w.ret4w == null ? "<b>—</b>" : signedPct(w.ret4w, true)) + " <span style=\"color:#8b96a3\">/</span> " + (w.ret13w == null ? "<b>—</b>" : signedPct(w.ret13w, true))) +
+          cell("4-week / 13-week", (w.ret4w == null ? "<b>—</b>" : signedPct(w.ret4w, true)) + " <span style=\"color:#9a948b\">/</span> " + (w.ret13w == null ? "<b>—</b>" : signedPct(w.ret13w, true))) +
           cell("Off 20w high", signedPct(w.fromHigh, true)) +
           cell("Monthly RSI", "<b>" + (m.rsi != null ? m.rsi.toFixed(1) : "—") + "</b>") +
           cell("Monthly trend", "<b class=\"" + (m.trend === "UP" ? "up" : m.trend === "DOWN" ? "down" : "") + "\">" + SA.esc(m.trend || "—") + "</b>") +
@@ -765,7 +765,7 @@
       }
       const slice = px.c.slice(-30);
       const d = sparkPath(slice);
-      const stroke = (last[1] >= slice[0][1]) ? "#7dcf7a" : "#ef7a74";
+      const stroke = (last[1] >= slice[0][1]) ? "#83cc91" : "#e38177";
       const spark = "<svg class=\"spark\" viewBox=\"0 0 88 42\" aria-hidden=\"true\"><path d=\"" + d + "\" fill=\"none\" stroke=\"" + stroke + "\" stroke-width=\"1.8\" /></svg>";
       return { pct: pct, spark: spark, chg: chg };
     }

@@ -3,38 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1a1d26" />
+  <meta name="theme-color" content="#251b15" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
   <title>Filed — Stock Act</title>
   <meta name="description" content="Trades newly added to the Stock Act tape, ranked by ingest time — not trade date." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --steel: #1c2430;
-      --panel: #2a3340;
-      --paper: #d8dde3;
-      --white: #eef2f5;
-      --red: #c2302a;
-      --caution: #e3b41a;
-      --mute: #8b96a3;
-      --ink: #1a1d26;
-      --teal: #36999d;
+      --steel: #2d2219;
+      --panel: #3f2f24;
+      --paper: #deddda;
+      --white: #f2f2f0;
+      --red: #ba3b2d;
+      --caution: #e4b350;
+      --mute: #9a948b;
+      --ink: #251b15;
+      --teal: #c97646;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
     body {
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
       color: var(--white);
       background:
-        linear-gradient(180deg, rgba(26, 29, 38, 0.94), rgba(28, 36, 48, 0.97)),
+        linear-gradient(180deg, rgba(37, 27, 21, 0.94), rgba(45, 34, 25, 0.97)),
         url("city.jpg?v=15") 50% 30% / cover fixed;
       min-height: 100vh;
     }
@@ -48,7 +48,7 @@
       padding: 16px 0; border-bottom: 2px solid var(--teal);
     }
     .mark, h1, h2, .kicker, nav, .chip, .tk, .gate, .lag b {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -61,11 +61,11 @@
     h1 { font-size: 1.5rem; line-height: 1.15; margin: 0; }
     .lede { color: var(--paper); max-width: 64ch; line-height: 1.5; margin-bottom: 12px; }
     details.how {
-      margin: 0 0 12px; border: 1px solid #4a5563; background: #151b24;
+      margin: 0 0 12px; border: 1px solid #5b534a; background: #221913;
     }
     details.how summary {
       cursor: pointer; padding: 10px 14px; color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.12em;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em;
       text-transform: uppercase; list-style: none;
     }
     details.how summary::-webkit-details-marker { display: none; }
@@ -83,30 +83,30 @@
       color: var(--mute);
       font-size: 0.82rem;
       margin: 0;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
     }
     .windows { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
     .chip {
-      background: #151b24;
-      border: 1px solid #4a5563;
+      background: #221913;
+      border: 1px solid #5b534a;
       color: var(--paper);
       padding: 8px 14px;
       cursor: pointer;
       font-size: 0.9rem;
     }
-    .chip.on { border-color: var(--caution); color: var(--caution); background: rgba(227, 180, 26, 0.08); }
+    .chip.on { border-color: var(--caution); color: var(--caution); background: rgba(228, 179, 80, 0.08); }
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       margin: 0 0 28px;
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       background: var(--panel);
     }
-    .stat { padding: 12px 14px; border-right: 1px solid #3a4452; }
+    .stat { padding: 12px 14px; border-right: 1px solid #49433c; }
     .stat:last-child { border-right: 0; }
     .stat b {
       display: block;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       font-size: 1.6rem;
       color: var(--caution);
       letter-spacing: 0.06em;
@@ -126,7 +126,7 @@
     .drop-meta { color: var(--mute); font-size: 0.82rem; }
     .card {
       background: var(--panel);
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       border-left: 6px solid var(--caution);
       padding: 14px 16px;
       margin: 0 0 10px;
@@ -135,7 +135,7 @@
     .who {
       color: var(--white);
       text-decoration: none;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 1.35rem;
@@ -150,12 +150,12 @@
       grid-template-columns: 52px 64px minmax(0, 1fr) auto;
       gap: 10px;
       padding: 8px 0;
-      border-top: 1px solid #3a4452;
+      border-top: 1px solid #49433c;
       font-size: 0.9rem;
       align-items: baseline;
     }
-    .tickets .side.buy { color: #7dcf7a; }
-    .tickets .side.sell { color: #ef7a74; }
+    .tickets .side.buy { color: #83cc91; }
+    .tickets .side.sell { color: #e38177; }
     .tk { color: var(--white); text-decoration: none; font-size: 1.05rem; }
     .tk:hover { color: var(--teal); }
     .co { color: var(--paper); font-size: 0.86rem; }
@@ -163,7 +163,7 @@
     .opt-tag {
       display: inline-block; margin-left: 6px; padding: 0 5px;
       border: 1px solid var(--caution); color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif; font-size: 0.68rem;
+      font-family: "Big Shoulders Display", sans-serif; font-size: 0.68rem;
       letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
     }
     footer {
@@ -173,7 +173,7 @@
     footer .wrap {
       display: flex; justify-content: space-between;
       padding: 18px 0 36px;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--mute);
@@ -215,7 +215,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", sans-serif;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         font-size: 0.78rem;
@@ -229,7 +229,7 @@
       h1 { font-size: 1.35rem; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=186" />
+  <link rel="stylesheet" href="shell.css?v=187" />
 </head>
 <body class="stock-act-v2 stock-act-v2-cards">
   <a class="stock-act-skip" href="#main">Skip to content</a>

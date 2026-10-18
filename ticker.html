@@ -3,34 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1a1d26" />
+  <meta name="theme-color" content="#251b15" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
   <title>Stock Act</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=Red+Hat+Mono:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --steel: #1c2430;
-      --panel: #2a3340;
-      --paper: #d8dde3;
-      --white: #eef2f5;
-      --caution: #e3b41a;
-      --mute: #8b96a3;
-      --ink: #1a1d26;
-      --teal: #36999d;
-      --buy: #2f9e4a;
-      --sell: #d45a55;
+      --steel: #2d2219;
+      --panel: #3f2f24;
+      --paper: #deddda;
+      --white: #f2f2f0;
+      --caution: #e4b350;
+      --mute: #9a948b;
+      --ink: #251b15;
+      --teal: #c97646;
+      --buy: #369d4b;
+      --sell: #cf5f52;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
-    body { font-family: "IBM Plex Sans", sans-serif; color: var(--white); background: var(--steel); }
+    body { font-family: "Figtree", sans-serif; color: var(--white); background: var(--steel); }
     @media (display-mode: standalone) {
       body { padding-top: env(safe-area-inset-top, 0px); }
     }
@@ -44,11 +44,11 @@
       padding: 16px 0; border-bottom: 2px solid var(--teal);
     }
     .mark, h1, h2, .kicker, .back {
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
     }
     .mark { font-weight: 700; letter-spacing: 0.18em; color: inherit; text-decoration: none; }
     .mark span { color: var(--teal); }
-    nav { display: flex; gap: 14px; font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
+    nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--caution); }
     .back { color: var(--teal); text-decoration: none; }
@@ -67,7 +67,7 @@
       color: var(--mute);
       font-size: 0.82rem;
       margin: 0;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
     }
     #note { margin: 0 0 12px; }
     .ticker-head {
@@ -82,13 +82,13 @@
       min-width: 8.5rem;
       text-align: right;
       border: 2px solid var(--caution);
-      background: #151b24;
+      background: #221913;
       padding: 8px 14px 7px;
       border-radius: 8px;
     }
     .price-pill b {
       display: block;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       font-size: clamp(1.5rem, 5vw, 2.1rem);
       color: var(--caution);
       letter-spacing: 0.04em;
@@ -97,7 +97,7 @@
     .price-pill span {
       display: block;
       margin-top: 5px;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       font-size: 0.68rem;
@@ -105,8 +105,8 @@
     }
     .range {
       display: flex;
-      background: #151b24;
-      border: 1px solid #3a4452;
+      background: #221913;
+      border: 1px solid #49433c;
       margin: 0 0 10px;
     }
     .range {
@@ -115,8 +115,8 @@
       gap: 4px;
       width: fit-content;
       max-width: 100%;
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(26, 20, 38, 0.72);
+      border: 1px solid rgba(255, 255, 254, 0.1);
       border-radius: 999px;
       padding: 4px 6px;
       margin: 0 0 14px;
@@ -127,8 +127,8 @@
       flex: 0 0 auto;
       background: transparent;
       border: 0;
-      color: #94a3b8;
-      font-family: "Barlow Condensed", sans-serif;
+      color: #a7a199;
+      font-family: "Big Shoulders Display", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.92rem;
@@ -139,38 +139,38 @@
       transition: all 0.16s ease;
     }
     .range button:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.08);
+      color: #fffffe;
+      background: rgba(255, 255, 254, 0.08);
     }
     .range button.on {
-      color: #03140a;
-      background: #22c55e;
-      box-shadow: 0 0 16px rgba(34, 197, 94, 0.45);
+      color: #051408;
+      background: #31c44f;
+      box-shadow: 0 0 16px rgba(49, 196, 79, 0.45);
       font-weight: 800;
     }
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       margin: 0 0 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(22, 30, 43, 0.75);
+      border: 1px solid rgba(255, 255, 254, 0.08);
+      background: rgba(37, 27, 21, 0.75);
       border-radius: 8px;
       overflow: hidden;
     }
-    .stat { padding: 10px 14px; border-right: 1px solid rgba(255, 255, 255, 0.08); }
+    .stat { padding: 10px 14px; border-right: 1px solid rgba(255, 255, 254, 0.08); }
     .stat:last-child { border-right: 0; }
     .stat b {
       display: inline;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       font-size: 1.25rem;
       color: var(--caution);
       margin-right: 6px;
     }
-    .stat b.up { color: #22c55e; }
-    .stat b.down { color: #f87171; }
-    .stat span { color: var(--mute); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: "Barlow Condensed", sans-serif; }
-    .up { color: #22c55e; }
-    .down { color: #f87171; }
+    .stat b.up { color: #31c44f; }
+    .stat b.down { color: #e38074; }
+    .stat span { color: var(--mute); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: "Big Shoulders Display", sans-serif; }
+    .up { color: #31c44f; }
+    .down { color: #e38074; }
     .opt-tag {
       display: inline-block;
       margin-left: 6px;
@@ -183,14 +183,14 @@
       white-space: nowrap;
       font-weight: 600;
     }
-    .buy { color: #22c55e; }
-    .sell { color: #f87171; }
+    .buy { color: #31c44f; }
+    .sell { color: #e38074; }
     .chart-wrap {
       position: relative;
-      background: rgba(13, 20, 31, 0.72);
+      background: rgba(22, 17, 32, 0.72);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 254, 0.09);
       border-radius: 20px;
       padding: 16px 16px 14px 8px;
       box-shadow: none;
@@ -213,15 +213,15 @@
       overflow: visible;
     }
     .stock-act-spline-main {
-      filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22));
+      filter: drop-shadow(0 0 5px rgba(231, 145, 96, 0.45)) drop-shadow(0 0 10px rgba(231, 145, 96, 0.22));
     }
     .stock-act-hover-price-pill {
       position: absolute;
-      background: #ffffff;
-      color: #0b111a;
+      background: #fffffe;
+      color: #120f1b;
       font-size: 13.5px;
       font-weight: 700;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", monospace;
       padding: 4px 10px;
       border-radius: 5px;
       pointer-events: none;
@@ -232,11 +232,11 @@
     .stock-act-hover-date-pill {
       position: absolute;
       bottom: 4px;
-      background: #0d1522;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #e2e8f0;
+      background: #171322;
+      border: 1px solid rgba(255, 255, 254, 0.2);
+      color: #e9e8e5;
       font-size: 14px;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", monospace;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 5px;
@@ -248,14 +248,14 @@
     .mark-pop {
       position: absolute;
       z-index: 70;
-      background: rgba(13, 20, 32, 0.94);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(22, 17, 32, 0.94);
+      border: 1px solid rgba(255, 255, 254, 0.15);
       border-radius: 12px;
       padding: 10px 12px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(6, 182, 212, 0.16);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(231, 145, 96, 0.16);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      color: #e2e8f0;
+      color: #e9e8e5;
       box-sizing: border-box;
       pointer-events: auto;
       animation: popFade 0.14s ease-out;
@@ -271,7 +271,7 @@
       gap: 8px;
       margin-bottom: 6px;
       padding-bottom: 6px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 254, 0.08);
     }
     .mark-pop .pop-title-wrap {
       display: flex;
@@ -284,7 +284,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       font-weight: 800;
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -294,31 +294,31 @@
       flex-shrink: 0;
     }
     .mark-pop .pop-badge.buy {
-      background: rgba(34, 197, 94, 0.2);
-      color: #22c55e;
-      border: 1px solid rgba(34, 197, 94, 0.5);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+      background: rgba(49, 196, 79, 0.2);
+      color: #31c44f;
+      border: 1px solid rgba(49, 196, 79, 0.5);
+      box-shadow: 0 0 10px rgba(49, 196, 79, 0.3);
     }
     .mark-pop .pop-badge.sell {
-      background: rgba(248, 113, 113, 0.2);
-      color: #f87171;
-      border: 1px solid rgba(248, 113, 113, 0.5);
-      box-shadow: 0 0 10px rgba(248, 113, 113, 0.3);
+      background: rgba(227, 128, 116, 0.2);
+      color: #e38074;
+      border: 1px solid rgba(227, 128, 116, 0.5);
+      box-shadow: 0 0 10px rgba(227, 128, 116, 0.3);
     }
     .mark-pop .pop-title {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", sans-serif;
       font-size: 1.02rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #fffffe;
       letter-spacing: 0.04em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .mark-pop .pop-close {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #94a3b8;
+      background: rgba(255, 255, 254, 0.08);
+      border: 1px solid rgba(255, 255, 254, 0.12);
+      color: #a7a199;
       width: 22px;
       height: 22px;
       border-radius: 50%;
@@ -333,15 +333,15 @@
       transition: all 0.12s ease;
     }
     .mark-pop .pop-close:hover {
-      background: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 254, 0.2);
+      color: #fffffe;
+      border-color: rgba(255, 255, 254, 0.3);
     }
     .mark-pop .pop-hint {
       font-size: 10.5px;
-      color: #94a3b8;
+      color: #a7a199;
       margin-bottom: 4px;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
     }
     .mark-pop .pop-list {
       display: flex;
@@ -358,14 +358,14 @@
       gap: 10px;
       font-size: 11.5px;
       padding: 3px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid rgba(255, 255, 254, 0.06);
     }
     .mark-pop .pop-item:first-child {
       border-top: none;
     }
     .mark-pop .pop-item-filer {
       font-weight: 600;
-      color: #f1f5f9;
+      color: #f5f3f9;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -377,16 +377,16 @@
       align-items: center;
       gap: 6px;
       flex-shrink: 0;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", monospace;
       font-size: 11px;
-      color: #94a3b8;
+      color: #a7a199;
     }
     .mark-pop .pop-item-amt {
-      color: #f8fafc;
+      color: #faf9fc;
       font-weight: 600;
     }
     .mark-pop .pop-item-date {
-      color: #94a3b8;
+      color: #a7a199;
       font-size: 10px;
     }
     .mark-pop .pop-more {
@@ -394,15 +394,15 @@
       margin-top: 4px;
       text-align: right;
       font-weight: 600;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
     }
     .mark-pop .pop-more-link {
-      color: #38bdf8;
+      color: #eaa076;
       text-decoration: none;
       transition: color 0.12s ease;
     }
     .mark-pop .pop-more-link:hover {
-      color: #7dd3fc;
+      color: #f1bea0;
       text-decoration: underline;
     }
     .mark-pop .pop-single-detail {
@@ -411,29 +411,29 @@
       flex-wrap: wrap;
       gap: 5px;
       margin: 5px 0 6px;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", monospace;
       font-size: 11.5px;
     }
     .mark-pop .pop-single-amt {
-      color: #ffffff;
+      color: #fffffe;
       font-weight: 700;
     }
     .mark-pop .pop-dot {
-      color: #64748b;
+      color: #7d7166;
       margin: 0 1px;
     }
     .mark-pop .pop-single-date,
     .mark-pop .pop-date-link {
-      color: #38bdf8;
+      color: #eaa076;
       text-decoration: none;
       font-weight: 600;
     }
     .mark-pop .pop-date-link:hover {
-      color: #7dd3fc;
+      color: #f1bea0;
       text-decoration: underline;
     }
     .mark-pop .pop-single-shares {
-      color: #cbd5e1;
+      color: #d6d3d0;
       font-size: 10.5px;
     }
     .chart-y {
@@ -445,10 +445,10 @@
       position: absolute;
       transform: translate(-100%, -50%);
       padding-right: 8px;
-      color: #e2e8f0;
+      color: #e9e8e5;
       font-size: 13.5px;
       font-weight: 700;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
       letter-spacing: 0.02em;
       line-height: 1;
       white-space: nowrap;
@@ -457,10 +457,10 @@
       display: flex;
       justify-content: space-between;
       padding: 10px 28px 0 34px;
-      color: #e2e8f0;
+      color: #e9e8e5;
       font-size: 13.5px;
       font-weight: 700;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", sans-serif;
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
@@ -474,14 +474,14 @@
       gap: 10px;
       align-items: baseline;
       padding: 9px 0;
-      border-bottom: 1px solid #2c3440;
+      border-bottom: 1px solid #403024;
       font-size: 0.9rem;
     }
     .chart-marks a, .chart-marks a:visited { color: var(--white); text-decoration: none; }
     .chart-marks a:hover { color: var(--teal); }
     footer {
       border-top: 2px solid var(--teal); padding: 18px 0 36px;
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
+      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
     }
     @media (max-width: 820px) {
       .wrap { width: calc(100% - 20px); }
@@ -524,7 +524,7 @@
         padding: 8px 22px 0 34px;
         font-size: 11.5px;
         font-weight: 700;
-        color: #e2e8f0;
+        color: #e9e8e5;
       }
       .range button {
         padding: 5px 10px;
@@ -567,7 +567,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", sans-serif;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         font-size: 0.78rem;
@@ -580,10 +580,10 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=186" />
+  <link rel="stylesheet" href="shell.css?v=187" />
   <style>
-    .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
-    .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
+    .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
+    .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }
     @media (max-width: 899px) {
       .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .opt-tag { display: inline-block !important; flex: 0 0 auto; }
       .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-tk:has(.opt-tag) .stock-act-txn-kind { display: none !important; }
@@ -642,7 +642,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=126"></script>
+  <script src="chart.js?v=127"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();

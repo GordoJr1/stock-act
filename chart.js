@@ -160,99 +160,99 @@ function createSplinePath(pts) {
 
 const CHART_PALETTES = {
   emerald: {
-    name: "Emerald Matrix",
+    name: "Leaf",
     gradStops: [
-      { offset: "0%", color: "#f8fafc" },
-      { offset: "36%", color: "#f1f5f9" },
-      { offset: "58%", color: "#6ee7b7" },
-      { offset: "85%", color: "#10b981" },
-      { offset: "100%", color: "#059669" }
+      { offset: "0%", color: "#faf9fc" },
+      { offset: "36%", color: "#f5f3f9" },
+      { offset: "58%", color: "#91e4a2" },
+      { offset: "85%", color: "#2fba4b" },
+      { offset: "100%", color: "#26973c" }
     ],
     glowStops: [
-      { offset: "0%", color: "#94a3b8", opacity: 0.15 },
-      { offset: "60%", color: "#34d399", opacity: 0.28 },
-      { offset: "100%", color: "#10b981", opacity: 0.55 }
+      { offset: "0%", color: "#a7a199", opacity: 0.15 },
+      { offset: "60%", color: "#58d370", opacity: 0.28 },
+      { offset: "100%", color: "#2fba4b", opacity: 0.55 }
     ],
-    primary: "#10b981",
-    light: "#6ee7b7",
-    glowFilter: "drop-shadow(0 0 7px rgba(16, 185, 129, 0.55)) drop-shadow(0 0 14px rgba(16, 185, 129, 0.32))",
-    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(16, 185, 129, 0.16)"
+    primary: "#2fba4b",
+    light: "#91e4a2",
+    glowFilter: "drop-shadow(0 0 7px rgba(47, 186, 75, 0.55)) drop-shadow(0 0 14px rgba(47, 186, 75, 0.32))",
+    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(47, 186, 75, 0.16)"
   },
   cyan: {
-    name: "Electric Cyan",
+    name: "Copper",
     gradStops: [
-      { offset: "0%", color: "#f8fafc" },
-      { offset: "36%", color: "#f1f5f9" },
-      { offset: "58%", color: "#67e8f9" },
-      { offset: "85%", color: "#06b6d4" },
-      { offset: "100%", color: "#0891b2" }
+      { offset: "0%", color: "#faf9fc" },
+      { offset: "36%", color: "#f5f3f9" },
+      { offset: "58%", color: "#f4cfb9" },
+      { offset: "85%", color: "#e79160" },
+      { offset: "100%", color: "#d76320" }
     ],
     glowStops: [
-      { offset: "0%", color: "#94a3b8", opacity: 0.15 },
-      { offset: "60%", color: "#22d3ee", opacity: 0.28 },
-      { offset: "100%", color: "#06b6d4", opacity: 0.55 }
+      { offset: "0%", color: "#a7a199", opacity: 0.15 },
+      { offset: "60%", color: "#eeb493", opacity: 0.28 },
+      { offset: "100%", color: "#e79160", opacity: 0.55 }
     ],
-    primary: "#06b6d4",
-    light: "#67e8f9",
-    glowFilter: "drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22))",
-    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(6, 182, 212, 0.16)"
+    primary: "#e79160",
+    light: "#f4cfb9",
+    glowFilter: "drop-shadow(0 0 5px rgba(231, 145, 96, 0.45)) drop-shadow(0 0 10px rgba(231, 145, 96, 0.22))",
+    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(231, 145, 96, 0.16)"
   },
   amber: {
     name: "Amber Gold",
     gradStops: [
-      { offset: "0%", color: "#f8fafc" },
-      { offset: "36%", color: "#fef3c7" },
-      { offset: "58%", color: "#fcd34d" },
-      { offset: "85%", color: "#f59e0b" },
-      { offset: "100%", color: "#d97706" }
+      { offset: "0%", color: "#faf9fc" },
+      { offset: "36%", color: "#fbf2de" },
+      { offset: "58%", color: "#f3d394" },
+      { offset: "85%", color: "#e6a522" },
+      { offset: "100%", color: "#be8515" }
     ],
     glowStops: [
-      { offset: "0%", color: "#94a3b8", opacity: 0.15 },
-      { offset: "60%", color: "#fbbf24", opacity: 0.28 },
-      { offset: "100%", color: "#f59e0b", opacity: 0.55 }
+      { offset: "0%", color: "#a7a199", opacity: 0.15 },
+      { offset: "60%", color: "#eec26a", opacity: 0.28 },
+      { offset: "100%", color: "#e6a522", opacity: 0.55 }
     ],
-    primary: "#f59e0b",
-    light: "#fcd34d",
-    glowFilter: "drop-shadow(0 0 7px rgba(245, 158, 11, 0.55)) drop-shadow(0 0 14px rgba(245, 158, 11, 0.32))",
-    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(245, 158, 11, 0.16)"
+    primary: "#e6a522",
+    light: "#f3d394",
+    glowFilter: "drop-shadow(0 0 7px rgba(230, 165, 34, 0.55)) drop-shadow(0 0 14px rgba(230, 165, 34, 0.32))",
+    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(230, 165, 34, 0.16)"
   },
   blue: {
-    name: "Cobalt Ice",
+    name: "Indigo",
     gradStops: [
-      { offset: "0%", color: "#f8fafc" },
-      { offset: "36%", color: "#f1f5f9" },
-      { offset: "58%", color: "#93c5fd" },
-      { offset: "85%", color: "#3b82f6" },
-      { offset: "100%", color: "#2563eb" }
+      { offset: "0%", color: "#faf9fc" },
+      { offset: "36%", color: "#f5f3f9" },
+      { offset: "58%", color: "#c7bae6" },
+      { offset: "85%", color: "#9177cc" },
+      { offset: "100%", color: "#785cbc" }
     ],
     glowStops: [
-      { offset: "0%", color: "#94a3b8", opacity: 0.15 },
-      { offset: "60%", color: "#60a5fa", opacity: 0.28 },
-      { offset: "100%", color: "#3b82f6", opacity: 0.55 }
+      { offset: "0%", color: "#a7a199", opacity: 0.15 },
+      { offset: "60%", color: "#ac98d9", opacity: 0.28 },
+      { offset: "100%", color: "#9177cc", opacity: 0.55 }
     ],
-    primary: "#3b82f6",
-    light: "#93c5fd",
-    glowFilter: "drop-shadow(0 0 7px rgba(59, 130, 246, 0.55)) drop-shadow(0 0 14px rgba(59, 130, 246, 0.32))",
-    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(59, 130, 246, 0.16)"
+    primary: "#9177cc",
+    light: "#c7bae6",
+    glowFilter: "drop-shadow(0 0 7px rgba(145, 119, 204, 0.55)) drop-shadow(0 0 14px rgba(145, 119, 204, 0.32))",
+    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(145, 119, 204, 0.16)"
   },
   purple: {
-    name: "Neon Purple",
+    name: "Plum",
     gradStops: [
-      { offset: "0%", color: "#f8fafc" },
-      { offset: "36%", color: "#f1f5f9" },
-      { offset: "58%", color: "#c084fc" },
-      { offset: "85%", color: "#a855f7" },
-      { offset: "100%", color: "#c084fc" }
+      { offset: "0%", color: "#faf9fc" },
+      { offset: "36%", color: "#f5f3f9" },
+      { offset: "58%", color: "#d589ac" },
+      { offset: "85%", color: "#c65b8d" },
+      { offset: "100%", color: "#d589ac" }
     ],
     glowStops: [
-      { offset: "0%", color: "#94a3b8", opacity: 0.15 },
-      { offset: "60%", color: "#c084fc", opacity: 0.28 },
-      { offset: "100%", color: "#a855f7", opacity: 0.5 }
+      { offset: "0%", color: "#a7a199", opacity: 0.15 },
+      { offset: "60%", color: "#d589ac", opacity: 0.28 },
+      { offset: "100%", color: "#c65b8d", opacity: 0.5 }
     ],
-    primary: "#a855f7",
-    light: "#c084fc",
-    glowFilter: "drop-shadow(0 0 7px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 14px rgba(168, 85, 247, 0.28))",
-    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(168, 85, 247, 0.12)"
+    primary: "#c65b8d",
+    light: "#d589ac",
+    glowFilter: "drop-shadow(0 0 7px rgba(198, 91, 141, 0.5)) drop-shadow(0 0 14px rgba(198, 91, 141, 0.28))",
+    popShadow: "0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(198, 91, 141, 0.12)"
   }
 };
 
@@ -364,7 +364,7 @@ function drawChart(points, marks, opts) {
   const gridLines = yTicks.map((px) => {
     const y = yAt(px).toFixed(1);
     return "<line x1=\"" + pad.l + "\" x2=\"" + (w - pad.r) + "\" y1=\"" + y + "\" y2=\"" + y +
-      "\" stroke=\"rgba(255,255,255,0.08)\" stroke-width=\"1\" stroke-dasharray=\"3 4\" />";
+      "\" stroke=\"rgba(255,255,254,0.08)\" stroke-width=\"1\" stroke-dasharray=\"3 4\" />";
   }).join("");
 
   const firstDate = points[0][0];
@@ -446,8 +446,8 @@ function drawChart(points, marks, opts) {
     const mid = cluster.items[Math.floor((n - 1) / 2)];
     const cy = yAt(points[mid.i][1]);
     const politician = family === "politician";
-    const color = sale ? "#f87171" : "#22c55e";
-    const haloBg = sale ? "rgba(248, 113, 113, 0.22)" : "rgba(34, 197, 94, 0.22)";
+    const color = sale ? "#e38074" : "#31c44f";
+    const haloBg = sale ? "rgba(227, 128, 116, 0.22)" : "rgba(49, 196, 79, 0.22)";
     const selected = !!(opts.selectedId && marksList.some((m) => m && m.id === opts.selectedId));
     const id = hit.length;
     const x = cluster.x;
@@ -462,7 +462,7 @@ function drawChart(points, marks, opts) {
       : (n >= 10 ? (isMobile ? 12 : 11) : (isMobile ? 13 : 12));
     const pinTextY = pinFontPx * 0.36;
     const label = n > 1 ? String(n) : (politician ? "P" : (sale ? "S" : "B"));
-    const ink = "#ffffff";
+    const ink = "#fffffe";
 
     hit.push({
       mark: marksList[0],
@@ -477,16 +477,16 @@ function drawChart(points, marks, opts) {
     });
 
     const pinShape = politician
-      ? "<polygon points=\"0,-" + pinRpx + " " + pinRpx + ",0 0," + pinRpx + " -" + pinRpx + ",0\" fill=\"" + color + "\" stroke=\"#090d14\" stroke-width=\"1.6\" />"
-      : "<circle cx=\"0\" cy=\"0\" r=\"" + pinRpx + "\" fill=\"" + color + "\" stroke=\"#090d14\" stroke-width=\"1.5\" />";
+      ? "<polygon points=\"0,-" + pinRpx + " " + pinRpx + ",0 0," + pinRpx + " -" + pinRpx + ",0\" fill=\"" + color + "\" stroke=\"#110c09\" stroke-width=\"1.6\" />"
+      : "<circle cx=\"0\" cy=\"0\" r=\"" + pinRpx + "\" fill=\"" + color + "\" stroke=\"#110c09\" stroke-width=\"1.5\" />";
 
     return "<g class=\"chart-mark" + (selected ? " is-selected" : "") + "\" data-i=\"" + id + "\" data-family=\"" + (politician ? "politician" : "filing") + "\" style=\"cursor:pointer\">" +
       "<circle cx=\"" + x.toFixed(1) + "\" cy=\"" + cy.toFixed(1) + "\" r=\"" + (isMobile ? 26 : 20) + "\" fill=\"transparent\" />" +
       "<g transform=\"translate(" + x.toFixed(1) + " " + cy.toFixed(1) + ") " + pinScale + "\">" +
-        (selected ? "<circle cx=\"0\" cy=\"0\" r=\"" + (haloRpx + 4) + "\" fill=\"none\" stroke=\"#e3b41a\" stroke-width=\"2.4\" />" : "") +
+        (selected ? "<circle cx=\"0\" cy=\"0\" r=\"" + (haloRpx + 4) + "\" fill=\"none\" stroke=\"#e4b350\" stroke-width=\"2.4\" />" : "") +
         (politician ? "" : "<circle cx=\"0\" cy=\"0\" r=\"" + haloRpx + "\" fill=\"" + haloBg + "\" />") +
         pinShape +
-        "<text x=\"0\" y=\"" + pinTextY.toFixed(1) + "\" text-anchor=\"middle\" fill=\"" + ink + "\" font-size=\"" + pinFontPx + "\" font-weight=\"800\" font-family=\"Barlow Condensed, sans-serif\" pointer-events=\"none\">" + label + "</text>" +
+        "<text x=\"0\" y=\"" + pinTextY.toFixed(1) + "\" text-anchor=\"middle\" fill=\"" + ink + "\" font-size=\"" + pinFontPx + "\" font-weight=\"800\" font-family=\"Big Shoulders Display, sans-serif\" pointer-events=\"none\">" + label + "</text>" +
       "</g>" +
     "</g>";
   }
@@ -521,12 +521,12 @@ function drawChart(points, marks, opts) {
     (areaPath ? "<path d=\"" + areaPath + "\" fill=\"url(#stock-act-sub-area)\" />" : "") +
     "<path d=\"" + spline + "\" fill=\"none\" stroke=\"url(#underGlow)\" stroke-width=\"" + (opts.glowWidth || 5.5) + "\" opacity=\"0.55\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />" +
     "<path class=\"stock-act-spline-main\" d=\"" + spline + "\" fill=\"none\" stroke=\"url(#neonGradient)\" stroke-width=\"" + (opts.lineWidth || 2.2) + "\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"filter:" + palette.glowFilter + ";\" />" +
-    "<circle cx=\"" + lastPt.x.toFixed(1) + "\" cy=\"" + lastPt.y.toFixed(1) + "\" r=\"5.2\" fill=\"" + palette.light + "\" stroke=\"#ffffff\" stroke-width=\"1.7\" />" +
+    "<circle cx=\"" + lastPt.x.toFixed(1) + "\" cy=\"" + lastPt.y.toFixed(1) + "\" r=\"5.2\" fill=\"" + palette.light + "\" stroke=\"#fffffe\" stroke-width=\"1.7\" />" +
     tradePinsHtml +
     "<g id=\"stock-act-scrubber-g\" style=\"display:none; pointer-events:none;\">" +
-      "<line id=\"stock-act-scrub-line\" x1=\"0\" y1=\"" + pad.t + "\" x2=\"0\" y2=\"" + priceBot + "\" stroke=\"rgba(255,255,255,0.22)\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\" />" +
-      "<circle id=\"stock-act-scrub-halo\" cx=\"0\" cy=\"0\" r=\"7.5\" fill=\"rgba(255,255,255,0.24)\" />" +
-      "<circle id=\"stock-act-scrub-dot\" cx=\"0\" cy=\"0\" r=\"3.8\" fill=\"#ffffff\" stroke=\"#0d141f\" stroke-width=\"2\" />" +
+      "<line id=\"stock-act-scrub-line\" x1=\"0\" y1=\"" + pad.t + "\" x2=\"0\" y2=\"" + priceBot + "\" stroke=\"rgba(255,255,254,0.22)\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\" />" +
+      "<circle id=\"stock-act-scrub-halo\" cx=\"0\" cy=\"0\" r=\"7.5\" fill=\"rgba(255,255,254,0.24)\" />" +
+      "<circle id=\"stock-act-scrub-dot\" cx=\"0\" cy=\"0\" r=\"3.8\" fill=\"#fffffe\" stroke=\"#161120\" stroke-width=\"2\" />" +
     "</g>";
 
   paintYAxisLabels(wrap, svg, yBox, yTicks, yAt, w, h, pad, axisStep);
