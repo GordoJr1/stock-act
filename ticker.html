@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
   <title>Stock Act</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -212,10 +212,10 @@
       cursor: crosshair;
       overflow: visible;
     }
-    .qc-spline-main {
+    .stock-act-spline-main {
       filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22));
     }
-    .qc-hover-price-pill {
+    .stock-act-hover-price-pill {
       position: absolute;
       background: #ffffff;
       color: #0b111a;
@@ -229,7 +229,7 @@
       transform: translateY(-50%);
       z-index: 10;
     }
-    .qc-hover-date-pill {
+    .stock-act-hover-date-pill {
       position: absolute;
       bottom: 4px;
       background: #0d1522;
@@ -580,39 +580,28 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=182" />
+  <link rel="stylesheet" href="shell.css?v=186" />
   <style>
-    .qc-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
-    .qc-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
+    .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
+    .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
     @media (max-width: 899px) {
-      .qc-txn-list.qc-tape-list > .qc-txn-tape .opt-tag { display: inline-block !important; flex: 0 0 auto; }
-      .qc-txn-list.qc-tape-list > .qc-txn-tape .qc-txn-tk:has(.opt-tag) .qc-txn-kind { display: none !important; }
+      .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .opt-tag { display: inline-block !important; flex: 0 0 auto; }
+      .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-tk:has(.opt-tag) .stock-act-txn-kind { display: none !important; }
     }
   </style>
 </head>
-<body class="qc-v2">
-  <a class="qc-skip" href="#main">Skip to content</a>
-  <header class="qc-header">
-    <div class="wrap qc-header-inner">
+<body class="stock-act-v2">
+  <a class="stock-act-skip" href="#main">Skip to content</a>
+  <header class="stock-act-header">
+    <div class="wrap stock-act-header-inner">
       <a class="mark" href="index.html">Stock <span>Act</span></a>
-      <nav class="qc-nav" aria-label="Politician tape">
+      <nav class="stock-act-nav" aria-label="Politician tape">
         <a href="index.html" title="Live politician trades">Tape</a>
         <a href="landed.html" title="New public filings">Filed</a>
         <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
         <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
         <a href="paper.html" title="Copy on the filed date">Paper</a>
       </nav>
-      <div class="qc-modes">
-        <details class="qc-more">
-          <summary class="qc-mode" title="Mines, Claims, Canada and Research">More</summary>
-          <div class="qc-more-menu">
-            <a href="https://gordojr1.github.io/quantity-capital/beta.html" title="Issuer mine profiles">Mines</a>
-            <a href="https://gordojr1.github.io/quantity-capital/claims.html" title="Mining claims map">Claims</a>
-            <a href="https://gordojr1.github.io/quantity-capital/canada.html" title="Canadian mining totals">Canada</a>
-            <a href="https://gordojr1.github.io/quantity-capital/research.html" title="What our studies found">Research</a>
-          </div>
-        </details>
-      </div>
     </div>
   </header>
   <div class="wrap" id="main">
@@ -644,31 +633,31 @@
     <p class="chart-legend"><span class="buy">● Buy</span><span class="sell">● Sell</span> Option purchase dates are marked; option P&amp;L is not.</p>
     <p class="kicker">Trades</p>
     <p class="count" id="tape-count"></p>
-    <div class="qc-pol-desk">
-      <ol class="qc-txn-list qc-tape-list" id="marks" aria-label="Company tape"></ol>
+    <div class="stock-act-pol-desk">
+      <ol class="stock-act-txn-list stock-act-tape-list" id="marks" aria-label="Company tape"></ol>
     </div>
     <div class="tape-more" id="tape-more-row" hidden>
       <button type="button" id="tape-more">Show full list</button>
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=149"></script>
-  <script src="chart.js?v=125"></script>
+  <script src="stock-act.js?v=152"></script>
+  <script src="chart.js?v=126"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();
     const filerId = params.get("id") || "";
     if (!ticker) location.replace("index.html");
 
-    const esc = QC.esc;
-    const amountHigh = QC.amountHigh;
-    const isBond = QC.isBond;
-    const isOptionLike = QC.isOptionLike;
-    const optionMeta = QC.optionMeta;
-    const formatMoney = QC.formatMoney;
-    const formatQuote = QC.formatQuote;
-    const signedMoney = QC.signedMoney;
-    const prettyDate = QC.prettyDate;
+    const esc = SA.esc;
+    const amountHigh = SA.amountHigh;
+    const isBond = SA.isBond;
+    const isOptionLike = SA.isOptionLike;
+    const optionMeta = SA.optionMeta;
+    const formatMoney = SA.formatMoney;
+    const formatQuote = SA.formatQuote;
+    const signedMoney = SA.signedMoney;
+    const prettyDate = SA.prettyDate;
     function nearestClose(points, date) {
       if (!points || !points.length) return null;
       let pick = points[0];
@@ -720,8 +709,8 @@
         back.href = "politician.html?id=" + encodeURIComponent(filerId);
         back.textContent = "← Politician";
       }
-      back.setAttribute("data-qc-back-fallback", back.getAttribute("href") || "index.html");
-      if (window.QC) QC.bindBack(back);
+      back.setAttribute("data-stock-act-back-fallback", back.getAttribute("href") || "index.html");
+      if (window.SA) SA.bindBack(back);
     }
 
     const cutoff = new Date();
@@ -758,7 +747,7 @@
 
       function getAmt(m) {
         if (m.amount) {
-          const r = QC.formatAmountRange(m.amount);
+          const r = SA.formatAmountRange(m.amount);
           if (r) return esc(r);
         }
         if (m.shares && m.price) {
@@ -921,7 +910,7 @@
       fetch("prices/" + encodeURIComponent(ticker) + ".json").then((r) => r.ok ? r.json() : null).catch(() => null)
     ]).then(([data, prices]) => {
       const asof = document.getElementById("asof");
-      if (asof) asof.textContent = QC.asOfLabel(data.collected);
+      if (asof) asof.textContent = SA.asOfLabel(data.collected);
       const deals = (data.trades || []).filter((t) => {
         if ((t.side !== "purchase" && t.side !== "sale") || isBond(t)) return false;
         if (new Date(t.trade_date) < cutoff) return false;
@@ -938,11 +927,11 @@
         document.title = ticker + " — " + who + " — Stock Act";
       }
 
-      const tape = deals.map((t) => (t && t.code && t.company) ? t : QC.enrich(t, {}));
+      const tape = deals.map((t) => (t && t.code && t.company) ? t : SA.enrich(t, {}));
       let showAllTape = false;
       function paintMarks() {
-        const page = QC.TAPE_PAGE;
-        document.getElementById("marks").innerHTML = QC.politicianTapeListHtml(tape, {
+        const page = SA.TAPE_PAGE;
+        document.getElementById("marks").innerHTML = SA.politicianTapeListHtml(tape, {
           tickerSelf: true,
           nameSelf: !!filerId,
           filerId: filerId,

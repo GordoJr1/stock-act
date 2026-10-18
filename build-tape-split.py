@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Derive page JSON from trades.json / trades-lite.json via qc.js so names and order match the site.
+"""Derive page JSON from trades.json / trades-lite.json via stock-act.js so names and order match the site.
 
 Outputs: tape/{page,filers}.json, tape/kind/*, tape/politicians/*, tape/tickers/*, landed.json, heat.json.
 """
@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent
 def main() -> int:
     node = shutil.which("node")
     if not node:
-        print("node is required to run qc.js for the tape split", file=sys.stderr)
+        print("node is required to run stock-act.js for the tape split", file=sys.stderr)
         return 1
     script = ROOT / "scripts" / "tape-split.mjs"
     proc = subprocess.run([node, str(script)], cwd=ROOT)

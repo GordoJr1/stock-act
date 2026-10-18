@@ -40,10 +40,10 @@ check(
 const pages = ["index.html", "politician.html", "ticker.html", "signals.html", "landed.html", "paper.html", "tells.html"];
 const versions = pages.map((name) => {
   const html = fs.readFileSync(path.join(root, name), "utf8");
-  const match = html.match(/qc\.js\?v=(\d+)/);
+  const match = html.match(/stock-act\.js\?v=(\d+)/);
   return match ? match[1] : "missing";
 });
-check("same qc.js version on every page", new Set(versions).size === 1 && versions[0] !== "missing", "v=" + versions[0]);
+check("same stock-act.js version on every page", new Set(versions).size === 1 && versions[0] !== "missing", "v=" + versions[0]);
 
 console.log(lines.join("\n"));
 if (failed) process.exit(1);

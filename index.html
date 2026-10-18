@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
   <title>Stock Act</title>
   <meta name="description" content="Official Senate, House, and White House STOCK Act / OGE 278-T tape. Amounts are ranges, not share counts." />
   <meta property="og:title" content="Stock Act" />
@@ -1432,10 +1432,10 @@
         max-height: 200px;
       }
     }
-    .focus .qc-spline-main {
+    .focus .stock-act-spline-main {
       filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22));
     }
-    .focus .qc-hover-price-pill {
+    .focus .stock-act-hover-price-pill {
       position: absolute;
       background: #ffffff;
       color: #0b111a;
@@ -1449,7 +1449,7 @@
       transform: translateY(-50%);
       z-index: 10;
     }
-    .focus .qc-hover-date-pill {
+    .focus .stock-act-hover-date-pill {
       position: absolute;
       bottom: 4px;
       background: #0d1522;
@@ -1604,111 +1604,111 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=182" />
-  <style id="qc-tape-port">
-    .qc-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
-    .qc-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
-    .qc-txn-end { grid-area: end; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: max-content; }
-    .qc-txn-chip { border: 0; border-radius: 0; background: transparent; color: #d7dee6; text-transform: none; letter-spacing: 0; font-family: "IBM Plex Sans", sans-serif; font-weight: 700; padding: 0; }
-    .qc-txn.buy .qc-txn-chip { background: transparent; color: #7dcf7a; }
-    .qc-txn.sell .qc-txn-chip { background: transparent; color: #ffb4ae; }
-    .qc-txn-hero, .qc-txn .qc-txn-hero { color: #eef2f5; }
-    .qc-txn-hero { font-weight: 700; font-family: "IBM Plex Sans", sans-serif; }
-    .qc-txn-id-line { display: flex; align-items: baseline; min-width: 0; max-width: 100%; overflow: hidden; }
-    .qc-txn-id-line .qc-txn-role { display: none; }
-    .qc-txn-sh, .qc-txn-cols, .qc-txn-id-sub, .qc-txn-tbl { display: none; }
-    .qc-txn-tape { grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "when when" "id end" "co co"; row-gap: 4px; align-items: start; }
-    .qc-txn-tape.qc-txn-co-first { grid-template-areas: "when when" "co end" "id id"; }
-    .qc-txn-sub { grid-area: sub; display: none; }
-    .qc-txn-who { display: flex; flex-wrap: nowrap; align-items: center; min-width: 0; }
-    .qc-txn-tape .qc-txn-hero { font-size: 1.32rem; color: #eef2f5; font-weight: 700; }
+  <link rel="stylesheet" href="shell.css?v=186" />
+  <style id="stock-act-tape-port">
+    .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
+    .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
+    .stock-act-txn-end { grid-area: end; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: max-content; }
+    .stock-act-txn-chip { border: 0; border-radius: 0; background: transparent; color: #d7dee6; text-transform: none; letter-spacing: 0; font-family: "IBM Plex Sans", sans-serif; font-weight: 700; padding: 0; }
+    .stock-act-txn.buy .stock-act-txn-chip { background: transparent; color: #7dcf7a; }
+    .stock-act-txn.sell .stock-act-txn-chip { background: transparent; color: #ffb4ae; }
+    .stock-act-txn-hero, .stock-act-txn .stock-act-txn-hero { color: #eef2f5; }
+    .stock-act-txn-hero { font-weight: 700; font-family: "IBM Plex Sans", sans-serif; }
+    .stock-act-txn-id-line { display: flex; align-items: baseline; min-width: 0; max-width: 100%; overflow: hidden; }
+    .stock-act-txn-id-line .stock-act-txn-role { display: none; }
+    .stock-act-txn-sh, .stock-act-txn-cols, .stock-act-txn-id-sub, .stock-act-txn-tbl { display: none; }
+    .stock-act-txn-tape { grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "when when" "id end" "co co"; row-gap: 4px; align-items: start; }
+    .stock-act-txn-tape.stock-act-txn-co-first { grid-template-areas: "when when" "co end" "id id"; }
+    .stock-act-txn-sub { grid-area: sub; display: none; }
+    .stock-act-txn-who { display: flex; flex-wrap: nowrap; align-items: center; min-width: 0; }
+    .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.32rem; color: #eef2f5; font-weight: 700; }
     @media (max-width: 560px) {
-      .qc-txn-tape .qc-txn-hero { font-size: 1.22rem; }
+      .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.22rem; }
     }
     @media (min-width: 900px) {
-      .qc-txn-when { display: none; }
-      .qc-txn-tape { column-gap: 10px; row-gap: 0; padding: 5px 12px; border-radius: 0; border-left-width: 3px; }
-      .qc-txn-tape .qc-txn-end, .qc-txn-tape .qc-txn-tbl { display: contents; }
-      .qc-txn-tape .qc-txn-sub { display: none; }
-      .qc-txn-tape .qc-txn-chip { grid-area: chip; }
-      .qc-txn-tape .qc-txn-date { grid-area: date; }
-      .qc-txn-tape .qc-txn-hero { grid-area: hero; }
-      .qc-txn-tape .qc-txn-company,
-      .qc-txn-tape a.qc-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #eef2f5); font-size: 0.84rem; font-weight: 600; font-family: "IBM Plex Sans", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
-      .qc-txn-list.qc-tape-list > .qc-txn-cols .qc-txn-company { display: block; grid-area: co; }
-      .qc-txn-tape .qc-txn-company .qc-txn-tk,
-      .qc-txn-tape .qc-txn-company a.qc-txn-tk { flex: 0 0 auto; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.05em; color: inherit; }
-      .qc-txn-tape .qc-txn-company .qc-txn-co-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; color: inherit; order: 0; }
-      .qc-txn-tape a.qc-txn-company:hover,
-      .qc-txn-tape a.qc-txn-company:hover .qc-txn-tk,
-      .qc-txn-tape a.qc-txn-company:hover .qc-txn-co-name { color: inherit; }
-      .qc-txn-tape .qc-txn-id { flex-direction: column; align-items: flex-start; gap: 1px; }
-      .qc-txn-tape .qc-txn-id-line { width: 100%; }
-      .qc-txn-tape .qc-txn-id-line .qc-txn-name {
+      .stock-act-txn-when { display: none; }
+      .stock-act-txn-tape { column-gap: 10px; row-gap: 0; padding: 5px 12px; border-radius: 0; border-left-width: 3px; }
+      .stock-act-txn-tape .stock-act-txn-end, .stock-act-txn-tape .stock-act-txn-tbl { display: contents; }
+      .stock-act-txn-tape .stock-act-txn-sub { display: none; }
+      .stock-act-txn-tape .stock-act-txn-chip { grid-area: chip; }
+      .stock-act-txn-tape .stock-act-txn-date { grid-area: date; }
+      .stock-act-txn-tape .stock-act-txn-hero { grid-area: hero; }
+      .stock-act-txn-tape .stock-act-txn-company,
+      .stock-act-txn-tape a.stock-act-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #eef2f5); font-size: 0.84rem; font-weight: 600; font-family: "IBM Plex Sans", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
+      .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-cols .stock-act-txn-company { display: block; grid-area: co; }
+      .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-tk,
+      .stock-act-txn-tape .stock-act-txn-company a.stock-act-txn-tk { flex: 0 0 auto; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.05em; color: inherit; }
+      .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-co-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; color: inherit; order: 0; }
+      .stock-act-txn-tape a.stock-act-txn-company:hover,
+      .stock-act-txn-tape a.stock-act-txn-company:hover .stock-act-txn-tk,
+      .stock-act-txn-tape a.stock-act-txn-company:hover .stock-act-txn-co-name { color: inherit; }
+      .stock-act-txn-tape .stock-act-txn-id { flex-direction: column; align-items: flex-start; gap: 1px; }
+      .stock-act-txn-tape .stock-act-txn-id-line { width: 100%; }
+      .stock-act-txn-tape .stock-act-txn-id-line .stock-act-txn-name {
         min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      .qc-txn-tape .qc-txn-id-line .qc-txn-role { display: none; }
+      .stock-act-txn-tape .stock-act-txn-id-line .stock-act-txn-role { display: none; }
 
-      .desk .qc-txn-list.qc-tape-list > .qc-txn-cols,
-      .desk .qc-txn-tape {
+      .desk .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-cols,
+      .desk .stock-act-txn-tape {
         grid-template-columns: 5.1rem minmax(8rem, 1.35fr) 3.7rem minmax(4rem, 1.2fr) minmax(2.4rem, auto) minmax(4.4rem, max-content);
         grid-template-areas: "date id co coname chip hero";
       }
-      .desk .qc-txn-tape .qc-txn-company { display: contents; }
-      .desk .qc-txn-tape .qc-txn-company .qc-txn-tk { grid-area: co; }
-      .desk .qc-txn-tape .qc-txn-company .qc-txn-co-name {
+      .desk .stock-act-txn-tape .stock-act-txn-company { display: contents; }
+      .desk .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-tk { grid-area: co; }
+      .desk .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-co-name {
         display: block; grid-area: coname; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: calc(0.82rem + 1px); font-weight: 500; color: #b7c1cc;
       }
-      .desk .qc-txn-cols .qc-txn-coname { grid-area: coname; display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .desk .qc-txn-cols .qc-txn-hero,
-      .desk .qc-txn-tape .qc-txn-hero,
-      .desk .qc-txn-tape .qc-txn-hero.is-empty {
+      .desk .stock-act-txn-cols .stock-act-txn-coname { grid-area: coname; display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .desk .stock-act-txn-cols .stock-act-txn-hero,
+      .desk .stock-act-txn-tape .stock-act-txn-hero,
+      .desk .stock-act-txn-tape .stock-act-txn-hero.is-empty {
         grid-area: hero; justify-self: end; text-align: right;
       }
-      .desk .qc-txn-tape .qc-txn-hero {
+      .desk .stock-act-txn-tape .stock-act-txn-hero {
         font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.01em; color: #eef2f5;
         min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       }
-      .desk .qc-txn-tape .qc-txn-hero.is-empty {
+      .desk .stock-act-txn-tape .stock-act-txn-hero.is-empty {
         font-family: "IBM Plex Sans", sans-serif;
         color: var(--mute, #8b96a3);
       }
-      .desk .qc-txn-tape { cursor: pointer; }
-      .desk .qc-txn-tape.on { border-color: var(--caution); background: rgba(227, 180, 26, 0.1); }
-      .desk .qc-txn-tape:hover { background: rgba(227, 180, 26, 0.05); }
-      .desk .qc-txn-list.qc-tape-list .day { padding: 0 12px; }
+      .desk .stock-act-txn-tape { cursor: pointer; }
+      .desk .stock-act-txn-tape.on { border-color: var(--caution); background: rgba(227, 180, 26, 0.1); }
+      .desk .stock-act-txn-tape:hover { background: rgba(227, 180, 26, 0.05); }
+      .desk .stock-act-txn-list.stock-act-tape-list .day { padding: 0 12px; }
 
       body.tape-opt .desk {
         grid-template-columns: minmax(0, 1.9fr) minmax(200px, 0.4fr);
       }
-      body.tape-opt .desk .qc-txn-list.qc-tape-list {
+      body.tape-opt .desk .stock-act-txn-list.stock-act-tape-list {
         overflow: visible;
       }
-      body.tape-opt .desk .qc-txn-tape {
+      body.tape-opt .desk .stock-act-txn-tape {
         overflow: visible;
       }
-      body.tape-opt .desk .qc-txn-list.qc-tape-list > .qc-txn-cols,
-      body.tape-opt .desk .qc-txn-tape {
+      body.tape-opt .desk .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-cols,
+      body.tape-opt .desk .stock-act-txn-tape {
         column-gap: 6px;
         grid-template-columns: 5.1rem minmax(4.2rem, 0.9fr) minmax(6.4rem, 0.7fr) 3.5rem 5.2rem 3.6rem minmax(6.8rem, max-content);
         grid-template-areas: "date id co strike exp chip hero";
       }
-      body.tape-opt .desk .qc-txn-tape .qc-txn-hero,
-      body.tape-opt .desk .qc-txn-cols .qc-txn-hero {
+      body.tape-opt .desk .stock-act-txn-tape .stock-act-txn-hero,
+      body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-hero {
         white-space: nowrap;
         overflow: visible;
         text-overflow: clip;
         min-width: max-content;
       }
-      body.tape-opt .desk .qc-txn-cols .qc-txn-coname,
-      body.tape-opt .desk .qc-txn-tape .qc-txn-company .qc-txn-co-name {
+      body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-coname,
+      body.tape-opt .desk .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-co-name {
         display: none !important;
       }
-      body.tape-opt .desk .qc-txn-cols .qc-txn-strike,
-      body.tape-opt .desk .qc-txn-strike {
+      body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-strike,
+      body.tape-opt .desk .stock-act-txn-strike {
         display: block;
         grid-area: strike;
         min-width: 0;
@@ -1716,8 +1716,8 @@
         font-variant-numeric: tabular-nums;
         color: var(--paper, #d8dde3);
       }
-      body.tape-opt .desk .qc-txn-cols .qc-txn-exp,
-      body.tape-opt .desk .qc-txn-exp {
+      body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-exp,
+      body.tape-opt .desk .stock-act-txn-exp {
         display: block;
         grid-area: exp;
         min-width: 0;
@@ -1726,8 +1726,8 @@
         white-space: nowrap;
         color: var(--paper, #d8dde3);
       }
-      body.tape-opt .desk .qc-txn-cols .qc-txn-strike,
-      body.tape-opt .desk .qc-txn-cols .qc-txn-exp {
+      body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-strike,
+      body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-exp {
         color: inherit;
         font-variant-numeric: normal;
       }
@@ -1737,21 +1737,21 @@
         grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.62fr);
       }
     }
-    .qc-txn .opt-tag.opt-call,
+    .stock-act-txn .opt-tag.opt-call,
     .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
-    .qc-txn .opt-tag.opt-put,
+    .stock-act-txn .opt-tag.opt-put,
     .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
     @media (max-width: 899px) {
-      body.tape-opt .qc-txn-list.qc-tape-list > .qc-txn-tape .opt-tag {
+      body.tape-opt .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .opt-tag {
         display: inline-block !important;
         flex: 0 0 auto;
       }
-      body.tape-opt .qc-txn-list.qc-tape-list > .qc-txn-tape .qc-txn-tk:has(.opt-tag) .qc-txn-kind {
+      body.tape-opt .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-tk:has(.opt-tag) .stock-act-txn-kind {
         display: none !important;
       }
     }
   </style>
-  <style id="qc-v2-look">
+  <style id="stock-act-v2-look">
     :root {
       --v2-card: #222a36;
       --v2-chart: #18202b;
@@ -2180,17 +2180,17 @@
     #wire .w-meta { margin-top: 3px; color: var(--v2-sub); font-size: 15px; line-height: 1.4; overflow-wrap: anywhere; }
     #wire .w-name { color: inherit; text-decoration: none; }
     #wire a.w-name:hover { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
-    #wire .w-meta .qc-plan-tag { margin-left: 8px; }
+    #wire .w-meta .stock-act-plan-tag { margin-left: 8px; }
     #wire .w-opt { margin-top: 3px; color: var(--paper); font-size: 14px; }
-    #wire .qc-file-notes { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; overflow: visible; }
-    #wire .qc-file-note,
-    #wire .qc-file-note-more {
+    #wire .stock-act-file-notes { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; overflow: visible; }
+    #wire .stock-act-file-note,
+    #wire .stock-act-file-note-more {
       display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       border: 1px solid var(--v2-border); border-radius: 6px; padding: 2px 9px; background: rgba(15, 18, 24, 0.45);
       color: #c5ced6; font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
     }
-    #wire .qc-file-note.is-extra { display: none !important; }
-    #wire .qc-file-note-more { display: inline-block !important; }
+    #wire .stock-act-file-note.is-extra { display: none !important; }
+    #wire .stock-act-file-note-more { display: inline-block !important; }
     #wire .w-amt {
       padding-top: 2px; color: var(--paper); font-size: 15px; font-weight: 600; white-space: nowrap;
       font-variant-numeric: tabular-nums;
@@ -2337,7 +2337,7 @@
     .spark .spark-dot.sell { fill: var(--v2-sell-bar, #e0625c); }
     .spark .spark-end { fill: #f8fafc; }
   </style>
-  <style id="qc-tape-2b">
+  <style id="stock-act-tape-2b">
     @media (max-width: 899px) {
       #wire > li.day, #wire > li.day.fresh { margin-top: 20px; padding-bottom: 8px; }
       #wire > li.day:first-child { margin-top: 0; }
@@ -2412,28 +2412,17 @@
 <body>
   <div class="bay-left" aria-hidden="true"></div>
   <div class="bay-right" aria-hidden="true"></div>
-  <a class="qc-skip" href="#main">Skip to content</a>
-  <header class="qc-header">
-    <div class="wrap qc-header-inner">
+  <a class="stock-act-skip" href="#main">Skip to content</a>
+  <header class="stock-act-header">
+    <div class="wrap stock-act-header-inner">
       <a class="mark" href="index.html">Stock <span>Act</span></a>
-      <nav class="qc-nav" aria-label="Politician tape">
+      <nav class="stock-act-nav" aria-label="Politician tape">
         <a href="index.html" class="on" aria-current="page" title="Live politician trades">Tape</a>
         <a href="landed.html" title="New public filings">Filed</a>
         <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
         <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
         <a href="paper.html" title="Copy on the filed date">Paper</a>
       </nav>
-      <div class="qc-modes">
-        <details class="qc-more">
-          <summary class="qc-mode" title="Mines, Claims, Canada and Research">More</summary>
-          <div class="qc-more-menu">
-            <a href="https://gordojr1.github.io/quantity-capital/beta.html" title="Issuer mine profiles">Mines</a>
-            <a href="https://gordojr1.github.io/quantity-capital/claims.html" title="Mining claims map">Claims</a>
-            <a href="https://gordojr1.github.io/quantity-capital/canada.html" title="Canadian mining totals">Canada</a>
-            <a href="https://gordojr1.github.io/quantity-capital/research.html" title="What our studies found">Research</a>
-          </div>
-        </details>
-      </div>
     </div>
   </header>
   <div class="wrap" id="main">
@@ -2629,8 +2618,8 @@
   <div class="stripe" hidden></div>
   </div>
 
-  <script src="qc.js?v=149"></script>
-  <script src="chart.js?v=125"></script>
+  <script src="stock-act.js?v=152"></script>
+  <script src="chart.js?v=126"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, (c) => ({
@@ -2686,7 +2675,7 @@
 
     function displayCompany(name, ticker) {
       const tk = String(ticker || "").trim();
-      let s = QC.displayIssuer(tk, name);
+      let s = SA.displayIssuer(tk, name);
       s = deskHolderStrip(s);
       s = cleanAssetName(s);
       if (!s || s === "—") return tk && tk !== "—" ? tk : "";
@@ -2962,24 +2951,24 @@
       });
     }
 
-    const isOptionLike = QC.isOptionLike;
-    const optionMeta = QC.optionMeta;
-    const optionTag = QC.optionTag;
-    const assetKind = QC.assetKind;
-    const enrich = QC.enrich;
-    const isFilingError = QC.isFilingError;
-    const OVERLAP_RULES = QC.OVERLAP_RULES;
-    const issuerName = QC.issuerName;
-    const overlapHit = QC.overlapHit;
-    const SECTORS = QC.SECTORS;
-    const sectorOf = QC.sectorOf;
-    const amountHigh = QC.amountHigh;
-    const isBond = QC.isBond;
-    const formatMoney = QC.formatMoney;
-    const signedMoney = QC.signedMoney;
-    const prettyDate = QC.prettyDate;
-    const sideLabel = QC.sideLabel;
-    const isChartTicker = QC.isChartTicker;
+    const isOptionLike = SA.isOptionLike;
+    const optionMeta = SA.optionMeta;
+    const optionTag = SA.optionTag;
+    const assetKind = SA.assetKind;
+    const enrich = SA.enrich;
+    const isFilingError = SA.isFilingError;
+    const OVERLAP_RULES = SA.OVERLAP_RULES;
+    const issuerName = SA.issuerName;
+    const overlapHit = SA.overlapHit;
+    const SECTORS = SA.SECTORS;
+    const sectorOf = SA.sectorOf;
+    const amountHigh = SA.amountHigh;
+    const isBond = SA.isBond;
+    const formatMoney = SA.formatMoney;
+    const signedMoney = SA.signedMoney;
+    const prettyDate = SA.prettyDate;
+    const sideLabel = SA.sideLabel;
+    const isChartTicker = SA.isChartTicker;
 
     const PAGE = 120;
     const DESK_PAGE_MAX = 300;
@@ -2989,7 +2978,7 @@
     let lastFiltered = [];
     let deskPinCount = 0;
     let lastTapeView = { onlyLanded: false, kind: "stock" };
-    const KIND_STORE = "qc-tape-kind-v2";
+    const KIND_STORE = "stock-act-tape-kind-v2";
     const KIND_DEFAULT = "stock"; // stocks + options; v2 drops leftover stocks-only defaults
     const KIND_VALUES = { stock: 1, option: 1, bond: 1, "": 1 };
 
@@ -3044,7 +3033,7 @@
       const moreRow = document.getElementById("more-row");
       const moreBtn = document.getElementById("show-all");
       const visible = deskRows;
-      const total = rows.qcTotal != null ? rows.qcTotal : rows.length;
+      const total = rows.saTotal != null ? rows.saTotal : rows.length;
       if (count) {
         const totalTxt = Number(total).toLocaleString("en-US");
         count.textContent = visible.length === total
@@ -3058,13 +3047,13 @@
       box.innerHTML = visible.map((t) => {
         const cls = t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : "";
         const bad = isFilingError(t);
-        const fresh = QC.isLanded(t, 72);
+        const fresh = SA.isLanded(t, 72);
         const flag = (bad ? errBadge() : "") +
           (fresh ? "<span class=\"landed-tag\" title=\"This print was added to Stock Act recently — the trade itself may be older.\">New</span>" : "");
         const co = displayCompany(t.company, t.code);
         const sym = shownCode(t);
         const meta = [co || sym, t.industry || "—", t.owner].join(" · ");
-        const noteHtml = QC.filingNotesChipsHtml(QC.filingNotesFor(t.id));
+        const noteHtml = SA.filingNotesChipsHtml(SA.filingNotesFor(t.id));
         const trCls = (bad ? " has-err" : "") + (fresh ? " just-in" : "");
         return "<tr data-id=\"" + escapeHtml(t.id || "") + "\"" + (trCls ? " class=\"" + trCls.trim() + "\"" : "") + ">" +
           stampHtml(t.trade_date).replace("</td>", flag + "</td>") +
@@ -3078,7 +3067,7 @@
             : escapeHtml(sym)) + optionTag(t) + "</td>" +
           "<td class=\"desk-only\"><span class=\"co\">" + escapeHtml(co || t.code || "—") + "</span></td>" +
           "<td class=\"desk-only ind\">" + escapeHtml(t.industry || "—") + "</td>" +
-          "<td class=\"tix-amt\">" + escapeHtml(QC.formatAmountRange(t.amount)) + "</td>" +
+          "<td class=\"tix-amt\">" + escapeHtml(SA.formatAmountRange(t.amount)) + "</td>" +
           "<td class=\"desk-only\">" + escapeHtml(t.owner) + "</td>" +
           "<td class=\"tix-meta\">" + escapeHtml(meta) + noteHtml + "</td>" +
           "</tr>";
@@ -3183,7 +3172,7 @@
     function renderDeskStatus(allFiltered, visible) {
       const box = document.getElementById("desk-status");
       if (!box) return;
-      const fresh = allFiltered.filter((t) => QC.isLanded(t, 72)).length;
+      const fresh = allFiltered.filter((t) => SA.isLanded(t, 72)).length;
       const buys = allFiltered.filter((t) => t.side === "purchase").length;
       const sells = allFiltered.filter((t) => t.side === "sale").length;
       
@@ -3191,12 +3180,11 @@
 
     function shownCode(t) {
       if (!isOptionLike(t)) return t.code || "";
-      const s = QC.tapeSymbol(t);
+      const s = SA.tapeSymbol(t);
       return !s || s === "—" ? "—" : s;
     }
 
-    /* Visible side word next to the amount, so Buy vs Sell does not rely on the bar color alone
-       (same idea as the Insiders rows, which print the trade type on the right). */
+    /* Visible side word next to the amount, so Buy vs Sell does not rely on the bar color alone. */
     function wireSideWord(cls, side) {
       const map = { buy: "Buy", sell: "Sell", postex: "Sell", exch: "Exch", exercise: "Exercise", award: "Award" };
       return map[cls] || String(side || "").split(/\s+/)[0] || "";
@@ -3205,11 +3193,11 @@
     function wireRowHtml(t) {
       const code = shownCode(t);
       const optMode = document.body.classList.contains("tape-opt");
-      const cls = QC.txnClass(t) || (t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : "");
-      const side = QC.txnLabel(t) || sideLabel(t.side) || "";
+      const cls = SA.txnClass(t) || (t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : "");
+      const side = SA.txnLabel(t) || sideLabel(t.side) || "";
       const sym = code && code !== "\u2014" ? code : (isOptionLike(t) ? "\u2014" : "");
       const tkHref = sym && sym !== "\u2014" && isChartTicker(sym) ? "ticker.html?t=" + encodeURIComponent(sym) : "";
-      const kind = QC.tapeKindLabel(t);
+      const kind = SA.tapeKindLabel(t);
       const co = displayCompany(t.company, sym);
       const coShow = co && co.toUpperCase() !== String(sym || "").toUpperCase() ? co : "";
       const rawCo = String(t.company || "").replace(/\s+/g, " ").trim();
@@ -3223,13 +3211,13 @@
       const title = tkHref
         ? "<a class=\"w-title\" href=\"" + tkHref + "\">" + titleInner + "</a>"
         : "<span class=\"w-title\">" + (titleInner || "<span class=\"w-tk\">\u2014</span>") + "</span>";
-      const name = QC.titleCaseName(t.filer) || t.filer || "";
+      const name = SA.titleCaseName(t.filer) || t.filer || "";
       const nameHtml = name
         ? (t.filer_id
           ? "<a class=\"w-name\" href=\"politician.html?id=" + encodeURIComponent(t.filer_id) + "\">" + escapeHtml(name) + "</a>"
           : "<span class=\"w-name\">" + escapeHtml(name) + "</span>")
         : "";
-      const plan = t.plan ? "<span class=\"qc-plan-tag\" title=\"" + escapeHtml(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>" : "";
+      const plan = t.plan ? "<span class=\"stock-act-plan-tag\" title=\"" + escapeHtml(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>" : "";
       const when = t.trade_date ? "<span class=\"w-when\">traded " + escapeHtml(prettyDate(t.trade_date)) + "</span>" : "";
       const metaBits = [nameHtml, when].filter(Boolean).join("<span class=\"w-dot\" aria-hidden=\"true\"> \u00b7 </span>");
       let optLine = "";
@@ -3239,7 +3227,7 @@
         const tipOpt = (!o.strike || !o.exp) ? " title=\"Not stated or unreadable in the filing\"" : "";
         optLine = "<div class=\"w-opt\"" + tipOpt + ">" + escapeHtml(bits.join(" \u00b7 ")) + "</div>";
       }
-      const shown = QC.formatAmountRange(t.amount) || (Number(t.value) ? formatMoney(Number(t.value)) : "\u2014");
+      const shown = SA.formatAmountRange(t.amount) || (Number(t.value) ? formatMoney(Number(t.value)) : "\u2014");
       const rawAmt = String(t.amount || "").trim();
       const tip = rawAmt && rawAmt !== shown ? " title=\"" + escapeHtml(rawAmt) + "\"" : "";
       const on = t.id === activeId;
@@ -3252,7 +3240,7 @@
           "<div class=\"w-head\">" + title + "</div>" +
           "<div class=\"w-meta\">" + metaBits + plan + "</div>" +
           optLine +
-          QC.filingNotesChipsHtml(QC.filingNotesFor(t.id)) +
+          SA.filingNotesChipsHtml(SA.filingNotesFor(t.id)) +
         "</div>" +
         "<div class=\"w-amt\"" + tip + "><span class=\"w-amt-v\">" + escapeHtml(shown) + "</span>" +
           (sideWord ? "<span class=\"w-side " + escapeHtml(cls || "other") + "\" aria-hidden=\"true\">" + escapeHtml(sideWord) + "</span>" : "") +
@@ -3299,7 +3287,6 @@
       if (/usual size$/.test(c)) return 1;
       if (/record/i.test(c)) return 2;
       if (/^Committee/.test(c)) return 3;
-      if (/^Insiders/.test(c)) return 4;
       if (/^Cluster/.test(c)) return 6;
       return 5;
     }
@@ -3308,7 +3295,7 @@
       return c && c !== "\u2014" ? c : "";
     }
     function w1Kind(t) {
-      return QC.tapeKindLabel(t) || (w1Ticker(t) ? "" : "No ticker");
+      return SA.tapeKindLabel(t) || (w1Ticker(t) ? "" : "No ticker");
     }
     function w1PersonGroups(rows) {
       const out = [];
@@ -3323,8 +3310,8 @@
     function w1RowHtml(t) {
       const sym = w1Ticker(t);
       const kind = w1Kind(t);
-      const cls = QC.txnClass(t) || (t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : "");
-      const side = QC.txnLabel(t) || sideLabel(t.side) || "";
+      const cls = SA.txnClass(t) || (t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : "");
+      const side = SA.txnLabel(t) || sideLabel(t.side) || "";
       const tkHref = sym && isChartTicker(sym) ? "ticker.html?t=" + encodeURIComponent(sym) : "";
       const tkInner = (sym ? "<b>" + escapeHtml(sym) + "</b>" : "") + (kind ? "<span class=\"w1-kind\">" + escapeHtml(kind) + "</span>" : "");
       const tk = tkHref
@@ -3333,14 +3320,14 @@
       const co = w1ShortCo(t.company);
       const coHtml = co.abbr && co.abbr.toUpperCase() !== sym.toUpperCase()
         ? "<span class=\"w1-co\" title=\"" + escapeHtml(co.full) + "\">" + escapeHtml(co.abbr) + "</span>" : "";
-      const notes = (QC.filingNotesFor(t.id) || []).map((c) => String(c || "").trim()).filter(Boolean);
+      const notes = (SA.filingNotesFor(t.id) || []).map((c) => String(c || "").trim()).filter(Boolean);
       const rest = notes.filter((c) => !w1OwnCluster(c) && c !== "Option/derivative");
       if (t.plan) rest.unshift("Plan");
       rest.sort((a, b) => w1Rank(a) - w1Rank(b));
       const key = rest[0] ? "<span class=\"w1-chip w1-key\" title=\"" + escapeHtml(rest.join(" · ")) + "\">" + escapeHtml(rest[0]) + "</span>" : "";
       const more = rest.length > 1 ? "<span class=\"w1-more\" title=\"" + escapeHtml(rest.slice(1).join(" · ")) + "\">+" + (rest.length - 1) + "</span>" : "";
       const all = rest.length ? "<span class=\"w1-all\" title=\"" + escapeHtml(rest.join(" · ")) + "\">+" + rest.length + "</span>" : "";
-      const shown = QC.formatAmountRange(t.amount) || (Number(t.value) ? formatMoney(Number(t.value)) : "\u2014");
+      const shown = SA.formatAmountRange(t.amount) || (Number(t.value) ? formatMoney(Number(t.value)) : "\u2014");
       const rawAmt = String(t.amount || "").trim();
       const tip = rawAmt && rawAmt !== shown ? " title=\"" + escapeHtml(rawAmt) + "\"" : "";
       let optLine = "";
@@ -3367,14 +3354,14 @@
       return w1PersonGroups(rows).map((g) => {
         const t = g.rows[0];
         const n = g.rows.length;
-        const name = QC.titleCaseName(t.filer) || t.filer || "";
+        const name = SA.titleCaseName(t.filer) || t.filer || "";
         const nameHtml = t.filer_id
           ? "<a class=\"w1-gname\" href=\"politician.html?id=" + encodeURIComponent(t.filer_id) + "\">" + escapeHtml(name) + "</a>"
           : "<span class=\"w1-gname\">" + escapeHtml(name) + "</span>";
         const when = (t.trade_date ? "traded " + prettyDate(t.trade_date) : "") + (n > 1 ? " \u00b7 " + n + " trades" : "");
         const clus = [];
         g.rows.forEach((r) => {
-          const c = (QC.filingNotesFor(r.id) || []).find(w1OwnCluster);
+          const c = (SA.filingNotesFor(r.id) || []).find(w1OwnCluster);
           const tk = w1Ticker(r) || w1Kind(r);
           if (c && !clus.some((x) => x.tk === tk)) clus.push({ tk, n: c.match(/\d+/)[0] });
         });
@@ -3428,7 +3415,7 @@
         const qEl = document.getElementById("filter-company");
         const hint = personEnterHint(qEl && qEl.value);
         box.innerHTML = "<li class=\"muted\">" + escapeHtml(hint || "No trades match these filters.") + "</li>";
-        if (window.QC && QC.restoreScroll) QC.restoreScroll();
+        if (window.SA && SA.restoreScroll) SA.restoreScroll();
         return;
       }
       const pinN = Math.min(deskPinCount, deskRows.length);
@@ -3443,7 +3430,7 @@
       });
       box.innerHTML = parts.join("");
       if (!DESK_MQ.matches) w1AfterPaint(box);
-      if (window.QC && QC.restoreScroll) QC.restoreScroll();
+      if (window.SA && SA.restoreScroll) SA.restoreScroll();
     }
 
     function paintFocus() {
@@ -3457,7 +3444,7 @@
         return;
       }
       const ch = chamberClass(t.chamber);
-      const fresh = QC.isLanded(t, 72);
+      const fresh = SA.isLanded(t, 72);
       const sym = shownCode(t);
       const tickerHtml = sym !== "—" && isChartTicker(sym)
         ? "<a href=\"ticker.html?t=" + encodeURIComponent(sym) + "\">" + escapeHtml(sym) + "</a>"
@@ -3465,7 +3452,7 @@
       const co = displayCompany(t.company, sym);
       const coShow = co && co.toUpperCase() !== String(sym || "").toUpperCase() ? co : "";
       head.innerHTML =
-        "<a class=\"who\" href=\"politician.html?id=" + encodeURIComponent(t.filer_id) + "\" title=\"" + escapeHtml(QC.titleCaseName(t.filer)) + "\">" + escapeHtml(QC.titleCaseName(t.filer)) + "</a>" +
+        "<a class=\"who\" href=\"politician.html?id=" + encodeURIComponent(t.filer_id) + "\" title=\"" + escapeHtml(SA.titleCaseName(t.filer)) + "\">" + escapeHtml(SA.titleCaseName(t.filer)) + "</a>" +
         "<div class=\"chips\">" +
           (t.chamber ? "<span class=\"ch " + ch + "\">" + escapeHtml(t.chamber) + "</span>" : "") +
           (t.owner ? "<span class=\"ch\">" + escapeHtml(ownerLabel(t.owner)) + "</span>" : "") +
@@ -3576,13 +3563,13 @@
       const marks = (rec.marks && rec.marks.length) ? rec.marks : [rec.mark || {}];
       const m = marks[0] || {};
       const buy = (rec.side || m.side) !== "sale";
-      const amt = m.amount ? QC.formatAmountRange(m.amount) : "";
+      const amt = m.amount ? SA.formatAmountRange(m.amount) : "";
       const mDate = m.date ? prettyDate(m.date) : "";
       pop.innerHTML =
         "<div class=\"pop-header\">" +
           "<div class=\"pop-title-wrap\">" +
             "<span class=\"pop-badge " + (buy ? "buy" : "sell") + "\">" + (buy ? "BUY" : "SELL") + "</span>" +
-            "<div class=\"pop-title\">" + escapeHtml(QC.titleCaseName(m.filer || "")) + "</div>" +
+            "<div class=\"pop-title\">" + escapeHtml(SA.titleCaseName(m.filer || "")) + "</div>" +
           "</div>" +
           "<button type=\"button\" class=\"pop-close\" aria-label=\"Close popover\">✕</button>" +
         "</div>" +
@@ -3719,7 +3706,7 @@
           paintRange();
         }
         const slice = slicePriceRange(points, chartRange);
-        paintSpark(slice, "", tradeIso, (window.QC && QC.txnClass && QC.txnClass(t)) || (t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : ""));
+        paintSpark(slice, "", tradeIso, (window.SA && SA.txnClass && SA.txnClass(t)) || (t.side === "purchase" ? "buy" : t.side === "sale" ? "sell" : ""));
         if (!DESK_MQ.matches && !stripOpen) return;
         const marks = [{
           date: tradeIso,
@@ -3762,7 +3749,7 @@
     }
 
     function renderDesk(filtered, keepPick) {
-      const sliced = QC.sliceTapeRows(filtered, {
+      const sliced = SA.sliceTapeRows(filtered, {
         showAll: showAll,
         desktop: DESK_MQ.matches,
         page: PAGE,
@@ -4010,14 +3997,14 @@
               "<span class=\"board-val\"><b class=\"" + sc + "\">" + signedMoney(s.pnl) + "</b></span></li>";
           }).join("");
           return "<li class=\"board-trader\" data-id=\"" + escapeHtml(r.id) + "\">" + rank +
-            "<span class=\"board-who\"><a href=\"politician.html?id=" + encodeURIComponent(r.id) + "\" title=\"" + escapeHtml(QC.titleCaseName(r.name)) + "\">" +
-            escapeHtml(QC.titleCaseName(r.name)) + "</a></span>" +
+            "<span class=\"board-who\"><a href=\"politician.html?id=" + encodeURIComponent(r.id) + "\" title=\"" + escapeHtml(SA.titleCaseName(r.name)) + "\">" +
+            escapeHtml(SA.titleCaseName(r.name)) + "</a></span>" +
             valHtml(signedMoney(r.pnl), "", cls) +
             "<ul class=\"board-sectors\">" + (secs || "<li class=\"sec-name\">No priced stock trades.</li>") + "</ul></li>";
         }
         const n = mode === "activity" ? r.trades : r.conflicts;
         const unit = mode === "activity" ? (n === 1 ? "trade" : "trades") : (n === 1 ? "ticker" : "tickers");
-        const person = QC.titleCaseName(r.name);
+        const person = SA.titleCaseName(r.name);
         return "<li>" + rank +
           "<span class=\"board-who\"><a href=\"politician.html?id=" + encodeURIComponent(r.id) + "\" title=\"" + escapeHtml(person) + "\">" +
           escapeHtml(person) + "</a></span>" + valHtml(String(n), unit, "") + "</li>";
@@ -4043,7 +4030,7 @@
             return parts[parts.length - 1] || s;
           };
           const pool = (boards.conflicts || []).slice(0, 3);
-          const bits = pool.map((r) => lastName(QC.titleCaseName(r.name)) + " " + r.conflicts);
+          const bits = pool.map((r) => lastName(SA.titleCaseName(r.name)) + " " + r.conflicts);
           peek.textContent = ["Conflicts"].concat(bits).join(" \u00b7 ");
         }
         paintTeasers(boards);
@@ -4092,7 +4079,7 @@
         const data = await res.json();
         const asof = document.getElementById("asof");
         if (asof && data.collected) {
-          asof.textContent = QC.asOfLabel(data.collected);
+          asof.textContent = SA.asOfLabel(data.collected);
         }
         const kindPools = { stock: data.trades || [] };
         let fullRows = null;
@@ -4123,7 +4110,7 @@
               if (!liteRes.ok || !tickerRes.ok) throw new Error("tape");
               return Promise.all([liteRes.json(), tickerRes.json()]);
             }).then(([liteData, tickerFile]) => {
-              fullRows = (liteData.trades || []).map((t) => QC.stampTapeRow(t, tickerFile));
+              fullRows = (liteData.trades || []).map((t) => SA.stampTapeRow(t, tickerFile));
               return fullRows;
             });
           }
@@ -4203,13 +4190,13 @@
             if (side && t.side !== side) return false;
             if (chamber && (t.chamber || "") !== chamber) return false;
             if (industry && sectorOf(t.industry) !== industry) return false;
-            if (onlyLanded && !QC.isLanded(t, 72)) return false;
+            if (onlyLanded && !SA.isLanded(t, 72)) return false;
             if (companyQ && !companyQueryHit(t, companyQ)) return false;
             return true;
           });
           if (!needsFull && data.totals) {
             const n = data.totals[kindKey(kind)];
-            if (n != null) filtered.qcTotal = n;
+            if (n != null) filtered.saTotal = n;
           }
           lastTapeView = { onlyLanded: onlyLanded, kind: kind };
           document.body.classList.toggle("tape-opt", kind === "option");
@@ -4253,7 +4240,7 @@
         await apply();
         bindBoard(data.boards || { activity: [], traders: [], conflicts: [], stocks: [] });
         markTapeReady();
-        QC.loadFilingNotes().then(() => {
+        SA.loadFilingNotes().then(() => {
           if (!lastFiltered || !lastFiltered.length) return;
           renderDesk(lastFiltered, true);
           renderTape(lastFiltered);
@@ -4267,8 +4254,8 @@
           : "Check your connection and reload.") + "</td></tr>";
       }
     }
-    if (window.QC && QC.bindTapeKeys) {
-      QC.bindTapeKeys({
+    if (window.SA && SA.bindTapeKeys) {
+      SA.bindTapeKeys({
         search: document.getElementById("filter-company"),
         rows: "#wire .w-row[data-id], #wire .w1[data-id]",
         select: selectDesk

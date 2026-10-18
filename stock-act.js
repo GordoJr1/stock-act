@@ -316,7 +316,7 @@
   function dotted(parts) {
     const out = [];
     parts.forEach((p, i) => {
-      if (i) out.push("<span class=\"qc-txn-dot\" aria-hidden=\"true\">·</span>");
+      if (i) out.push("<span class=\"stock-act-txn-dot\" aria-hidden=\"true\">·</span>");
       out.push(p);
     });
     return out;
@@ -458,7 +458,7 @@
   function lastCloseHtml(n, code) {
     const text = (n != null && isFinite(Number(n))) ? formatQuote(n) : "—";
     const tk = String(code || "").toUpperCase();
-    return "<span class=\"qc-txn-last\"" +
+    return "<span class=\"stock-act-txn-last\"" +
       (tk ? " data-tk=\"" + esc(tk) + "\"" : "") +
       " title=\"Last close\">" + esc(text) + "</span>";
   }
@@ -482,7 +482,7 @@
 
   function applyLastCloses(root, map) {
     if (!root || !map) return;
-    root.querySelectorAll(".qc-txn-last[data-tk]").forEach((el) => {
+    root.querySelectorAll(".stock-act-txn-last[data-tk]").forEach((el) => {
       const px = map[el.getAttribute("data-tk")];
       el.textContent = (px != null && isFinite(Number(px))) ? formatQuote(px) : "—";
     });
@@ -515,18 +515,18 @@
     if (!iso) return "";
     const full = prettyDate(iso);
     const short = tapeDateShort(iso);
-    return "<span class=\"qc-txn-date\">" +
-      "<span class=\"qc-date-full\">" + esc(full) + "</span>" +
-      "<span class=\"qc-date-short\">" + esc(short) + "</span>" +
+    return "<span class=\"stock-act-txn-date\">" +
+      "<span class=\"stock-act-date-full\">" + esc(full) + "</span>" +
+      "<span class=\"stock-act-date-short\">" + esc(short) + "</span>" +
     "</span>";
   }
 
   function tapePhoneColsHtml() {
-    return "<li class=\"qc-txn-cols qc-txn-cols-phone\" aria-hidden=\"true\">" +
-      "<span class=\"qc-txn-date\">Date</span>" +
-      "<span class=\"qc-txn-company\">Tkr</span>" +
-      "<span class=\"qc-txn-chip\">Side</span>" +
-      "<span class=\"qc-txn-hero\">Value</span>" +
+    return "<li class=\"stock-act-txn-cols stock-act-txn-cols-phone\" aria-hidden=\"true\">" +
+      "<span class=\"stock-act-txn-date\">Date</span>" +
+      "<span class=\"stock-act-txn-company\">Tkr</span>" +
+      "<span class=\"stock-act-txn-chip\">Side</span>" +
+      "<span class=\"stock-act-txn-hero\">Value</span>" +
     "</li>";
   }
 
@@ -543,7 +543,7 @@
 
   function tapeKindHtml(t) {
     const k = tapeKindLabel(t);
-    return k ? "<span class=\"qc-txn-kind\">" + esc(k) + "</span>" : "";
+    return k ? "<span class=\"stock-act-txn-kind\">" + esc(k) + "</span>" : "";
   }
 
   function tapeMonthDay(iso) {
@@ -565,13 +565,13 @@
     if (!name) return "";
     const href = opts.nameHref || "";
     const nameHtml = href
-      ? "<a class=\"qc-txn-name\" href=\"" + esc(href) + "\">" + esc(name) + "</a>"
-      : "<span class=\"qc-txn-name\">" + esc(name) + "</span>";
-    const followHtml = opts.follow ? "<span class=\"qc-follow-tag\">Follow</span>" : "";
+      ? "<a class=\"stock-act-txn-name\" href=\"" + esc(href) + "\">" + esc(name) + "</a>"
+      : "<span class=\"stock-act-txn-name\">" + esc(name) + "</span>";
+    const followHtml = opts.follow ? "<span class=\"stock-act-follow-tag\">Follow</span>" : "";
     const planHtml = t && t.plan
-      ? "<span class=\"qc-plan-tag\" title=\"" + esc(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>"
+      ? "<span class=\"stock-act-plan-tag\" title=\"" + esc(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>"
       : "";
-    return "<div class=\"qc-txn-who-line\">" + nameHtml + followHtml + planHtml + "</div>";
+    return "<div class=\"stock-act-txn-who-line\">" + nameHtml + followHtml + planHtml + "</div>";
   }
 
   function threeYearCutoff() {
@@ -1370,19 +1370,19 @@
     const amtTip = amountTitle(t && t.amount, hero.text);
     const amtAttr = amtTip ? " title=\"" + esc(amtTip) + "\"" : "";
     if (hero.kind === "usd" && hero.text) {
-      heroHtml = "<span class=\"qc-txn-hero\"" + amtAttr + ">" + esc(hero.text) + "</span>";
+      heroHtml = "<span class=\"stock-act-txn-hero\"" + amtAttr + ">" + esc(hero.text) + "</span>";
     } else {
       if (hero.kind === "shares" && hero.text) {
-        heroHtml = "<span class=\"qc-txn-hero is-shares\">" + esc(hero.text) + "<small> sh</small></span>";
+        heroHtml = "<span class=\"stock-act-txn-hero is-shares\">" + esc(hero.text) + "<small> sh</small></span>";
       }
-      heroHtml += "<span class=\"qc-txn-hero is-empty\">—</span>";
+      heroHtml += "<span class=\"stock-act-txn-hero is-empty\">—</span>";
     }
     const chipHtml = chip
-      ? ("<span class=\"qc-txn-chip\"" + (chip !== fullLabel ? " title=\"" + esc(fullLabel) + "\"" : "") + ">" +
+      ? ("<span class=\"stock-act-txn-chip\"" + (chip !== fullLabel ? " title=\"" + esc(fullLabel) + "\"" : "") + ">" +
           esc(chip) +
         "</span>")
       : "";
-    return (chipHtml || heroHtml) ? "<div class=\"qc-txn-end\">" + chipHtml + heroHtml + "</div>" : "";
+    return (chipHtml || heroHtml) ? "<div class=\"stock-act-txn-end\">" + chipHtml + heroHtml + "</div>" : "";
   }
 
   function tickerHref(t) {
@@ -1415,7 +1415,7 @@
   }
 
   function emptyFilingsBadgeHtml() {
-    return "<span class=\"qc-empty-filings\" title=\"On the insider universe; no Form 4 / SEDI prints on the tape yet\">No filings yet</span>";
+    return "<span class=\"stock-act-empty-filings\" title=\"No Senate, House, or White House filings on the tape yet\">No filings yet</span>";
   }
 
   function tradeTickerSet(trades) {
@@ -1438,22 +1438,22 @@
     const href = primary ? "ticker.html?t=" + encodeURIComponent(primary) : "";
     const filings = Number(opts.filings || 0);
     const badge = filings > 0
-      ? "<span class=\"qc-issuer-meta\">" + esc(filings === 1 ? "1 print" : filings + " prints") + "</span>"
+      ? "<span class=\"stock-act-issuer-meta\">" + esc(filings === 1 ? "1 print" : filings + " prints") + "</span>"
       : emptyFilingsBadgeHtml();
-    const inner = "<span class=\"qc-txn-tk\">" + esc(primary || "—") + "</span>" +
-      "<span class=\"qc-issuer-name\">" + esc(name) + "</span>";
+    const inner = "<span class=\"stock-act-txn-tk\">" + esc(primary || "—") + "</span>" +
+      "<span class=\"stock-act-issuer-name\">" + esc(name) + "</span>";
     const main = href
-      ? "<a class=\"qc-issuer-main\" href=\"" + href + "\">" + inner + "</a>"
-      : "<span class=\"qc-issuer-main\">" + inner + "</span>";
-    return "<li class=\"qc-issuer" + (filings ? "" : " qc-issuer-empty") + "\">" + main + badge + "</li>";
+      ? "<a class=\"stock-act-issuer-main\" href=\"" + href + "\">" + inner + "</a>"
+      : "<span class=\"stock-act-issuer-main\">" + inner + "</span>";
+    return "<li class=\"stock-act-issuer" + (filings ? "" : " stock-act-issuer-empty") + "\">" + main + badge + "</li>";
   }
 
   function tapeTickerHtml(t) {
     if (!t || !t.ticker) return "";
     const href = tickerHref(t);
     return href
-      ? "<a class=\"qc-txn-tk\" href=\"" + esc(href) + "\">" + esc(t.ticker) + "</a>"
-      : "<span class=\"qc-txn-tk\">" + esc(t.ticker) + "</span>";
+      ? "<a class=\"stock-act-txn-tk\" href=\"" + esc(href) + "\">" + esc(t.ticker) + "</a>"
+      : "<span class=\"stock-act-txn-tk\">" + esc(t.ticker) + "</span>";
   }
 
   function tapeRowHtml(t, opts) {
@@ -1464,8 +1464,8 @@
     const href = opts.nameHref || "";
     const nameHtml = name
       ? (href
-          ? "<a class=\"qc-txn-name\" href=\"" + esc(href) + "\">" + esc(name) + "</a>"
-          : (opts.nameHtml || "<span class=\"qc-txn-name\">" + esc(name) + "</span>"))
+          ? "<a class=\"stock-act-txn-name\" href=\"" + esc(href) + "\">" + esc(name) + "</a>"
+          : (opts.nameHtml || "<span class=\"stock-act-txn-name\">" + esc(name) + "</span>"))
       : (opts.nameHtml || "");
     const tickerHtml = opts.tickerHtml || tapeTickerHtml(t);
     const company = String(t.company || "").trim();
@@ -1478,51 +1478,51 @@
     if (t.trade_date) metaParts.push("<span>" + esc(prettyDate(t.trade_date)) + "</span>");
     if (company) {
       metaParts.push(coHref
-        ? "<a class=\"qc-txn-co\" href=\"" + esc(coHref) + "\">" + esc(company) + "</a>"
-        : "<span class=\"qc-txn-co\">" + esc(company) + "</span>");
+        ? "<a class=\"stock-act-txn-co\" href=\"" + esc(coHref) + "\">" + esc(company) + "</a>"
+        : "<span class=\"stock-act-txn-co\">" + esc(company) + "</span>");
     }
 
     const who = dotted(whoParts);
     const meta = dotted(metaParts);
-    const sub = (who.length ? "<div class=\"qc-txn-who\">" + who.join("") + "</div>" : "") +
-      (meta.length ? "<div class=\"qc-txn-meta\">" + meta.join("") + "</div>" : "");
+    const sub = (who.length ? "<div class=\"stock-act-txn-who\">" + who.join("") + "</div>" : "") +
+      (meta.length ? "<div class=\"stock-act-txn-meta\">" + meta.join("") + "</div>" : "");
 
     const companyBits = [];
     const kindHtml = tapeKindHtml(t);
-    if (t.ticker) companyBits.push("<span class=\"qc-txn-tk\">" + esc(t.ticker) + optionTag(t) + kindHtml + "</span>");
-    else if (kindHtml) companyBits.push("<span class=\"qc-txn-tk\">" + kindHtml + "</span>");
-    if (company) companyBits.push("<span class=\"qc-txn-co-name\">" + esc(company) + "</span>");
+    if (t.ticker) companyBits.push("<span class=\"stock-act-txn-tk\">" + esc(t.ticker) + optionTag(t) + kindHtml + "</span>");
+    else if (kindHtml) companyBits.push("<span class=\"stock-act-txn-tk\">" + kindHtml + "</span>");
+    if (company) companyBits.push("<span class=\"stock-act-txn-co-name\">" + esc(company) + "</span>");
     const companyInner = companyBits.join("");
     const companyCol = companyInner
       ? (coHref
-          ? "<a class=\"qc-txn-company\" href=\"" + esc(coHref) + "\">" + companyInner + "</a>"
-          : "<span class=\"qc-txn-company\">" + companyInner + "</span>")
-      : "<span class=\"qc-txn-company\"></span>";
+          ? "<a class=\"stock-act-txn-company\" href=\"" + esc(coHref) + "\">" + companyInner + "</a>"
+          : "<span class=\"stock-act-txn-company\">" + companyInner + "</span>")
+      : "<span class=\"stock-act-txn-company\"></span>";
 
     const tblParts = [];
-    tblParts.push(tapeDateHtml(t.trade_date) || "<span class=\"qc-txn-date\"></span>");
+    tblParts.push(tapeDateHtml(t.trade_date) || "<span class=\"stock-act-txn-date\"></span>");
     const sh = formatSharesQuiet(t.shares);
-    if (sh) tblParts.push("<span class=\"qc-txn-sh\">" + esc(sh) + "</span>");
+    if (sh) tblParts.push("<span class=\"stock-act-txn-sh\">" + esc(sh) + "</span>");
     const px = formatPriceQuiet(t.price);
-    if (px) tblParts.push("<span class=\"qc-txn-px\">" + esc(px) + "</span>");
+    if (px) tblParts.push("<span class=\"stock-act-txn-px\">" + esc(px) + "</span>");
     const held = formatHeldQuiet(t.held_pct);
-    if (held) tblParts.push("<span class=\"qc-txn-held " + delta + "\">" + esc(held) + "</span>");
-    const tbl = tblParts.length ? "<div class=\"qc-txn-tbl\">" + tblParts.join("") + "</div>" : "";
+    if (held) tblParts.push("<span class=\"stock-act-txn-held " + delta + "\">" + esc(held) + "</span>");
+    const tbl = tblParts.length ? "<div class=\"stock-act-txn-tbl\">" + tblParts.join("") + "</div>" : "";
 
-    const followHtml = opts.follow ? "<span class=\"qc-follow-tag\">Follow</span>" : "";
-    const planHtml = t.plan ? "<span class=\"qc-plan-tag\" title=\"" + esc(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>" : "";
-    const nameLineFollow = "<div class=\"qc-txn-id-line\">" + nameHtml + followHtml + planHtml + "</div>";
+    const followHtml = opts.follow ? "<span class=\"stock-act-follow-tag\">Follow</span>" : "";
+    const planHtml = t.plan ? "<span class=\"stock-act-plan-tag\" title=\"" + esc(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>" : "";
+    const nameLineFollow = "<div class=\"stock-act-txn-id-line\">" + nameHtml + followHtml + planHtml + "</div>";
     const when = t.trade_date
-      ? "<span class=\"qc-txn-when\">" + esc(prettyDate(t.trade_date)) + "</span>"
+      ? "<span class=\"stock-act-txn-when\">" + esc(prettyDate(t.trade_date)) + "</span>"
       : "";
 
-    return "<li class=\"qc-txn qc-txn-tape qc-txn-co-first" + (cls ? " " + cls : "") + (opts.follow ? " qc-follow" : "") + "\"" +
+    return "<li class=\"stock-act-txn stock-act-txn-tape stock-act-txn-co-first" + (cls ? " " + cls : "") + (opts.follow ? " stock-act-follow" : "") + "\"" +
       (t.id ? " data-id=\"" + esc(t.id) + "\"" : "") + ">" +
       when +
       tapeWhoLineHtml(t, { nameHref: href, follow: !!opts.follow, hideWhoLine: !!opts.hideWhoLine }) +
-      "<div class=\"qc-txn-id\">" + nameLineFollow + "</div>" +
+      "<div class=\"stock-act-txn-id\">" + nameLineFollow + "</div>" +
       txnEndHtml(t) +
-      (sub ? "<div class=\"qc-txn-sub\">" + sub + "</div>" : "") +
+      (sub ? "<div class=\"stock-act-txn-sub\">" + sub + "</div>" : "") +
       tbl +
       companyCol +
     "</li>";
@@ -1532,26 +1532,26 @@
     opts = opts || {};
     const nameLabel = opts.nameLabel || "Name";
     if (opts.tape) {
-      return "<li class=\"qc-txn-cols\" aria-hidden=\"true\">" +
-        "<span class=\"qc-txn-date\">Date</span>" +
-        "<span class=\"qc-txn-id\">" + esc(nameLabel) + "</span>" +
-        "<span class=\"qc-txn-company\">" + esc(opts.companyLabel || "Company") + "</span>" +
-        "<span class=\"qc-txn-chip\">Txn</span>" +
-        "<span class=\"qc-txn-sh\">Shares</span>" +
-        "<span class=\"qc-txn-px\">@ Price</span>" +
-        "<span class=\"qc-txn-hero\">Value</span>" +
-        "<span class=\"qc-txn-held\">% Held</span>" +
+      return "<li class=\"stock-act-txn-cols\" aria-hidden=\"true\">" +
+        "<span class=\"stock-act-txn-date\">Date</span>" +
+        "<span class=\"stock-act-txn-id\">" + esc(nameLabel) + "</span>" +
+        "<span class=\"stock-act-txn-company\">" + esc(opts.companyLabel || "Company") + "</span>" +
+        "<span class=\"stock-act-txn-chip\">Txn</span>" +
+        "<span class=\"stock-act-txn-sh\">Shares</span>" +
+        "<span class=\"stock-act-txn-px\">@ Price</span>" +
+        "<span class=\"stock-act-txn-hero\">Value</span>" +
+        "<span class=\"stock-act-txn-held\">% Held</span>" +
       "</li>";
     }
-    return "<li class=\"qc-txn-cols\" aria-hidden=\"true\">" +
-      "<span class=\"qc-txn-date\">Date</span>" +
-      "<span class=\"qc-txn-id\">" + esc(nameLabel) + "</span>" +
-      "<span class=\"qc-txn-chip\">Txn</span>" +
-      "<span class=\"qc-txn-sh\">Shares</span>" +
-      "<span class=\"qc-txn-px\">@ Price</span>" +
-      "<span class=\"qc-txn-hero\">Value</span>" +
-      "<span class=\"qc-txn-after\">Total Held</span>" +
-      "<span class=\"qc-txn-held\">% Held</span>" +
+    return "<li class=\"stock-act-txn-cols\" aria-hidden=\"true\">" +
+      "<span class=\"stock-act-txn-date\">Date</span>" +
+      "<span class=\"stock-act-txn-id\">" + esc(nameLabel) + "</span>" +
+      "<span class=\"stock-act-txn-chip\">Txn</span>" +
+      "<span class=\"stock-act-txn-sh\">Shares</span>" +
+      "<span class=\"stock-act-txn-px\">@ Price</span>" +
+      "<span class=\"stock-act-txn-hero\">Value</span>" +
+      "<span class=\"stock-act-txn-after\">Total Held</span>" +
+      "<span class=\"stock-act-txn-held\">% Held</span>" +
     "</li>";
   }
 
@@ -1561,36 +1561,36 @@
 
     const cls = txnClass(t);
     const delta = positionDelta(t);
-    let nameHtml = opts.nameHtml || (t.filer ? "<span class=\"qc-txn-name\">" + esc(t.filer) + "</span>" : "");
+    let nameHtml = opts.nameHtml || (t.filer ? "<span class=\"stock-act-txn-name\">" + esc(t.filer) + "</span>" : "");
     const tickerHtml = opts.tickerHtml || "";
     const tagsHtml = opts.tagsHtml || "";
     const extraMeta = (opts.extraMeta || []).filter(Boolean);
     if (opts.withRole) {
       const role = shortRole(t);
       if (role) {
-        nameHtml = "<div class=\"qc-txn-id-line\">" + nameHtml +
-          "<span class=\"qc-txn-role\">" + esc(role) + "</span></div>";
+        nameHtml = "<div class=\"stock-act-txn-id-line\">" + nameHtml +
+          "<span class=\"stock-act-txn-role\">" + esc(role) + "</span></div>";
       }
     }
 
     const parts = [];
-    if (t.trade_date) parts.push("<span class=\"qc-txn-date\">" + esc(prettyDate(t.trade_date)) + "</span>");
+    if (t.trade_date) parts.push("<span class=\"stock-act-txn-date\">" + esc(prettyDate(t.trade_date)) + "</span>");
     const px = formatPriceQuiet(t.price);
-    if (px) parts.push("<span class=\"qc-txn-px\"><span class=\"qc-txn-lbl\">@ </span>" + esc(px) + "</span>");
+    if (px) parts.push("<span class=\"stock-act-txn-px\"><span class=\"stock-act-txn-lbl\">@ </span>" + esc(px) + "</span>");
     const after = formatSharesQuiet(t.shares_after);
-    if (after) parts.push("<span class=\"qc-txn-after\"><span class=\"qc-txn-lbl\">After </span>" + esc(after) + "</span>");
+    if (after) parts.push("<span class=\"stock-act-txn-after\"><span class=\"stock-act-txn-lbl\">After </span>" + esc(after) + "</span>");
     const held = formatHeldQuiet(t.held_pct);
-    if (held) parts.push("<span class=\"qc-txn-held " + delta + "\">" + esc(held) + "</span>");
+    if (held) parts.push("<span class=\"stock-act-txn-held " + delta + "\">" + esc(held) + "</span>");
     extraMeta.forEach((html) => parts.push("<span>" + html + "</span>"));
 
     const meta = dotted(parts);
     const sh = formatSharesQuiet(t.shares);
-    const shHtml = sh ? "<span class=\"qc-txn-sh\">" + esc(sh) + "</span>" : "";
+    const shHtml = sh ? "<span class=\"stock-act-txn-sh\">" + esc(sh) + "</span>" : "";
 
-    return "<li class=\"qc-txn" + (cls ? " " + cls : "") + "\">" +
-      "<div class=\"qc-txn-id\">" + nameHtml + tickerHtml + tagsHtml + "</div>" +
+    return "<li class=\"stock-act-txn" + (cls ? " " + cls : "") + "\">" +
+      "<div class=\"stock-act-txn-id\">" + nameHtml + tickerHtml + tagsHtml + "</div>" +
       txnEndHtml(t) +
-      (meta.length ? "<div class=\"qc-txn-meta\">" + meta.join("") + "</div>" : "") +
+      (meta.length ? "<div class=\"stock-act-txn-meta\">" + meta.join("") + "</div>" : "") +
       shHtml +
     "</li>";
   }
@@ -1606,28 +1606,28 @@
   function politicianTapeColsHtml(opts) {
     opts = opts || {};
     const last = opts.showLastClose
-      ? "<span class=\"qc-txn-last\">Last</span>"
+      ? "<span class=\"stock-act-txn-last\">Last</span>"
       : "";
     const hold = opts.showHoldings
-      ? "<span class=\"qc-txn-sh\">Shares</span>" +
-        "<span class=\"qc-txn-after\">Held</span>" +
-        "<span class=\"qc-txn-held\">% Held</span>"
+      ? "<span class=\"stock-act-txn-sh\">Shares</span>" +
+        "<span class=\"stock-act-txn-after\">Held</span>" +
+        "<span class=\"stock-act-txn-held\">% Held</span>"
       : "";
     const opt = opts.showOptionMeta
-      ? "<span class=\"qc-txn-strike\">Strike</span>" +
-        "<span class=\"qc-txn-exp\">Exp</span>"
+      ? "<span class=\"stock-act-txn-strike\">Strike</span>" +
+        "<span class=\"stock-act-txn-exp\">Exp</span>"
       : "";
     return tapePhoneColsHtml() +
-      "<li class=\"qc-txn-cols\" aria-hidden=\"true\">" +
-      "<span class=\"qc-txn-date\">Date</span>" +
-      "<span class=\"qc-txn-id\">Name</span>" +
-      "<span class=\"qc-txn-company\">Ticker</span>" +
+      "<li class=\"stock-act-txn-cols\" aria-hidden=\"true\">" +
+      "<span class=\"stock-act-txn-date\">Date</span>" +
+      "<span class=\"stock-act-txn-id\">Name</span>" +
+      "<span class=\"stock-act-txn-company\">Ticker</span>" +
       opt +
-      "<span class=\"qc-txn-coname\">Company</span>" +
+      "<span class=\"stock-act-txn-coname\">Company</span>" +
       last +
-      "<span class=\"qc-txn-chip\">Trade</span>" +
+      "<span class=\"stock-act-txn-chip\">Trade</span>" +
       hold +
-      "<span class=\"qc-txn-hero\">Value</span>" +
+      "<span class=\"stock-act-txn-hero\">Value</span>" +
     "</li>";
   }
 
@@ -1643,8 +1643,8 @@
     const linkCode = !!(tickerHref && showCode && showCode !== "\u2014");
     const nameHtml = name
       ? (nameHref
-          ? "<a class=\"qc-txn-name\" href=\"" + esc(nameHref) + "\">" + esc(name) + "</a>"
-          : "<span class=\"qc-txn-name\">" + esc(name) + "</span>")
+          ? "<a class=\"stock-act-txn-name\" href=\"" + esc(nameHref) + "\">" + esc(name) + "</a>"
+          : "<span class=\"stock-act-txn-name\">" + esc(name) + "</span>")
       : "";
     let optTag = optionTag(t);
     let strikeHtml = "";
@@ -1663,24 +1663,24 @@
           strike = o.strike ? "$" + o.strike : "\u2014";
           exp = o.exp || "\u2014";
           const detail = optionDetailText(o);
-          if (detail) optLineHtml = "<div class=\"qc-txn-optline\">" + esc(detail) + "</div>";
+          if (detail) optLineHtml = "<div class=\"stock-act-txn-optline\">" + esc(detail) + "</div>";
         }
         const bits = [];
         if (o.strike) bits.push("$" + o.strike);
         if (o.exp) bits.push(o.exp);
         if (bits.length) {
-          deskOptHtml = "<div class=\"qc-desk-opt\">" +
+          deskOptHtml = "<div class=\"stock-act-desk-opt\">" +
             esc((named ? o.kind : "Option") + " " + bits.join(" ")) + "</div>";
         }
       }
-      strikeHtml = "<span class=\"qc-txn-strike\">" + esc(strike) + "</span>";
-      expHtml = "<span class=\"qc-txn-exp\">" + esc(exp) + "</span>";
+      strikeHtml = "<span class=\"stock-act-txn-strike\">" + esc(strike) + "</span>";
+      expHtml = "<span class=\"stock-act-txn-exp\">" + esc(exp) + "</span>";
     }
-    const co = "<span class=\"qc-txn-tk\">" + esc(showCode) + optTag + tapeKindHtml(t) + "</span>" +
-      "<span class=\"qc-txn-co-name\">" + esc(company) + "</span>";
+    const co = "<span class=\"stock-act-txn-tk\">" + esc(showCode) + optTag + tapeKindHtml(t) + "</span>" +
+      "<span class=\"stock-act-txn-co-name\">" + esc(company) + "</span>";
     const companyHtml = linkCode
-      ? "<a class=\"qc-txn-company\" href=\"" + esc(tickerHref) + "\">" + co + "</a>"
-      : "<span class=\"qc-txn-company\">" + co + "</span>";
+      ? "<a class=\"stock-act-txn-company\" href=\"" + esc(tickerHref) + "\">" + co + "</a>"
+      : "<span class=\"stock-act-txn-company\">" + co + "</span>";
 
     const lastHtml = opts.showLastClose ? lastCloseHtml(opts.lastClose, code) : "";
     const showHold = !!opts.showHoldings;
@@ -1688,43 +1688,43 @@
     const after = showHold ? formatSharesQuiet(t && t.shares_after) : "";
     const held = showHold ? formatHeldQuiet(t && t.held_pct) : "";
     const delta = showHold ? positionDelta(t) : "flat";
-    const shHtml = showHold ? "<span class=\"qc-txn-sh\">" + esc(sh || "—") + "</span>" : "";
-    const afterHtml = showHold ? "<span class=\"qc-txn-after\">" + esc(after || "—") + "</span>" : "";
+    const shHtml = showHold ? "<span class=\"stock-act-txn-sh\">" + esc(sh || "—") + "</span>" : "";
+    const afterHtml = showHold ? "<span class=\"stock-act-txn-after\">" + esc(after || "—") + "</span>" : "";
     const heldHtml = showHold
-      ? "<span class=\"qc-txn-held " + delta + "\">" + esc(held || "—") + "</span>"
+      ? "<span class=\"stock-act-txn-held " + delta + "\">" + esc(held || "—") + "</span>"
       : "";
     const whoParts = [];
     if (showCode) {
       whoParts.push(linkCode
-        ? "<a class=\"qc-txn-tk\" href=\"" + esc(tickerHref) + "\">" + esc(showCode) + "</a>"
-        : "<span class=\"qc-txn-tk\">" + esc(showCode) + "</span>");
+        ? "<a class=\"stock-act-txn-tk\" href=\"" + esc(tickerHref) + "\">" + esc(showCode) + "</a>"
+        : "<span class=\"stock-act-txn-tk\">" + esc(showCode) + "</span>");
     }
     if (lastHtml) whoParts.push(lastHtml);
     const metaParts = [];
     if (t && t.trade_date) metaParts.push("<span>" + esc(prettyDate(t.trade_date)) + "</span>");
     if (company) {
       metaParts.push(linkCode
-        ? "<a class=\"qc-txn-co\" href=\"" + esc(tickerHref) + "\">" + esc(company) + "</a>"
-        : "<span class=\"qc-txn-co\">" + esc(company) + "</span>");
+        ? "<a class=\"stock-act-txn-co\" href=\"" + esc(tickerHref) + "\">" + esc(company) + "</a>"
+        : "<span class=\"stock-act-txn-co\">" + esc(company) + "</span>");
     }
-    if (sh) metaParts.push("<span class=\"qc-txn-sh\">" + esc(sh) + "</span>");
-    if (after) metaParts.push("<span class=\"qc-txn-after\"><span class=\"qc-txn-lbl\">held </span>" + esc(after) + "</span>");
-    if (held) metaParts.push("<span class=\"qc-txn-held " + delta + "\">" + esc(held) + "</span>");
+    if (sh) metaParts.push("<span class=\"stock-act-txn-sh\">" + esc(sh) + "</span>");
+    if (after) metaParts.push("<span class=\"stock-act-txn-after\"><span class=\"stock-act-txn-lbl\">held </span>" + esc(after) + "</span>");
+    if (held) metaParts.push("<span class=\"stock-act-txn-held " + delta + "\">" + esc(held) + "</span>");
     const who = dotted(whoParts);
     const meta = dotted(metaParts);
-    const sub = (who.length ? "<div class=\"qc-txn-who\">" + who.join("") + "</div>" : "") +
-      (meta.length ? "<div class=\"qc-txn-meta\">" + meta.join("") + "</div>" : "");
+    const sub = (who.length ? "<div class=\"stock-act-txn-who\">" + who.join("") + "</div>" : "") +
+      (meta.length ? "<div class=\"stock-act-txn-meta\">" + meta.join("") + "</div>" : "");
 
     const extras = [];
     if (opts.selected) extras.push("on");
     if (opts.preview) extras.push("preview");
     if (opts.extraClass) extras.push(opts.extraClass);
-    if (opts.companyFirst) extras.push("qc-txn-co-first");
+    if (opts.companyFirst) extras.push("stock-act-txn-co-first");
     const extraCls = extras.length ? " " + extras.join(" ") : "";
     const when = (t && t.trade_date)
-      ? "<span class=\"qc-txn-when\">" + esc(prettyDate(t.trade_date)) + "</span>"
+      ? "<span class=\"stock-act-txn-when\">" + esc(prettyDate(t.trade_date)) + "</span>"
       : "";
-    return "<li class=\"qc-txn qc-txn-tape" + (cls ? " " + cls : "") + extraCls + "\"" +
+    return "<li class=\"stock-act-txn stock-act-txn-tape" + (cls ? " " + cls : "") + extraCls + "\"" +
       (t && t.id ? " data-id=\"" + esc(t.id) + "\"" : "") +
       (opts.holdKey ? " data-key=\"" + esc(opts.holdKey) + "\"" : "") +
       (opts.interactive === false
@@ -1732,20 +1732,20 @@
         : " tabindex=\"0\" role=\"button\" aria-pressed=\"" + (opts.selected ? "true" : "false") + "\"") + ">" +
       when +
       tapeWhoLineHtml(t, { nameHref: nameHref, hideWhoLine: !!opts.hideWhoLine }) +
-      "<div class=\"qc-txn-id\"><div class=\"qc-txn-id-line\">" +
+      "<div class=\"stock-act-txn-id\"><div class=\"stock-act-txn-id-line\">" +
         nameHtml +
-        (t && t.plan ? "<span class=\"qc-plan-tag\" title=\"" + esc(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>" : "") +
+        (t && t.plan ? "<span class=\"stock-act-plan-tag\" title=\"" + esc(t.planWhy || "Rule 10b5-1 / trading plan") + "\">Plan</span>" : "") +
       "</div></div>" +
-      "<div class=\"qc-txn-end\">" +
-        "<span class=\"qc-txn-chip\">" + esc(txnLabel(t) || sideLabel(t && t.side)) + "</span>" +
+      "<div class=\"stock-act-txn-end\">" +
+        "<span class=\"stock-act-txn-chip\">" + esc(txnLabel(t) || sideLabel(t && t.side)) + "</span>" +
         (function () {
           const shown = formatAmountRange(t && t.amount) || (Number(t && t.value) ? formatMoney(Number(t.value)) : "—");
           const tip = amountTitle(t && t.amount, shown);
-          return "<span class=\"qc-txn-hero\"" + (tip ? " title=\"" + esc(tip) + "\"" : "") + ">" + esc(shown) + "</span>";
+          return "<span class=\"stock-act-txn-hero\"" + (tip ? " title=\"" + esc(tip) + "\"" : "") + ">" + esc(shown) + "</span>";
         })() +
       "</div>" +
-      (sub ? "<div class=\"qc-txn-sub\">" + sub + "</div>" : "") +
-      "<div class=\"qc-txn-tbl\">" + tapeDateHtml(t && t.trade_date) + lastHtml + shHtml + afterHtml + heldHtml + "</div>" +
+      (sub ? "<div class=\"stock-act-txn-sub\">" + sub + "</div>" : "") +
+      "<div class=\"stock-act-txn-tbl\">" + tapeDateHtml(t && t.trade_date) + lastHtml + shHtml + afterHtml + heldHtml + "</div>" +
       companyHtml +
       strikeHtml +
       expHtml +
@@ -1792,11 +1792,11 @@
     }
     if (!clean.length) return "";
     const body = clean.map(function (text, i) {
-      return "<span class=\"qc-file-note" + (i >= 3 ? " is-extra" : "") + "\">" + esc(text) + "</span>";
+      return "<span class=\"stock-act-file-note" + (i >= 3 ? " is-extra" : "") + "\">" + esc(text) + "</span>";
     }).join("");
     const extra = clean.length > 3 ? clean.length - 3 : 0;
-    const more = extra ? "<span class=\"qc-file-note-more\">+" + extra + "</span>" : "";
-    return "<span class=\"qc-file-notes\">" + body + more + "</span>";
+    const more = extra ? "<span class=\"stock-act-file-note-more\">+" + extra + "</span>" : "";
+    return "<span class=\"stock-act-file-notes\">" + body + more + "</span>";
   }
 
   function compareFiledDesc(a, b) {
@@ -1947,7 +1947,6 @@
   }
 
   const RETURN_KEY = "sa:return";
-  const RETURN_KEY_OLD = "qc:return";
   let replaceWrapped = false;
   const PAGE_LABELS = {
     "index.html": "Tape",
@@ -1986,7 +1985,7 @@
     return path.slice(0, i + 1);
   }
 
-  function isQcHref(href) {
+  function isSaHref(href) {
     if (!href) return false;
     try {
       const u = new URL(href, location.href);
@@ -2010,40 +2009,18 @@
     return location.pathname + location.search + location.hash;
   }
 
-  const SCROLL_PREFIX = "qc:sy:";
+  const SCROLL_PREFIX = "sa:sy:";
   const SCROLL_BACK = "sa:scroll-back";
-  const SCROLL_BACK_OLD = "qc:scroll-back";
 
-  // One read of the pre-split key. A hit is copied onto the new key and the old key is removed.
-  function readMovedKey(key, oldKey) {
+  function readStoredKey(key) {
     const stores = [];
     try { stores.push(sessionStorage); } catch (e) {}
     try { stores.push(localStorage); } catch (e) {}
     for (let i = 0; i < stores.length; i++) {
-      let current = null;
       try {
-        current = stores[i].getItem(key);
-      } catch (e) {
-        continue;
-      }
-      if (current != null) return current;
-      let previous = null;
-      try {
-        previous = stores[i].getItem(oldKey);
-      } catch (e) {
-        continue;
-      }
-      if (previous == null) continue;
-      const home = stores[0] || stores[i];
-      try {
-        home.setItem(key, previous);
-      } catch (e) {
-        return previous;
-      }
-      for (let j = 0; j < stores.length; j++) {
-        try { stores[j].removeItem(oldKey); } catch (e) {}
-      }
-      return previous;
+        const current = stores[i].getItem(key);
+        if (current != null) return current;
+      } catch (e) {}
     }
     return null;
   }
@@ -2106,7 +2083,7 @@
 
   function shouldRestoreScroll() {
     try {
-      if (readMovedKey(SCROLL_BACK, SCROLL_BACK_OLD) === location.pathname + location.search) return true;
+      if (readStoredKey(SCROLL_BACK) === location.pathname + location.search) return true;
     } catch (e) {}
     return navIsBack();
   }
@@ -2192,8 +2169,8 @@
 
   function storedReturn() {
     try {
-      const v = readMovedKey(RETURN_KEY, RETURN_KEY_OLD);
-      if (!v || !isQcHref(v)) return "";
+      const v = readStoredKey(RETURN_KEY);
+      if (!v || !isSaHref(v)) return "";
       const u = new URL(v, location.href);
       if (pageFile(u.pathname) === pageFile(location.pathname)) return "";
       return u.pathname + u.search + u.hash;
@@ -2240,7 +2217,7 @@
   function resolveDest(fallbackHref) {
     const stored = storedReturn();
     const ref = document.referrer;
-    const fromRef = (ref && isQcHref(ref)) ? toLocal(ref) : "";
+    const fromRef = (ref && isSaHref(ref)) ? toLocal(ref) : "";
     const fallback = fallbackHref || "index.html";
     let dest = fallback;
     if (fromRef) {
@@ -2263,7 +2240,7 @@
 
   function canHistoryBack(ref, dest) {
     if (history.length < 2) return false;
-    if (!ref || !dest || !isQcHref(ref)) return false;
+    if (!ref || !dest || !isSaHref(ref)) return false;
     const r = parseHref(ref);
     const d = parseHref(dest);
     if (!r || !d) return false;
@@ -2276,21 +2253,21 @@
   function bindBack(el) {
     if (!el) return;
     // Fallback stays the page default. A second bindBack must not treat the resolved href as the default.
-    if (!el.getAttribute("data-qc-back-fallback")) {
-      el.setAttribute("data-qc-back-fallback", el.getAttribute("href") || "index.html");
+    if (!el.getAttribute("data-stock-act-back-fallback")) {
+      el.setAttribute("data-stock-act-back-fallback", el.getAttribute("href") || "index.html");
     }
-    if (!el.getAttribute("data-qc-back-label")) {
-      el.setAttribute("data-qc-back-label", String(el.textContent || "← Back").replace(/\s+/g, " ").trim());
+    if (!el.getAttribute("data-stock-act-back-label")) {
+      el.setAttribute("data-stock-act-back-label", String(el.textContent || "← Back").replace(/\s+/g, " ").trim());
     }
-    const fallbackHref = el.getAttribute("data-qc-back-fallback") || "index.html";
-    const fallbackLabel = el.getAttribute("data-qc-back-label") || "← Back";
+    const fallbackHref = el.getAttribute("data-stock-act-back-fallback") || "index.html";
+    const fallbackLabel = el.getAttribute("data-stock-act-back-label") || "← Back";
     const dest = resolveDest(fallbackHref);
-    if (isQcHref(dest) || dest === fallbackHref) {
+    if (isSaHref(dest) || dest === fallbackHref) {
       el.href = dest;
       el.textContent = labelFor(dest, fallbackLabel);
     }
-    if (el.dataset.qcBack === "1") return;
-    el.dataset.qcBack = "1";
+    if (el.dataset.saBack === "1") return;
+    el.dataset.saBack = "1";
     el.addEventListener("click", function (e) {
       if (e.defaultPrevented) return;
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -2409,22 +2386,6 @@
     });
   }
 
-  function bootMoreMenu() {
-    document.addEventListener("click", function (e) {
-      document.querySelectorAll("details.qc-more[open]").forEach(function (d) {
-        if (!d.contains(e.target)) d.removeAttribute("open");
-      });
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key !== "Escape") return;
-      document.querySelectorAll("details.qc-more[open]").forEach(function (d) {
-        d.removeAttribute("open");
-        const s = d.querySelector("summary");
-        if (s) s.focus();
-      });
-    });
-  }
-
   function bootNav() {
     const file = pageFile(location.pathname);
     if (LIST_FILES[file]) {
@@ -2440,11 +2401,10 @@
     }
   }
 
-  bootMoreMenu();
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootNav);
   else bootNav();
 
-  global.QC = {
+  global.SA = {
     esc: esc,
     isBond: isBond,
     isOptionLike: isOptionLike,

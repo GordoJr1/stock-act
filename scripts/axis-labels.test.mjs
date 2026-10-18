@@ -12,7 +12,7 @@ function check(name, ok, detail) {
   if (!ok) failed = true;
 }
 
-function loadQC() {
+function loadSA() {
   const sandbox = {
     console,
     document: {
@@ -36,12 +36,12 @@ function loadQC() {
   sandbox.window = sandbox;
   sandbox.global = sandbox;
   vm.createContext(sandbox);
-  vm.runInContext(fs.readFileSync(path.join(root, "qc.js"), "utf8"), sandbox, { filename: "qc.js" });
-  return sandbox.QC;
+  vm.runInContext(fs.readFileSync(path.join(root, "stock-act.js"), "utf8"), sandbox, { filename: "stock-act.js" });
+  return sandbox.SA;
 }
 
-const QC = loadQC();
-if (!QC || typeof QC.formatAxisPrice !== "function") {
+const SA = loadSA();
+if (!SA || typeof SA.formatAxisPrice !== "function") {
   console.log("FAIL  formatAxisPrice is missing");
   process.exit(1);
 }
@@ -53,7 +53,7 @@ function ticks(start, step, count) {
 }
 
 function labelsFor(start, step, count) {
-  return ticks(start, step, count).map((v) => QC.formatAxisPrice(v, step));
+  return ticks(start, step, count).map((v) => SA.formatAxisPrice(v, step));
 }
 
 function assertDistinct(name, start, step, count) {
@@ -107,7 +107,7 @@ check(
   quarters.join(" ") === "$4.25 $4.50",
   quarters.join(" ")
 );
-check("sub-$1 eighths show three decimals", QC.formatAxisPrice(0.125, 0.125) === "$0.125", QC.formatAxisPrice(0.125, 0.125));
+check("sub-$1 eighths show three decimals", SA.formatAxisPrice(0.125, 0.125) === "$0.125", SA.formatAxisPrice(0.125, 0.125));
 
 console.log(lines.join("\n"));
 if (failed) process.exit(1);

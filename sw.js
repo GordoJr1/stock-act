@@ -1,4 +1,4 @@
-const CACHE = "stock-act-v14";
+const CACHE = "stock-act-v17";
 const SHELL = [
   "./",
   "./index.html",
@@ -9,7 +9,7 @@ const SHELL = [
   "./tells.html",
   "./paper.html",
   "./shell.css",
-  "./qc.js",
+  "./stock-act.js",
   "./chart.js",
   "./refresh.js",
   "./manifest.webmanifest",
@@ -53,7 +53,7 @@ self.addEventListener("fetch", (event) => {
     || url.pathname.endsWith("/refresh.js")
     || url.pathname.endsWith("/sw.js")
     || url.pathname.endsWith("/shell.css")
-    || url.pathname.endsWith("/qc.js")
+    || url.pathname.endsWith("/stock-act.js")
     || url.pathname.endsWith("/chart.js");
   function storeIfOk(res, event) {
     if (res && res.ok) {

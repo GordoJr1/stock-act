@@ -1,5 +1,5 @@
 function axisDecimals(step) {
-  if (typeof QC !== "undefined" && typeof QC.axisDecimals === "function") return QC.axisDecimals(step);
+  if (typeof SA !== "undefined" && typeof SA.axisDecimals === "function") return SA.axisDecimals(step);
   const s = Math.abs(Number(step));
   if (!isFinite(s) || s === 0) return 2;
   let scaled = s;
@@ -14,7 +14,7 @@ function axisDecimals(step) {
 }
 
 function axisPrice(n, step) {
-  if (typeof QC !== "undefined" && typeof QC.formatAxisPrice === "function") return QC.formatAxisPrice(n, step);
+  if (typeof SA !== "undefined" && typeof SA.formatAxisPrice === "function") return SA.formatAxisPrice(n, step);
   const dec = axisDecimals(step);
   return "$" + Number(n).toFixed(dec);
 }
@@ -130,8 +130,8 @@ function tradeValue(m) {
   if (m.shares != null && m.price != null && m.shares > 0 && m.price > 0) {
     return Number(m.shares) * Number(m.price);
   }
-  if (m.amount && typeof QC !== "undefined" && QC.amountHigh) {
-    const value = QC.amountHigh(m.amount);
+  if (m.amount && typeof SA !== "undefined" && SA.amountHigh) {
+    const value = SA.amountHigh(m.amount);
     if (value > 0) return value;
   }
   return null;
@@ -257,11 +257,11 @@ const CHART_PALETTES = {
 };
 
 function rebindChartEvents(el) {
-  if (el.__qcUnbind) el.__qcUnbind();
+  if (el.__saUnbind) el.__saUnbind();
   const cleanups = [];
-  el.__qcUnbind = () => {
+  el.__saUnbind = () => {
     cleanups.forEach((fn) => fn());
-    el.__qcUnbind = null;
+    el.__saUnbind = null;
   };
   return (type, fn, opts) => {
     el.addEventListener(type, fn, opts);
@@ -320,7 +320,7 @@ function drawChart(points, marks, opts) {
   const xAt = (i) => pad.l + (i / Math.max(1, points.length - 1)) * (w - pad.l - pad.r);
   const yAt = (px) => priceTop + (1 - (px - min) / span) * priceH;
 
-  const themeKey = (opts.theme && CHART_PALETTES[opts.theme]) ? opts.theme : (window.QC_CHART_THEME || "cyan");
+  const themeKey = (opts.theme && CHART_PALETTES[opts.theme]) ? opts.theme : (window.SA_CHART_THEME || "cyan");
   const palette = CHART_PALETTES[themeKey] || CHART_PALETTES.cyan;
 
   const pts = points.map((p, i) => ({
@@ -396,7 +396,7 @@ function drawChart(points, marks, opts) {
   }
 
   function markFamily(m) {
-    return m && m.family === "politician" ? "politician" : "insider";
+    return m && m.family === "politician" ? "politician" : "filing";
   }
   function isSaleMark(m) {
     return !!(m && (m.side === "sale" || m.side === "sale_post"));
@@ -468,7 +468,7 @@ function drawChart(points, marks, opts) {
       mark: marksList[0],
       marks: marksList,
       side: sale ? "sale" : "purchase",
-      family: politician ? "politician" : "insider",
+      family: politician ? "politician" : "filing",
       x: x,
       y: cy,
       xPct: x / w,
@@ -480,7 +480,7 @@ function drawChart(points, marks, opts) {
       ? "<polygon points=\"0,-" + pinRpx + " " + pinRpx + ",0 0," + pinRpx + " -" + pinRpx + ",0\" fill=\"" + color + "\" stroke=\"#090d14\" stroke-width=\"1.6\" />"
       : "<circle cx=\"0\" cy=\"0\" r=\"" + pinRpx + "\" fill=\"" + color + "\" stroke=\"#090d14\" stroke-width=\"1.5\" />";
 
-    return "<g class=\"chart-mark" + (selected ? " is-selected" : "") + "\" data-i=\"" + id + "\" data-family=\"" + (politician ? "politician" : "insider") + "\" style=\"cursor:pointer\">" +
+    return "<g class=\"chart-mark" + (selected ? " is-selected" : "") + "\" data-i=\"" + id + "\" data-family=\"" + (politician ? "politician" : "filing") + "\" style=\"cursor:pointer\">" +
       "<circle cx=\"" + x.toFixed(1) + "\" cy=\"" + cy.toFixed(1) + "\" r=\"" + (isMobile ? 26 : 20) + "\" fill=\"transparent\" />" +
       "<g transform=\"translate(" + x.toFixed(1) + " " + cy.toFixed(1) + ") " + pinScale + "\">" +
         (selected ? "<circle cx=\"0\" cy=\"0\" r=\"" + (haloRpx + 4) + "\" fill=\"none\" stroke=\"#e3b41a\" stroke-width=\"2.4\" />" : "") +
@@ -491,8 +491,8 @@ function drawChart(points, marks, opts) {
     "</g>";
   }
 
-  const tradePinsHtml = buyClusters.map((c) => drawCluster(c, false, "insider")).join("") +
-                        sellClusters.map((c) => drawCluster(c, true, "insider")).join("") +
+  const tradePinsHtml = buyClusters.map((c) => drawCluster(c, false, "filing")).join("") +
+                        sellClusters.map((c) => drawCluster(c, true, "filing")).join("") +
                         polBuyClusters.map((c) => drawCluster(c, false, "politician")).join("") +
                         polSellClusters.map((c) => drawCluster(c, true, "politician")).join("");
 
@@ -512,21 +512,21 @@ function drawChart(points, marks, opts) {
       "<linearGradient id=\"underGlow\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\">" +
         glowStopsHtml +
       "</linearGradient>" +
-      "<linearGradient id=\"qc-sub-area\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">" +
+      "<linearGradient id=\"stock-act-sub-area\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">" +
         "<stop offset=\"0%\" stop-color=\"" + palette.primary + "\" stop-opacity=\"0.18\" />" +
         "<stop offset=\"100%\" stop-color=\"" + palette.primary + "\" stop-opacity=\"0.01\" />" +
       "</linearGradient>" +
     "</defs>" +
     gridLines +
-    (areaPath ? "<path d=\"" + areaPath + "\" fill=\"url(#qc-sub-area)\" />" : "") +
+    (areaPath ? "<path d=\"" + areaPath + "\" fill=\"url(#stock-act-sub-area)\" />" : "") +
     "<path d=\"" + spline + "\" fill=\"none\" stroke=\"url(#underGlow)\" stroke-width=\"" + (opts.glowWidth || 5.5) + "\" opacity=\"0.55\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />" +
-    "<path class=\"qc-spline-main\" d=\"" + spline + "\" fill=\"none\" stroke=\"url(#neonGradient)\" stroke-width=\"" + (opts.lineWidth || 2.2) + "\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"filter:" + palette.glowFilter + ";\" />" +
+    "<path class=\"stock-act-spline-main\" d=\"" + spline + "\" fill=\"none\" stroke=\"url(#neonGradient)\" stroke-width=\"" + (opts.lineWidth || 2.2) + "\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"filter:" + palette.glowFilter + ";\" />" +
     "<circle cx=\"" + lastPt.x.toFixed(1) + "\" cy=\"" + lastPt.y.toFixed(1) + "\" r=\"5.2\" fill=\"" + palette.light + "\" stroke=\"#ffffff\" stroke-width=\"1.7\" />" +
     tradePinsHtml +
-    "<g id=\"qc-scrubber-g\" style=\"display:none; pointer-events:none;\">" +
-      "<line id=\"qc-scrub-line\" x1=\"0\" y1=\"" + pad.t + "\" x2=\"0\" y2=\"" + priceBot + "\" stroke=\"rgba(255,255,255,0.22)\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\" />" +
-      "<circle id=\"qc-scrub-halo\" cx=\"0\" cy=\"0\" r=\"7.5\" fill=\"rgba(255,255,255,0.24)\" />" +
-      "<circle id=\"qc-scrub-dot\" cx=\"0\" cy=\"0\" r=\"3.8\" fill=\"#ffffff\" stroke=\"#0d141f\" stroke-width=\"2\" />" +
+    "<g id=\"stock-act-scrubber-g\" style=\"display:none; pointer-events:none;\">" +
+      "<line id=\"stock-act-scrub-line\" x1=\"0\" y1=\"" + pad.t + "\" x2=\"0\" y2=\"" + priceBot + "\" stroke=\"rgba(255,255,255,0.22)\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\" />" +
+      "<circle id=\"stock-act-scrub-halo\" cx=\"0\" cy=\"0\" r=\"7.5\" fill=\"rgba(255,255,255,0.24)\" />" +
+      "<circle id=\"stock-act-scrub-dot\" cx=\"0\" cy=\"0\" r=\"3.8\" fill=\"#ffffff\" stroke=\"#0d141f\" stroke-width=\"2\" />" +
     "</g>";
 
   paintYAxisLabels(wrap, svg, yBox, yTicks, yAt, w, h, pad, axisStep);
@@ -573,7 +573,7 @@ function drawChart(points, marks, opts) {
 function ensureInteractiveDomElements(wrap, palette) {
   if (!wrap) return;
 
-  const leftoverTerm = wrap.querySelector(".qc-terminal-pill");
+  const leftoverTerm = wrap.querySelector(".stock-act-terminal-pill");
   if (leftoverTerm) leftoverTerm.remove();
 
   const pop = wrap.querySelector("#mark-pop");
@@ -581,23 +581,23 @@ function ensureInteractiveDomElements(wrap, palette) {
     pop.style.boxShadow = palette.popShadow;
   }
 
-  let hoverPricePill = wrap.querySelector(".qc-hover-price-pill");
+  let hoverPricePill = wrap.querySelector(".stock-act-hover-price-pill");
   if (!hoverPricePill) {
     hoverPricePill = document.createElement("div");
-    hoverPricePill.className = "qc-hover-price-pill";
+    hoverPricePill.className = "stock-act-hover-price-pill";
     hoverPricePill.style.display = "none";
     wrap.appendChild(hoverPricePill);
   }
 
-  let hoverDatePill = wrap.querySelector(".qc-hover-date-pill");
+  let hoverDatePill = wrap.querySelector(".stock-act-hover-date-pill");
   if (!hoverDatePill) {
     hoverDatePill = document.createElement("div");
-    hoverDatePill.className = "qc-hover-date-pill";
+    hoverDatePill.className = "stock-act-hover-date-pill";
     hoverDatePill.style.display = "none";
     wrap.appendChild(hoverDatePill);
   }
 
-  const leftoverHud = wrap.querySelector(".qc-glass-hud");
+  const leftoverHud = wrap.querySelector(".stock-act-glass-hud");
   if (leftoverHud) leftoverHud.remove();
 }
 
@@ -606,8 +606,8 @@ function syncYAxisOverlayBox(yBox, wrap, svg) {
   const wr = wrap.getBoundingClientRect();
   const sr = svg.getBoundingClientRect();
   if (sr.width < 2 || sr.height < 2) return;
-  const pad = wrap._qcYPad;
-  const vw = wrap._qcYW;
+  const pad = wrap._saYPad;
+  const vw = wrap._saYW;
   if (!pad || !vw) return;
   // Left gutter only: wrap padding-box left → plot pad.l. Height matches the SVG.
   const originX = wr.left + wrap.clientLeft;
@@ -640,8 +640,8 @@ function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad, step) {
       wrap.appendChild(yBox);
     }
   }
-  wrap._qcYPad = pad;
-  wrap._qcYW = w;
+  wrap._saYPad = pad;
+  wrap._saYW = w;
   yBox.setAttribute("aria-hidden", "true");
   yBox.innerHTML = ticks.map((px) => {
     const topPct = (yAt(px) / h) * 100;
@@ -649,31 +649,31 @@ function paintYAxisLabels(wrap, svg, yBox, ticks, yAt, w, h, pad, step) {
   }).join("");
   syncYAxisOverlayBox(yBox, wrap, svg);
 
-  if (!wrap._qcYAxisRO && typeof ResizeObserver !== "undefined") {
-    wrap._qcYAxisRO = new ResizeObserver(function () {
+  if (!wrap._saYAxisRO && typeof ResizeObserver !== "undefined") {
+    wrap._saYAxisRO = new ResizeObserver(function () {
       syncYAxisOverlayBox(yBox, wrap, svg);
     });
-    wrap._qcYAxisRO.observe(svg);
-    wrap._qcYAxisRO.observe(wrap);
+    wrap._saYAxisRO.observe(svg);
+    wrap._saYAxisRO.observe(wrap);
   }
 }
 
 function hideChartHoverUi(wrap, svg) {
-  const hoverPricePill = wrap && wrap.querySelector(".qc-hover-price-pill");
-  const hoverDatePill = wrap && wrap.querySelector(".qc-hover-date-pill");
-  const scrubG = svg && svg.querySelector("#qc-scrubber-g");
+  const hoverPricePill = wrap && wrap.querySelector(".stock-act-hover-price-pill");
+  const hoverDatePill = wrap && wrap.querySelector(".stock-act-hover-date-pill");
+  const scrubG = svg && svg.querySelector("#stock-act-scrubber-g");
   if (hoverPricePill) hoverPricePill.style.display = "none";
   if (hoverDatePill) hoverDatePill.style.display = "none";
   if (scrubG) scrubG.style.display = "none";
 }
 
 function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
-  const scrubG = svg.querySelector("#qc-scrubber-g");
-  const scrubLine = svg.querySelector("#qc-scrub-line");
-  const scrubDot = svg.querySelector("#qc-scrub-dot");
-  const scrubHalo = svg.querySelector("#qc-scrub-halo");
-  const hoverPricePill = wrap.querySelector(".qc-hover-price-pill");
-  const hoverDatePill = wrap.querySelector(".qc-hover-date-pill");
+  const scrubG = svg.querySelector("#stock-act-scrubber-g");
+  const scrubLine = svg.querySelector("#stock-act-scrub-line");
+  const scrubDot = svg.querySelector("#stock-act-scrub-dot");
+  const scrubHalo = svg.querySelector("#stock-act-scrub-halo");
+  const hoverPricePill = wrap.querySelector(".stock-act-hover-price-pill");
+  const hoverDatePill = wrap.querySelector(".stock-act-hover-date-pill");
 
   function onPointerMove(e) {
     const pop = wrap.querySelector("#mark-pop");
@@ -824,7 +824,7 @@ function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
 function sampleSplineInWrap(svg, wrap) {
   const pts = [];
   if (!svg || !wrap || !svg.querySelector) return pts;
-  const path = svg.querySelector(".qc-spline-main");
+  const path = svg.querySelector(".stock-act-spline-main");
   if (!path || typeof path.getTotalLength !== "function") return pts;
   const wr = wrap.getBoundingClientRect();
   const sr = svg.getBoundingClientRect();

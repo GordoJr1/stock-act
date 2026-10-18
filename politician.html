@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
   <title>Stock Act</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -466,13 +466,13 @@
       overflow: visible;
     }
     @media (min-width: 821px) {
-      .qc-member-desk .holdings .focus .chart-wrap { height: auto; }
-      .qc-member-desk .holdings .focus #chart-svg { height: 300px; flex-basis: 300px; }
+      .stock-act-member-desk .holdings .focus .chart-wrap { height: auto; }
+      .stock-act-member-desk .holdings .focus #chart-svg { height: 300px; flex-basis: 300px; }
     }
-    .holdings .focus .qc-spline-main {
+    .holdings .focus .stock-act-spline-main {
       filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22));
     }
-    .holdings .focus .qc-hover-price-pill {
+    .holdings .focus .stock-act-hover-price-pill {
       position: absolute;
       background: #ffffff;
       color: #0b111a;
@@ -486,7 +486,7 @@
       transform: translateY(-50%);
       z-index: 10;
     }
-    .holdings .focus .qc-hover-date-pill {
+    .holdings .focus .stock-act-hover-date-pill {
       position: absolute;
       bottom: 4px;
       background: #0d1522;
@@ -570,8 +570,8 @@
     }
     .tape-head .kicker { margin: 0; }
     .tape-head .count { color: var(--mute); font-size: 0.82rem; }
-    .qc-pol-desk .qc-txn-tape { cursor: pointer; }
-    .qc-pol-desk .qc-txn-tape.on {
+    .stock-act-pol-desk .stock-act-txn-tape { cursor: pointer; }
+    .stock-act-pol-desk .stock-act-txn-tape.on {
       background: rgba(227, 180, 26, 0.1);
       box-shadow: inset 0 0 0 1px rgba(227, 180, 26, 0.35);
     }
@@ -649,39 +649,28 @@
       font-family: "IBM Plex Sans", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=182" />
+  <link rel="stylesheet" href="shell.css?v=186" />
   <style>
-    .qc-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
-    .qc-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
+    .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
+    .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
     @media (max-width: 899px) {
-      .qc-txn-list.qc-tape-list > .qc-txn-tape .opt-tag { display: inline-block !important; flex: 0 0 auto; }
-      .qc-txn-list.qc-tape-list > .qc-txn-tape .qc-txn-tk:has(.opt-tag) .qc-txn-kind { display: none !important; }
+      .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .opt-tag { display: inline-block !important; flex: 0 0 auto; }
+      .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-tk:has(.opt-tag) .stock-act-txn-kind { display: none !important; }
     }
   </style>
 </head>
-<body class="qc-v2">
-  <a class="qc-skip" href="#main">Skip to content</a>
-  <header class="qc-header">
-    <div class="wrap qc-header-inner">
+<body class="stock-act-v2">
+  <a class="stock-act-skip" href="#main">Skip to content</a>
+  <header class="stock-act-header">
+    <div class="wrap stock-act-header-inner">
       <a class="mark" href="index.html">Stock <span>Act</span></a>
-      <nav class="qc-nav" aria-label="Politician tape">
+      <nav class="stock-act-nav" aria-label="Politician tape">
         <a href="index.html" title="Live politician trades">Tape</a>
         <a href="landed.html" title="New public filings">Filed</a>
         <a href="tells.html" title="Buys that preceded spikes">Patterns</a>
         <a href="signals.html" title="Recency-weighted buy heat">Heat</a>
         <a href="paper.html" title="Copy on the filed date">Paper</a>
       </nav>
-      <div class="qc-modes">
-        <details class="qc-more">
-          <summary class="qc-mode" title="Mines, Claims, Canada and Research">More</summary>
-          <div class="qc-more-menu">
-            <a href="https://gordojr1.github.io/quantity-capital/beta.html" title="Issuer mine profiles">Mines</a>
-            <a href="https://gordojr1.github.io/quantity-capital/claims.html" title="Mining claims map">Claims</a>
-            <a href="https://gordojr1.github.io/quantity-capital/canada.html" title="Canadian mining totals">Canada</a>
-            <a href="https://gordojr1.github.io/quantity-capital/research.html" title="What our studies found">Research</a>
-          </div>
-        </details>
-      </div>
     </div>
   </header>
   <div class="wrap" id="main">
@@ -696,7 +685,7 @@
       <div class="bio" id="bio"></div>
     </details>
     <div class="stats" id="stats" hidden></div>
-    <div class="qc-member-desk qc-pol-desk" id="pol-desk">
+    <div class="stock-act-member-desk stock-act-pol-desk" id="pol-desk">
     <section class="holdings" id="holdings" hidden>
       <div class="hold-stage chart-col" id="chart-col">
         <div class="link-bar" id="link-bar">
@@ -736,7 +725,7 @@
       <p class="kicker">Trade tape</p>
       <p class="count" id="tape-count"></p>
     </div>
-      <ol class="qc-txn-list qc-tape-list qc-show-opt" id="rows" aria-label="Politician tape"></ol>
+      <ol class="stock-act-txn-list stock-act-tape-list stock-act-show-opt" id="rows" aria-label="Politician tape"></ol>
     <div class="tape-more" id="tape-more-row" hidden>
       <button type="button" id="tape-more">Show full list</button>
     </div>
@@ -744,26 +733,26 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="qc.js?v=149"></script>
-  <script src="chart.js?v=125"></script>
+  <script src="stock-act.js?v=152"></script>
+  <script src="chart.js?v=126"></script>
   <script>
-    const isOptionLike = QC.isOptionLike;
-    const isBond = QC.isBond;
-    const issuerName = QC.issuerName;
-    const OVERLAP_RULES = QC.OVERLAP_RULES;
-    const overlapHit = QC.overlapHit;
+    const isOptionLike = SA.isOptionLike;
+    const isBond = SA.isBond;
+    const issuerName = SA.issuerName;
+    const OVERLAP_RULES = SA.OVERLAP_RULES;
+    const overlapHit = SA.overlapHit;
     function tickerInfo(t, file) {
       if (t && t.code && t.company) {
         return { code: t.code, name: t.company, industry: t.industry || "—" };
       }
-      return QC.tickerInfo(t, file);
+      return SA.tickerInfo(t, file);
     }
-    const cleanAsset = QC.cleanAsset;
-    const amountHigh = QC.amountHigh;
-    const formatMoney = QC.formatMoney;
-    const signedMoney = QC.signedMoney;
-    const prettyDate = QC.prettyDate;
-    const esc = QC.esc;
+    const cleanAsset = SA.cleanAsset;
+    const amountHigh = SA.amountHigh;
+    const formatMoney = SA.formatMoney;
+    const signedMoney = SA.signedMoney;
+    const prettyDate = SA.prettyDate;
+    const esc = SA.esc;
 
     let id = new URLSearchParams(location.search).get("id");
     if (!id) {
@@ -931,11 +920,11 @@
         .sort((a, b) => b.trade_date.localeCompare(a.trade_date));
     }
 
-    const BAD_TICKERS = QC.BAD_TICKERS;
+    const BAD_TICKERS = SA.BAD_TICKERS;
     const SLICE = ["#e3b41a", "#3db8c4", "#1e4b8a", "#7dcf7a", "#ef7a74", "#9b7ed9", "#e08a4a", "#6b7582"];
     const BOOK_RANGES = ["3m", "1y", "3y"];
     const RANGE_LABEL = { "3m": "3-month", "1y": "1-year", "3y": "3-year" };
-    const isChartTicker = QC.isChartTicker;
+    const isChartTicker = SA.isChartTicker;
 
     let allRows = [];
     let tapeRows = [];
@@ -1187,7 +1176,7 @@
         if (pos.buys) bits.push((pos.buys === 1 ? "1 buy" : pos.buys + " buys"));
         bits.push(formatMoney(pos.value));
       }
-      if (t) bits.push("marked " + prettyDate(t.trade_date) + " " + QC.sideLabel(t.side).toLowerCase());
+      if (t) bits.push("marked " + prettyDate(t.trade_date) + " " + SA.sideLabel(t.side).toLowerCase());
       label.innerHTML = bits.join(" · ");
       if (dot) dot.style.background = colorForKey(key, book.positions);
     }
@@ -1253,7 +1242,7 @@
       const marks = (rec.marks && rec.marks.length) ? rec.marks : [rec.mark || {}];
       const m = marks[0] || {};
       const buy = (rec.side || m.side) !== "sale";
-      const amt = m.amount ? QC.formatAmountRange(m.amount) : "";
+      const amt = m.amount ? SA.formatAmountRange(m.amount) : "";
       const mDate = m.date ? esc(prettyDate(m.date)) : "";
       const title = m.filer || m.label || "";
       pop.innerHTML =
@@ -1531,10 +1520,10 @@
       if (!list) return;
       const key = selectedKey;
       const full = key ? tradesForKey(key) : tapeRows;
-      const page = QC.TAPE_PAGE;
+      const page = SA.TAPE_PAGE;
       const limit = showAllTape ? 0 : page;
       list.hidden = false;
-      list.innerHTML = QC.politicianTapeListHtml(full, {
+      list.innerHTML = SA.politicianTapeListHtml(full, {
         nameSelf: true,
         tickerSelf: true,
         filerId: id,
@@ -1567,7 +1556,7 @@
       const list = document.getElementById("rows");
       if (!list) return;
       const onId = visibleTradeId();
-      list.querySelectorAll(".qc-txn-tape[data-id]").forEach((el) => {
+      list.querySelectorAll(".stock-act-txn-tape[data-id]").forEach((el) => {
         const tid = el.getAttribute("data-id");
         el.classList.toggle("on", !!(onId && tid === onId));
         el.setAttribute("aria-pressed", onId && tid === onId ? "true" : "false");
@@ -1670,16 +1659,16 @@
       }
       if (rows) {
         rows.addEventListener("click", (e) => {
-          const row = e.target.closest(".qc-txn-tape[data-id]");
+          const row = e.target.closest(".stock-act-txn-tape[data-id]");
           if (!row) return;
           const link = e.target.closest("a");
           if (link) {
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
             const href = link.getAttribute("href") || "";
             const pin = /ticker\.html/.test(href) ||
-              link.classList.contains("qc-txn-company") ||
-              link.classList.contains("qc-txn-tk") ||
-              link.classList.contains("qc-txn-co");
+              link.classList.contains("stock-act-txn-company") ||
+              link.classList.contains("stock-act-txn-tk") ||
+              link.classList.contains("stock-act-txn-co");
             if (pin) e.preventDefault();
             else return;
           }
@@ -1687,7 +1676,7 @@
         });
         rows.addEventListener("keydown", (e) => {
           if (e.key !== "Enter" && e.key !== " ") return;
-          const row = e.target.closest(".qc-txn-tape[data-id]");
+          const row = e.target.closest(".stock-act-txn-tape[data-id]");
           if (!row) return;
           e.preventDefault();
           selectTrade(row.getAttribute("data-id"));
@@ -1711,7 +1700,7 @@
     function paint(rows, lookup) {
       tickerLookup = lookup || {};
       allRows = rows || [];
-      tapeRows = (rows || []).map((t) => (t && t.code && t.company) ? t : QC.enrich(t, tickerLookup));
+      tapeRows = (rows || []).map((t) => (t && t.code && t.company) ? t : SA.enrich(t, tickerLookup));
       if (rows[0]) document.getElementById("who").textContent = rows[0].filer;
       const stats = document.getElementById("stats");
       if (stats) {
@@ -1826,7 +1815,7 @@
         if (personRes.ok) data = await personRes.json();
       } catch (e) {}
       const asof = document.getElementById("asof");
-      if (asof) asof.textContent = QC.asOfLabel(data.collected || filerIndex.collected);
+      if (asof) asof.textContent = SA.asOfLabel(data.collected || filerIndex.collected);
       const rows = threeYearRows(data);
       const bio = (bios.people || {})[id] || null;
       const fromTrades = (data.trades || []).find((t) => t.filer_id === id);
@@ -1835,7 +1824,7 @@
         return;
       }
       paint(rows, {});
-      QC.loadFilingNotes().then(() => { if (tapeRows.length) paintTape(); });
+      SA.loadFilingNotes().then(() => { if (tapeRows.length) paintTape(); });
       paintHeroFacts(bio);
       paintBio(bio, findOverlaps(bio, rows, {}));
       const bioPerson = (bios.people || {})[id] || {};
