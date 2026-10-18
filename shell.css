@@ -204,6 +204,7 @@ summary:focus-visible,
   .qc-modes {
     gap: 4px;
     flex-wrap: nowrap;
+    margin-left: auto;
   }
   .qc-mode {
     font-size: 0.62rem;
@@ -300,6 +301,7 @@ summary:focus-visible,
 
 @media (min-width: 821px) {
   .tabbar { display: none !important; }
+  .qc-modes { display: none; }
 }
 
 .qc-txn-head {
