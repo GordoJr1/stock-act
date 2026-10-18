@@ -57,7 +57,7 @@
     nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--gold); }
-    .back { color: #38bdf8; text-decoration: none; }
+    .back { color: var(--accent); text-decoration: none; }
     .kicker { color: var(--gold); margin: 8px 0 4px; }
     h1 { font-size: 1.5rem; line-height: 1.15; margin: 0; }
     .hero {
@@ -534,6 +534,7 @@
     .holdings .focus .mark-pop .pop-close {
       background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12);
       color: #94a3b8; width: 22px; height: 22px; border-radius: 50%;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       display: flex; align-items: center; justify-content: center; cursor: pointer;
       font-size: 11.5px; line-height: 1; padding: 0;
     }
@@ -542,7 +543,7 @@
       font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace; font-size: 12px; max-width: 100%;
     }
     .holdings .focus .mark-pop .pop-single-amt { color: #ffffff; font-weight: 700; }
-    .holdings .focus .mark-pop .pop-dot { color: #64748b; }
+    .holdings .focus .mark-pop .pop-dot { color: #94a3b8; }
     .holdings .focus .mark-pop .pop-single-date { color: #38bdf8; font-weight: 600; overflow-wrap: anywhere; }
     .holdings .focus .chart-y {
       position: absolute; left: 0; pointer-events: none; z-index: 4;
@@ -655,7 +656,7 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=191" />
+  <link rel="stylesheet" href="shell.css?v=192" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }

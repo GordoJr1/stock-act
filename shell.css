@@ -491,8 +491,8 @@ summary:focus-visible,
 }
 .stock-act-txn-name:hover,
 .stock-act-txn a.stock-act-txn-name:hover { color: var(--accent, #36999d); }
-body.stock-act-v2 .stock-act-txn-name:hover,
-body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-accent-fg, #8fdde0); }
+body.stock-act-v2-phone .stock-act-txn-name:hover,
+body.stock-act-v2-phone .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-accent-fg, #8fdde0); }
 .stock-act-txn-tk,
 .stock-act-txn a.stock-act-txn-tk {
   flex: 0 0 auto;
@@ -544,7 +544,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
   border: 1px solid #6b7582;
   color: #c5cdd6;
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-left: 0;
@@ -580,7 +580,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
 }
 .stock-act-txn-tape .stock-act-txn-tk .opt-tag { margin-left: 0; }
 .stock-act-txn-tag.hot { border-color: var(--gold, #e3b41a); color: var(--gold, #e3b41a); }
-.stock-act-txn-tag.ceo { border-color: var(--gold, #e3b41a); color: var(--gold, #e3b41a); }
+.stock-act-txn-tag.ceo { border-color: #7dcf7a; color: #7dcf7a; }
 .stock-act-txn-hero,
 .stock-act-txn .stock-act-txn-hero,
 .stock-act-txn-hero.is-shares {
@@ -649,7 +649,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
   .stock-act-txn a.stock-act-txn-name { font-size: 0.92rem; }
   .stock-act-txn-hero,
   .stock-act-txn .stock-act-txn-hero { font-size: 1.2rem; }
-  .stock-act-txn-meta { font-size: calc(0.68rem + 1px); color: #b7c1cc; }
+  .stock-act-txn-meta { font-size: calc(0.6875rem + 1px); color: #b7c1cc; }
   .stock-act-txn-legend { font-size: 0.66rem; }
   .stock-act-txn-head { margin: 14px 0 8px; }
 }
@@ -965,7 +965,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
     color: var(--mute, #a7b1bd);
     font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
-    font-size: 0.68rem;
+    font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 1.25;
@@ -986,7 +986,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
     display: block;
     grid-area: date;
     color: #b7c1cc;
-    font-size: calc(0.68rem + 1px);
+    font-size: calc(0.6875rem + 1px);
     white-space: nowrap;
     min-width: 0;
   }
@@ -1241,7 +1241,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
     grid-area: chip;
     justify-self: start;
     padding: 2px 8px;
-    font-size: 0.68rem;
+    font-size: 0.6875rem;
   }
   .stock-act-txn .stock-act-txn-date {
     grid-area: date;
@@ -1364,7 +1364,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--mute, #a7b1bd);
-    font-size: 0.68rem;
+    font-size: 0.6875rem;
     line-height: 1.25;
     font-weight: 400;
     letter-spacing: 0;
@@ -1656,7 +1656,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-cols .stock-act-txn-after,
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-cols .stock-act-txn-held {
     font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-    font-size: 0.68rem;
+    font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -1715,7 +1715,7 @@ body.stock-act-v2 .stock-act-txn a.stock-act-txn-name:hover { color: var(--v2-ac
   margin: 4px 0 0;
   font-size: 0.82rem;
 }
-.ident-nav .back { color: #38bdf8; text-decoration: none; }
+.ident-nav .back { color: var(--accent, #36999d); text-decoration: none; }
 @media (max-width: 820px) {
   a.back,
   .ident-nav .back {
@@ -2021,7 +2021,7 @@ body.stock-act-v2 #main > h1, body.stock-act-v2 main > h1, body.stock-act-v2 .wr
 }
 body.stock-act-v2 .page-head:not(.ident) h1 { font-size: 30px; line-height: 1.1; }
 body.stock-act-v2 .page-head .asof, body.stock-act-v2 .asof { color: var(--v2-sub); }
-body.stock-act-v2 .kicker { color: var(--gold, #e3b41a); }
+body.stock-act-v2 .kicker { color: var(--v2-buy-text); }
 body.stock-act-v2 .lede { color: var(--paper, #d8dde3); }
 body.stock-act-v2 .muted, body.stock-act-v2 .drop-meta, body.stock-act-v2 .count { color: var(--v2-sub); }
 
@@ -2037,12 +2037,12 @@ body.stock-act-v2 .card, body.stock-act-v2 .play, body.stock-act-v2 .lead, body.
   background: var(--v2-card); border-top-color: var(--v2-border); border-right-color: var(--v2-border);
   border-bottom-color: var(--v2-border); border-radius: 14px;
 }
-body.stock-act-v2-cards .card:not(.now):not(.conflict):not(.follow-card) { border-left-color: var(--gold, #e3b41a); }
+body.stock-act-v2-cards .card:not(.now):not(.conflict):not(.follow-card) { border-left-color: var(--v2-buy-bar); }
 body.stock-act-v2 .bio article { background: var(--v2-chart); border-top-color: var(--v2-line); border-right-color: var(--v2-line); border-bottom-color: var(--v2-line); border-radius: 12px; }
 body.stock-act-v2 .holdings .focus { background: var(--v2-chart); border-color: var(--v2-line); border-radius: 12px; }
 body.stock-act-v2 .explain h3, body.stock-act-v2 .bio h3, body.stock-act-v2 .bio .subhead { color: var(--white, #eef2f5); }
 body.stock-act-v2 .rank { color: var(--v2-sub); }
-body.stock-act-v2 .card:first-child .rank, body.stock-act-v2 table.rep tbody tr:first-child .rank { color: var(--gold, #e3b41a); }
+body.stock-act-v2 .card:first-child .rank, body.stock-act-v2 table.rep tbody tr:first-child .rank { color: var(--v2-buy-text); }
 body.stock-act-v2 .rate { color: var(--white, #eef2f5); }
 body.stock-act-v2 .rate span,
 body.stock-act-v2 .lag span { font-size: 0.6875rem; }
@@ -2053,7 +2053,7 @@ body.stock-act-v2 .who-list a:hover, body.stock-act-v2 .card h3 a:hover, body.st
 body.stock-act-v2 .who:hover { color: var(--v2-accent-fg); }
 
 body.stock-act-v2 .drop-head { border-bottom: 1px solid var(--v2-line); }
-body.stock-act-v2 .gate, body.stock-act-v2 .lag { color: var(--gold, #e3b41a); }
+body.stock-act-v2 .gate, body.stock-act-v2 .lag { color: var(--v2-buy-text); }
 body.stock-act-v2 h2 { color: var(--white, #eef2f5); }
 
 body.stock-act-v2 .stats { background: var(--v2-card); border-color: var(--v2-border); border-radius: 14px; overflow: hidden; }
@@ -2072,17 +2072,17 @@ body.stock-act-v2 a.chip:hover, body.stock-act-v2 button.chip:hover, body.stock-
 }
 body.stock-act-v2 a.chip.on, body.stock-act-v2 button.chip.on,
 body.stock-act-v2 .board-tabs button.on, body.stock-act-v2 .rep-windows button.on, body.stock-act-v2 .alloc-sort button.on {
-  color: #1a1d26; background: #e3b41a; border-color: #e3b41a;
+  color: #04140a; background: var(--v2-buy-bar); border-color: var(--v2-buy-bar);
 }
 body.stock-act-v2 .board-tabs { border-color: var(--v2-border); border-radius: 12px; overflow: hidden; }
 body.stock-act-v2 .alloc-sort-label { color: var(--v2-sub); }
 body.stock-act-v2 .hold-tile { border-radius: 10px; }
-body.stock-act-v2 .hold-tile.on { border-color: #e3b41a; }
+body.stock-act-v2 .hold-tile.on { border-color: var(--v2-buy-bar); }
 body.stock-act-v2 .tag, body.stock-act-v2 .label, body.stock-act-v2 .opt-tag, body.stock-act-v2 .holdings .focus .chip { border-radius: 6px; }
-body.stock-act-v2 .tag.hot { color: var(--gold, #e3b41a); border-color: var(--gold, #e3b41a); background: rgba(227, 180, 26, 0.12); }
+body.stock-act-v2 .tag.hot { color: var(--v2-chip-fg); border-color: var(--v2-chip-bd); background: var(--v2-chip-bg); }
 body.stock-act-v2 .tag.warn, body.stock-act-v2 .opt-tag, body.stock-act-v2 .stock-act-empty-filings { color: var(--v2-gold-fg); border-color: var(--v2-gold-bd); background: var(--v2-gold-bg); }
-body.stock-act-v2 .label { color: var(--gold, #e3b41a); border-color: var(--gold, #e3b41a); background: rgba(227, 180, 26, 0.12); }
-body.stock-act-v2 .bar > i { background: var(--accent, #36999d); }
+body.stock-act-v2 .label { color: var(--v2-chip-fg); border-color: var(--v2-chip-bd); background: var(--v2-chip-bg); }
+body.stock-act-v2 .bar > i { background: var(--v2-buy-bar); }
 
 body.stock-act-v2 .btn, body.stock-act-v2 .more-row button, body.stock-act-v2 button.more, body.stock-act-v2 .series-more,
 body.stock-act-v2 .hold-toggle, body.stock-act-v2 .clear-btn, body.stock-act-v2 .landed-chip, body.stock-act-v2 button.stock-act-track-more,
@@ -2092,15 +2092,15 @@ body.stock-act-v2 #search-form button.dl, body.stock-act-v2 .stock-act-follow-al
 }
 body.stock-act-v2 .btn:hover, body.stock-act-v2 .more-row button:hover, body.stock-act-v2 button.more:hover, body.stock-act-v2 .series-more:hover,
 body.stock-act-v2 .hold-toggle:hover, body.stock-act-v2 .clear-btn:hover, body.stock-act-v2 .landed-chip:hover,
-body.stock-act-v2 #search-form button.dl:hover { border-color: #e3b41a; color: #e3b41a; background: transparent; }
+body.stock-act-v2 #search-form button.dl:hover { border-color: var(--v2-buy-bar); color: var(--v2-buy-text); background: transparent; }
 body.stock-act-v2 .btn.fill, body.stock-act-v2 #search-form button[type="submit"] {
-  border-radius: 10px; background: #e3b41a; border-color: #e3b41a; color: #1a1d26;
+  border-radius: 10px; background: var(--v2-buy-bar); border-color: var(--v2-buy-bar); color: #04140a;
 }
 
 body.stock-act-v2 details.how > summary, body.stock-act-v2 .bio-wrap > summary, body.stock-act-v2 .paper-filters > summary, body.stock-act-v2 .play-more > summary {
   color: var(--white, #eef2f5); font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; letter-spacing: 0.1em;
 }
-body.stock-act-v2 details.how > summary::before, body.stock-act-v2 .paper-filters > summary::before { color: var(--gold, #e3b41a); }
+body.stock-act-v2 details.how > summary::before, body.stock-act-v2 .paper-filters > summary::before { color: var(--v2-buy-text); }
 body.stock-act-v2 details.how .body { color: var(--paper, #d8dde3); }
 
 body.stock-act-v2 .picker input, body.stock-act-v2 .picker select, body.stock-act-v2 .filters input, body.stock-act-v2 .filters select, body.stock-act-v2 #search {
@@ -2126,25 +2126,25 @@ body.stock-act-v2 .stock-act-txn { border-top-color: var(--v2-border); border-ri
 body.stock-act-v2 .stock-act-txn-head, body.stock-act-v2 .stock-act-txn-cols { color: var(--v2-sub); }
 
 body.stock-act-v2 .stock-act-txn-list > .day h2, body.stock-act-v2 .stock-act-pol-desk .day h2 { color: var(--paper, #d8dde3); }
-body.stock-act-v2 .stock-act-txn-list > .day.fresh h2, body.stock-act-v2 .stock-act-pol-desk .day.fresh h2 { color: var(--gold, #e3b41a); }
-body.stock-act-v2 .stock-act-txn-tag.hot { color: var(--gold, #e3b41a); border-color: var(--gold, #e3b41a); background: rgba(227, 180, 26, 0.12); border-radius: 6px; }
+body.stock-act-v2 .stock-act-txn-list > .day.fresh h2, body.stock-act-v2 .stock-act-pol-desk .day.fresh h2 { color: var(--v2-buy-text); }
+body.stock-act-v2 .stock-act-txn-tag.hot { color: var(--v2-chip-fg); border-color: var(--v2-chip-bd); background: var(--v2-chip-bg); border-radius: 6px; }
 body.stock-act-v2 .tape-more button { border-radius: 10px; border-color: var(--v2-border); color: var(--white, #eef2f5); }
-body.stock-act-v2 .tape-more button:hover { border-color: #e3b41a; color: #e3b41a; }
-body.stock-act-v2 .ticket-more > summary { color: var(--gold, #e3b41a); }
+body.stock-act-v2 .tape-more button:hover { border-color: var(--v2-buy-bar); color: var(--v2-buy-text); }
+body.stock-act-v2 .ticket-more > summary { color: var(--v2-buy-text); }
 
 body.stock-act-v2 .price-pill { background: var(--v2-card); border-color: var(--v2-border); border-radius: 12px; color: var(--white, #eef2f5); }
 body.stock-act-v2 .price-pill b { color: var(--white, #eef2f5); }
 body.stock-act-v2 .range { background: var(--v2-chart); border-color: var(--v2-line); }
-body.stock-act-v2 .range button.on { color: #1a1d26; background: #e3b41a; border-color: #e3b41a; box-shadow: none; }
+body.stock-act-v2 .range button.on { color: #04140a; background: var(--v2-buy-bar); box-shadow: none; }
 
 body.stock-act-v2 .hud, body.stock-act-v2 .layers, body.stock-act-v2 .status { border-color: var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 #search-results { border-color: var(--v2-border); border-radius: 12px; background: var(--v2-card); }
 body.stock-act-v2 #search-results button { border-color: var(--v2-line); }
-body.stock-act-v2 .hit .who, body.stock-act-v2 .pop .holder { color: var(--gold, #e3b41a); }
+body.stock-act-v2 .hit .who, body.stock-act-v2 .pop .holder { color: var(--v2-buy-text); }
 body.stock-act-v2 .stock-act-follow-alerts { background: var(--v2-card); border: 1px solid var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 .stock-act-follow-alerts .hd { color: var(--white, #eef2f5); }
-body.stock-act-v2 .stock-act-follow-alerts .acts a:hover, body.stock-act-v2 .stock-act-follow-alerts .acts button:hover { border-color: var(--gold, #e3b41a); color: var(--gold, #e3b41a); }
-body.stock-act-v2 .stock-act-follow-tag { color: var(--gold, #e3b41a); background: rgba(227, 180, 26, 0.12); border-color: var(--gold, #e3b41a); border-radius: 6px; }
+body.stock-act-v2 .stock-act-follow-alerts .acts a:hover, body.stock-act-v2 .stock-act-follow-alerts .acts button:hover { border-color: var(--v2-buy-bar); color: var(--v2-buy-text); }
+body.stock-act-v2 .stock-act-follow-tag { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); border-radius: 6px; }
 body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #d8dde3); border-color: var(--v2-border); border-radius: 6px; }
 
 @media (max-width: 899px) {
@@ -2180,15 +2180,15 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #d8dde3); border-col
   body.stock-act-v2-phone #windows .chip {
     border-radius: 10px; background: var(--v2-card); border-color: var(--v2-border); color: var(--paper, #d8dde3); font-weight: 700;
   }
-  body.stock-act-v2-phone #windows .chip.on { color: #1a1d26; background: #e3b41a; border-color: #e3b41a; }
+  body.stock-act-v2-phone #windows .chip.on { color: #04140a; background: var(--v2-buy-bar); border-color: var(--v2-buy-bar); }
   body.stock-act-v2-phone .picker input { background: var(--v2-card); border-color: var(--v2-border); border-radius: 10px; }
   body.stock-act-v2-phone .more-row .btn { border-radius: 10px; border: 1px solid var(--v2-border); color: var(--white, #eef2f5); min-height: 44px; }
   body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list { background: var(--v2-card); border-color: var(--v2-border); }
   body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list > .day h2 { color: var(--paper, #d8dde3); }
-  body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list > .day.fresh h2 { color: var(--gold, #e3b41a); }
+  body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list > .day.fresh h2 { color: var(--v2-buy-text); }
   body.stock-act-v2-phone .stock-act-follow-alerts .hd { color: var(--white, #eef2f5); }
   body.stock-act-v2-phone .stock-act-txn-tag.stock-act-basket-chip { color: var(--v2-accent-fg); border-color: var(--v2-accent-bd); }
-  body.stock-act-v2-phone .stock-act-follow-tag { color: var(--gold, #e3b41a); background: rgba(227, 180, 26, 0.12); border-color: var(--gold, #e3b41a); }
+  body.stock-act-v2-phone .stock-act-follow-tag { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
   body.stock-act-v2-phone .stock-act-plan-tag { color: var(--paper, #d8dde3); border-color: var(--v2-border); }
   body.stock-act-v2-phone #basket .stat b, body.stock-act-v2-phone #basket .stock-act-stats dd { color: var(--white, #eef2f5); }
   body.stock-act-v2-phone .stock-act-issuer { background: var(--v2-card); border-color: var(--v2-border); }

@@ -412,7 +412,7 @@
       border: 1px solid var(--gold);
       color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
@@ -822,7 +822,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 0.68rem;
+        font-size: 0.6875rem;
       }
       #board .board-co { font-size: 0.72rem; }
       #board .board-rank { font-size: 0.78rem; }
@@ -895,7 +895,7 @@
       border: 1px solid var(--gold);
       color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
@@ -1009,7 +1009,7 @@
       padding: 6px 8px 4px 0;
     }
     #chart-svg { width: 100%; height: 220px; display: block; background: transparent; }
-    .chart-y, .chart-x { color: var(--mute); font-size: 0.68rem; line-height: 1; }
+    .chart-y, .chart-x { color: var(--mute); font-size: 0.6875rem; line-height: 1; }
     .chart-y {
       display: flex;
       flex-direction: column;
@@ -1208,7 +1208,7 @@
       color: var(--gold);
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
     }
     .desk .stamp .dayn { font-size: 1.55rem; line-height: 0.9; font-weight: 700; }
     .desk .body { grid-area: story; min-width: 0; }
@@ -1239,7 +1239,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-size: 0.68rem;
+      font-size: 0.6875rem;
       padding: 2px 7px;
       border: 1px solid #5b6573;
       color: var(--paper);
@@ -1383,9 +1383,9 @@
     }
     .focus .range button:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
     .focus .range button.on {
-      color: #e2e8f0;
-      background: #151b24;
-      box-shadow: none;
+      color: #03140a;
+      background: #22c55e;
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.45);
       font-weight: 800;
     }
     .focus .chart-wrap {
@@ -1524,6 +1524,7 @@
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #94a3b8;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       width: 22px;
       height: 22px;
       border-radius: 50%;
@@ -1598,7 +1599,7 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=191" />
+  <link rel="stylesheet" href="shell.css?v=192" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
@@ -1851,7 +1852,7 @@
         text-transform: uppercase; color: var(--white);
       }
       .board-fold > summary::before,
-      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--gold); content: "\25B8"; }
+      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8"; }
       .board-fold[open] > summary::before,
       .filter-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary,
@@ -1895,7 +1896,7 @@
       }
       .board-fold > summary.board-strip::-webkit-details-marker { display: none; }
       .board-fold > summary::before {
-        grid-column: 1; grid-row: 1; color: var(--gold); content: "\25B8";
+        grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8";
       }
       .board-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary {
@@ -2244,7 +2245,7 @@
     .focus .quiet { margin: 0 0 14px; color: var(--v2-sub); font-size: 14px; }
     .focus .range { background: var(--v2-chart); border: 1px solid var(--v2-line); padding: 3px; margin: 0 0 12px; }
     .focus .range button { color: var(--v2-sub); font-size: 14px; padding: 5px 12px; }
-    .focus .range button.on { color: #1a1d26; background: #e3b41a; box-shadow: none; }
+    .focus .range button.on { color: #04140a; background: var(--v2-buy-bar); box-shadow: none; }
     .focus .chart-wrap {
       background: var(--v2-chart); border: 1px solid var(--v2-line); border-radius: 14px;
       padding: 14px 14px 10px 52px; backdrop-filter: none; -webkit-backdrop-filter: none; margin-bottom: 14px;
@@ -2285,7 +2286,7 @@
       border-radius: 10px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 15px;
       letter-spacing: 0.1em; padding: 10px 16px; color: var(--white); border: 1px solid var(--v2-border); background: transparent;
     }
-    .focus .btn.fill { background: #e3b41a; border-color: #e3b41a; color: #1a1d26; }
+    .focus .btn.fill { background: var(--v2-buy-bar); border-color: var(--v2-buy-bar); color: #04140a; }
 
     /* .chart-top is display:contents on desktop so the card itself is the sticky grid item. */
     .strip-toggle, .spark { display: none; }
