@@ -405,7 +405,7 @@
     .holdings .focus .chart-pnl.down { color: #ef7a74; }
     .holdings .focus .chart-pnl .pnl-amt { white-space: nowrap; }
     .holdings .focus .chart-pnl .pnl-lbl {
-      color: #e2e8f0;
+      color: var(--mute);
       font-weight: 600;
       font-size: 12px;
       letter-spacing: 0.06em;
@@ -426,7 +426,7 @@
     .holdings .focus .range button:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
     .holdings .focus .range button.on {
       color: #03140a; background: #22c55e;
-      box-shadow: none; font-weight: 800;
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.45); font-weight: 800;
     }
     .holdings .focus .chart-wrap {
       position: relative;
@@ -656,7 +656,7 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=192" />
+  <link rel="stylesheet" href="shell.css?v=193" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }

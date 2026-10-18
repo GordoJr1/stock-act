@@ -650,7 +650,6 @@ body.stock-act-v2-phone .stock-act-txn a.stock-act-txn-name:hover { color: var(-
   .stock-act-txn-hero,
   .stock-act-txn .stock-act-txn-hero { font-size: 1.2rem; }
   .stock-act-txn-meta { font-size: calc(0.6875rem + 1px); color: #b7c1cc; }
-  .stock-act-txn-legend { font-size: 0.66rem; }
   .stock-act-txn-head { margin: 14px 0 8px; }
 }
 
@@ -744,7 +743,7 @@ body.stock-act-v2-phone .stock-act-txn a.stock-act-txn-name:hover { color: var(-
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: #eef2f5;
+  color: #8fdde0;
 }
 .stock-act-txn-tape a.stock-act-txn-company:hover,
 .stock-act-txn-tape a.stock-act-txn-company:hover .stock-act-txn-tk,
@@ -1091,7 +1090,7 @@ body.stock-act-v2-phone .stock-act-txn a.stock-act-txn-name:hover { color: var(-
     line-height: 1.25;
   }
   .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-who-line a.stock-act-txn-name:hover {
-    color: #eef2f5;
+    color: #8fdde0;
   }
   .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-who-line .stock-act-follow-tag,
   .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-who-line .stock-act-plan-tag {
@@ -1835,7 +1834,7 @@ details.how {
   border: 1px solid var(--gold, #e3b41a);
   color: var(--gold, #e3b41a);
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-  font-size: 0.66rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   line-height: 1.2;
@@ -1852,7 +1851,7 @@ a.stock-act-follow-tag:hover { background: rgba(227, 180, 26, 0.12); }
   margin-left: 6px;
   padding: 1px 6px;
   border: 1px solid var(--accent, #36999d);
-  color: #eef2f5;
+  color: #8fdde0;
   font-family: "Figtree", "Figtree Fallback", sans-serif;
   font-size: 12px;
   letter-spacing: 0.1em;
