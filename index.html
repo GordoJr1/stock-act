@@ -48,9 +48,7 @@
     body {
       font-family: "Figtree", sans-serif;
       color: var(--white);
-      background:
-        linear-gradient(180deg, rgba(37, 27, 21, 0.94), rgba(45, 34, 25, 0.97)),
-        url("city.jpg?v=15") 50% 30% / cover fixed;
+      background: var(--ink);
       min-height: 100vh;
     }
 
@@ -470,20 +468,19 @@
     }
 
     table.hist th {
-      font-family: "Big Shoulders Display", sans-serif;
-      letter-spacing: 0.1em;
+      font-family: "Figtree", sans-serif;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--caution);
       font-weight: 600;
+      font-size: 12px;
     }
 
     footer {
       position: relative;
       z-index: 1;
       border-top: 2px solid var(--caution);
-      background:
-        linear-gradient(0deg, rgba(25, 18, 14, 0.9), rgba(25, 18, 14, 0.86)),
-        url("city.jpg?v=15") 50% 96% / cover no-repeat;
+      background: var(--ink);
     }
 
     footer .wrap {
@@ -1389,9 +1386,9 @@
     }
     .focus .range button:hover { color: #fffffe; background: rgba(255, 255, 254, 0.08); }
     .focus .range button.on {
-      color: #051408;
-      background: #31c44f;
-      box-shadow: 0 0 16px rgba(49, 196, 79, 0.45);
+      color: #251b15;
+      background: #e4b350;
+      box-shadow: none;
       font-weight: 800;
     }
     .focus .chart-wrap {
@@ -1554,7 +1551,7 @@
     }
     .focus .mark-pop .pop-single-amt { color: #fffffe; font-weight: 700; }
     .focus .mark-pop .pop-dot { color: #7d7166; margin: 0 1px; }
-    .focus .mark-pop .pop-single-date { color: #eaa076; font-weight: 600; }
+    .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 600; }
     .focus .chart-y {
       position: absolute;
       left: 0;
@@ -1604,7 +1601,7 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=187" />
+  <link rel="stylesheet" href="shell.css?v=188" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
@@ -1857,7 +1854,7 @@
         text-transform: uppercase; color: var(--white);
       }
       .board-fold > summary::before,
-      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8"; }
+      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8"; }
       .board-fold[open] > summary::before,
       .filter-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary,
@@ -1901,7 +1898,7 @@
       }
       .board-fold > summary.board-strip::-webkit-details-marker { display: none; }
       .board-fold > summary::before {
-        grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8";
+        grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8";
       }
       .board-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary {
@@ -2023,12 +2020,12 @@
     }
     .seg button:last-child { border-right: 0; }
     .seg button.on {
-      background: rgba(242, 242, 240, 0.06);
-      color: var(--white);
+      background: #e4b350;
+      color: #251b15;
     }
     .seg.is-on button.on {
-      background: rgba(228, 179, 80, 0.12);
-      color: var(--caution);
+      background: #e4b350;
+      color: #251b15;
     }
     .filter-clear-wrap {
       display: flex;
@@ -2250,7 +2247,7 @@
     .focus .quiet { margin: 0 0 14px; color: var(--v2-sub); font-size: 14px; }
     .focus .range { background: var(--v2-chart); border: 1px solid var(--v2-line); padding: 3px; margin: 0 0 12px; }
     .focus .range button { color: var(--v2-sub); font-size: 14px; padding: 5px 12px; }
-    .focus .range button.on { color: #051408; background: var(--v2-buy-bar); box-shadow: none; }
+    .focus .range button.on { color: #251b15; background: #e4b350; box-shadow: none; }
     .focus .chart-wrap {
       background: var(--v2-chart); border: 1px solid var(--v2-line); border-radius: 14px;
       padding: 14px 14px 10px 52px; backdrop-filter: none; -webkit-backdrop-filter: none; margin-bottom: 14px;
@@ -2281,7 +2278,7 @@
     .focus .mark-pop .pop-single-detail { margin: 4px 0 0; font-family: "Figtree", sans-serif; font-size: 14px; gap: 4px; }
     .focus .mark-pop .pop-single-amt { color: var(--paper); font-weight: 600; }
     .focus .mark-pop .pop-dot { color: var(--v2-sub); }
-    .focus .mark-pop .pop-single-date { color: var(--v2-sub); font-weight: 400; }
+    .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 400; }
     .focus .mark-pop .pop-link {
       position: absolute; top: 100%; width: 0; border-left: 1.5px dashed rgba(240, 186, 180, 0.6); pointer-events: none;
     }
@@ -2291,7 +2288,7 @@
       border-radius: 10px; font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 15px;
       letter-spacing: 0.1em; padding: 10px 16px; color: var(--white); border: 1px solid var(--v2-border); background: transparent;
     }
-    .focus .btn.fill { background: var(--v2-buy-bar); border-color: var(--v2-buy-bar); color: #051408; }
+    .focus .btn.fill { background: #e4b350; border-color: #e4b350; color: #251b15; }
 
     /* .chart-top is display:contents on desktop so the card itself is the sticky grid item. */
     .strip-toggle, .spark { display: none; }
@@ -2619,7 +2616,7 @@
   </div>
 
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=127"></script>
+  <script src="chart.js?v=128"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, (c) => ({

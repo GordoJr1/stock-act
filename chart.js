@@ -911,21 +911,63 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
     return o;
   }
 
-  let best = clampBox(raw[0].left, raw[0].top);
+  function fits(left, top) {
+    return overflow(left, top) < 0.5;
+  }
+  const preferLeft = pinX + popW * 0.5 > wr.width - margin;
+  let best = null;
   let bestScore = Infinity;
   for (let i = 0; i < raw.length; i++) {
     const c = raw[i];
-    const box = clampBox(c.left, c.top);
-    const score = pathHits(box) * 100 + overflow(c.left, c.top) * 0.5 + i * 0.02;
+    if (!fits(c.left, c.top)) continue;
+    const onLeft = c.left + popW <= pinX + 2;
+    if (preferLeft && !onLeft) continue;
+    const score = pathHits(c) * 100 + (onLeft ? 0 : 8) + i * 0.02;
     if (score < bestScore) {
       bestScore = score;
-      best = box;
+      best = c;
+    }
+  }
+  if (!best && preferLeft) {
+    for (let i = 0; i < raw.length; i++) {
+      const c = raw[i];
+      if (c.left + popW > pinX + 2) continue;
+      const score = overflow(c.left, c.top) + i * 0.02;
+      if (score < bestScore) {
+        bestScore = score;
+        best = c;
+      }
+    }
+  }
+  if (!best) {
+    best = clampBox(raw[0].left, raw[0].top);
+    bestScore = Infinity;
+    for (let i = 0; i < raw.length; i++) {
+      const c = raw[i];
+      const box = clampBox(c.left, c.top);
+      const score = pathHits(box) * 100 + overflow(c.left, c.top) * 4 + i * 0.02;
+      if (score < bestScore) {
+        bestScore = score;
+        best = box;
+      }
     }
   }
 
-  pop.style.left = best.left + "px";
-  pop.style.top = best.top + "px";
+  const placed = clampBox(best.left, best.top);
+  pop.style.left = placed.left + "px";
+  pop.style.top = placed.top + "px";
   pop.style.transform = "none";
+
+  const visibleLeft = Math.max(margin, -wr.left);
+  const screenRight = Math.min(wr.right, window.innerWidth) - margin;
+  const pr = pop.getBoundingClientRect();
+  const againstRight = pr.right >= screenRight - 4;
+  if (againstRight) {
+    const room = Math.max(150, pinX - gap - visibleLeft);
+    const w = Math.min(popW, room);
+    pop.style.width = w + "px";
+    pop.style.left = Math.max(visibleLeft, pinX - gap - w) + "px";
+  }
 }
 
 if (typeof window !== "undefined") {

@@ -51,7 +51,7 @@
     nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--caution); }
-    .back { color: var(--teal); text-decoration: none; }
+    .back { color: #d98a5a; text-decoration: none; }
     .kicker { color: var(--caution); margin: 22px 0 8px; }
     h1 { font-size: clamp(2.2rem, 8vw, 3.6rem); line-height: 0.9; margin-bottom: 0; }
     .muted { color: var(--mute); font-size: 0.88rem; line-height: 1.45; }
@@ -97,10 +97,11 @@
     .price-pill span {
       display: block;
       margin-top: 5px;
-      font-family: "Big Shoulders Display", sans-serif;
-      letter-spacing: 0.14em;
+      font-family: "Figtree", sans-serif;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      font-size: 0.68rem;
+      font-size: 12px;
+      font-weight: 600;
       color: var(--mute);
     }
     .range {
@@ -143,9 +144,9 @@
       background: rgba(255, 255, 254, 0.08);
     }
     .range button.on {
-      color: #051408;
-      background: #31c44f;
-      box-shadow: 0 0 16px rgba(49, 196, 79, 0.45);
+      color: #251b15;
+      background: #e4b350;
+      box-shadow: none;
       font-weight: 800;
     }
     .stats {
@@ -168,7 +169,7 @@
     }
     .stat b.up { color: #31c44f; }
     .stat b.down { color: #e38074; }
-    .stat span { color: var(--mute); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: "Big Shoulders Display", sans-serif; }
+    .stat span { color: var(--mute); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-family: "Figtree", sans-serif; }
     .up { color: #31c44f; }
     .down { color: #e38074; }
     .opt-tag {
@@ -424,7 +425,7 @@
     }
     .mark-pop .pop-single-date,
     .mark-pop .pop-date-link {
-      color: #eaa076;
+      color: #d98a5a;
       text-decoration: none;
       font-weight: 600;
     }
@@ -580,7 +581,7 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=187" />
+  <link rel="stylesheet" href="shell.css?v=188" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }
@@ -642,7 +643,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=127"></script>
+  <script src="chart.js?v=128"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();
@@ -964,10 +965,11 @@
           : "No daily prices on file for " + ticker + ".";
         const buys = stockDeals.filter((t) => t.side === "purchase").length;
         const sells = stockDeals.filter((t) => t.side === "sale").length;
+        const net0 = buys - sells;
         document.getElementById("stats").innerHTML =
           "<div class=\"stat\"><b>" + buys + "</b><span>buys</span></div>" +
           "<div class=\"stat\"><b>" + sells + "</b><span>sells</span></div>" +
-          "<div class=\"stat\"><b>—</b><span>close</span></div>";
+          "<div class=\"stat\"><b class=\"" + (net0 > 0 ? "up" : net0 < 0 ? "down" : "") + "\">" + (net0 > 0 ? "+" : "") + net0 + "</b><span>net</span></div>";
         return;
       }
       allPoints = prices.c;
@@ -989,10 +991,11 @@
           "<div class=\"stat\"><b class=\"" + unCls + "\">" + signedMoney(est.unrealized) + "</b><span>held</span></div>" +
           "<div class=\"stat\"><b class=\"" + realCls + "\">" + signedMoney(est.realized) + "</b><span>realized</span></div>";
       } else {
+        const net = buys - sells;
         document.getElementById("stats").innerHTML =
           "<div class=\"stat\"><b>" + buys + "</b><span>buys</span></div>" +
           "<div class=\"stat\"><b>" + sells + "</b><span>sells</span></div>" +
-          "<div class=\"stat\"><b>" + formatQuote(last[1]) + "</b><span>close</span></div>";
+          "<div class=\"stat\"><b class=\"" + (net > 0 ? "up" : net < 0 ? "down" : "") + "\">" + (net > 0 ? "+" : "") + net + "</b><span>net</span></div>";
       }
 
       paintRange();

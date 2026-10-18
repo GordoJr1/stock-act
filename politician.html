@@ -36,9 +36,7 @@
     body { font-family: "Figtree", sans-serif; color: var(--white); background: var(--steel); }
     @media (min-width: 821px) {
       body {
-        background:
-          linear-gradient(180deg, rgba(37, 27, 21, 0.94), rgba(45, 34, 25, 0.97)),
-          url("city.jpg?v=15") 50% 30% / cover fixed;
+        background: var(--ink);
         min-height: 100vh;
       }
     }
@@ -62,7 +60,7 @@
     nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--caution); }
-    .back { color: var(--teal); text-decoration: none; }
+    .back { color: #d98a5a; text-decoration: none; }
     .kicker { color: var(--caution); margin: 8px 0 4px; }
     h1 { font-size: 1.5rem; line-height: 1.15; margin: 0; }
     .hero {
@@ -410,10 +408,11 @@
     .holdings .focus .chart-pnl.down { color: #e38177; }
     .holdings .focus .chart-pnl .pnl-amt { white-space: nowrap; }
     .holdings .focus .chart-pnl .pnl-lbl {
-      color: var(--mute);
+      color: #d98a5a;
       font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      font-family: "Figtree", sans-serif;
     }
     .holdings .focus .range button {
       background: transparent; border: 0; color: #a7a199;
@@ -429,8 +428,8 @@
     }
     .holdings .focus .range button:hover { color: #fffffe; background: rgba(255, 255, 254, 0.08); }
     .holdings .focus .range button.on {
-      color: #051408; background: #31c44f;
-      box-shadow: 0 0 16px rgba(49, 196, 79, 0.45); font-weight: 800;
+      color: #251b15; background: #e4b350;
+      box-shadow: none; font-weight: 800;
     }
     .holdings .focus .chart-wrap {
       position: relative;
@@ -513,6 +512,7 @@
       backdrop-filter: blur(20px);
       color: #e9e8e5;
       box-sizing: border-box;
+      max-width: calc(100% - 16px);
     }
     .holdings .focus .mark-pop .pop-header {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
@@ -542,11 +542,11 @@
     }
     .holdings .focus .mark-pop .pop-single-detail {
       display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 5px 0 2px;
-      font-family: "Red Hat Mono", monospace; font-size: 11.5px;
+      font-family: "Red Hat Mono", monospace; font-size: 12px; max-width: 100%;
     }
     .holdings .focus .mark-pop .pop-single-amt { color: #fffffe; font-weight: 700; }
     .holdings .focus .mark-pop .pop-dot { color: #7d7166; }
-    .holdings .focus .mark-pop .pop-single-date { color: #eaa076; font-weight: 600; }
+    .holdings .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 600; overflow-wrap: anywhere; }
     .holdings .focus .chart-y {
       position: absolute; left: 0; pointer-events: none; z-index: 4;
     }
@@ -576,6 +576,14 @@
       box-shadow: inset 0 0 0 1px rgba(228, 179, 80, 0.35);
     }
     @media (max-width: 820px) {
+      .holdings { padding-left: 0; padding-right: 0; }
+      .holdings .focus {
+        padding: 0;
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+      }
+      .holdings .focus .range-row { padding: 8px 10px 0; }
       .holdings .focus .chart-wrap { height: 364px; }
       .holdings .focus #chart-svg { height: 320px; flex-basis: 320px; }
       .holdings .focus .chart-pnl { font-size: 0.98rem; }
@@ -624,10 +632,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Big Shoulders Display", sans-serif;
-        letter-spacing: 0.12em;
+        font-family: "Figtree", sans-serif;
+        letter-spacing: 0.04em;
         text-transform: uppercase;
-        font-size: 0.85rem;
+        font-weight: 600;
+        font-size: 12px;
         color: var(--paper);
         text-decoration: none;
       }
@@ -649,7 +658,7 @@
       font-family: "Figtree", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=187" />
+  <link rel="stylesheet" href="shell.css?v=188" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }
@@ -734,7 +743,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=127"></script>
+  <script src="chart.js?v=128"></script>
   <script>
     const isOptionLike = SA.isOptionLike;
     const isBond = SA.isBond;
@@ -866,11 +875,10 @@
         return;
       }
       box.hidden = false;
-      box.innerHTML = (line1.length
-        ? "<span class=\"hero-line\">" + line1.join(" · ") + "</span>"
-        : "") + (line2.length
-          ? "<span class=\"hero-line\">" + line2.join(" · ") + "</span>"
-          : "");
+      const heroBits = [];
+      if (line1.length) heroBits.push("<span class=\"hero-line\">" + line1.join(" · ") + "</span>");
+      if (line2.length) heroBits.push("<span class=\"hero-line\">" + line2.join(" · ") + "</span>");
+      box.innerHTML = heroBits.join(" · ");
     }
 
     function paintBio(bio, overlaps) {
@@ -1291,6 +1299,16 @@
           pop.style.bottom = "auto";
           pop.style.transform = "translateY(-100%)";
         }
+      }
+      const wrNow = wrap.getBoundingClientRect();
+      const xPct = Number(rec.xPct || 0);
+      if (xPct > 0.5) {
+        const pinX = 8 + xPct * Math.max(0, wrNow.width - 16);
+        const w = Math.min(260, Math.max(200, pinX - 20));
+        pop.style.width = w + "px";
+        pop.style.right = "auto";
+        pop.style.transform = "none";
+        pop.style.left = Math.max(8, pinX - w - 12) + "px";
       }
       pop.hidden = false;
     }
