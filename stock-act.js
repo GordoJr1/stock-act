@@ -1947,7 +1947,6 @@
   }
 
   const RETURN_KEY = "sa:return";
-  const RETURN_KEY_OLD = "qc:return";
   let replaceWrapped = false;
   const PAGE_LABELS = {
     "index.html": "Tape",
@@ -2012,38 +2011,16 @@
 
   const SCROLL_PREFIX = "sa:sy:";
   const SCROLL_BACK = "sa:scroll-back";
-  const SCROLL_BACK_OLD = "qc:scroll-back";
 
-  // One read of the pre-split key. A hit is copied onto the new key and the old key is removed.
-  function readMovedKey(key, oldKey) {
+  function readStoredKey(key) {
     const stores = [];
     try { stores.push(sessionStorage); } catch (e) {}
     try { stores.push(localStorage); } catch (e) {}
     for (let i = 0; i < stores.length; i++) {
-      let current = null;
       try {
-        current = stores[i].getItem(key);
-      } catch (e) {
-        continue;
-      }
-      if (current != null) return current;
-      let previous = null;
-      try {
-        previous = stores[i].getItem(oldKey);
-      } catch (e) {
-        continue;
-      }
-      if (previous == null) continue;
-      const home = stores[0] || stores[i];
-      try {
-        home.setItem(key, previous);
-      } catch (e) {
-        return previous;
-      }
-      for (let j = 0; j < stores.length; j++) {
-        try { stores[j].removeItem(oldKey); } catch (e) {}
-      }
-      return previous;
+        const current = stores[i].getItem(key);
+        if (current != null) return current;
+      } catch (e) {}
     }
     return null;
   }
@@ -2106,7 +2083,7 @@
 
   function shouldRestoreScroll() {
     try {
-      if (readMovedKey(SCROLL_BACK, SCROLL_BACK_OLD) === location.pathname + location.search) return true;
+      if (readStoredKey(SCROLL_BACK) === location.pathname + location.search) return true;
     } catch (e) {}
     return navIsBack();
   }
@@ -2192,7 +2169,7 @@
 
   function storedReturn() {
     try {
-      const v = readMovedKey(RETURN_KEY, RETURN_KEY_OLD);
+      const v = readStoredKey(RETURN_KEY);
       if (!v || !isSaHref(v)) return "";
       const u = new URL(v, location.href);
       if (pageFile(u.pathname) === pageFile(location.pathname)) return "";
@@ -2409,22 +2386,6 @@
     });
   }
 
-  function bootMoreMenu() {
-    document.addEventListener("click", function (e) {
-      document.querySelectorAll("details.stock-act-more[open]").forEach(function (d) {
-        if (!d.contains(e.target)) d.removeAttribute("open");
-      });
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key !== "Escape") return;
-      document.querySelectorAll("details.stock-act-more[open]").forEach(function (d) {
-        d.removeAttribute("open");
-        const s = d.querySelector("summary");
-        if (s) s.focus();
-      });
-    });
-  }
-
   function bootNav() {
     const file = pageFile(location.pathname);
     if (LIST_FILES[file]) {
@@ -2440,7 +2401,6 @@
     }
   }
 
-  bootMoreMenu();
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootNav);
   else bootNav();
 

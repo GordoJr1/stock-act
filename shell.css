@@ -1979,7 +1979,7 @@ body.stock-act-v2 .muted, body.stock-act-v2 .drop-meta, body.stock-act-v2 .count
 body.stock-act-v2 .panel, body.stock-act-v2 article.study,
 body.stock-act-v2 .explain, body.stock-act-v2 .holdings, body.stock-act-v2 .allocator, body.stock-act-v2 .bio-wrap,
 body.stock-act-v2 details.how, body.stock-act-v2 .paper-filters,
-body.stock-act-v2 .stage, body.stock-act-v2 .exited, body.stock-act-v2 .issuer-chart {
+body.stock-act-v2 .stage {
   background: var(--v2-card); border-color: var(--v2-border); border-radius: 14px;
 }
 /* accent cards: the colored left stripe carries meaning (buy, avoid, watch, conflict...), so only
@@ -1999,7 +1999,7 @@ body.stock-act-v2 .ago, body.stock-act-v2 .opp, body.stock-act-v2 .did-mean,
 body.stock-act-v2 .sources a { color: var(--v2-teal-fg); }
 body.stock-act-v2 .alloc-sort-label, body.stock-act-v2 .bio .subhead { color: var(--v2-sub); }
 body.stock-act-v2 .who-list a:hover, body.stock-act-v2 .card h3 a:hover, body.stock-act-v2 .tk:hover, body.stock-act-v2 .tk-link:hover,
-body.stock-act-v2 .issuer-chart-head a:hover, body.stock-act-v2 .who:hover { color: var(--v2-teal-fg); }
+body.stock-act-v2 .who:hover { color: var(--v2-teal-fg); }
 
 body.stock-act-v2 .drop-head { border-bottom: 1px solid var(--v2-line); }
 body.stock-act-v2 .gate, body.stock-act-v2 .lag { color: var(--v2-buy-text); }
@@ -2083,20 +2083,6 @@ body.stock-act-v2 .hud, body.stock-act-v2 .layers, body.stock-act-v2 .status { b
 body.stock-act-v2 #search-results { border-color: var(--v2-border); border-radius: 12px; background: var(--v2-card); }
 body.stock-act-v2 #search-results button { border-color: var(--v2-line); }
 body.stock-act-v2 .hit .who, body.stock-act-v2 .pop .holder { color: var(--v2-buy-text); }
-body.stock-act-v2 button.camp { border-color: var(--v2-border); border-radius: 10px; }
-body.stock-act-v2 .maplibregl-popup-content { border-color: var(--v2-border); border-radius: 12px; }
-
-@media (min-width: 821px) {
-  body.stock-act-v2 .layers-toggle,
-  body.stock-act-v2 .legend-more {
-    border-radius: 10px; border: 1px solid var(--v2-border); background: transparent; color: var(--white, #eef2f5);
-    font-family: "Barlow Condensed", sans-serif; font-weight: 700; letter-spacing: 0.1em;
-  }
-  body.stock-act-v2 .layers-toggle:hover, body.stock-act-v2 .legend-more:hover {
-    border-color: var(--v2-buy-bar); color: var(--v2-buy-text); background: transparent;
-  }
-}
-
 body.stock-act-v2 .stock-act-follow-alerts { background: var(--v2-card); border: 1px solid var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 .stock-act-follow-alerts .hd { color: var(--white, #eef2f5); }
 body.stock-act-v2 .stock-act-follow-alerts .acts a:hover, body.stock-act-v2 .stock-act-follow-alerts .acts button:hover { border-color: var(--v2-buy-bar); color: var(--v2-buy-text); }
@@ -2120,7 +2106,6 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #d8dde3); border-col
   body.stock-act-v2 .holdings .focus .mark-pop .pop-close { position: relative; }
   body.stock-act-v2 .holdings .focus .mark-pop .pop-close::after { content: ""; position: absolute; inset: -11px; }
   body.stock-act-v2 #search-form input, body.stock-act-v2 #search-form button, body.stock-act-v2 #search { min-height: 44px; }
-  body.stock-act-v2 .maplibregl-ctrl-group button { width: 44px; height: 44px; }
   body.stock-act-v2 .layers label, body.stock-act-v2 .layers .swatch { min-height: 44px; }
 }
 
