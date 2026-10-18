@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#251b15" />
+  <meta name="theme-color" content="#1a1d26" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=5" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=5" />
   <title>Filed — Stock Act</title>
   <meta name="description" content="Trades newly added to the Stock Act tape, ranked by ingest time — not trade date." />
   <style>
     :root {
-      --walnut: #2d2219;
-      --panel: #3f2f24;
-      --paper: #deddda;
-      --white: #f2f2f0;
-      --red: #ba3b2d;
-      --wheat: #e4b350;
-      --mute: #9a948b;
-      --ink: #251b15;
-      --copper: #c97646;
+      --surface: #1c2430;
+      --panel: #2a3340;
+      --paper: #d8dde3;
+      --white: #eef2f5;
+      --red: #c2302a;
+      --gold: #e3b41a;
+      --mute: #a7b1bd;
+      --ink: #1a1d26;
+      --accent: #36999d;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
@@ -36,11 +36,11 @@
     .wrap { width: min(1680px, calc(100% - 48px)); margin: 0 auto; }
     .stripe {
       height: 10px;
-      background: repeating-linear-gradient(-45deg, var(--ink) 0 10px, var(--wheat) 10px 20px);
+      background: repeating-linear-gradient(-45deg, var(--ink) 0 10px, var(--gold) 10px 20px);
     }
     header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 0; border-bottom: 2px solid var(--copper);
+      padding: 16px 0; border-bottom: 2px solid var(--accent);
     }
     .mark, h1, h2, .kicker, nav, .chip, .tk, .gate, .lag b {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
@@ -48,18 +48,18 @@
       text-transform: uppercase;
     }
     a.mark { font-weight: 700; letter-spacing: 0.18em; font-size: 1rem; color: inherit; text-decoration: none; }
-    .mark span { color: var(--copper); }
+    .mark span { color: var(--accent); }
     nav { display: flex; gap: 14px; font-size: 0.88rem; letter-spacing: 0.1em; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
-    nav a:hover, nav a.on { color: var(--wheat); }
-    .kicker { color: var(--wheat); margin: 8px 0 4px; }
+    nav a:hover, nav a.on { color: var(--gold); }
+    .kicker { color: var(--gold); margin: 8px 0 4px; }
     h1 { font-size: 1.5rem; line-height: 1.15; margin: 0; }
     .lede { color: var(--paper); max-width: 64ch; line-height: 1.5; margin-bottom: 12px; }
     details.how {
-      margin: 0 0 12px; border: 1px solid #5b534a; background: #221913;
+      margin: 0 0 12px; border: 1px solid #4a5563; background: #151b24;
     }
     details.how summary {
-      cursor: pointer; padding: 10px 14px; color: var(--wheat);
+      cursor: pointer; padding: 10px 14px; color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em;
       text-transform: uppercase; list-style: none;
     }
@@ -82,28 +82,28 @@
     }
     .windows { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
     .chip {
-      background: #221913;
-      border: 1px solid #5b534a;
+      background: #151b24;
+      border: 1px solid #4a5563;
       color: var(--paper);
       padding: 8px 14px;
       cursor: pointer;
       font-size: 0.9rem;
     }
-    .chip.on { border-color: var(--wheat); color: var(--wheat); background: rgba(228, 179, 80, 0.08); }
+    .chip.on { border-color: var(--gold); color: var(--gold); background: rgba(227, 180, 26, 0.08); }
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       margin: 0 0 28px;
-      border: 1px solid #5b534a;
+      border: 1px solid #4a5563;
       background: var(--panel);
     }
-    .stat { padding: 12px 14px; border-right: 1px solid #49433c; }
+    .stat { padding: 12px 14px; border-right: 1px solid #3a4452; }
     .stat:last-child { border-right: 0; }
     .stat b {
       display: block;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.6rem;
-      color: var(--wheat);
+      color: var(--gold);
       letter-spacing: 0.06em;
     }
     .stat span { color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -114,15 +114,15 @@
       align-items: baseline;
       gap: 12px;
       padding: 10px 0;
-      border-bottom: 2px solid var(--wheat);
+      border-bottom: 2px solid var(--gold);
       margin-bottom: 12px;
     }
-    .gate { color: var(--wheat); font-size: 1.35rem; }
+    .gate { color: var(--gold); font-size: 1.35rem; }
     .drop-meta { color: var(--mute); font-size: 0.82rem; }
     .card {
       background: var(--panel);
-      border: 1px solid #5b534a;
-      border-left: 6px solid var(--wheat);
+      border: 1px solid #4a5563;
+      border-left: 6px solid var(--gold);
       padding: 14px 16px;
       margin: 0 0 10px;
     }
@@ -135,8 +135,8 @@
       text-transform: uppercase;
       font-size: 1.35rem;
     }
-    .who:hover { color: var(--copper); }
-    .lag { text-align: right; color: var(--wheat); line-height: 1; }
+    .who:hover { color: var(--accent); }
+    .lag { text-align: right; color: var(--gold); line-height: 1; }
     .lag b { display: block; font-size: 1.7rem; }
     .lag span { display: block; margin-top: 4px; color: var(--mute); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; }
     .tickets { list-style: none; margin-top: 10px; }
@@ -145,24 +145,24 @@
       grid-template-columns: 52px 64px minmax(0, 1fr) auto;
       gap: 10px;
       padding: 8px 0;
-      border-top: 1px solid #49433c;
+      border-top: 1px solid #3a4452;
       font-size: 0.9rem;
       align-items: baseline;
     }
-    .tickets .side.buy { color: #83cc91; }
-    .tickets .side.sell { color: #e38177; }
+    .tickets .side.buy { color: #7dcf7a; }
+    .tickets .side.sell { color: #ef7a74; }
     .tk { color: var(--white); text-decoration: none; font-size: 1.05rem; }
-    .tk:hover { color: var(--copper); }
+    .tk:hover { color: var(--accent); }
     .co { color: var(--paper); font-size: 0.86rem; }
     .amt { color: var(--white); font-weight: 600; white-space: nowrap; }
     .opt-tag {
       display: inline-block; margin-left: 6px; padding: 0 5px;
-      border: 1px solid var(--wheat); color: var(--wheat);
+      border: 1px solid var(--gold); color: var(--gold);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-size: 0.68rem;
       letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
     }
     footer {
-      border-top: 2px solid var(--wheat);
+      border-top: 2px solid var(--gold);
       margin-top: 20px;
     }
     footer .wrap {
@@ -173,7 +173,7 @@
       text-transform: uppercase;
       color: var(--mute);
     }
-    footer a { color: var(--wheat); }
+    footer a { color: var(--gold); }
     .tickets li.no-tk { grid-template-columns: 4.5em minmax(0, 1fr) auto; }
     @media (max-width: 720px) {
       .stats { grid-template-columns: repeat(3, 1fr); }
@@ -201,7 +201,7 @@
         bottom: 0;
         z-index: 80;
         background: var(--ink);
-        border-top: 2px solid var(--copper);
+        border-top: 2px solid var(--accent);
         padding-bottom: env(safe-area-inset-bottom, 0px);
       }
       .tabbar a {
@@ -219,12 +219,12 @@
         padding: 0 2px;
         text-align: center;
       }
-      .tabbar a.on, .tabbar a:hover { color: var(--wheat); }
+      .tabbar a.on, .tabbar a:hover { color: var(--gold); }
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
       h1 { font-size: 1.35rem; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=190" />
+  <link rel="stylesheet" href="shell.css?v=191" />
 </head>
 <body class="stock-act-v2 stock-act-v2-cards">
   <a class="stock-act-skip" href="#main">Skip to content</a>
