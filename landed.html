@@ -13,9 +13,6 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
   <title>Filed — Stock Act</title>
   <meta name="description" content="Trades newly added to the Stock Act tape, ranked by ingest time — not trade date." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --steel: #2d2219;
@@ -26,12 +23,12 @@
       --caution: #e4b350;
       --mute: #9a948b;
       --ink: #251b15;
-      --teal: #c97646;
+      --copper: #c97646;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
     body {
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       color: var(--white);
       background: var(--ink);
       min-height: 100vh;
@@ -43,15 +40,15 @@
     }
     header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 0; border-bottom: 2px solid var(--teal);
+      padding: 16px 0; border-bottom: 2px solid var(--copper);
     }
     .mark, h1, h2, .kicker, nav, .chip, .tk, .gate, .lag b {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
     a.mark { font-weight: 700; letter-spacing: 0.18em; font-size: 1rem; color: inherit; text-decoration: none; }
-    .mark span { color: var(--teal); }
+    .mark span { color: var(--copper); }
     nav { display: flex; gap: 14px; font-size: 0.88rem; letter-spacing: 0.1em; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--caution); }
@@ -63,7 +60,7 @@
     }
     details.how summary {
       cursor: pointer; padding: 10px 14px; color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em;
       text-transform: uppercase; list-style: none;
     }
     details.how summary::-webkit-details-marker { display: none; }
@@ -81,7 +78,7 @@
       color: var(--mute);
       font-size: 0.82rem;
       margin: 0;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
     .windows { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
     .chip {
@@ -104,7 +101,7 @@
     .stat:last-child { border-right: 0; }
     .stat b {
       display: block;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.6rem;
       color: var(--caution);
       letter-spacing: 0.06em;
@@ -133,12 +130,12 @@
     .who {
       color: var(--white);
       text-decoration: none;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 1.35rem;
     }
-    .who:hover { color: var(--teal); }
+    .who:hover { color: var(--copper); }
     .lag { text-align: right; color: var(--caution); line-height: 1; }
     .lag b { display: block; font-size: 1.7rem; }
     .lag span { display: block; margin-top: 4px; color: var(--mute); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -155,13 +152,13 @@
     .tickets .side.buy { color: #83cc91; }
     .tickets .side.sell { color: #e38177; }
     .tk { color: var(--white); text-decoration: none; font-size: 1.05rem; }
-    .tk:hover { color: var(--teal); }
+    .tk:hover { color: var(--copper); }
     .co { color: var(--paper); font-size: 0.86rem; }
     .amt { color: var(--white); font-weight: 600; white-space: nowrap; }
     .opt-tag {
       display: inline-block; margin-left: 6px; padding: 0 5px;
       border: 1px solid var(--caution); color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif; font-size: 0.68rem;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-size: 0.68rem;
       letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
     }
     footer {
@@ -171,7 +168,7 @@
     footer .wrap {
       display: flex; justify-content: space-between;
       padding: 18px 0 36px;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--mute);
@@ -204,7 +201,7 @@
         bottom: 0;
         z-index: 80;
         background: var(--ink);
-        border-top: 2px solid var(--teal);
+        border-top: 2px solid var(--copper);
         padding-bottom: env(safe-area-inset-bottom, 0px);
       }
       .tabbar a {
@@ -213,7 +210,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         font-size: 0.78rem;
@@ -227,7 +224,7 @@
       h1 { font-size: 1.35rem; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=188" />
+  <link rel="stylesheet" href="shell.css?v=189" />
 </head>
 <body class="stock-act-v2 stock-act-v2-cards">
   <a class="stock-act-skip" href="#main">Skip to content</a>

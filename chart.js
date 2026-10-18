@@ -462,7 +462,7 @@ function drawChart(points, marks, opts) {
       : (n >= 10 ? (isMobile ? 12 : 11) : (isMobile ? 13 : 12));
     const pinTextY = pinFontPx * 0.36;
     const label = n > 1 ? String(n) : (politician ? "P" : (sale ? "S" : "B"));
-    const ink = "#fffffe";
+    const ink = "#110c09";
 
     hit.push({
       mark: marksList[0],
@@ -486,7 +486,7 @@ function drawChart(points, marks, opts) {
         (selected ? "<circle cx=\"0\" cy=\"0\" r=\"" + (haloRpx + 4) + "\" fill=\"none\" stroke=\"#e4b350\" stroke-width=\"2.4\" />" : "") +
         (politician ? "" : "<circle cx=\"0\" cy=\"0\" r=\"" + haloRpx + "\" fill=\"" + haloBg + "\" />") +
         pinShape +
-        "<text x=\"0\" y=\"" + pinTextY.toFixed(1) + "\" text-anchor=\"middle\" fill=\"" + ink + "\" font-size=\"" + pinFontPx + "\" font-weight=\"800\" font-family=\"Big Shoulders Display, sans-serif\" pointer-events=\"none\">" + label + "</text>" +
+        "<text x=\"0\" y=\"" + pinTextY.toFixed(1) + "\" text-anchor=\"middle\" fill=\"" + ink + "\" font-size=\"" + pinFontPx + "\" font-weight=\"800\" font-family=\"Big Shoulders Display, Big Shoulders Fallback, sans-serif\" pointer-events=\"none\">" + label + "</text>" +
       "</g>" +
     "</g>";
   }

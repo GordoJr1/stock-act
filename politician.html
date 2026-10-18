@@ -12,9 +12,6 @@
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
   <title>Stock Act</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=Red+Hat+Mono:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --steel: #2d2219;
@@ -26,14 +23,14 @@
       --caution: #e4b350;
       --mute: #9a948b;
       --ink: #251b15;
-      --teal: #c97646;
+      --copper: #c97646;
       --navy: #322849;
       --buy: #369d4b;
       --sell: #cf5f52;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
-    body { font-family: "Figtree", sans-serif; color: var(--white); background: var(--steel); }
+    body { font-family: "Figtree", "Figtree Fallback", sans-serif; color: var(--white); background: var(--steel); }
     @media (min-width: 821px) {
       body {
         background: var(--ink);
@@ -45,19 +42,19 @@
     }
     .stripe {
       height: 10px;
-      background: repeating-linear-gradient(-45deg, var(--ink) 0 10px, var(--teal) 10px 20px);
+      background: repeating-linear-gradient(-45deg, var(--ink) 0 10px, var(--copper) 10px 20px);
     }
     .wrap { width: min(1680px, calc(100% - 48px)); margin: 0 auto; }
     header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 0; border-bottom: 2px solid var(--teal);
+      padding: 16px 0; border-bottom: 2px solid var(--copper);
     }
     .mark, h1, h2, th, .kicker, .back {
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
     }
     .mark { font-weight: 700; letter-spacing: 0.18em; color: inherit; text-decoration: none; }
-    .mark span { color: var(--teal); }
-    nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
+    .mark span { color: var(--copper); }
+    nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--caution); }
     .back { color: #d98a5a; text-decoration: none; }
@@ -95,7 +92,7 @@
       background: #221913;
     }
     .bio-wrap > summary {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--caution);
@@ -132,12 +129,12 @@
     .bio .overlap strong {
       color: var(--white);
       margin-right: 6px;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
     }
     .bio .overlap .why { color: var(--caution); font-size: 0.88rem; }
     .bio .subhead {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -153,7 +150,7 @@
       padding: 16px 18px;
     }
     .bio h3 {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -208,12 +205,12 @@
     }
     .sel-chip.show { display: inline-flex; }
     .sel-chip b {
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.08em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--caution);
     }
     .sel-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
     .clear-btn, .hint {
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
     }
     .clear-btn {
       display: none;
@@ -247,7 +244,7 @@
       margin-bottom: 8px;
     }
     .alloc-kicker {
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--mute); font-size: 0.72rem; margin: 0;
     }
     .alloc-total {
@@ -255,7 +252,7 @@
       margin: 0;
     }
     .alloc-total b {
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.04em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.04em;
       color: var(--caution); font-size: 1.2rem; line-height: 1;
     }
     .alloc-total span { color: var(--mute); font-size: 0.72rem; }
@@ -267,7 +264,7 @@
       margin: 0 0 8px;
     }
     .alloc-sort-label {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--caution);
@@ -282,7 +279,7 @@
       background: rgba(255, 255, 254, 0.04);
       border: 1px solid #5b534a;
       color: var(--paper);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-size: 0.82rem;
@@ -333,14 +330,14 @@
       outline-offset: -2px;
     }
     .hold-tile .tk {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-size: 0.95rem;
       line-height: 1;
     }
     .hold-tile .nm {
-      color: var(--mute); font-size: 0.68rem; margin-top: 3px;
+      color: var(--mute); font-size: 11px; margin-top: 3px;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .hold-tile .meta {
@@ -348,7 +345,7 @@
       margin-top: 6px;
     }
     .hold-tile .amt {
-      font-family: "Big Shoulders Display", sans-serif; color: var(--caution); font-size: 0.95rem;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; color: var(--caution); font-size: 0.95rem;
     }
     .hold-tile .pct { color: var(--mute); font-size: 0.7rem; }
     .hold-more { margin-top: 8px; }
@@ -356,7 +353,7 @@
       background: transparent;
       border: 1px solid #5b534a;
       color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 8px 10px;
@@ -395,7 +392,7 @@
       gap: 6px;
       min-width: 0;
       margin-left: auto;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-weight: 800;
@@ -412,11 +409,11 @@
       font-weight: 600;
       font-size: 12px;
       letter-spacing: 0.06em;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
     .holdings .focus .range button {
       background: transparent; border: 0; color: #a7a199;
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.1em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.1em;
       text-transform: uppercase; font-size: 0.78rem; font-weight: 700;
       padding: 4px 10px; border-radius: 999px; cursor: pointer;
     }
@@ -477,7 +474,7 @@
       color: #120f1b;
       font-size: 12px;
       font-weight: 700;
-      font-family: "Red Hat Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       padding: 3px 8px;
       border-radius: 5px;
       pointer-events: none;
@@ -492,7 +489,7 @@
       border: 1px solid rgba(255, 255, 254, 0.2);
       color: #e9e8e5;
       font-size: 12px;
-      font-family: "Red Hat Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 5px;
@@ -521,7 +518,7 @@
     .holdings .focus .mark-pop .pop-title-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
     .holdings .focus .mark-pop .pop-badge {
       display: inline-flex; align-items: center; justify-content: center;
-      font-family: "Big Shoulders Display", sans-serif; font-weight: 800; font-size: 11px;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 800; font-size: 11px;
       letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px;
     }
     .holdings .focus .mark-pop .pop-badge.buy {
@@ -531,7 +528,7 @@
       background: rgba(227, 128, 116, 0.2); color: #e38074; border: 1px solid rgba(227, 128, 116, 0.5);
     }
     .holdings .focus .mark-pop .pop-title {
-      font-family: "Big Shoulders Display", sans-serif; font-size: 1.02rem; font-weight: 700;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-size: 1.02rem; font-weight: 700;
       color: #fffffe; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .holdings .focus .mark-pop .pop-close {
@@ -542,10 +539,10 @@
     }
     .holdings .focus .mark-pop .pop-single-detail {
       display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 5px 0 2px;
-      font-family: "Red Hat Mono", monospace; font-size: 12px; max-width: 100%;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace; font-size: 12px; max-width: 100%;
     }
     .holdings .focus .mark-pop .pop-single-amt { color: #fffffe; font-weight: 700; }
-    .holdings .focus .mark-pop .pop-dot { color: #7d7166; }
+    .holdings .focus .mark-pop .pop-dot { color: #9a948b; }
     .holdings .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 600; overflow-wrap: anywhere; }
     .holdings .focus .chart-y {
       position: absolute; left: 0; pointer-events: none; z-index: 4;
@@ -554,13 +551,13 @@
       position: absolute; left: 0; right: 0; width: 100%; text-align: right;
       transform: translateY(-50%); padding-right: 6px; padding-left: 2px;
       color: #e9e8e5; font-size: 12px; font-weight: 700;
-      font-family: "Figtree", sans-serif; line-height: 1; white-space: nowrap;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; line-height: 1; white-space: nowrap;
     }
     .holdings .focus .chart-x {
       display: flex; justify-content: space-between;
       padding: 4px 8px 0 8px;
       color: #e9e8e5; font-size: 11.5px; font-weight: 700;
-      font-family: "Figtree", sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
     }
     .holdings .focus .chart-note {
       color: var(--mute); font-size: 0.8rem; padding: 28px 8px; text-align: center;
@@ -595,7 +592,7 @@
     .sell { color: #e38177; }
     footer {
       border-top: 2px solid var(--caution); margin-top: 40px; padding: 18px 0 36px;
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
     }
     .tk-link {
       background: none;
@@ -623,7 +620,7 @@
         bottom: 0;
         z-index: 80;
         background: var(--ink);
-        border-top: 2px solid var(--teal);
+        border-top: 2px solid var(--copper);
         padding-bottom: env(safe-area-inset-bottom, 0px);
       }
       .tabbar a {
@@ -632,7 +629,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: "Figtree", sans-serif;
+        font-family: "Figtree", "Figtree Fallback", sans-serif;
         letter-spacing: 0.04em;
         text-transform: uppercase;
         font-weight: 600;
@@ -655,10 +652,10 @@
       color: var(--mute);
       font-size: 0.82rem;
       margin: 0;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=188" />
+  <link rel="stylesheet" href="shell.css?v=189" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }
@@ -743,7 +740,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=128"></script>
+  <script src="chart.js?v=129"></script>
   <script>
     const isOptionLike = SA.isOptionLike;
     const isBond = SA.isBond;
@@ -929,7 +926,7 @@
     }
 
     const BAD_TICKERS = SA.BAD_TICKERS;
-    const SLICE = ["#e4b350", "#d89b77", "#53417e", "#83cc91", "#e38177", "#c2769a", "#e1894f", "#7e7367"];
+    const SLICE = ["#e4b350", "#d89b77", "#53417e", "#d4b06a", "#e38177", "#c2769a", "#e1894f", "#7e7367"];
     const BOOK_RANGES = ["3m", "1y", "3y"];
     const RANGE_LABEL = { "3m": "3-month", "1y": "1-year", "3y": "3-year" };
     const isChartTicker = SA.isChartTicker;

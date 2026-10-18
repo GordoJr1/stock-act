@@ -16,9 +16,6 @@
   <meta property="og:title" content="Stock Act" />
   <meta property="og:description" content="Official Senate, House, and White House STOCK Act / OGE 278-T tape." />
   <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=Red+Hat+Mono:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --steel: #2d2219;
@@ -30,7 +27,7 @@
       --caution: #e4b350;
       --mute: #9a948b;
       --ink: #251b15;
-      --teal: #c97646;
+      --copper: #c97646;
       --navy: #322849;
       --buy: #369d4b;
       --sell: #cf5f52;
@@ -46,7 +43,7 @@
     }
 
     body {
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       color: var(--white);
       background: var(--ink);
       min-height: 100vh;
@@ -80,7 +77,7 @@
       background: repeating-linear-gradient(
         -45deg,
         var(--ink) 0 10px,
-        var(--teal) 10px 20px
+        var(--copper) 10px 20px
       );
     }
 
@@ -91,7 +88,7 @@
       font-size: 0.82rem;
       margin: 0;
       padding: 10px 0;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
 
     header {
@@ -99,24 +96,24 @@
       align-items: center;
       justify-content: space-between;
       padding: 16px 0;
-      border-bottom: 2px solid var(--teal);
+      border-bottom: 2px solid var(--copper);
     }
 
     .mark {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       font-size: 1rem;
     }
 
-    .mark span { color: var(--teal); }
+    .mark span { color: var(--copper); }
 
     nav {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.9rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -127,7 +124,7 @@
     nav a:hover, nav a.on { color: var(--caution); }
 
     .kicker {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--caution);
@@ -136,7 +133,7 @@
     }
 
     h1 {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-weight: 700;
       font-size: clamp(3.6rem, 9vw, 7rem);
       line-height: 0.85;
@@ -158,7 +155,7 @@
 
     .meta {
       margin-top: 12px;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--caution);
@@ -168,7 +165,7 @@
     .cta { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
 
     .btn {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
@@ -192,7 +189,7 @@
     }
 
     h2 {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--caution);
@@ -208,7 +205,7 @@
     }
 
     .card h3 {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-size: 1.5rem;
@@ -224,7 +221,7 @@
       padding: 3px 8px;
       border: 1px solid var(--red);
       color: var(--red);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-size: 0.8rem;
@@ -251,7 +248,7 @@
     .tape-item:hover { border-color: var(--caution); }
 
     .pill {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.85rem;
@@ -264,7 +261,7 @@
     .pill.sell { color: #e38177; }
 
     .tape-item h3 {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.25rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -273,7 +270,7 @@
 
     .tape-item p { color: var(--mute); font-size: 0.9rem; }
     .tape-item .amt {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       color: var(--caution);
       letter-spacing: 0.04em;
       text-align: right;
@@ -289,7 +286,7 @@
 
     .picker label {
       display: block;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--caution);
@@ -331,7 +328,7 @@
       color: var(--paper);
       padding: 10px 12px;
       cursor: pointer;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
@@ -347,7 +344,7 @@
     }
     .filters label {
       display: block;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--caution);
@@ -390,7 +387,7 @@
     }
 
     table.tape-table th {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -414,7 +411,7 @@
       padding: 0 5px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -430,7 +427,7 @@
       padding: 1px 6px;
       border: 1px solid var(--red);
       color: var(--red);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -443,7 +440,7 @@
       padding: 1px 6px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -468,7 +465,7 @@
     }
 
     table.hist th {
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--caution);
@@ -487,7 +484,7 @@
       display: flex;
       justify-content: space-between;
       padding: 18px 0 36px;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--mute);
@@ -503,7 +500,7 @@
     .fold-teaser {
       display: block;
       margin-top: 4px;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
       text-transform: none;
       color: var(--mute);
@@ -573,7 +570,7 @@
       .board-fold > summary {
         display: block;
         padding: 12px 14px;
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--caution);
@@ -642,7 +639,7 @@
         border-right: 1px solid #49433c;
         padding-right: 8px;
         text-align: center;
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       }
       table.tape-table .tix-stamp .mon {
         color: var(--caution);
@@ -660,7 +657,7 @@
       table.tape-table tr.has-err { box-shadow: inset 3px 0 0 var(--red); }
       table.tape-table .tix-who {
         grid-area: who;
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         text-transform: uppercase;
         letter-spacing: 0.04em;
         font-size: 1.05rem;
@@ -676,7 +673,7 @@
         grid-area: amt;
         text-align: left;
         color: var(--caution);
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-size: 1.05rem;
       }
       table.tape-table .tix-meta {
@@ -700,7 +697,7 @@
     #board { padding: 16px 0 8px; }
     .board-fold > summary { display: none; list-style: none; }
     .board-strip-label {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -745,7 +742,7 @@
     }
     .board-tabs::-webkit-scrollbar { display: none; }
     .board-tabs button {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       background: transparent;
@@ -791,7 +788,7 @@
       #board .board-col { display: block; min-width: 0; padding: 0; }
       .board-col-title {
         display: block;
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--caution);
@@ -897,7 +894,7 @@
       padding: 1px 6px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -916,7 +913,7 @@
     .board-co {
       color: var(--mute);
       font-size: 0.82rem;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       text-transform: none;
       letter-spacing: 0;
       min-width: 0;
@@ -925,7 +922,7 @@
       white-space: nowrap;
     }
     .board-rank {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       color: var(--mute);
       letter-spacing: 0.06em;
     }
@@ -933,15 +930,15 @@
     .board-list a {
       color: var(--white);
       text-decoration: none;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
       text-transform: none;
       font-weight: 600;
     }
     .board-list a:hover { color: var(--caution); }
-    .board-why { display: block; color: #c3c0ba; font-size: calc(0.75rem + 1px); text-transform: none; letter-spacing: 0; font-family: "Figtree", sans-serif; }
+    .board-why { display: block; color: #c3c0ba; font-size: calc(0.75rem + 1px); text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; }
     .board-val {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       color: var(--caution);
       font-size: 1.05rem;
       white-space: nowrap;
@@ -955,7 +952,7 @@
     .tk-link:hover { color: var(--caution); }
     .board-list a.tk-link {
       color: var(--white);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
@@ -983,7 +980,7 @@
       background: transparent;
       border: 1px solid #5b534a;
       color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 8px 12px;
@@ -999,7 +996,7 @@
     .chart-pnl div { background: var(--panel); border: 1px solid #49433c; padding: 8px 10px; }
     .chart-pnl b {
       display: block;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.2rem;
       color: var(--caution);
     }
@@ -1059,14 +1056,14 @@
       }
       .desk-status:empty { display: none; }
       .desk-status b {
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-size: 1.35rem;
         letter-spacing: 0.04em;
         display: block;
         line-height: 1;
       }
       .desk-status span {
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--mute);
@@ -1147,7 +1144,7 @@
     .desk .wire-day0[hidden] { display: none; }
     #wire li.day.fresh h2 { color: var(--caution); }
     .desk .day h2 {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--caution);
@@ -1159,7 +1156,7 @@
       font-style: normal;
       color: var(--mute);
       font-size: 0.78rem;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
     }
     .desk .print {
@@ -1203,7 +1200,7 @@
       border-right: 1px solid #49433c;
       padding-right: 10px;
       min-height: 52px;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       text-align: center;
       align-self: stretch;
     }
@@ -1223,8 +1220,8 @@
       min-width: 0;
     }
     .desk .who {
-      font-family: "Figtree", sans-serif;
-      font-weight: 650;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
+      font-weight: 600;
       letter-spacing: 0;
       text-transform: none;
       font-size: 1.08rem;
@@ -1237,9 +1234,9 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .desk .who:hover { color: var(--teal); }
+    .desk .who:hover { color: var(--copper); }
     .desk .ch {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.68rem;
@@ -1248,7 +1245,7 @@
       color: var(--paper);
       white-space: nowrap;
     }
-    .desk .ch.sen { border-color: var(--teal); color: var(--teal); }
+    .desk .ch.sen { border-color: var(--copper); color: var(--copper); }
     .desk .ch.wh { border-color: var(--caution); color: var(--caution); }
     .desk .ch.hot { border-color: var(--caution); color: var(--caution); }
     .desk .ch.bad { border-color: #e38177; color: #e38177; }
@@ -1266,7 +1263,7 @@
       line-clamp: 2;
     }
     .desk .asset a {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-weight: 700;
@@ -1274,14 +1271,14 @@
       text-decoration: none;
       margin-right: 6px;
     }
-    .desk .asset a:hover { color: var(--teal); }
+    .desk .asset a:hover { color: var(--copper); }
     .desk .meta {
       color: #c3c0ba;
       font-size: calc(0.75rem + 1px);
       margin-top: 2px;
       letter-spacing: 0;
       text-transform: none;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
     .desk .pay {
       grid-area: pay;
@@ -1295,7 +1292,7 @@
       border: 0;
       border-radius: 0;
       color: #dfddda;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-weight: 700;
       font-size: 0.74rem;
       padding: 0;
@@ -1325,7 +1322,7 @@
       padding: 1px 6px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.66rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -1375,7 +1372,7 @@
       background: transparent;
       border: 0;
       color: #a7a199;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.78rem;
@@ -1438,7 +1435,7 @@
       color: #120f1b;
       font-size: 12px;
       font-weight: 700;
-      font-family: "Red Hat Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       padding: 3px 8px;
       border-radius: 5px;
       pointer-events: none;
@@ -1453,7 +1450,7 @@
       border: 1px solid rgba(255, 255, 254, 0.2);
       color: #e9e8e5;
       font-size: 12px;
-      font-family: "Red Hat Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 5px;
@@ -1492,7 +1489,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-weight: 800;
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -1514,7 +1511,7 @@
       box-shadow: 0 0 10px rgba(227, 128, 116, 0.3);
     }
     .focus .mark-pop .pop-title {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.02rem;
       font-weight: 700;
       color: #fffffe;
@@ -1546,11 +1543,11 @@
       flex-wrap: wrap;
       gap: 5px;
       margin: 5px 0 2px;
-      font-family: "Red Hat Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-size: 11.5px;
     }
     .focus .mark-pop .pop-single-amt { color: #fffffe; font-weight: 700; }
-    .focus .mark-pop .pop-dot { color: #7d7166; margin: 0 1px; }
+    .focus .mark-pop .pop-dot { color: #9a948b; margin: 0 1px; }
     .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 600; }
     .focus .chart-y {
       position: absolute;
@@ -1577,7 +1574,7 @@
       color: #e9e8e5;
       font-size: 12px;
       font-weight: 700;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0.02em;
       line-height: 1;
       white-space: nowrap;
@@ -1589,7 +1586,7 @@
       color: #e9e8e5;
       font-size: 11.5px;
       font-weight: 700;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       grid-column: auto;
@@ -1601,16 +1598,16 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=188" />
+  <link rel="stylesheet" href="shell.css?v=189" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
     .stock-act-txn-end { grid-area: end; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: max-content; }
-    .stock-act-txn-chip { border: 0; border-radius: 0; background: transparent; color: #dfddda; text-transform: none; letter-spacing: 0; font-family: "Figtree", sans-serif; font-weight: 700; padding: 0; }
+    .stock-act-txn-chip { border: 0; border-radius: 0; background: transparent; color: #dfddda; text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; padding: 0; }
     .stock-act-txn.buy .stock-act-txn-chip { background: transparent; color: #83cc91; }
     .stock-act-txn.sell .stock-act-txn-chip { background: transparent; color: #f0bab4; }
     .stock-act-txn-hero, .stock-act-txn .stock-act-txn-hero { color: #f2f2f0; }
-    .stock-act-txn-hero { font-weight: 700; font-family: "Figtree", sans-serif; }
+    .stock-act-txn-hero { font-weight: 700; font-family: "Figtree", "Figtree Fallback", sans-serif; }
     .stock-act-txn-id-line { display: flex; align-items: baseline; min-width: 0; max-width: 100%; overflow: hidden; }
     .stock-act-txn-id-line .stock-act-txn-role { display: none; }
     .stock-act-txn-sh, .stock-act-txn-cols, .stock-act-txn-id-sub, .stock-act-txn-tbl { display: none; }
@@ -1631,7 +1628,7 @@
       .stock-act-txn-tape .stock-act-txn-date { grid-area: date; }
       .stock-act-txn-tape .stock-act-txn-hero { grid-area: hero; }
       .stock-act-txn-tape .stock-act-txn-company,
-      .stock-act-txn-tape a.stock-act-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #f2f2f0); font-size: 0.84rem; font-weight: 600; font-family: "Figtree", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
+      .stock-act-txn-tape a.stock-act-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #f2f2f0); font-size: 0.84rem; font-weight: 600; font-family: "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
       .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-cols .stock-act-txn-company { display: block; grid-area: co; }
       .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-tk,
       .stock-act-txn-tape .stock-act-txn-company a.stock-act-txn-tk { flex: 0 0 auto; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.05em; color: inherit; }
@@ -1666,11 +1663,11 @@
         grid-area: hero; justify-self: end; text-align: right;
       }
       .desk .stock-act-txn-tape .stock-act-txn-hero {
-        font-family: "Red Hat Mono", monospace; font-variant-numeric: tabular-nums; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.01em; color: #f2f2f0;
+        font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace; font-variant-numeric: tabular-nums; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.01em; color: #f2f2f0;
         min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       }
       .desk .stock-act-txn-tape .stock-act-txn-hero.is-empty {
-        font-family: "Figtree", sans-serif;
+        font-family: "Figtree", "Figtree Fallback", sans-serif;
         color: var(--mute, #9a948b);
       }
       .desk .stock-act-txn-tape { cursor: pointer; }
@@ -1759,7 +1756,7 @@
       --v2-buy-text: #83cc91;
       --v2-sell-bar: #db675a;
       --v2-buy-bar: #47b25c;
-      --v2-chip-fg: #a2e0ae;
+      --v2-chip-fg: #e4b350;
       --v2-chip-bg: #433225;
       --v2-chip-bd: #776d62;
     }
@@ -1771,15 +1768,15 @@
     #board { padding: 18px 0 8px; border: 0; background: transparent; }
     .board-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 16px; }
     #board .board-head h2 {
-      margin: 0; font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 30px;
+      margin: 0; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 30px;
       letter-spacing: 0.06em; text-transform: uppercase; color: var(--white);
     }
     .board-more {
       background: transparent; border: 0; padding: 8px 0; min-height: 40px; cursor: pointer;
-      font-family: "Big Shoulders Display", sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--v2-buy-text); white-space: nowrap;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--caution); white-space: nowrap;
     }
-    .board-more:hover { color: #ace6b8; }
+    .board-more:hover { color: var(--caution); }
     .board-more:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
     .board-more[hidden] { display: none !important; }
     .board-more-foot { display: none; }
@@ -1792,13 +1789,13 @@
     }
     #board .board-col-title {
       display: flex; align-items: center; gap: 10px; margin: 0;
-      font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.08em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--white);
     }
     .board-chip {
-      font-family: "Figtree", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
       line-height: 1; padding: 4px 7px; border-radius: 6px; text-transform: none;
-      color: var(--v2-chip-fg); background: var(--v2-chip-bg); border: 1px solid var(--v2-chip-bd);
+      color: var(--caution); background: rgba(228, 179, 80, 0.12); border: 1px solid var(--caution);
     }
     .board-desc { margin: 8px 0 10px; color: var(--v2-sub); font-size: 14px; line-height: 1.45; }
     #board .board-list { list-style: none; margin: 0; padding: 0; border: 0; background: transparent; max-width: none; }
@@ -1812,19 +1809,19 @@
     }
     #board .board-rank,
     #board .board-list > li:first-child .board-rank {
-      color: var(--v2-sub); font-family: "Figtree", sans-serif; font-size: 13px; font-weight: 600;
+      color: var(--v2-sub); font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 600;
       letter-spacing: 0; font-variant-numeric: tabular-nums;
     }
     #board .board-who { min-width: 0; }
     #board .board-list a {
       display: block; overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: anywhere;
-      font-family: "Figtree", sans-serif; font-weight: 600; font-size: 15px; line-height: 1.3;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 600; font-size: 15px; line-height: 1.3;
       letter-spacing: 0; text-transform: none; color: var(--white); text-decoration: none;
     }
     #board .board-list a:hover { color: #eacab7; }
     #board .board-stock a.tk-link { display: inline; font-weight: 700; letter-spacing: 0.03em; text-decoration: none; }
     #board .board-val {
-      font-family: "Figtree", sans-serif; font-weight: 700; font-size: 15px; color: var(--white);
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; font-size: 15px; color: var(--white);
       white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums;
     }
     #board .board-val b { font-weight: 700; color: inherit; }
@@ -1850,7 +1847,7 @@
         display: grid; grid-template-columns: 18px minmax(0, 1fr); row-gap: 4px; column-gap: 0; align-items: baseline;
         background: var(--v2-card); border: 1px solid var(--v2-border); border-radius: 14px;
         padding: 14px 16px; min-height: 44px; cursor: pointer; list-style: none;
-        font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.1em;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.1em;
         text-transform: uppercase; color: var(--white);
       }
       .board-fold > summary::before,
@@ -1862,7 +1859,7 @@
       .board-strip-label { grid-column: 2; color: var(--white); font: inherit; letter-spacing: inherit; }
       .board-peek {
         grid-column: 1 / -1; padding-left: 18px; white-space: normal; overflow: visible; text-overflow: clip;
-        font-family: "Figtree", sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 0;
+        font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 0;
         text-transform: none; line-height: 1.4; color: var(--v2-sub);
       }
       .board-fold[open] .board-peek { display: none; }
@@ -1889,7 +1886,7 @@
         min-height: 44px;
         cursor: pointer;
         list-style: none;
-        font-family: "Big Shoulders Display", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-weight: 700;
         font-size: 19px;
         letter-spacing: 0.1em;
@@ -1912,7 +1909,7 @@
         white-space: normal;
         overflow: visible;
         text-overflow: clip;
-        font-family: "Figtree", sans-serif;
+        font-family: "Figtree", "Figtree Fallback", sans-serif;
         font-weight: 400;
         font-size: 14px;
         letter-spacing: 0;
@@ -1934,7 +1931,7 @@
     .filter-fold .filters label,
     .filter-fold .filter-label {
       display: block;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       color: var(--v2-sub);
       font-weight: 600;
       font-size: 13px;
@@ -1956,7 +1953,7 @@
     }
     .picker input, .filters input, .filters select, .seg {
       min-height: 34px; height: 34px; background-color: var(--v2-card); border: 1px solid var(--v2-border);
-      border-radius: 10px; color: var(--white); font-family: "Figtree", sans-serif; font-size: 15px;
+      border-radius: 10px; color: var(--white); font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 15px;
     }
     .filters select { padding-top: 0; padding-bottom: 0; line-height: 32px; }
     .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--caution); outline-offset: 1px; }
@@ -1982,7 +1979,7 @@
       border: 1px solid var(--v2-border);
       border-radius: 4px;
       color: var(--mute);
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 12px;
       font-weight: 600;
       line-height: 20px;
@@ -2010,7 +2007,7 @@
       border-right: 1px solid var(--v2-border);
       background: transparent;
       color: var(--mute);
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0;
@@ -2039,7 +2036,7 @@
       border: 0;
       background: transparent;
       color: var(--caution);
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
@@ -2064,7 +2061,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
       text-transform: none;
       font-size: 14px;
@@ -2119,7 +2116,7 @@
 
     .wire-kicker,
     .desk .wire-kicker {
-      display: block; margin: 0 0 16px; font-family: "Big Shoulders Display", sans-serif; font-weight: 700;
+      display: block; margin: 0 0 16px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700;
       font-size: 30px; letter-spacing: 0.06em; color: var(--white);
     }
     .wire-count {
@@ -2144,10 +2141,10 @@
     }
     #wire > li.day:first-child { margin-top: 0; }
     #wire > li.day h2 {
-      margin: 0; font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 17px;
+      margin: 0; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 17px;
       letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper);
     }
-    #wire > li.day.fresh h2 { color: var(--v2-buy-text); }
+    #wire > li.day.fresh h2 { color: var(--caution); }
     #wire > li.w-row {
       position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
       align-items: start; padding: 14px 4px 14px 26px; border-bottom: 1px solid var(--v2-line); outline: none;
@@ -2184,7 +2181,7 @@
     #wire .stock-act-file-note-more {
       display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       border: 1px solid var(--v2-border); border-radius: 6px; padding: 2px 9px; background: rgba(22, 17, 13, 0.45);
-      color: #cfcdc8; font-family: "Figtree", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+      color: #cfcdc8; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
     }
     #wire .stock-act-file-note.is-extra { display: none !important; }
     #wire .stock-act-file-note-more { display: inline-block !important; }
@@ -2194,7 +2191,7 @@
       display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
     }
     #wire .w-side, #wire .w1-side {
-      font-family: "Figtree", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase; line-height: 1.3; color: var(--paper); white-space: nowrap;
     }
     #wire .w-side.buy, #wire .w1-side.buy { color: var(--v2-buy-text); }
@@ -2233,16 +2230,16 @@
     }
     .focus .chips { gap: 6px; margin: 0 0 12px; }
     .desk .focus .ch {
-      font-family: "Figtree", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; line-height: 1;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; line-height: 1;
       padding: 5px 8px; border: 1px solid var(--v2-border); border-radius: 6px; color: var(--paper);
       background: rgba(22, 17, 13, 0.35);
     }
     .desk .focus .ch.sen { color: #eacab7; border-color: #98542c; }
-    .desk .focus .ch.hot { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
+    .desk .focus .ch.hot { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
     .desk .focus .ch.bad { color: #e38177; border-color: #e38177; }
     .desk .focus .asset { margin: 0 0 2px; font-size: 16px; color: var(--white); overflow-wrap: anywhere; }
     .desk .focus .asset a {
-      font-family: "Figtree", sans-serif; font-weight: 700; letter-spacing: 0.03em; text-transform: none; margin-right: 4px;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; letter-spacing: 0.03em; text-transform: none; margin-right: 4px;
     }
     .focus .quiet { margin: 0 0 14px; color: var(--v2-sub); font-size: 14px; }
     .focus .range { background: var(--v2-chart); border: 1px solid var(--v2-line); padding: 3px; margin: 0 0 12px; }
@@ -2265,19 +2262,19 @@
     .focus .mark-pop .pop-badge,
     .focus .mark-pop .pop-badge.buy,
     .focus .mark-pop .pop-badge.sell {
-      font-family: "Figtree", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
       padding: 3px 7px; border-radius: 6px; box-shadow: none;
     }
     .focus .mark-pop .pop-badge.sell { color: var(--v2-sell-text); background: rgba(207, 95, 82, 0.16); border: 1px solid rgba(219, 103, 90, 0.45); }
     .focus .mark-pop .pop-badge.buy { color: var(--v2-buy-text); background: rgba(54, 157, 75, 0.16); border: 1px solid rgba(71, 178, 92, 0.45); }
     .focus .mark-pop .pop-title {
-      font-family: "Figtree", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0;
       white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; color: var(--white);
     }
     .focus .mark-pop .pop-close { width: 22px; height: 22px; margin-left: 4px; }
-    .focus .mark-pop .pop-single-detail { margin: 4px 0 0; font-family: "Figtree", sans-serif; font-size: 14px; gap: 4px; }
+    .focus .mark-pop .pop-single-detail { margin: 4px 0 0; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 14px; gap: 4px; }
     .focus .mark-pop .pop-single-amt { color: var(--paper); font-weight: 600; }
-    .focus .mark-pop .pop-dot { color: var(--v2-sub); }
+    .focus .mark-pop .pop-dot { color: #9a948b; }
     .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 400; }
     .focus .mark-pop .pop-link {
       position: absolute; top: 100%; width: 0; border-left: 1.5px dashed rgba(240, 186, 180, 0.6); pointer-events: none;
@@ -2285,7 +2282,7 @@
     .focus .mark-pop .pop-link.buy { border-left-color: rgba(131, 204, 145, 0.6); }
     .focus .cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
     .focus .btn {
-      border-radius: 10px; font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 15px;
+      border-radius: 10px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 15px;
       letter-spacing: 0.1em; padding: 10px 16px; color: var(--white); border: 1px solid var(--v2-border); background: transparent;
     }
     .focus .btn.fill { background: #e4b350; border-color: #e4b350; color: #251b15; }
@@ -2313,7 +2310,7 @@
       .chart-top #focus-foot { display: none; }
       .chart-top .strip-toggle {
         display: inline-flex; align-items: center; gap: 6px; position: absolute; top: 10px; right: 10px; z-index: 2;
-        font: 600 12px/1 "Figtree", sans-serif; letter-spacing: 0.05em; color: var(--v2-sub, #c3c0ba);
+        font: 600 12px/1 "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0.05em; color: var(--v2-sub, #c3c0ba);
         padding: 6px 9px; border: 1px solid var(--v2-border, #49433c); border-radius: 6px; background: rgba(22, 17, 13, 0.35); cursor: pointer;
       }
       .chart-top .strip-toggle::after { content: "\25BE"; font-size: 11px; }
@@ -2349,9 +2346,9 @@
       #wire .w1-chip {
         display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         border: 1px solid var(--v2-border); border-radius: 6px; padding: 1px 8px; background: rgba(22, 17, 13, 0.45);
-        color: #cfcdc8; font-family: "Figtree", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+        color: #cfcdc8; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
       }
-      #wire .w1-clus { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
+      #wire .w1-clus { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
       #wire li.w1 {
         position: relative; min-height: 44px; padding: 4px 2px 4px 20px; border-top: 1px solid rgba(69, 62, 56, 0.55);
         display: flex; flex-direction: column; justify-content: center; outline: none;
@@ -2616,7 +2613,7 @@
   </div>
 
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=128"></script>
+  <script src="chart.js?v=129"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, (c) => ({

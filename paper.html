@@ -14,18 +14,15 @@
   <link rel="prefetch" href="backtest.json">
   <title>Paper trades — Stock Act</title>
   <meta name="description" content="Hypothetical STOCK Act copy: buy when the filing hits, not on the trade date. Equal-weight purchase legs. Not investment advice." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --steel: #2d2219; --panel: #3f2f24; --paper: #deddda; --white: #f2f2f0;
-      --caution: #e4b350; --mute: #9a948b; --ink: #251b15; --teal: #c97646;
+      --caution: #e4b350; --mute: #9a948b; --ink: #251b15; --copper: #c97646;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
     body {
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       color: var(--white);
       background: var(--ink);
       min-height: 100vh;
@@ -33,15 +30,15 @@
     .wrap { width: min(1680px, calc(100% - 48px)); margin: 0 auto; }
     header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 0; border-bottom: 2px solid var(--teal);
+      padding: 16px 0; border-bottom: 2px solid var(--copper);
     }
     .mark, h1, h2, .kicker, nav, .chip, .tk, .who, .subhead, .rate b, .rank, .board-tabs button {
-      font-family: "Big Shoulders Display", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
     a.mark { font-weight: 700; letter-spacing: 0.18em; font-size: 1rem; color: inherit; text-decoration: none; }
-    .mark span { color: var(--teal); }
+    .mark span { color: var(--copper); }
     nav { display: flex; gap: 16px; font-size: 0.9rem; letter-spacing: 0.12em; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
     nav a:hover, nav a.on { color: var(--caution); }
@@ -61,7 +58,7 @@
       color: var(--mute);
       font-size: 0.82rem;
       margin: 0;
-      font-family: "Figtree", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
     .muted { color: var(--mute); font-size: 0.88rem; line-height: 1.45; }
     .stats {
@@ -71,7 +68,7 @@
     .stat { padding: 12px 14px; border-right: 1px solid #49433c; }
     .stat:last-child { border-right: 0; }
     .stat b {
-      display: block; font-family: "Big Shoulders Display", sans-serif;
+      display: block; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.6rem; color: var(--caution); letter-spacing: 0.06em;
     }
     .stat span { color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -102,7 +99,7 @@
     .card.open { background: rgba(228, 179, 80, 0.05); }
     .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; cursor: pointer; scroll-margin-top: 12px; }
     .who, .tk-title { color: var(--white); text-decoration: none; font-size: 1.35rem; }
-    .who:hover, .tk-title:hover { color: var(--teal); }
+    .who:hover, .tk-title:hover { color: var(--copper); }
     .rate { text-align: right; color: var(--caution); line-height: 1; }
     .rate b { display: block; font-size: 1.7rem; }
     .rate b.up { color: #83cc91; }
@@ -118,7 +115,7 @@
       font-size: 0.9rem; align-items: baseline;
     }
     .tk { color: var(--white); text-decoration: none; font-size: 1.05rem; }
-    .tk:hover { color: var(--teal); }
+    .tk:hover { color: var(--copper); }
     .co { color: var(--paper); font-size: 0.86rem; min-width: 0; }
     .co .dot { color: var(--mute); }
     .ret { color: #83cc91; font-weight: 600; white-space: nowrap; }
@@ -128,7 +125,7 @@
     }
     details.how summary {
       cursor: pointer; padding: 12px 16px; color: var(--caution);
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em;
       text-transform: uppercase; list-style: none;
     }
     details.how summary::-webkit-details-marker { display: none; }
@@ -136,7 +133,7 @@
     details.how .body p + p { margin-top: 10px; }
     .more-row { margin: 12px 0 8px; }
     .btn {
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.14em; text-transform: uppercase;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.14em; text-transform: uppercase;
       text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 10px 16px;
       border: 2px solid var(--caution); color: var(--caution); background: transparent; cursor: pointer;
       min-height: 44px;
@@ -144,14 +141,14 @@
     footer { border-top: 2px solid var(--caution); margin-top: 20px; }
     footer .wrap {
       display: flex; justify-content: space-between; padding: 18px 0 36px;
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--mute);
     }
     footer a { color: var(--caution); }
     .paper-filters { margin: 0 0 10px; border: 1px solid #5b534a; background: #221913; }
     .paper-filters > summary {
       display: flex; align-items: center; min-height: 36px; padding: 0 14px; cursor: pointer;
-      font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.12em; text-transform: uppercase;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--caution); list-style: none;
     }
     .paper-filters > summary::-webkit-details-marker { display: none; }
@@ -201,12 +198,12 @@
       header nav { display: none; }
       .tabbar {
         display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
-        background: var(--ink); border-top: 2px solid var(--teal);
+        background: var(--ink); border-top: 2px solid var(--copper);
         padding-bottom: env(safe-area-inset-bottom, 0px);
       }
       .tabbar a {
         flex: 1 1 0; min-height: 44px; display: flex; align-items: center; justify-content: center;
-        font-family: "Big Shoulders Display", sans-serif; letter-spacing: 0.06em; text-transform: uppercase;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.06em; text-transform: uppercase;
         font-size: 0.78rem; color: var(--paper); text-decoration: none; padding: 0 2px; text-align: center;
       }
       .tabbar a.on, .tabbar a:hover { color: var(--caution); }
@@ -215,7 +212,7 @@
       .kicker { margin: 8px 0 4px; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=188" />
+  <link rel="stylesheet" href="shell.css?v=189" />
 </head>
 <body class="stock-act-v2 stock-act-v2-cards">
   <a class="stock-act-skip" href="#main">Skip to content</a>

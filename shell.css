@@ -1,3 +1,49 @@
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/big-shoulders-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Big Shoulders Fallback";
+  src: local("Arial"), local("Liberation Sans");
+  size-adjust: 113.57%;
+  ascent-override: 86.64%;
+  descent-override: 18.75%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("fonts/figtree.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree Fallback";
+  src: local("Arial"), local("Liberation Sans");
+  size-adjust: 94.64%;
+  ascent-override: 100.38%;
+  descent-override: 26.42%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Red Hat Mono";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("fonts/red-hat-mono.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Red Hat Mono Fallback";
+  src: local("Courier New"), local("Liberation Mono");
+  size-adjust: 92.37%;
+  ascent-override: 110.21%;
+  descent-override: 33.02%;
+  line-gap-override: 0%;
+}
+
 /* Reserve the classic Y scrollbar so tab loads do not shift the page. */
 html {
   scrollbar-gutter: stable;
@@ -27,7 +73,7 @@ html {
   font-size: 0.82rem;
   margin: 0;
   padding: 10px 0;
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
 }
 
 .stock-act-skip {
@@ -39,7 +85,7 @@ html {
   background: var(--ink, #251b15);
   color: var(--caution, #e4b350);
   border: 2px solid var(--caution, #e4b350);
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
@@ -59,7 +105,7 @@ html {
   /* Safe area: pad the sticky header itself so it stays below the iOS status bar after scrolling
      (viewport-fit=cover + black-translucent). env() is 0 on desktop browsers. */
   padding: env(safe-area-inset-top, 0px) 0 0;
-  border-bottom: 2px solid var(--teal, #c97646);
+  border-bottom: 2px solid var(--copper, #c97646);
   background: var(--shell-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -79,7 +125,7 @@ body { padding-top: 0 !important; }
   align-items: center;
 }
 :where(.stock-act-header) :where(a.mark) {
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -87,7 +133,7 @@ body { padding-top: 0 !important; }
   color: var(--white, #f2f2f0);
   text-decoration: none;
 }
-:where(.stock-act-header) :where(a.mark span) { color: var(--teal, #c97646); }
+:where(.stock-act-header) :where(a.mark span) { color: var(--copper, #c97646); }
 .stock-act-nav {
   display: flex;
   flex: 1 1 auto;
@@ -104,7 +150,7 @@ body { padding-top: 0 !important; }
   padding: 0 10px;
   display: inline-flex;
   align-items: center;
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 13px;
@@ -130,7 +176,7 @@ body { padding-top: 0 !important; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 0.78rem;
@@ -202,7 +248,7 @@ summary:focus-visible,
   }
   .stock-act-header .mark span {
     display: inline;
-    color: var(--teal, #c97646);
+    color: var(--copper, #c97646);
   }
   .stock-act-nav { display: none; }
   .stock-act-desk-only { display: none !important; }
@@ -226,7 +272,7 @@ summary:focus-visible,
     bottom: 0;
     z-index: 80;
     background: var(--ink, #251b15);
-    border-top: 2px solid var(--teal, #c97646);
+    border-top: 2px solid var(--copper, #c97646);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .chip, a.chip, .board-tabs button, .windows button {
@@ -243,7 +289,7 @@ summary:focus-visible,
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     font-weight: 600;
@@ -441,14 +487,14 @@ summary:focus-visible,
   text-decoration: none;
   letter-spacing: 0;
   text-transform: none;
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
 }
 .stock-act-txn-name:hover,
-.stock-act-txn a.stock-act-txn-name:hover { color: var(--teal, #c97646); }
+.stock-act-txn a.stock-act-txn-name:hover { color: var(--copper, #c97646); }
 .stock-act-txn-tk,
 .stock-act-txn a.stock-act-txn-tk {
   flex: 0 0 auto;
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 0.82rem;
@@ -469,7 +515,7 @@ summary:focus-visible,
 }
 .stock-act-txn-chip {
   flex: 0 0 auto;
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   letter-spacing: 0;
   text-transform: none;
   font-size: 0.74rem;
@@ -495,7 +541,7 @@ summary:focus-visible,
   padding: 1px 5px;
   border: 1px solid #7e7367;
   color: #cecbc7;
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   font-size: 0.62rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -532,12 +578,12 @@ summary:focus-visible,
 }
 .stock-act-txn-tape .stock-act-txn-tk .opt-tag { margin-left: 0; }
 .stock-act-txn-tag.hot { border-color: var(--caution, #e4b350); color: var(--caution, #e4b350); }
-.stock-act-txn-tag.ceo { border-color: #83cc91; color: #83cc91; }
+.stock-act-txn-tag.ceo { border-color: var(--caution, #e4b350); color: var(--caution, #e4b350); }
 .stock-act-txn-hero,
 .stock-act-txn .stock-act-txn-hero,
 .stock-act-txn-hero.is-shares {
   flex: 0 0 auto;
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   font-size: 1.22rem;
   font-weight: 700;
   letter-spacing: 0;
@@ -668,11 +714,11 @@ summary:focus-visible,
   max-width: 100%;
   min-width: 0;
   padding: 0 0 3px;
-  border-bottom: 2px solid var(--teal, #c97646);
+  border-bottom: 2px solid var(--copper, #c97646);
   overflow: hidden;
   text-decoration: none;
   color: var(--white, #f2f2f0);
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -730,7 +776,7 @@ summary:focus-visible,
 }
 .stock-act-txn-tape .stock-act-txn-tk,
 .stock-act-txn-tape a.stock-act-txn-tk {
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 0.78rem;
@@ -832,7 +878,7 @@ summary:focus-visible,
     border-radius: 0;
     box-shadow: 0 -1px 0 #16110d, 0 1px 0 #49433c;
     color: var(--mute, #9a948b);
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -915,7 +961,7 @@ summary:focus-visible,
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--mute, #9a948b);
-    font-family: "Red Hat Mono", monospace;
+    font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.68rem;
     font-weight: 500;
@@ -970,7 +1016,7 @@ summary:focus-visible,
     display: inline;
     flex: 0 0 auto;
     margin-left: 0;
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
     font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0;
@@ -993,7 +1039,7 @@ summary:focus-visible,
     grid-area: hero;
     justify-self: end;
     text-align: right;
-    font-family: "Red Hat Mono", monospace;
+    font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.72rem;
     font-weight: 600;
@@ -1008,7 +1054,7 @@ summary:focus-visible,
   .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-hero.is-empty {
     color: var(--mute, #9a948b);
     font-weight: 400;
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
   }
   .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-sh,
   .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-px,
@@ -1039,7 +1085,7 @@ summary:focus-visible,
     text-decoration: none;
     letter-spacing: 0;
     text-transform: none;
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
     line-height: 1.25;
   }
   .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .stock-act-txn-who-line a.stock-act-txn-name:hover {
@@ -1066,7 +1112,7 @@ summary:focus-visible,
   }
   .stock-act-txn-list.stock-act-tape-list > .day:first-child { padding-top: 8px; }
   .stock-act-txn-list.stock-act-tape-list > .day h2 {
-    font-family: "Big Shoulders Display", sans-serif;
+    font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--caution, #e4b350);
@@ -1117,7 +1163,7 @@ summary:focus-visible,
     border-left: 3px solid transparent;
     border-bottom: 1px solid #49433c;
     color: var(--mute, #9a948b);
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -1278,7 +1324,7 @@ summary:focus-visible,
     font-weight: 400;
     letter-spacing: 0;
     text-transform: none;
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
   }
   .stock-act-txn:not(.stock-act-txn-tape) .stock-act-txn-id-line .stock-act-txn-role::before {
     content: "– ";
@@ -1321,7 +1367,7 @@ summary:focus-visible,
     font-weight: 400;
     letter-spacing: 0;
     text-transform: none;
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
   }
   .stock-act-txn-tape .stock-act-txn-id-sub .stock-act-txn-dot {
     display: inline;
@@ -1340,7 +1386,7 @@ summary:focus-visible,
     color: var(--white, #f2f2f0);
     font-size: 0.84rem;
     font-weight: 600;
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
     letter-spacing: 0;
     text-transform: none;
   }
@@ -1380,7 +1426,7 @@ summary:focus-visible,
 }
 .stock-act-pol-desk .stock-act-txn-list > .day:first-child { margin-top: 0; }
 .stock-act-pol-desk .day h2 {
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--caution, #e4b350);
@@ -1490,7 +1536,7 @@ summary:focus-visible,
     text-align: right;
   }
   .stock-act-pol-desk .stock-act-txn-tape .stock-act-txn-hero {
-    font-family: "Red Hat Mono", monospace;
+    font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.84rem;
     font-weight: 600;
@@ -1498,7 +1544,7 @@ summary:focus-visible,
     color: #f2f2f0;
   }
   .stock-act-pol-desk .stock-act-txn-tape .stock-act-txn-hero.is-empty {
-    font-family: "Figtree", sans-serif;
+    font-family: "Figtree", "Figtree Fallback", sans-serif;
     color: var(--mute, #9a948b);
   }
   .stock-act-pol-desk .stock-act-txn-list.stock-act-tape-list .day { padding: 0 12px; }
@@ -1522,7 +1568,7 @@ summary:focus-visible,
   .stock-act-pol-desk .stock-act-show-opt .stock-act-txn-cols .stock-act-txn-exp { grid-area: exp; }
   .stock-act-pol-desk .stock-act-show-opt .stock-act-txn-tape .stock-act-txn-strike {
     grid-area: strike;
-    font-family: "Red Hat Mono", monospace;
+    font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.76rem;
     font-weight: 600;
@@ -1531,7 +1577,7 @@ summary:focus-visible,
   }
   .stock-act-pol-desk .stock-act-show-opt .stock-act-txn-tape .stock-act-txn-exp {
     grid-area: exp;
-    font-family: "Red Hat Mono", monospace;
+    font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.72rem;
     font-weight: 500;
@@ -1590,7 +1636,7 @@ summary:focus-visible,
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-cols .stock-act-txn-held { grid-area: held; }
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-tape .stock-act-txn-sh,
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-tape .stock-act-txn-after {
-    font-family: "Red Hat Mono", monospace;
+    font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.76rem;
     font-weight: 600;
@@ -1598,7 +1644,7 @@ summary:focus-visible,
     color: #f2f2f0;
   }
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-tape .stock-act-txn-held {
-    font-family: "Red Hat Mono", monospace;
+    font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
     font-variant-numeric: tabular-nums;
     font-size: 0.72rem;
     font-weight: 600;
@@ -1607,7 +1653,7 @@ summary:focus-visible,
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-cols .stock-act-txn-sh,
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-cols .stock-act-txn-after,
   .stock-act-pol-desk.stock-act-has-hold .stock-act-txn-cols .stock-act-txn-held {
-    font-family: "Big Shoulders Display", sans-serif;
+    font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -1631,7 +1677,7 @@ summary:focus-visible,
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
 }
 .page-head .asof {
   padding: 0;
@@ -1709,7 +1755,7 @@ summary:focus-visible,
   background: transparent;
   border: 1px solid var(--caution, #e4b350);
   color: var(--caution, #e4b350);
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 8px 14px;
@@ -1745,7 +1791,7 @@ details.how {
 .ticket-more > summary {
   cursor: pointer;
   color: var(--caution, #e4b350);
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 0.78rem;
@@ -1786,7 +1832,7 @@ details.how {
   padding: 1px 6px;
   border: 1px solid var(--caution, #e4b350);
   color: var(--caution, #e4b350);
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1803,9 +1849,9 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
   flex: 0 0 auto;
   margin-left: 6px;
   padding: 1px 6px;
-  border: 1px solid var(--teal, #c97646);
+  border: 1px solid var(--copper, #c97646);
   color: #d98a5a;
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1824,7 +1870,7 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
   gap: 10px;
   flex-wrap: wrap;
   padding: 10px 12px 8px;
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--caution, #e4b350);
@@ -1838,7 +1884,7 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
 }
 .stock-act-follow-alerts .acts a,
 .stock-act-follow-alerts .acts button {
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--paper, #deddda);
@@ -1869,7 +1915,7 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
 }
 .stock-act-follow-alerts a.hit:hover { background: rgba(201, 118, 70, 0.08); }
 .stock-act-follow-alerts .who {
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   letter-spacing: 0;
   text-transform: none;
   font-weight: 600;
@@ -1914,7 +1960,7 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
   padding: 0 6px;
   color: #cfcdc8;
   background: rgba(22, 17, 13, 0.45);
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0;
@@ -1962,14 +2008,14 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
 :root {
   --v2-card: #34271d; --v2-chart: #271e16; --v2-line: #453e38; --v2-border: #49433c; --v2-sub: #c3c0ba;
   --v2-sell-text: #f0bab4; --v2-buy-text: #83cc91; --v2-sell-bar: #db675a; --v2-buy-bar: #47b25c;
-  --v2-chip-fg: #a2e0ae; --v2-chip-bg: #433225; --v2-chip-bd: #776d62;
+  --v2-chip-fg: #e4b350; --v2-chip-bg: #433225; --v2-chip-bd: #776d62;
   --v2-teal-fg: #eacab7; --v2-teal-bd: #98542c;
   --v2-gold-fg: #eecf92; --v2-gold-bd: #94887d; --v2-gold-bg: rgba(148, 136, 125, 0.14);
 }
 
 body.stock-act-v2 .page-head h1,
 body.stock-act-v2 #main > h1, body.stock-act-v2 main > h1, body.stock-act-v2 .wrap > h1 {
-  font-family: "Big Shoulders Display", sans-serif; font-weight: 700; letter-spacing: 0.06em; color: var(--white, #f2f2f0);
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; letter-spacing: 0.06em; color: var(--white, #f2f2f0);
 }
 body.stock-act-v2 .page-head:not(.ident) h1 { font-size: 30px; line-height: 1.1; }
 body.stock-act-v2 .page-head .asof, body.stock-act-v2 .asof { color: var(--v2-sub); }
@@ -1989,12 +2035,12 @@ body.stock-act-v2 .card, body.stock-act-v2 .play, body.stock-act-v2 .lead, body.
   background: var(--v2-card); border-top-color: var(--v2-border); border-right-color: var(--v2-border);
   border-bottom-color: var(--v2-border); border-radius: 14px;
 }
-body.stock-act-v2-cards .card:not(.now):not(.conflict):not(.follow-card) { border-left-color: var(--v2-buy-bar); }
+body.stock-act-v2-cards .card:not(.now):not(.conflict):not(.follow-card) { border-left-color: var(--caution, #e4b350); }
 body.stock-act-v2 .bio article { background: var(--v2-chart); border-top-color: var(--v2-line); border-right-color: var(--v2-line); border-bottom-color: var(--v2-line); border-radius: 12px; }
 body.stock-act-v2 .holdings .focus { background: var(--v2-chart); border-color: var(--v2-line); border-radius: 12px; }
 body.stock-act-v2 .explain h3, body.stock-act-v2 .bio h3, body.stock-act-v2 .bio .subhead { color: var(--white, #f2f2f0); }
 body.stock-act-v2 .rank { color: var(--v2-sub); }
-body.stock-act-v2 .card:first-child .rank, body.stock-act-v2 table.rep tbody tr:first-child .rank { color: var(--v2-buy-text); }
+body.stock-act-v2 .card:first-child .rank, body.stock-act-v2 table.rep tbody tr:first-child .rank { color: var(--caution, #e4b350); }
 body.stock-act-v2 .rate { color: var(--white, #f2f2f0); }
 body.stock-act-v2 .ago, body.stock-act-v2 .opp, body.stock-act-v2 .did-mean,
 body.stock-act-v2 .sources a { color: var(--v2-teal-fg); }
@@ -2003,7 +2049,7 @@ body.stock-act-v2 .who-list a:hover, body.stock-act-v2 .card h3 a:hover, body.st
 body.stock-act-v2 .who:hover { color: var(--v2-teal-fg); }
 
 body.stock-act-v2 .drop-head { border-bottom: 1px solid var(--v2-line); }
-body.stock-act-v2 .gate, body.stock-act-v2 .lag { color: var(--v2-buy-text); }
+body.stock-act-v2 .gate, body.stock-act-v2 .lag { color: var(--caution, #e4b350); }
 body.stock-act-v2 h2 { color: var(--white, #f2f2f0); }
 
 body.stock-act-v2 .stats { background: var(--v2-card); border-color: var(--v2-border); border-radius: 14px; overflow: hidden; }
@@ -2015,7 +2061,7 @@ body.stock-act-v2 .alloc-total b, body.stock-act-v2 .hold-tile .amt, body.stock-
 body.stock-act-v2 a.chip, body.stock-act-v2 button.chip,
 body.stock-act-v2 .board-tabs button, body.stock-act-v2 .rep-windows button, body.stock-act-v2 .alloc-sort button {
   border-radius: 10px; background: var(--v2-card); border: 1px solid var(--v2-border); color: var(--paper, #deddda);
-  font-family: "Big Shoulders Display", sans-serif; font-weight: 700; letter-spacing: 0.1em;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; letter-spacing: 0.1em;
 }
 body.stock-act-v2 a.chip:hover, body.stock-act-v2 button.chip:hover, body.stock-act-v2 .board-tabs button:hover, body.stock-act-v2 .rep-windows button:hover, body.stock-act-v2 .alloc-sort button:hover {
   border-color: #6c6359; color: var(--white, #f2f2f0);
@@ -2029,16 +2075,16 @@ body.stock-act-v2 .alloc-sort-label { color: var(--v2-sub); }
 body.stock-act-v2 .hold-tile { border-radius: 10px; }
 body.stock-act-v2 .hold-tile.on { border-color: #e4b350; }
 body.stock-act-v2 .tag, body.stock-act-v2 .label, body.stock-act-v2 .opt-tag, body.stock-act-v2 .holdings .focus .chip { border-radius: 6px; }
-body.stock-act-v2 .tag.hot { color: var(--v2-chip-fg); border-color: var(--v2-chip-bd); background: var(--v2-chip-bg); }
+body.stock-act-v2 .tag.hot { color: var(--caution, #e4b350); border-color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); }
 body.stock-act-v2 .tag.warn, body.stock-act-v2 .opt-tag, body.stock-act-v2 .stock-act-empty-filings { color: var(--v2-gold-fg); border-color: var(--v2-gold-bd); background: var(--v2-gold-bg); }
-body.stock-act-v2 .label { color: var(--v2-chip-fg); border-color: var(--v2-chip-bd); background: var(--v2-chip-bg); }
-body.stock-act-v2 .bar > i { background: var(--v2-buy-bar); }
+body.stock-act-v2 .label { color: var(--caution, #e4b350); border-color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); }
+body.stock-act-v2 .bar > i { background: var(--copper, #c97646); }
 
 body.stock-act-v2 .btn, body.stock-act-v2 .more-row button, body.stock-act-v2 button.more, body.stock-act-v2 .series-more,
 body.stock-act-v2 .hold-toggle, body.stock-act-v2 .clear-btn, body.stock-act-v2 .landed-chip, body.stock-act-v2 button.stock-act-track-more,
 body.stock-act-v2 #search-form button.dl, body.stock-act-v2 .stock-act-follow-alerts .acts a, body.stock-act-v2 .stock-act-follow-alerts .acts button {
   border-radius: 10px; border: 1px solid var(--v2-border); background: transparent; color: var(--white, #f2f2f0);
-  font-family: "Big Shoulders Display", sans-serif; font-weight: 700; letter-spacing: 0.1em;
+  font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; letter-spacing: 0.1em;
 }
 body.stock-act-v2 .btn:hover, body.stock-act-v2 .more-row button:hover, body.stock-act-v2 button.more:hover, body.stock-act-v2 .series-more:hover,
 body.stock-act-v2 .hold-toggle:hover, body.stock-act-v2 .clear-btn:hover, body.stock-act-v2 .landed-chip:hover,
@@ -2048,7 +2094,7 @@ body.stock-act-v2 .btn.fill, body.stock-act-v2 #search-form button[type="submit"
 }
 
 body.stock-act-v2 details.how > summary, body.stock-act-v2 .bio-wrap > summary, body.stock-act-v2 .paper-filters > summary, body.stock-act-v2 .play-more > summary {
-  color: var(--white, #f2f2f0); font-family: "Big Shoulders Display", sans-serif; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--white, #f2f2f0); font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; letter-spacing: 0.1em;
 }
 body.stock-act-v2 details.how > summary::before, body.stock-act-v2 .paper-filters > summary::before { color: var(--caution, #e4b350); }
 body.stock-act-v2 details.how .body { color: var(--paper, #deddda); }
@@ -2061,7 +2107,7 @@ body.stock-act-v2 .picker input:focus, body.stock-act-v2 .picker select:focus, b
 body.stock-act-v2 .table-wrap, body.stock-act-v2 .rep-wrap, body.stock-act-v2 .stock-act-track-scroll { background: var(--v2-card); border-color: var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 th {
   color: var(--v2-sub);
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -2077,10 +2123,10 @@ body.stock-act-v2 .stock-act-txn-head, body.stock-act-v2 .stock-act-txn-cols { c
 
 body.stock-act-v2 .stock-act-txn-list > .day h2, body.stock-act-v2 .stock-act-pol-desk .day h2 { color: var(--paper, #deddda); }
 body.stock-act-v2 .stock-act-txn-list > .day.fresh h2, body.stock-act-v2 .stock-act-pol-desk .day.fresh h2 { color: var(--caution, #e4b350); }
-body.stock-act-v2 .stock-act-txn-tag.hot { color: var(--v2-chip-fg); border-color: var(--v2-chip-bd); background: var(--v2-chip-bg); border-radius: 6px; }
+body.stock-act-v2 .stock-act-txn-tag.hot { color: var(--caution, #e4b350); border-color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); border-radius: 6px; }
 body.stock-act-v2 .tape-more button { border-radius: 10px; border-color: var(--v2-border); color: var(--white, #f2f2f0); }
 body.stock-act-v2 .tape-more button:hover { border-color: #e4b350; color: #e4b350; }
-body.stock-act-v2 .ticket-more > summary { color: var(--v2-buy-text); }
+body.stock-act-v2 .ticket-more > summary { color: var(--caution, #e4b350); }
 
 body.stock-act-v2 .price-pill { background: var(--v2-card); border-color: var(--v2-border); border-radius: 12px; color: var(--white, #f2f2f0); }
 body.stock-act-v2 .price-pill b { color: var(--white, #f2f2f0); }
@@ -2090,11 +2136,11 @@ body.stock-act-v2 .range button.on { color: #251b15; background: #e4b350; border
 body.stock-act-v2 .hud, body.stock-act-v2 .layers, body.stock-act-v2 .status { border-color: var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 #search-results { border-color: var(--v2-border); border-radius: 12px; background: var(--v2-card); }
 body.stock-act-v2 #search-results button { border-color: var(--v2-line); }
-body.stock-act-v2 .hit .who, body.stock-act-v2 .pop .holder { color: var(--v2-buy-text); }
+body.stock-act-v2 .hit .who, body.stock-act-v2 .pop .holder { color: var(--caution, #e4b350); }
 body.stock-act-v2 .stock-act-follow-alerts { background: var(--v2-card); border: 1px solid var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 .stock-act-follow-alerts .hd { color: var(--white, #f2f2f0); }
-body.stock-act-v2 .stock-act-follow-alerts .acts a:hover, body.stock-act-v2 .stock-act-follow-alerts .acts button:hover { border-color: var(--v2-buy-bar); color: var(--v2-buy-text); }
-body.stock-act-v2 .stock-act-follow-tag { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); border-radius: 6px; }
+body.stock-act-v2 .stock-act-follow-alerts .acts a:hover, body.stock-act-v2 .stock-act-follow-alerts .acts button:hover { border-color: var(--caution, #e4b350); color: var(--caution, #e4b350); }
+body.stock-act-v2 .stock-act-follow-tag { color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); border-color: var(--caution, #e4b350); border-radius: 6px; }
 body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #deddda); border-color: var(--v2-border); border-radius: 6px; }
 
 @media (max-width: 899px) {
@@ -2138,7 +2184,7 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #deddda); border-col
   body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list > .day.fresh h2 { color: var(--caution, #e4b350); }
   body.stock-act-v2-phone .stock-act-follow-alerts .hd { color: var(--white, #f2f2f0); }
   body.stock-act-v2-phone .stock-act-txn-tag.stock-act-basket-chip { color: var(--v2-teal-fg); border-color: var(--v2-teal-bd); }
-  body.stock-act-v2-phone .stock-act-follow-tag { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
+  body.stock-act-v2-phone .stock-act-follow-tag { color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); border-color: var(--caution, #e4b350); }
   body.stock-act-v2-phone .stock-act-plan-tag { color: var(--paper, #deddda); border-color: var(--v2-border); }
   body.stock-act-v2-phone #basket .stat b, body.stock-act-v2-phone #basket .stock-act-stats dd { color: var(--white, #f2f2f0); }
   body.stock-act-v2-phone .stock-act-issuer { background: var(--v2-card); border-color: var(--v2-border); }
@@ -2161,7 +2207,7 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #deddda); border-col
   display: none;
   margin: 6px 0 0;
   color: var(--mute, #9a948b);
-  font-family: "Figtree", sans-serif;
+  font-family: "Figtree", "Figtree Fallback", sans-serif;
   font-size: 0.72rem;
   letter-spacing: 0.01em;
 }
@@ -2275,7 +2321,7 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #deddda); border-col
       overflow: visible;
       white-space: nowrap;
       color: var(--mute, #9a948b);
-      font-family: "Red Hat Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-variant-numeric: tabular-nums;
       font-size: 0.72rem;
       font-weight: 500;
