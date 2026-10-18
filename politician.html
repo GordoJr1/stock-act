@@ -14,13 +14,13 @@
   <title>Stock Act</title>
   <style>
     :root {
-      --steel: #2d2219;
+      --walnut: #2d2219;
       --panel: #3f2f24;
       --paper: #deddda;
       --white: #f2f2f0;
       --fed: #53417e;
       --red: #ba3b2d;
-      --caution: #e4b350;
+      --wheat: #e4b350;
       --mute: #9a948b;
       --ink: #251b15;
       --copper: #c97646;
@@ -30,7 +30,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
-    body { font-family: "Figtree", "Figtree Fallback", sans-serif; color: var(--white); background: var(--steel); }
+    body { font-family: "Figtree", "Figtree Fallback", sans-serif; color: var(--white); background: var(--walnut); }
     @media (min-width: 821px) {
       body {
         background: var(--ink);
@@ -56,9 +56,9 @@
     .mark span { color: var(--copper); }
     nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
-    nav a:hover, nav a.on { color: var(--caution); }
+    nav a:hover, nav a.on { color: var(--wheat); }
     .back { color: #d98a5a; text-decoration: none; }
-    .kicker { color: var(--caution); margin: 8px 0 4px; }
+    .kicker { color: var(--wheat); margin: 8px 0 4px; }
     h1 { font-size: 1.5rem; line-height: 1.15; margin: 0; }
     .hero {
       display: flex;
@@ -85,7 +85,7 @@
       line-height: 1.3;
     }
     .hero-line.soft { color: var(--mute); font-size: 0.82rem; }
-    .hero-party { color: var(--caution); font-weight: 600; }
+    .hero-party { color: var(--wheat); font-weight: 600; }
     .bio-wrap {
       margin: 4px 0 12px;
       border: 1px solid #5b534a;
@@ -95,7 +95,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       cursor: pointer;
       padding: 12px 16px;
       list-style: none;
@@ -123,7 +123,7 @@
     .bio .office { grid-area: office; }
     .bio .economy { grid-area: economy; }
     .bio .committees { grid-area: committees; }
-    .bio .overlap { grid-area: overlap; border-left-color: var(--caution); }
+    .bio .overlap { grid-area: overlap; border-left-color: var(--wheat); }
     .bio .subs { grid-area: subs; }
     .bio .overlap li { margin: 6px 0; color: var(--paper); }
     .bio .overlap strong {
@@ -132,12 +132,12 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
     }
-    .bio .overlap .why { color: var(--caution); font-size: 0.88rem; }
+    .bio .overlap .why { color: var(--wheat); font-size: 0.88rem; }
     .bio .subhead {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-size: 0.85rem;
       margin: 12px 0 4px;
     }
@@ -153,7 +153,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-size: 0.95rem;
       margin-bottom: 8px;
     }
@@ -161,7 +161,7 @@
     .bio ul { padding-left: 18px; }
     .bio li { margin: 4px 0; }
     .muted { color: var(--mute); font-size: 0.88rem; }
-    .did-mean { color: var(--caution); }
+    .did-mean { color: var(--wheat); }
     .missing-id { color: var(--paper); }
     @media (max-width: 820px) {
       .wrap { width: calc(100% - 24px); }
@@ -206,7 +206,7 @@
     .sel-chip.show { display: inline-flex; }
     .sel-chip b {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--caution);
+      text-transform: uppercase; color: var(--wheat);
     }
     .sel-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
     .clear-btn, .hint {
@@ -214,7 +214,7 @@
     }
     .clear-btn {
       display: none;
-      background: transparent; border: 1px solid #5b534a; color: var(--caution);
+      background: transparent; border: 1px solid #5b534a; color: var(--wheat);
       padding: 7px 12px; min-height: 36px; cursor: pointer;
     }
     .clear-btn.show { display: inline-flex; align-items: center; }
@@ -253,7 +253,7 @@
     }
     .alloc-total b {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.04em;
-      color: var(--caution); font-size: 1.2rem; line-height: 1;
+      color: var(--wheat); font-size: 1.2rem; line-height: 1;
     }
     .alloc-total span { color: var(--mute); font-size: 0.72rem; }
     .alloc-sort-row {
@@ -267,7 +267,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-size: 0.78rem;
     }
     .alloc-sort {
@@ -290,8 +290,8 @@
     .alloc-sort button:hover { color: #fffffe; background: rgba(255, 255, 254, 0.08); }
     .alloc-sort button.on {
       color: #251b15;
-      background: var(--caution);
-      border-color: var(--caution);
+      background: var(--wheat);
+      border-color: var(--wheat);
       font-weight: 800;
     }
     .tile-board {
@@ -326,7 +326,7 @@
     .hold-tile.other { min-height: 72px; }
     .hold-tile:hover { filter: brightness(1.08); }
     .hold-tile.on {
-      outline: 2px solid var(--caution);
+      outline: 2px solid var(--wheat);
       outline-offset: -2px;
     }
     .hold-tile .tk {
@@ -345,14 +345,14 @@
       margin-top: 6px;
     }
     .hold-tile .amt {
-      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; color: var(--caution); font-size: 0.95rem;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; color: var(--wheat); font-size: 0.95rem;
     }
     .hold-tile .pct { color: var(--mute); font-size: 0.7rem; }
     .hold-more { margin-top: 8px; }
     .hold-toggle {
       background: transparent;
       border: 1px solid #5b534a;
-      color: var(--caution);
+      color: var(--wheat);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -591,7 +591,7 @@
     .buy { color: #83cc91; }
     .sell { color: #e38177; }
     footer {
-      border-top: 2px solid var(--caution); margin-top: 40px; padding: 18px 0 36px;
+      border-top: 2px solid var(--wheat); margin-top: 40px; padding: 18px 0 36px;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
     }
     .tk-link {
@@ -607,7 +607,7 @@
       text-underline-offset: 3px;
       text-decoration-color: #5b534a;
     }
-    .tk-link:hover { color: var(--caution); }
+    .tk-link:hover { color: var(--wheat); }
 
     .tabbar { display: none; }
     @media (max-width: 820px) {
@@ -637,7 +637,7 @@
         color: var(--paper);
         text-decoration: none;
       }
-      .tabbar a.on, .tabbar a:hover { color: var(--caution); }
+      .tabbar a.on, .tabbar a:hover { color: var(--wheat); }
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
       .sub-bar {
@@ -655,7 +655,7 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=189" />
+  <link rel="stylesheet" href="shell.css?v=190" />
   <style>
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }

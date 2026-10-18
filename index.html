@@ -18,13 +18,13 @@
   <meta property="og:type" content="website" />
   <style>
     :root {
-      --steel: #2d2219;
+      --walnut: #2d2219;
       --panel: #3f2f24;
       --paper: #deddda;
       --white: #f2f2f0;
       --fed: #53417e;
       --red: #ba3b2d;
-      --caution: #e4b350;
+      --wheat: #e4b350;
       --mute: #9a948b;
       --ink: #251b15;
       --copper: #c97646;
@@ -121,13 +121,13 @@
 
     a.mark { color: inherit; text-decoration: none; }
     nav a { color: var(--paper); text-decoration: none; }
-    nav a:hover, nav a.on { color: var(--caution); }
+    nav a:hover, nav a.on { color: var(--wheat); }
 
     .kicker {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-size: 0.9rem;
       margin-bottom: 10px;
     }
@@ -158,7 +158,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-size: 0.88rem;
     }
 
@@ -172,13 +172,13 @@
       font-weight: 600;
       font-size: 0.95rem;
       padding: 10px 16px;
-      border: 2px solid var(--caution);
-      color: var(--caution);
+      border: 2px solid var(--wheat);
+      color: var(--wheat);
     }
 
     /* Buttons (e.g. "Show full list") had the browser's gray button fill under amber text (2.74:1). */
     button.btn { background: transparent; }
-    .btn.fill { background: var(--caution); color: #1b1305; }
+    .btn.fill { background: var(--wheat); color: #1b1305; }
     .btn.red { border-color: var(--red); color: var(--white); background: var(--red); }
     .btn:hover { opacity: 0.88; }
 
@@ -192,7 +192,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       margin-bottom: 14px;
       font-size: 1.1rem;
     }
@@ -245,7 +245,7 @@
       color: inherit;
     }
 
-    .tape-item:hover { border-color: var(--caution); }
+    .tape-item:hover { border-color: var(--wheat); }
 
     .pill {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
@@ -271,7 +271,7 @@
     .tape-item p { color: var(--mute); font-size: 0.9rem; }
     .tape-item .amt {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      color: var(--caution);
+      color: var(--wheat);
       letter-spacing: 0.04em;
       text-align: right;
     }
@@ -289,7 +289,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       margin-bottom: 6px;
       font-size: 0.9rem;
     }
@@ -303,7 +303,7 @@
       font: inherit;
     }
 
-    .picker input:focus { outline: 1px solid var(--caution); }
+    .picker input:focus { outline: 1px solid var(--wheat); }
 
     .picker-menu {
       position: absolute;
@@ -333,7 +333,7 @@
       text-transform: uppercase;
     }
 
-    .picker-menu button:hover { background: rgba(228, 179, 80, 0.12); color: var(--caution); }
+    .picker-menu button:hover { background: rgba(228, 179, 80, 0.12); color: var(--wheat); }
 
     .filters {
       display: grid;
@@ -347,7 +347,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       margin-bottom: 6px;
       font-size: 0.85rem;
     }
@@ -390,7 +390,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-weight: 600;
       position: sticky;
       top: var(--tape-lock-h, 0px);
@@ -402,15 +402,15 @@
     .tix-meta, .tix-stamp { display: none; }
 
     table.tape-table a { color: inherit; text-decoration: none; }
-    table.tape-table a:hover { color: var(--caution); }
+    table.tape-table a:hover { color: var(--wheat); }
     .buy { color: #83cc91; }
     .sell { color: #e38177; }
     .opt-tag {
       display: inline-block;
       margin-left: 6px;
       padding: 0 5px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--wheat);
+      color: var(--wheat);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.08em;
@@ -438,8 +438,8 @@
       display: inline-block;
       margin-left: 6px;
       padding: 1px 6px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--wheat);
+      color: var(--wheat);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
@@ -448,7 +448,7 @@
       white-space: nowrap;
     }
     table.tape-table tr.has-err td:nth-child(2) { box-shadow: inset 3px 0 0 var(--red); }
-    table.tape-table tr.just-in td:first-child { box-shadow: inset 3px 0 0 var(--caution); }
+    table.tape-table tr.just-in td:first-child { box-shadow: inset 3px 0 0 var(--wheat); }
     .count { color: var(--mute); font-size: 0.85rem; margin: 0; padding: 0 0 10px; }
     .more-row { margin: 14px 0 0; }
 
@@ -468,7 +468,7 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-weight: 600;
       font-size: 12px;
     }
@@ -476,7 +476,7 @@
     footer {
       position: relative;
       z-index: 1;
-      border-top: 2px solid var(--caution);
+      border-top: 2px solid var(--wheat);
       background: var(--ink);
     }
 
@@ -490,7 +490,7 @@
       color: var(--mute);
     }
 
-    footer a { color: var(--caution); }
+    footer a { color: var(--wheat); }
 
     .filter-fold > summary,
     .board-fold > summary {
@@ -573,7 +573,7 @@
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--caution);
+        color: var(--wheat);
         cursor: pointer;
         list-style: none;
         min-height: 44px;
@@ -642,7 +642,7 @@
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       }
       table.tape-table .tix-stamp .mon {
-        color: var(--caution);
+        color: var(--wheat);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         font-size: 0.72rem;
@@ -672,7 +672,7 @@
       table.tape-table .tix-amt {
         grid-area: amt;
         text-align: left;
-        color: var(--caution);
+        color: var(--wheat);
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-size: 1.05rem;
       }
@@ -700,7 +700,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       flex: 0 0 auto;
     }
     .board-peek {
@@ -757,8 +757,8 @@
       cursor: pointer;
     }
     .board-tabs button.on {
-      border-color: var(--caution);
-      color: var(--caution);
+      border-color: var(--wheat);
+      color: var(--wheat);
     }
     .board-note { color: #c3c0ba; font-size: calc(0.82rem + 1px); margin: 0 0 12px; line-height: 1.4; }
     .board-col-title { display: none; }
@@ -791,7 +791,7 @@
         font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: var(--caution);
+        color: var(--wheat);
         font-size: 0.78rem;
         font-weight: 600;
         margin: 0 0 6px;
@@ -892,8 +892,8 @@
     .board-flag {
       display: inline-block;
       padding: 1px 6px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--wheat);
+      color: var(--wheat);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.08em;
@@ -926,7 +926,7 @@
       color: var(--mute);
       letter-spacing: 0.06em;
     }
-    .board-list li:first-child .board-rank { color: var(--caution); }
+    .board-list li:first-child .board-rank { color: var(--wheat); }
     .board-list a {
       color: var(--white);
       text-decoration: none;
@@ -935,11 +935,11 @@
       text-transform: none;
       font-weight: 600;
     }
-    .board-list a:hover { color: var(--caution); }
+    .board-list a:hover { color: var(--wheat); }
     .board-why { display: block; color: #c3c0ba; font-size: calc(0.75rem + 1px); text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; }
     .board-val {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
-      color: var(--caution);
+      color: var(--wheat);
       font-size: 1.05rem;
       white-space: nowrap;
     }
@@ -949,7 +949,7 @@
       text-underline-offset: 3px;
       text-decoration-color: #5b534a;
     }
-    .tk-link:hover { color: var(--caution); }
+    .tk-link:hover { color: var(--wheat); }
     .board-list a.tk-link {
       color: var(--white);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
@@ -979,7 +979,7 @@
     .chart-close {
       background: transparent;
       border: 1px solid #5b534a;
-      color: var(--caution);
+      color: var(--wheat);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -998,7 +998,7 @@
       display: block;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.2rem;
-      color: var(--caution);
+      color: var(--wheat);
     }
     .chart-pnl span { color: var(--mute); font-size: 0.75rem; }
     .chart-frame {
@@ -1035,7 +1035,7 @@
       font-size: 0.88rem;
     }
     .chart-marks a { color: var(--white); text-decoration: none; }
-    .chart-marks a:hover { color: var(--caution); }
+    .chart-marks a:hover { color: var(--wheat); }
     @media (max-width: 820px) {
       .chart-pnl { grid-template-columns: 1fr; }
       .chart-panel { top: 2vh; max-height: 96vh; }
@@ -1069,7 +1069,7 @@
         color: var(--mute);
         font-size: 0.7rem;
       }
-      .desk-status .hot b { color: var(--caution); }
+      .desk-status .hot b { color: var(--wheat); }
       .desk-status .up b { color: #83cc91; }
       .desk-status .down b { color: #e38177; }
       .desk {
@@ -1142,12 +1142,12 @@
     .desk .wire-day0 { margin-top: 0; }
     .desk .wire-day0:empty,
     .desk .wire-day0[hidden] { display: none; }
-    #wire li.day.fresh h2 { color: var(--caution); }
+    #wire li.day.fresh h2 { color: var(--wheat); }
     .desk .day h2 {
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--caution);
+      color: var(--wheat);
       font-size: 0.92rem;
       font-weight: 600;
       margin: 0;
@@ -1187,10 +1187,10 @@
       border-bottom-color: rgba(228, 179, 80, 0.35);
     }
     .desk .print.on {
-      border-color: var(--caution);
+      border-color: var(--wheat);
       background: rgba(228, 179, 80, 0.1);
     }
-    .desk .print:hover { border-right-color: var(--caution); }
+    .desk .print:hover { border-right-color: var(--wheat); }
     .desk .stamp {
       grid-area: stamp;
       display: flex;
@@ -1205,7 +1205,7 @@
       align-self: stretch;
     }
     .desk .stamp .mon {
-      color: var(--caution);
+      color: var(--wheat);
       letter-spacing: 0.14em;
       text-transform: uppercase;
       font-size: 0.68rem;
@@ -1246,8 +1246,8 @@
       white-space: nowrap;
     }
     .desk .ch.sen { border-color: var(--copper); color: var(--copper); }
-    .desk .ch.wh { border-color: var(--caution); color: var(--caution); }
-    .desk .ch.hot { border-color: var(--caution); color: var(--caution); }
+    .desk .ch.wh { border-color: var(--wheat); color: var(--wheat); }
+    .desk .ch.hot { border-color: var(--wheat); color: var(--wheat); }
     .desk .ch.bad { border-color: #e38177; color: #e38177; }
     .desk .asset {
       grid-area: asset;
@@ -1320,8 +1320,8 @@
       margin: 0;
       max-width: none;
       padding: 1px 6px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--wheat);
+      color: var(--wheat);
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.66rem;
       letter-spacing: 0.1em;
@@ -1598,7 +1598,7 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=189" />
+  <link rel="stylesheet" href="shell.css?v=190" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
@@ -1671,7 +1671,7 @@
         color: var(--mute, #9a948b);
       }
       .desk .stock-act-txn-tape { cursor: pointer; }
-      .desk .stock-act-txn-tape.on { border-color: var(--caution); background: rgba(228, 179, 80, 0.1); }
+      .desk .stock-act-txn-tape.on { border-color: var(--wheat); background: rgba(228, 179, 80, 0.1); }
       .desk .stock-act-txn-tape:hover { background: rgba(228, 179, 80, 0.05); }
       .desk .stock-act-txn-list.stock-act-tape-list .day { padding: 0 12px; }
 
@@ -1774,10 +1774,10 @@
     .board-more {
       background: transparent; border: 0; padding: 8px 0; min-height: 40px; cursor: pointer;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--caution); white-space: nowrap;
+      text-transform: uppercase; color: var(--wheat); white-space: nowrap;
     }
-    .board-more:hover { color: var(--caution); }
-    .board-more:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
+    .board-more:hover { color: var(--wheat); }
+    .board-more:focus-visible { outline: 2px solid var(--wheat); outline-offset: 2px; }
     .board-more[hidden] { display: none !important; }
     .board-more-foot { display: none; }
     #board .board-grid {
@@ -1795,7 +1795,7 @@
     .board-chip {
       font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
       line-height: 1; padding: 4px 7px; border-radius: 6px; text-transform: none;
-      color: var(--caution); background: rgba(228, 179, 80, 0.12); border: 1px solid var(--caution);
+      color: var(--wheat); background: rgba(228, 179, 80, 0.12); border: 1px solid var(--wheat);
     }
     .board-desc { margin: 8px 0 10px; color: var(--v2-sub); font-size: 14px; line-height: 1.45; }
     #board .board-list { list-style: none; margin: 0; padding: 0; border: 0; background: transparent; max-width: none; }
@@ -1851,7 +1851,7 @@
         text-transform: uppercase; color: var(--white);
       }
       .board-fold > summary::before,
-      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8"; }
+      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--wheat); content: "\25B8"; }
       .board-fold[open] > summary::before,
       .filter-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary,
@@ -1895,7 +1895,7 @@
       }
       .board-fold > summary.board-strip::-webkit-details-marker { display: none; }
       .board-fold > summary::before {
-        grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8";
+        grid-column: 1; grid-row: 1; color: var(--wheat); content: "\25B8";
       }
       .board-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary {
@@ -1956,7 +1956,7 @@
       border-radius: 10px; color: var(--white); font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 15px;
     }
     .filters select { padding-top: 0; padding-bottom: 0; line-height: 32px; }
-    .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--caution); outline-offset: 1px; }
+    .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--wheat); outline-offset: 1px; }
     .picker-menu { border-radius: 10px; background: #271e16; border-color: var(--v2-border); }
     .tape-search { max-width: none; width: 100%; margin: 0; }
     .tape-search-field { position: relative; }
@@ -2035,7 +2035,7 @@
       padding: 0 2px;
       border: 0;
       background: transparent;
-      color: var(--caution);
+      color: var(--wheat);
       font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 13px;
       font-weight: 600;
@@ -2048,7 +2048,7 @@
     .tape-search-field.is-on input,
     .filters select.is-on,
     .seg.is-on {
-      border-color: var(--caution);
+      border-color: var(--wheat);
     }
     .picker-menu {
       max-height: 280px;
@@ -2144,7 +2144,7 @@
       margin: 0; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 17px;
       letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper);
     }
-    #wire > li.day.fresh h2 { color: var(--caution); }
+    #wire > li.day.fresh h2 { color: var(--wheat); }
     #wire > li.w-row {
       position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
       align-items: start; padding: 14px 4px 14px 26px; border-bottom: 1px solid var(--v2-line); outline: none;
@@ -2158,7 +2158,7 @@
     #wire > li.w-row.exercise::before { background: #96522b; }
     #wire > li.w-row.award::before { background: #94887d; }
     #wire > li.w-row.exch::before { background: #7e7367; }
-    #wire > li.w-row:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
+    #wire > li.w-row:focus-visible { outline: 2px solid var(--wheat); outline-offset: 2px; }
     #wire .w-main { min-width: 0; }
     #wire .w-head { font-size: 17px; font-weight: 600; line-height: 1.35; color: var(--white); overflow-wrap: anywhere; }
     #wire .w-title { color: inherit; text-decoration: none; }
@@ -2235,7 +2235,7 @@
       background: rgba(22, 17, 13, 0.35);
     }
     .desk .focus .ch.sen { color: #eacab7; border-color: #98542c; }
-    .desk .focus .ch.hot { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
+    .desk .focus .ch.hot { color: var(--wheat); background: rgba(228, 179, 80, 0.12); border-color: var(--wheat); }
     .desk .focus .ch.bad { color: #e38177; border-color: #e38177; }
     .desk .focus .asset { margin: 0 0 2px; font-size: 16px; color: var(--white); overflow-wrap: anywhere; }
     .desk .focus .asset a {
@@ -2348,13 +2348,13 @@
         border: 1px solid var(--v2-border); border-radius: 6px; padding: 1px 8px; background: rgba(22, 17, 13, 0.45);
         color: #cfcdc8; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
       }
-      #wire .w1-clus { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
+      #wire .w1-clus { color: var(--wheat); background: rgba(228, 179, 80, 0.12); border-color: var(--wheat); }
       #wire li.w1 {
         position: relative; min-height: 44px; padding: 4px 2px 4px 20px; border-top: 1px solid rgba(69, 62, 56, 0.55);
         display: flex; flex-direction: column; justify-content: center; outline: none;
       }
       #wire li.w1:first-child { border-top: 0; }
-      #wire li.w1:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
+      #wire li.w1:focus-visible { outline: 2px solid var(--wheat); outline-offset: 2px; }
       #wire li.w1::before {
         content: ""; position: absolute; left: 2px; top: 9px; bottom: 9px; width: 6px; border-radius: 4px; background: #7e7367;
       }

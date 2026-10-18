@@ -83,8 +83,8 @@ html {
   z-index: 90;
   padding: 8px 12px;
   background: var(--ink, #251b15);
-  color: var(--caution, #e4b350);
-  border: 2px solid var(--caution, #e4b350);
+  color: var(--wheat, #e4b350);
+  border: 2px solid var(--wheat, #e4b350);
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -156,10 +156,10 @@ body { padding-top: 0 !important; }
   font-size: 13px;
   border-bottom: 2px solid transparent;
 }
-.stock-act-nav a:hover { color: var(--caution, #e4b350); }
+.stock-act-nav a:hover { color: var(--wheat, #e4b350); }
 .stock-act-nav a.on {
-  color: var(--caution, #e4b350);
-  border-bottom-color: var(--caution, #e4b350);
+  color: var(--wheat, #e4b350);
+  border-bottom-color: var(--wheat, #e4b350);
 }
 
 .stock-act-modes {
@@ -189,8 +189,8 @@ body { padding-top: 0 !important; }
 .stock-act-mode:hover,
 .stock-act-mode:focus-visible,
 .stock-act-mode.on {
-  color: var(--caution, #e4b350);
-  border-color: var(--caution, #e4b350);
+  color: var(--wheat, #e4b350);
+  border-color: var(--wheat, #e4b350);
 }
 .stock-act-mode.on {
   background: rgba(228, 179, 80, 0.08);
@@ -303,10 +303,10 @@ summary:focus-visible,
   }
   .tabbar a.on,
   .tabbar a:hover {
-    color: var(--caution, #e4b350);
+    color: var(--wheat, #e4b350);
   }
   .tabbar a.on {
-    border-top-color: var(--caution, #e4b350);
+    border-top-color: var(--wheat, #e4b350);
     border-top-width: 3px;
     font-weight: 700;
     background: rgba(228, 179, 80, 0.12);
@@ -551,12 +551,12 @@ summary:focus-visible,
   line-height: 1.2;
 }
 .stock-act-txn .opt-tag {
-  border-color: var(--caution, #e4b350);
-  color: var(--caution, #e4b350);
+  border-color: var(--wheat, #e4b350);
+  color: var(--wheat, #e4b350);
   min-width: 1.05em;
   text-align: center;
   padding: 1px 6px;
-  font-size: 0.66rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.1em;
   font-weight: 600;
 }
@@ -577,8 +577,8 @@ summary:focus-visible,
   flex-wrap: nowrap;
 }
 .stock-act-txn-tape .stock-act-txn-tk .opt-tag { margin-left: 0; }
-.stock-act-txn-tag.hot { border-color: var(--caution, #e4b350); color: var(--caution, #e4b350); }
-.stock-act-txn-tag.ceo { border-color: var(--caution, #e4b350); color: var(--caution, #e4b350); }
+.stock-act-txn-tag.hot { border-color: var(--wheat, #e4b350); color: var(--wheat, #e4b350); }
+.stock-act-txn-tag.ceo { border-color: var(--wheat, #e4b350); color: var(--wheat, #e4b350); }
 .stock-act-txn-hero,
 .stock-act-txn .stock-act-txn-hero,
 .stock-act-txn-hero.is-shares {
@@ -833,7 +833,7 @@ summary:focus-visible,
   .stock-act-txn-tape .stock-act-txn-tag.hot { display: inline-block; }
   .stock-act-txn-tape .stock-act-txn-hero,
   .stock-act-txn-tape .stock-act-txn-hero.is-shares { font-size: 1.2rem; }
-  .stock-act-txn-tape .stock-act-txn-chip { padding: 4px 10px; font-size: 0.68rem; }
+  .stock-act-txn-tape .stock-act-txn-chip { padding: 4px 10px; font-size: 0.6875rem; }
   .stock-act-txn-tape .stock-act-txn-end { gap: 6px; }
 }
 
@@ -1027,7 +1027,7 @@ summary:focus-visible,
     grid-area: chip;
     justify-self: start;
     padding: 2px 0;
-    font-size: 0.62rem;
+    font-size: 0.6875rem;
     font-weight: 600;
     text-transform: none;
     letter-spacing: 0;
@@ -1115,7 +1115,7 @@ summary:focus-visible,
     font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--caution, #e4b350);
+    color: var(--wheat, #e4b350);
     font-size: 0.78rem;
     font-weight: 600;
     margin: 0;
@@ -1429,7 +1429,7 @@ summary:focus-visible,
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--caution, #e4b350);
+  color: var(--wheat, #e4b350);
   font-size: 0.92rem;
   font-weight: 600;
   margin: 0;
@@ -1708,7 +1708,7 @@ summary:focus-visible,
   font-size: 0.9rem;
   line-height: 1.3;
 }
-.page-head.ident .hero-party { color: var(--caution, #e4b350); font-weight: 600; }
+.page-head.ident .hero-party { color: var(--wheat, #e4b350); font-weight: 600; }
 .ident-nav {
   margin: 4px 0 0;
   font-size: 0.82rem;
@@ -1753,8 +1753,8 @@ summary:focus-visible,
 .tape-more[hidden] { display: none; }
 .tape-more button {
   background: transparent;
-  border: 1px solid var(--caution, #e4b350);
-  color: var(--caution, #e4b350);
+  border: 1px solid var(--wheat, #e4b350);
+  color: var(--wheat, #e4b350);
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1790,7 +1790,7 @@ details.how {
 }
 .ticket-more > summary {
   cursor: pointer;
-  color: var(--caution, #e4b350);
+  color: var(--wheat, #e4b350);
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1830,8 +1830,8 @@ details.how {
   flex: 0 0 auto;
   margin-left: 6px;
   padding: 1px 6px;
-  border: 1px solid var(--caution, #e4b350);
-  color: var(--caution, #e4b350);
+  border: 1px solid var(--wheat, #e4b350);
+  color: var(--wheat, #e4b350);
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   font-size: 0.66rem;
   letter-spacing: 0.1em;
@@ -1860,7 +1860,7 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
 }
 .stock-act-follow-alerts {
   margin: 0 0 14px;
-  border: 1px solid var(--caution, #e4b350);
+  border: 1px solid var(--wheat, #e4b350);
   background: rgba(228, 179, 80, 0.07);
 }
 .stock-act-follow-alerts .hd {
@@ -1873,7 +1873,7 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
   font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--caution, #e4b350);
+  color: var(--wheat, #e4b350);
   font-size: 0.95rem;
 }
 .stock-act-follow-alerts .acts {
@@ -1898,8 +1898,8 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
 }
 .stock-act-follow-alerts .acts a:hover,
 .stock-act-follow-alerts .acts button:hover {
-  border-color: var(--caution, #e4b350);
-  color: var(--caution, #e4b350);
+  border-color: var(--wheat, #e4b350);
+  color: var(--wheat, #e4b350);
 }
 .stock-act-follow-alerts .list { padding: 0 6px 8px; }
 .stock-act-follow-alerts a.hit {
@@ -1961,7 +1961,7 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
   color: #cfcdc8;
   background: rgba(22, 17, 13, 0.45);
   font-family: "Figtree", "Figtree Fallback", sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0;
   line-height: 1.45;
@@ -2009,8 +2009,8 @@ a.stock-act-follow-tag:hover { background: rgba(228, 179, 80, 0.12); }
   --v2-card: #34271d; --v2-chart: #271e16; --v2-line: #453e38; --v2-border: #49433c; --v2-sub: #c3c0ba;
   --v2-sell-text: #f0bab4; --v2-buy-text: #83cc91; --v2-sell-bar: #db675a; --v2-buy-bar: #47b25c;
   --v2-chip-fg: #e4b350; --v2-chip-bg: #433225; --v2-chip-bd: #776d62;
-  --v2-teal-fg: #eacab7; --v2-teal-bd: #98542c;
-  --v2-gold-fg: #eecf92; --v2-gold-bd: #94887d; --v2-gold-bg: rgba(148, 136, 125, 0.14);
+  --v2-copper-fg: #eacab7; --v2-copper-bd: #98542c;
+  --v2-wheat-fg: #eecf92; --v2-wheat-bd: #94887d; --v2-wheat-bg: rgba(148, 136, 125, 0.14);
 }
 
 body.stock-act-v2 .page-head h1,
@@ -2019,7 +2019,7 @@ body.stock-act-v2 #main > h1, body.stock-act-v2 main > h1, body.stock-act-v2 .wr
 }
 body.stock-act-v2 .page-head:not(.ident) h1 { font-size: 30px; line-height: 1.1; }
 body.stock-act-v2 .page-head .asof, body.stock-act-v2 .asof { color: var(--v2-sub); }
-body.stock-act-v2 .kicker { color: var(--caution, #e4b350); }
+body.stock-act-v2 .kicker { color: var(--wheat, #e4b350); }
 body.stock-act-v2 .lede { color: var(--paper, #deddda); }
 body.stock-act-v2 .muted, body.stock-act-v2 .drop-meta, body.stock-act-v2 .count { color: var(--v2-sub); }
 
@@ -2035,21 +2035,23 @@ body.stock-act-v2 .card, body.stock-act-v2 .play, body.stock-act-v2 .lead, body.
   background: var(--v2-card); border-top-color: var(--v2-border); border-right-color: var(--v2-border);
   border-bottom-color: var(--v2-border); border-radius: 14px;
 }
-body.stock-act-v2-cards .card:not(.now):not(.conflict):not(.follow-card) { border-left-color: var(--caution, #e4b350); }
+body.stock-act-v2-cards .card:not(.now):not(.conflict):not(.follow-card) { border-left-color: var(--wheat, #e4b350); }
 body.stock-act-v2 .bio article { background: var(--v2-chart); border-top-color: var(--v2-line); border-right-color: var(--v2-line); border-bottom-color: var(--v2-line); border-radius: 12px; }
 body.stock-act-v2 .holdings .focus { background: var(--v2-chart); border-color: var(--v2-line); border-radius: 12px; }
 body.stock-act-v2 .explain h3, body.stock-act-v2 .bio h3, body.stock-act-v2 .bio .subhead { color: var(--white, #f2f2f0); }
 body.stock-act-v2 .rank { color: var(--v2-sub); }
-body.stock-act-v2 .card:first-child .rank, body.stock-act-v2 table.rep tbody tr:first-child .rank { color: var(--caution, #e4b350); }
+body.stock-act-v2 .card:first-child .rank, body.stock-act-v2 table.rep tbody tr:first-child .rank { color: var(--wheat, #e4b350); }
 body.stock-act-v2 .rate { color: var(--white, #f2f2f0); }
+body.stock-act-v2 .rate span,
+body.stock-act-v2 .lag span { font-size: 0.6875rem; }
 body.stock-act-v2 .ago, body.stock-act-v2 .opp, body.stock-act-v2 .did-mean,
-body.stock-act-v2 .sources a { color: var(--v2-teal-fg); }
+body.stock-act-v2 .sources a { color: var(--v2-copper-fg); }
 body.stock-act-v2 .alloc-sort-label, body.stock-act-v2 .bio .subhead { color: var(--v2-sub); }
 body.stock-act-v2 .who-list a:hover, body.stock-act-v2 .card h3 a:hover, body.stock-act-v2 .tk:hover, body.stock-act-v2 .tk-link:hover,
-body.stock-act-v2 .who:hover { color: var(--v2-teal-fg); }
+body.stock-act-v2 .who:hover { color: var(--v2-copper-fg); }
 
 body.stock-act-v2 .drop-head { border-bottom: 1px solid var(--v2-line); }
-body.stock-act-v2 .gate, body.stock-act-v2 .lag { color: var(--caution, #e4b350); }
+body.stock-act-v2 .gate, body.stock-act-v2 .lag { color: var(--wheat, #e4b350); }
 body.stock-act-v2 h2 { color: var(--white, #f2f2f0); }
 
 body.stock-act-v2 .stats { background: var(--v2-card); border-color: var(--v2-border); border-radius: 14px; overflow: hidden; }
@@ -2075,9 +2077,9 @@ body.stock-act-v2 .alloc-sort-label { color: var(--v2-sub); }
 body.stock-act-v2 .hold-tile { border-radius: 10px; }
 body.stock-act-v2 .hold-tile.on { border-color: #e4b350; }
 body.stock-act-v2 .tag, body.stock-act-v2 .label, body.stock-act-v2 .opt-tag, body.stock-act-v2 .holdings .focus .chip { border-radius: 6px; }
-body.stock-act-v2 .tag.hot { color: var(--caution, #e4b350); border-color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); }
-body.stock-act-v2 .tag.warn, body.stock-act-v2 .opt-tag, body.stock-act-v2 .stock-act-empty-filings { color: var(--v2-gold-fg); border-color: var(--v2-gold-bd); background: var(--v2-gold-bg); }
-body.stock-act-v2 .label { color: var(--caution, #e4b350); border-color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); }
+body.stock-act-v2 .tag.hot { color: var(--wheat, #e4b350); border-color: var(--wheat, #e4b350); background: rgba(228, 179, 80, 0.12); }
+body.stock-act-v2 .tag.warn, body.stock-act-v2 .opt-tag, body.stock-act-v2 .stock-act-empty-filings { color: var(--v2-wheat-fg); border-color: var(--v2-wheat-bd); background: var(--v2-wheat-bg); }
+body.stock-act-v2 .label { color: var(--wheat, #e4b350); border-color: var(--wheat, #e4b350); background: rgba(228, 179, 80, 0.12); }
 body.stock-act-v2 .bar > i { background: var(--copper, #c97646); }
 
 body.stock-act-v2 .btn, body.stock-act-v2 .more-row button, body.stock-act-v2 button.more, body.stock-act-v2 .series-more,
@@ -2096,13 +2098,13 @@ body.stock-act-v2 .btn.fill, body.stock-act-v2 #search-form button[type="submit"
 body.stock-act-v2 details.how > summary, body.stock-act-v2 .bio-wrap > summary, body.stock-act-v2 .paper-filters > summary, body.stock-act-v2 .play-more > summary {
   color: var(--white, #f2f2f0); font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; letter-spacing: 0.1em;
 }
-body.stock-act-v2 details.how > summary::before, body.stock-act-v2 .paper-filters > summary::before { color: var(--caution, #e4b350); }
+body.stock-act-v2 details.how > summary::before, body.stock-act-v2 .paper-filters > summary::before { color: var(--wheat, #e4b350); }
 body.stock-act-v2 details.how .body { color: var(--paper, #deddda); }
 
 body.stock-act-v2 .picker input, body.stock-act-v2 .picker select, body.stock-act-v2 .filters input, body.stock-act-v2 .filters select, body.stock-act-v2 #search {
   background-color: var(--v2-card); border: 1px solid var(--v2-border); border-radius: 10px; color: var(--white, #f2f2f0);
 }
-body.stock-act-v2 .picker input:focus, body.stock-act-v2 .picker select:focus, body.stock-act-v2 #search:focus { outline: 2px solid var(--caution, #e4b350); outline-offset: 1px; }
+body.stock-act-v2 .picker input:focus, body.stock-act-v2 .picker select:focus, body.stock-act-v2 #search:focus { outline: 2px solid var(--wheat, #e4b350); outline-offset: 1px; }
 
 body.stock-act-v2 .table-wrap, body.stock-act-v2 .rep-wrap, body.stock-act-v2 .stock-act-track-scroll { background: var(--v2-card); border-color: var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 th {
@@ -2122,11 +2124,11 @@ body.stock-act-v2 .stock-act-txn { border-top-color: var(--v2-border); border-ri
 body.stock-act-v2 .stock-act-txn-head, body.stock-act-v2 .stock-act-txn-cols { color: var(--v2-sub); }
 
 body.stock-act-v2 .stock-act-txn-list > .day h2, body.stock-act-v2 .stock-act-pol-desk .day h2 { color: var(--paper, #deddda); }
-body.stock-act-v2 .stock-act-txn-list > .day.fresh h2, body.stock-act-v2 .stock-act-pol-desk .day.fresh h2 { color: var(--caution, #e4b350); }
-body.stock-act-v2 .stock-act-txn-tag.hot { color: var(--caution, #e4b350); border-color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); border-radius: 6px; }
+body.stock-act-v2 .stock-act-txn-list > .day.fresh h2, body.stock-act-v2 .stock-act-pol-desk .day.fresh h2 { color: var(--wheat, #e4b350); }
+body.stock-act-v2 .stock-act-txn-tag.hot { color: var(--wheat, #e4b350); border-color: var(--wheat, #e4b350); background: rgba(228, 179, 80, 0.12); border-radius: 6px; }
 body.stock-act-v2 .tape-more button { border-radius: 10px; border-color: var(--v2-border); color: var(--white, #f2f2f0); }
 body.stock-act-v2 .tape-more button:hover { border-color: #e4b350; color: #e4b350; }
-body.stock-act-v2 .ticket-more > summary { color: var(--caution, #e4b350); }
+body.stock-act-v2 .ticket-more > summary { color: var(--wheat, #e4b350); }
 
 body.stock-act-v2 .price-pill { background: var(--v2-card); border-color: var(--v2-border); border-radius: 12px; color: var(--white, #f2f2f0); }
 body.stock-act-v2 .price-pill b { color: var(--white, #f2f2f0); }
@@ -2136,11 +2138,11 @@ body.stock-act-v2 .range button.on { color: #251b15; background: #e4b350; border
 body.stock-act-v2 .hud, body.stock-act-v2 .layers, body.stock-act-v2 .status { border-color: var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 #search-results { border-color: var(--v2-border); border-radius: 12px; background: var(--v2-card); }
 body.stock-act-v2 #search-results button { border-color: var(--v2-line); }
-body.stock-act-v2 .hit .who, body.stock-act-v2 .pop .holder { color: var(--caution, #e4b350); }
+body.stock-act-v2 .hit .who, body.stock-act-v2 .pop .holder { color: var(--wheat, #e4b350); }
 body.stock-act-v2 .stock-act-follow-alerts { background: var(--v2-card); border: 1px solid var(--v2-border); border-radius: 14px; }
 body.stock-act-v2 .stock-act-follow-alerts .hd { color: var(--white, #f2f2f0); }
-body.stock-act-v2 .stock-act-follow-alerts .acts a:hover, body.stock-act-v2 .stock-act-follow-alerts .acts button:hover { border-color: var(--caution, #e4b350); color: var(--caution, #e4b350); }
-body.stock-act-v2 .stock-act-follow-tag { color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); border-color: var(--caution, #e4b350); border-radius: 6px; }
+body.stock-act-v2 .stock-act-follow-alerts .acts a:hover, body.stock-act-v2 .stock-act-follow-alerts .acts button:hover { border-color: var(--wheat, #e4b350); color: var(--wheat, #e4b350); }
+body.stock-act-v2 .stock-act-follow-tag { color: var(--wheat, #e4b350); background: rgba(228, 179, 80, 0.12); border-color: var(--wheat, #e4b350); border-radius: 6px; }
 body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #deddda); border-color: var(--v2-border); border-radius: 6px; }
 
 @media (max-width: 899px) {
@@ -2181,10 +2183,10 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #deddda); border-col
   body.stock-act-v2-phone .more-row .btn { border-radius: 10px; border: 1px solid var(--v2-border); color: var(--white, #f2f2f0); min-height: 44px; }
   body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list { background: var(--v2-card); border-color: var(--v2-border); }
   body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list > .day h2 { color: var(--paper, #deddda); }
-  body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list > .day.fresh h2 { color: var(--caution, #e4b350); }
+  body.stock-act-v2-phone .stock-act-txn-list.stock-act-tape-list > .day.fresh h2 { color: var(--wheat, #e4b350); }
   body.stock-act-v2-phone .stock-act-follow-alerts .hd { color: var(--white, #f2f2f0); }
-  body.stock-act-v2-phone .stock-act-txn-tag.stock-act-basket-chip { color: var(--v2-teal-fg); border-color: var(--v2-teal-bd); }
-  body.stock-act-v2-phone .stock-act-follow-tag { color: var(--caution, #e4b350); background: rgba(228, 179, 80, 0.12); border-color: var(--caution, #e4b350); }
+  body.stock-act-v2-phone .stock-act-txn-tag.stock-act-basket-chip { color: var(--v2-copper-fg); border-color: var(--v2-copper-bd); }
+  body.stock-act-v2-phone .stock-act-follow-tag { color: var(--wheat, #e4b350); background: rgba(228, 179, 80, 0.12); border-color: var(--wheat, #e4b350); }
   body.stock-act-v2-phone .stock-act-plan-tag { color: var(--paper, #deddda); border-color: var(--v2-border); }
   body.stock-act-v2-phone #basket .stat b, body.stock-act-v2-phone #basket .stock-act-stats dd { color: var(--white, #f2f2f0); }
   body.stock-act-v2-phone .stock-act-issuer { background: var(--v2-card); border-color: var(--v2-border); }

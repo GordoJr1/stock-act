@@ -14,11 +14,11 @@
   <title>Stock Act</title>
   <style>
     :root {
-      --steel: #2d2219;
+      --walnut: #2d2219;
       --panel: #3f2f24;
       --paper: #deddda;
       --white: #f2f2f0;
-      --caution: #e4b350;
+      --wheat: #e4b350;
       --mute: #9a948b;
       --ink: #251b15;
       --copper: #c97646;
@@ -27,7 +27,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--ink); color-scheme: dark; scrollbar-gutter: stable; overflow-y: scroll; }
-    body { font-family: "Figtree", "Figtree Fallback", sans-serif; color: var(--white); background: var(--steel); }
+    body { font-family: "Figtree", "Figtree Fallback", sans-serif; color: var(--white); background: var(--walnut); }
     @media (display-mode: standalone) {
       body { padding-top: env(safe-area-inset-top, 0px); }
     }
@@ -47,9 +47,9 @@
     .mark span { color: var(--copper); }
     nav { display: flex; gap: 14px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.88rem; flex-wrap: wrap; }
     nav a { color: var(--paper); text-decoration: none; }
-    nav a:hover, nav a.on { color: var(--caution); }
+    nav a:hover, nav a.on { color: var(--wheat); }
     .back { color: #d98a5a; text-decoration: none; }
-    .kicker { color: var(--caution); margin: 22px 0 8px; }
+    .kicker { color: var(--wheat); margin: 22px 0 8px; }
     h1 { font-size: clamp(2.2rem, 8vw, 3.6rem); line-height: 0.9; margin-bottom: 0; }
     .muted { color: var(--mute); font-size: 0.88rem; line-height: 1.45; }
     .sub-bar {
@@ -78,7 +78,7 @@
       flex: 0 0 auto;
       min-width: 8.5rem;
       text-align: right;
-      border: 2px solid var(--caution);
+      border: 2px solid var(--wheat);
       background: #221913;
       padding: 8px 14px 7px;
       border-radius: 8px;
@@ -87,7 +87,7 @@
       display: block;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: clamp(1.5rem, 5vw, 2.1rem);
-      color: var(--caution);
+      color: var(--wheat);
       letter-spacing: 0.04em;
       line-height: 1;
     }
@@ -161,7 +161,7 @@
       display: inline;
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.25rem;
-      color: var(--caution);
+      color: var(--wheat);
       margin-right: 6px;
     }
     .stat b.up { color: #31c44f; }
@@ -173,8 +173,8 @@
       display: inline-block;
       margin-left: 6px;
       padding: 0 5px;
-      border: 1px solid var(--caution);
-      color: var(--caution);
+      border: 1px solid var(--wheat);
+      color: var(--wheat);
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -574,11 +574,11 @@
         padding: 0 2px;
         text-align: center;
       }
-      .tabbar a.on, .tabbar a:hover { color: var(--caution); }
+      .tabbar a.on, .tabbar a:hover { color: var(--wheat); }
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=189" />
+  <link rel="stylesheet" href="shell.css?v=190" />
   <style>
     body.stock-act-v2 .stat b.sell { color: #e38074; }
     body.stock-act-v2 .stat b.up { color: #31c44f; }
