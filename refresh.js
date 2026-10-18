@@ -7,9 +7,9 @@
   const style = document.createElement("style");
   style.textContent = [
     ".ptr{display:flex;align-items:center;justify-content:center;gap:10px;height:0;overflow:hidden;",
-    "color:#e3b41a;background:#151b24;font-family:\"Barlow Condensed\",sans-serif;",
+    "color:#e4b350;background:#221913;font-family:\"Big Shoulders Display\",sans-serif;",
     "letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;}",
-    ".ptr-mark{width:14px;height:14px;border:2px solid #e3b41a;border-right-color:transparent;border-radius:50%;",
+    ".ptr-mark{width:14px;height:14px;border:2px solid #e4b350;border-right-color:transparent;border-radius:50%;",
     "flex:0 0 14px;opacity:.85;}",
     ".ptr.busy .ptr-mark{animation:ptr-spin .7s linear infinite;}",
     "@keyframes ptr-spin{to{transform:rotate(360deg);}}",

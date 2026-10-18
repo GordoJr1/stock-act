@@ -3,37 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1a1d26" />
+  <meta name="theme-color" content="#251b15" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Stock Act" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3" />
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=4" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=4" />
   <title>Stock Act</title>
   <meta name="description" content="Official Senate, House, and White House STOCK Act / OGE 278-T tape. Amounts are ranges, not share counts." />
   <meta property="og:title" content="Stock Act" />
   <meta property="og:description" content="Official Senate, House, and White House STOCK Act / OGE 278-T tape." />
   <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --steel: #1c2430;
-      --panel: #2a3340;
-      --paper: #d8dde3;
-      --white: #eef2f5;
-      --fed: #1e4b8a;
-      --red: #c2302a;
-      --caution: #e3b41a;
-      --mute: #8b96a3;
-      --ink: #1a1d26;
-      --teal: #36999d;
-      --navy: #1c2d4e;
-      --buy: #2f9e4a;
-      --sell: #d45a55;
+      --steel: #2d2219;
+      --panel: #3f2f24;
+      --paper: #deddda;
+      --white: #f2f2f0;
+      --fed: #53417e;
+      --red: #ba3b2d;
+      --caution: #e4b350;
+      --mute: #9a948b;
+      --ink: #251b15;
+      --copper: #c97646;
+      --navy: #322849;
+      --buy: #369d4b;
+      --sell: #cf5f52;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,11 +43,9 @@
     }
 
     body {
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       color: var(--white);
-      background:
-        linear-gradient(180deg, rgba(26, 29, 38, 0.94), rgba(28, 36, 48, 0.97)),
-        url("city.jpg?v=15") 50% 30% / cover fixed;
+      background: var(--ink);
       min-height: 100vh;
     }
 
@@ -60,7 +55,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(28, 36, 48, 0.9);
+      background: rgba(45, 34, 25, 0.9);
     }
 
     .bay-left {
@@ -82,7 +77,7 @@
       background: repeating-linear-gradient(
         -45deg,
         var(--ink) 0 10px,
-        var(--teal) 10px 20px
+        var(--copper) 10px 20px
       );
     }
 
@@ -93,7 +88,7 @@
       font-size: 0.82rem;
       margin: 0;
       padding: 10px 0;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
 
     header {
@@ -101,24 +96,24 @@
       align-items: center;
       justify-content: space-between;
       padding: 16px 0;
-      border-bottom: 2px solid var(--teal);
+      border-bottom: 2px solid var(--copper);
     }
 
     .mark {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       font-size: 1rem;
     }
 
-    .mark span { color: var(--teal); }
+    .mark span { color: var(--copper); }
 
     nav {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.9rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -129,7 +124,7 @@
     nav a:hover, nav a.on { color: var(--caution); }
 
     .kicker {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--caution);
@@ -138,7 +133,7 @@
     }
 
     h1 {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-weight: 700;
       font-size: clamp(3.6rem, 9vw, 7rem);
       line-height: 0.85;
@@ -160,7 +155,7 @@
 
     .meta {
       margin-top: 12px;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--caution);
@@ -170,7 +165,7 @@
     .cta { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
 
     .btn {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       text-decoration: none;
@@ -183,7 +178,7 @@
 
     /* Buttons (e.g. "Show full list") had the browser's gray button fill under amber text (2.74:1). */
     button.btn { background: transparent; }
-    .btn.fill { background: var(--caution); color: #1a1404; }
+    .btn.fill { background: var(--caution); color: #1b1305; }
     .btn.red { border-color: var(--red); color: var(--white); background: var(--red); }
     .btn:hover { opacity: 0.88; }
 
@@ -194,7 +189,7 @@
     }
 
     h2 {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--caution);
@@ -204,13 +199,13 @@
 
     .card {
       background: var(--panel);
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       border-left: 6px solid var(--fed);
       padding: 22px;
     }
 
     .card h3 {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-size: 1.5rem;
@@ -226,7 +221,7 @@
       padding: 3px 8px;
       border: 1px solid var(--red);
       color: var(--red);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-size: 0.8rem;
@@ -244,7 +239,7 @@
       gap: 14px;
       align-items: center;
       background: var(--panel);
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       padding: 14px 16px;
       text-decoration: none;
       color: inherit;
@@ -253,7 +248,7 @@
     .tape-item:hover { border-color: var(--caution); }
 
     .pill {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.85rem;
@@ -262,11 +257,11 @@
       border: 1px solid currentColor;
     }
 
-    .pill.buy { color: #7dcf7a; }
-    .pill.sell { color: #ef7a74; }
+    .pill.buy { color: #83cc91; }
+    .pill.sell { color: #e38177; }
 
     .tape-item h3 {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.25rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -275,7 +270,7 @@
 
     .tape-item p { color: var(--mute); font-size: 0.9rem; }
     .tape-item .amt {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       color: var(--caution);
       letter-spacing: 0.04em;
       text-align: right;
@@ -291,7 +286,7 @@
 
     .picker label {
       display: block;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--caution);
@@ -301,8 +296,8 @@
 
     .picker input {
       width: 100%;
-      background: #151b24;
-      border: 1px solid #4a5563;
+      background: #221913;
+      border: 1px solid #5b534a;
       color: var(--white);
       padding: 10px 12px;
       font: inherit;
@@ -313,8 +308,8 @@
     .picker-menu {
       position: absolute;
       left: 0; right: 0; top: 100%;
-      background: #151b24;
-      border: 1px solid #4a5563;
+      background: #221913;
+      border: 1px solid #5b534a;
       max-height: 220px;
       overflow: auto;
       z-index: 12;
@@ -329,16 +324,16 @@
       text-align: left;
       background: transparent;
       border: 0;
-      border-bottom: 1px solid #2c3440;
+      border-bottom: 1px solid #403024;
       color: var(--paper);
       padding: 10px 12px;
       cursor: pointer;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
-    .picker-menu button:hover { background: rgba(227, 180, 26, 0.12); color: var(--caution); }
+    .picker-menu button:hover { background: rgba(228, 179, 80, 0.12); color: var(--caution); }
 
     .filters {
       display: grid;
@@ -349,7 +344,7 @@
     }
     .filters label {
       display: block;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--caution);
@@ -359,8 +354,8 @@
 
     .filters input, .filters select {
       width: 100%;
-      background: #151b24;
-      border: 1px solid #4a5563;
+      background: #221913;
+      border: 1px solid #5b534a;
       color: var(--white);
       padding: 10px 12px;
       font: inherit;
@@ -378,7 +373,7 @@
     table.tape-table th, table.tape-table td {
       text-align: left;
       padding: 10px 12px;
-      border-bottom: 1px solid #3a4452;
+      border-bottom: 1px solid #49433c;
       vertical-align: top;
     }
 
@@ -392,7 +387,7 @@
     }
 
     table.tape-table th {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -401,22 +396,22 @@
       top: var(--tape-lock-h, 0px);
       z-index: 14;
       background: var(--panel);
-      box-shadow: 0 1px 0 #3a4452;
+      box-shadow: 0 1px 0 #49433c;
     }
 
     .tix-meta, .tix-stamp { display: none; }
 
     table.tape-table a { color: inherit; text-decoration: none; }
     table.tape-table a:hover { color: var(--caution); }
-    .buy { color: #7dcf7a; }
-    .sell { color: #ef7a74; }
+    .buy { color: #83cc91; }
+    .sell { color: #e38177; }
     .opt-tag {
       display: inline-block;
       margin-left: 6px;
       padding: 0 5px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -432,7 +427,7 @@
       padding: 1px 6px;
       border: 1px solid var(--red);
       color: var(--red);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -445,7 +440,7 @@
       padding: 1px 6px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -466,31 +461,30 @@
     table.hist th, table.hist td {
       text-align: left;
       padding: 10px 8px;
-      border-bottom: 1px solid #3a4452;
+      border-bottom: 1px solid #49433c;
     }
 
     table.hist th {
-      font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: 0.1em;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--caution);
       font-weight: 600;
+      font-size: 12px;
     }
 
     footer {
       position: relative;
       z-index: 1;
       border-top: 2px solid var(--caution);
-      background:
-        linear-gradient(0deg, rgba(16, 20, 28, 0.9), rgba(16, 20, 28, 0.86)),
-        url("city.jpg?v=15") 50% 96% / cover no-repeat;
+      background: var(--ink);
     }
 
     footer .wrap {
       display: flex;
       justify-content: space-between;
       padding: 18px 0 36px;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--mute);
@@ -506,7 +500,7 @@
     .fold-teaser {
       display: block;
       margin-top: 4px;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
       text-transform: none;
       color: var(--mute);
@@ -568,15 +562,15 @@
       #tape { padding-top: 8px; }
       .filter-fold,
       .board-fold {
-        border: 1px solid #4a5563;
-        background: #151b24;
+        border: 1px solid #5b534a;
+        background: #221913;
         margin: 0 0 8px;
       }
       .filter-fold > summary,
       .board-fold > summary {
         display: block;
         padding: 12px 14px;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--caution);
@@ -591,7 +585,7 @@
       .filter-fold[open] > summary::before,
       .board-fold[open] > summary::before { content: "▾ "; }
       .filter-fold[open] > summary,
-      .board-fold[open] > summary { border-bottom: 1px solid #3a4452; }
+      .board-fold[open] > summary { border-bottom: 1px solid #49433c; }
       .filter-fold .picker, .filter-fold .filters { padding: 10px 12px 12px; }
       .board-fold[open] .board-teaser { display: none; }
       .board-fold > h2 { display: none; }
@@ -624,7 +618,7 @@
           "stamp meta meta";
         gap: 3px 10px;
         margin: 0 0 8px;
-        border: 1px solid #4a5563;
+        border: 1px solid #5b534a;
         background: var(--panel);
         padding: 10px 12px;
       }
@@ -642,10 +636,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-right: 1px solid #3a4452;
+        border-right: 1px solid #49433c;
         padding-right: 8px;
         text-align: center;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       }
       table.tape-table .tix-stamp .mon {
         color: var(--caution);
@@ -663,7 +657,7 @@
       table.tape-table tr.has-err { box-shadow: inset 3px 0 0 var(--red); }
       table.tape-table .tix-who {
         grid-area: who;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         text-transform: uppercase;
         letter-spacing: 0.04em;
         font-size: 1.05rem;
@@ -679,7 +673,7 @@
         grid-area: amt;
         text-align: left;
         color: var(--caution);
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-size: 1.05rem;
       }
       table.tape-table .tix-meta {
@@ -703,7 +697,7 @@
     #board { padding: 16px 0 8px; }
     .board-fold > summary { display: none; list-style: none; }
     .board-strip-label {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--caution);
@@ -721,8 +715,8 @@
     @media (max-width: 820px) {
       #board { padding: 8px 0 4px; }
       .board-fold {
-        border: 1px solid #4a5563;
-        background: #151b24;
+        border: 1px solid #5b534a;
+        background: #221913;
         margin: 0 0 8px;
       }
       .board-fold > summary.board-strip {
@@ -748,11 +742,11 @@
     }
     .board-tabs::-webkit-scrollbar { display: none; }
     .board-tabs button {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       background: transparent;
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       color: var(--mute);
       padding: 8px 4px;
       min-height: 44px;
@@ -766,11 +760,11 @@
       border-color: var(--caution);
       color: var(--caution);
     }
-    .board-note { color: #b7c1cc; font-size: calc(0.82rem + 1px); margin: 0 0 12px; line-height: 1.4; }
+    .board-note { color: #c3c0ba; font-size: calc(0.82rem + 1px); margin: 0 0 12px; line-height: 1.4; }
     .board-col-title { display: none; }
     .board-col { display: none; padding: 0; }
     .board-col.on { display: block; }
-    .board-list { list-style: none; border: 1px solid #4a5563; background: var(--panel); }
+    .board-list { list-style: none; border: 1px solid #5b534a; background: var(--panel); }
     @media (min-width: 821px) {
       #board .board-list, #tape .table-wrap { max-width: 1040px; }
     }
@@ -779,8 +773,8 @@
     body.is-ready .board-grid { min-height: 0; }
     @media (min-width: 1000px) {
       #board {
-        border: 1px solid #4a5563;
-        background: rgba(21, 27, 36, 0.78);
+        border: 1px solid #5b534a;
+        background: rgba(34, 25, 19, 0.78);
         padding: 14px 16px 16px;
       }
       #board h2 { margin-bottom: 12px; }
@@ -794,7 +788,7 @@
       #board .board-col { display: block; min-width: 0; padding: 0; }
       .board-col-title {
         display: block;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--caution);
@@ -842,7 +836,7 @@
     .board-list li.skel::after {
       content: "";
       display: block;
-      background: #3a4452;
+      background: #49433c;
       border-radius: 2px;
     }
     .board-list li.skel::before {
@@ -860,7 +854,7 @@
       gap: 6px 10px;
       align-items: baseline;
       padding: 7px 10px;
-      border-bottom: 1px solid #3a4452;
+      border-bottom: 1px solid #49433c;
     }
     .board-list li:last-child { border-bottom: 0; }
     .board-list li.board-trader {
@@ -874,14 +868,14 @@
       grid-template-areas:
         "rank name val"
         "sec sec sec";
-      background: rgba(227, 180, 26, 0.05);
+      background: rgba(228, 179, 80, 0.05);
     }
     .board-sectors {
       grid-area: sec;
       list-style: none;
       margin: 4px 0 2px;
       padding: 6px 0 0;
-      border-top: 1px solid #3a4452;
+      border-top: 1px solid #49433c;
       display: none;
     }
     .board-list li.board-trader.open .board-sectors { display: block; }
@@ -900,14 +894,14 @@
       padding: 1px 6px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       white-space: nowrap;
     }
-    .board-val.up { color: #7dcf7a; }
-    .board-val.down { color: #ef7a74; }
+    .board-val.up { color: #83cc91; }
+    .board-val.down { color: #e38177; }
     .board-val.flat { color: var(--mute); }
     .board-stock {
       display: flex;
@@ -919,7 +913,7 @@
     .board-co {
       color: var(--mute);
       font-size: 0.82rem;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       text-transform: none;
       letter-spacing: 0;
       min-width: 0;
@@ -928,7 +922,7 @@
       white-space: nowrap;
     }
     .board-rank {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       color: var(--mute);
       letter-spacing: 0.06em;
     }
@@ -936,15 +930,15 @@
     .board-list a {
       color: var(--white);
       text-decoration: none;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
       text-transform: none;
       font-weight: 600;
     }
     .board-list a:hover { color: var(--caution); }
-    .board-why { display: block; color: #b7c1cc; font-size: calc(0.75rem + 1px); text-transform: none; letter-spacing: 0; font-family: "IBM Plex Sans", sans-serif; }
+    .board-why { display: block; color: #c3c0ba; font-size: calc(0.75rem + 1px); text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; }
     .board-val {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       color: var(--caution);
       font-size: 1.05rem;
       white-space: nowrap;
@@ -953,19 +947,19 @@
       color: inherit;
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: #4a5563;
+      text-decoration-color: #5b534a;
     }
     .tk-link:hover { color: var(--caution); }
     .board-list a.tk-link {
       color: var(--white);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
     .chart-back {
       position: fixed;
       inset: 0;
-      background: rgba(10, 12, 16, 0.72);
+      background: rgba(15, 11, 9, 0.72);
       z-index: 80;
     }
     .chart-panel {
@@ -976,17 +970,17 @@
       width: min(760px, calc(100% - 24px));
       max-height: 88vh;
       overflow: auto;
-      background: #151b24;
-      border: 1px solid #4a5563;
+      background: #221913;
+      border: 1px solid #5b534a;
       z-index: 81;
       padding: 16px 18px 20px;
     }
     .chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
     .chart-close {
       background: transparent;
-      border: 1px solid #4a5563;
+      border: 1px solid #5b534a;
       color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 8px 12px;
@@ -999,10 +993,10 @@
       gap: 8px;
       margin: 12px 0;
     }
-    .chart-pnl div { background: var(--panel); border: 1px solid #3a4452; padding: 8px 10px; }
+    .chart-pnl div { background: var(--panel); border: 1px solid #49433c; padding: 8px 10px; }
     .chart-pnl b {
       display: block;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.2rem;
       color: var(--caution);
     }
@@ -1011,7 +1005,7 @@
       display: grid;
       grid-template-columns: 52px 1fr;
       grid-template-rows: 220px 22px;
-      background: #10151c;
+      background: #1a130f;
       padding: 6px 8px 4px 0;
     }
     #chart-svg { width: 100%; height: 220px; display: block; background: transparent; }
@@ -1037,7 +1031,7 @@
       justify-content: space-between;
       gap: 10px;
       padding: 7px 0;
-      border-bottom: 1px solid #2c3440;
+      border-bottom: 1px solid #403024;
       font-size: 0.88rem;
     }
     .chart-marks a { color: var(--white); text-decoration: none; }
@@ -1058,26 +1052,26 @@
         margin: 0 0 12px;
         padding: 8px 0;
         border-top: 0;
-        border-bottom: 1px solid #3a4452;
+        border-bottom: 1px solid #49433c;
       }
       .desk-status:empty { display: none; }
       .desk-status b {
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-size: 1.35rem;
         letter-spacing: 0.04em;
         display: block;
         line-height: 1;
       }
       .desk-status span {
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--mute);
         font-size: 0.7rem;
       }
       .desk-status .hot b { color: var(--caution); }
-      .desk-status .up b { color: #7dcf7a; }
-      .desk-status .down b { color: #ef7a74; }
+      .desk-status .up b { color: #83cc91; }
+      .desk-status .down b { color: #e38177; }
       .desk {
         display: grid;
         grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.82fr);
@@ -1150,7 +1144,7 @@
     .desk .wire-day0[hidden] { display: none; }
     #wire li.day.fresh h2 { color: var(--caution); }
     .desk .day h2 {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--caution);
@@ -1162,7 +1156,7 @@
       font-style: normal;
       color: var(--mute);
       font-size: 0.78rem;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
     }
     .desk .print {
@@ -1173,9 +1167,9 @@
         "stamp asset pay";
       gap: 4px 12px;
       align-items: center;
-      background: rgba(37, 45, 56, 0.92);
-      border: 1px solid #3a4452;
-      border-left: 4px solid #5b6573;
+      background: rgba(55, 42, 31, 0.92);
+      border: 1px solid #49433c;
+      border-left: 4px solid #6c6359;
       padding: 10px 12px;
       margin: 0 0 8px;
       color: inherit;
@@ -1187,14 +1181,14 @@
     .desk .print.buy { border-left-color: var(--buy); }
     .desk .print.sell { border-left-color: var(--sell); }
     .desk .print.fresh {
-      background: rgba(227, 180, 26, 0.06);
-      border-top-color: rgba(227, 180, 26, 0.45);
-      border-right-color: rgba(227, 180, 26, 0.35);
-      border-bottom-color: rgba(227, 180, 26, 0.35);
+      background: rgba(228, 179, 80, 0.06);
+      border-top-color: rgba(228, 179, 80, 0.45);
+      border-right-color: rgba(228, 179, 80, 0.35);
+      border-bottom-color: rgba(228, 179, 80, 0.35);
     }
     .desk .print.on {
       border-color: var(--caution);
-      background: rgba(227, 180, 26, 0.1);
+      background: rgba(228, 179, 80, 0.1);
     }
     .desk .print:hover { border-right-color: var(--caution); }
     .desk .stamp {
@@ -1203,10 +1197,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-right: 1px solid #3a4452;
+      border-right: 1px solid #49433c;
       padding-right: 10px;
       min-height: 52px;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       text-align: center;
       align-self: stretch;
     }
@@ -1226,8 +1220,8 @@
       min-width: 0;
     }
     .desk .who {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-weight: 650;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
+      font-weight: 600;
       letter-spacing: 0;
       text-transform: none;
       font-size: 1.08rem;
@@ -1240,21 +1234,21 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .desk .who:hover { color: var(--teal); }
+    .desk .who:hover { color: var(--copper); }
     .desk .ch {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.68rem;
       padding: 2px 7px;
-      border: 1px solid #5b6573;
+      border: 1px solid #6c6359;
       color: var(--paper);
       white-space: nowrap;
     }
-    .desk .ch.sen { border-color: var(--teal); color: var(--teal); }
+    .desk .ch.sen { border-color: var(--copper); color: var(--copper); }
     .desk .ch.wh { border-color: var(--caution); color: var(--caution); }
     .desk .ch.hot { border-color: var(--caution); color: var(--caution); }
-    .desk .ch.bad { border-color: #ef7a74; color: #ef7a74; }
+    .desk .ch.bad { border-color: #e38177; color: #e38177; }
     .desk .asset {
       grid-area: asset;
       margin: 0;
@@ -1269,7 +1263,7 @@
       line-clamp: 2;
     }
     .desk .asset a {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-weight: 700;
@@ -1277,14 +1271,14 @@
       text-decoration: none;
       margin-right: 6px;
     }
-    .desk .asset a:hover { color: var(--teal); }
+    .desk .asset a:hover { color: var(--copper); }
     .desk .meta {
-      color: #b7c1cc;
+      color: #c3c0ba;
       font-size: calc(0.75rem + 1px);
       margin-top: 2px;
       letter-spacing: 0;
       text-transform: none;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
     .desk .pay {
       grid-area: pay;
@@ -1297,8 +1291,8 @@
     .desk .print .pill {
       border: 0;
       border-radius: 0;
-      color: #d7dee6;
-      font-family: "IBM Plex Sans", sans-serif;
+      color: #dfddda;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-weight: 700;
       font-size: 0.74rem;
       padding: 0;
@@ -1308,12 +1302,12 @@
       text-align: center;
       background: transparent;
     }
-    .desk .print.buy .pill { background: transparent; color: #7dcf7a; }
-    .desk .print.sell .pill { background: transparent; color: #ffb4ae; }
+    .desk .print.buy .pill { background: transparent; color: #83cc91; }
+    .desk .print.sell .pill { background: transparent; color: #f0bab4; }
     .desk .hero {
       font-weight: 700;
       font-size: 1.22rem;
-      color: #eef2f5;
+      color: #f2f2f0;
       letter-spacing: -0.02em;
       line-height: 1.15;
       font-variant-numeric: tabular-nums;
@@ -1328,7 +1322,7 @@
       padding: 1px 6px;
       border: 1px solid var(--caution);
       color: var(--caution);
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 0.66rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -1339,8 +1333,8 @@
     .focus {
       position: sticky;
       top: calc(var(--site-header-h, 62px) + 8px);
-      background: rgba(21, 27, 36, 0.94);
-      border: 1px solid #4a5563;
+      background: rgba(34, 25, 19, 0.94);
+      border: 1px solid #5b534a;
       padding: 12px 12px 14px;
     }
     .focus .who {
@@ -1351,7 +1345,7 @@
     }
     .focus .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
     .focus .asset { white-space: normal; display: block; margin: 0 0 2px; font-size: 0.95rem; }
-    .focus .quiet { color: #b7c1cc; font-size: calc(0.76rem + 1px); margin: 0 0 8px; }
+    .focus .quiet { color: #c3c0ba; font-size: calc(0.76rem + 1px); margin: 0 0 8px; }
     .focus .cta { margin-top: 0; }
     .focus .btn {
       display: inline-flex;
@@ -1367,8 +1361,8 @@
       gap: 3px;
       width: fit-content;
       max-width: 100%;
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(26, 20, 38, 0.72);
+      border: 1px solid rgba(255, 255, 254, 0.1);
       border-radius: 999px;
       padding: 3px 5px;
       margin: 0 0 10px;
@@ -1377,8 +1371,8 @@
       flex: 0 0 auto;
       background: transparent;
       border: 0;
-      color: #94a3b8;
-      font-family: "Barlow Condensed", sans-serif;
+      color: #a7a199;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-size: 0.78rem;
@@ -1387,19 +1381,19 @@
       border-radius: 999px;
       cursor: pointer;
     }
-    .focus .range button:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
+    .focus .range button:hover { color: #fffffe; background: rgba(255, 255, 254, 0.08); }
     .focus .range button.on {
-      color: #03140a;
-      background: #22c55e;
-      box-shadow: 0 0 16px rgba(34, 197, 94, 0.45);
+      color: #251b15;
+      background: #e4b350;
+      box-shadow: none;
       font-weight: 800;
     }
     .focus .chart-wrap {
       position: relative;
-      background: rgba(13, 20, 31, 0.72);
+      background: rgba(22, 17, 32, 0.72);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 254, 0.09);
       border-radius: 16px;
       padding: 10px 8px 10px 44px;
       overflow: hidden;
@@ -1433,15 +1427,15 @@
       }
     }
     .focus .stock-act-spline-main {
-      filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.45)) drop-shadow(0 0 10px rgba(6, 182, 212, 0.22));
+      filter: drop-shadow(0 0 5px rgba(231, 145, 96, 0.45)) drop-shadow(0 0 10px rgba(231, 145, 96, 0.22));
     }
     .focus .stock-act-hover-price-pill {
       position: absolute;
-      background: #ffffff;
-      color: #0b111a;
+      background: #fffffe;
+      color: #120f1b;
       font-size: 12px;
       font-weight: 700;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       padding: 3px 8px;
       border-radius: 5px;
       pointer-events: none;
@@ -1452,11 +1446,11 @@
     .focus .stock-act-hover-date-pill {
       position: absolute;
       bottom: 4px;
-      background: #0d1522;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #e2e8f0;
+      background: #171322;
+      border: 1px solid rgba(255, 255, 254, 0.2);
+      color: #e9e8e5;
       font-size: 12px;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 5px;
@@ -1468,14 +1462,14 @@
     .focus .mark-pop {
       position: absolute;
       z-index: 70;
-      background: rgba(13, 20, 32, 0.94);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(22, 17, 32, 0.94);
+      border: 1px solid rgba(255, 255, 254, 0.15);
       border-radius: 12px;
       padding: 10px 12px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(6, 182, 212, 0.16);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.82), 0 0 1px rgba(255, 255, 254, 0.25), 0 0 20px rgba(231, 145, 96, 0.16);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      color: #e2e8f0;
+      color: #e9e8e5;
       box-sizing: border-box;
       pointer-events: auto;
       animation: popFade 0.14s ease-out;
@@ -1488,14 +1482,14 @@
       gap: 8px;
       margin-bottom: 6px;
       padding-bottom: 6px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 254, 0.08);
     }
     .focus .mark-pop .pop-title-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
     .focus .mark-pop .pop-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-weight: 800;
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -1505,31 +1499,31 @@
       flex-shrink: 0;
     }
     .focus .mark-pop .pop-badge.buy {
-      background: rgba(34, 197, 94, 0.2);
-      color: #22c55e;
-      border: 1px solid rgba(34, 197, 94, 0.5);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+      background: rgba(49, 196, 79, 0.2);
+      color: #31c44f;
+      border: 1px solid rgba(49, 196, 79, 0.5);
+      box-shadow: 0 0 10px rgba(49, 196, 79, 0.3);
     }
     .focus .mark-pop .pop-badge.sell {
-      background: rgba(248, 113, 113, 0.2);
-      color: #f87171;
-      border: 1px solid rgba(248, 113, 113, 0.5);
-      box-shadow: 0 0 10px rgba(248, 113, 113, 0.3);
+      background: rgba(227, 128, 116, 0.2);
+      color: #e38074;
+      border: 1px solid rgba(227, 128, 116, 0.5);
+      box-shadow: 0 0 10px rgba(227, 128, 116, 0.3);
     }
     .focus .mark-pop .pop-title {
-      font-family: "Barlow Condensed", sans-serif;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
       font-size: 1.02rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #fffffe;
       letter-spacing: 0.04em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .focus .mark-pop .pop-close {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #94a3b8;
+      background: rgba(255, 255, 254, 0.08);
+      border: 1px solid rgba(255, 255, 254, 0.12);
+      color: #a7a199;
       width: 22px;
       height: 22px;
       border-radius: 50%;
@@ -1542,19 +1536,19 @@
       padding: 0;
       flex-shrink: 0;
     }
-    .focus .mark-pop .pop-close:hover { background: rgba(255, 255, 255, 0.2); color: #ffffff; }
+    .focus .mark-pop .pop-close:hover { background: rgba(255, 255, 254, 0.2); color: #fffffe; }
     .focus .mark-pop .pop-single-detail {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       gap: 5px;
       margin: 5px 0 2px;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace;
       font-size: 11.5px;
     }
-    .focus .mark-pop .pop-single-amt { color: #ffffff; font-weight: 700; }
-    .focus .mark-pop .pop-dot { color: #64748b; margin: 0 1px; }
-    .focus .mark-pop .pop-single-date { color: #38bdf8; font-weight: 600; }
+    .focus .mark-pop .pop-single-amt { color: #fffffe; font-weight: 700; }
+    .focus .mark-pop .pop-dot { color: #9a948b; margin: 0 1px; }
+    .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 600; }
     .focus .chart-y {
       position: absolute;
       left: 0;
@@ -1577,10 +1571,10 @@
       padding-right: 6px;
       padding-left: 2px;
       box-sizing: border-box;
-      color: #e2e8f0;
+      color: #e9e8e5;
       font-size: 12px;
       font-weight: 700;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0.02em;
       line-height: 1;
       white-space: nowrap;
@@ -1589,10 +1583,10 @@
       display: flex;
       justify-content: space-between;
       padding: 8px 16px 0 28px;
-      color: #e2e8f0;
+      color: #e9e8e5;
       font-size: 11.5px;
       font-weight: 700;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       grid-column: auto;
@@ -1604,16 +1598,16 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=186" />
+  <link rel="stylesheet" href="shell.css?v=189" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
     .stock-act-txn-end { grid-area: end; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: max-content; }
-    .stock-act-txn-chip { border: 0; border-radius: 0; background: transparent; color: #d7dee6; text-transform: none; letter-spacing: 0; font-family: "IBM Plex Sans", sans-serif; font-weight: 700; padding: 0; }
-    .stock-act-txn.buy .stock-act-txn-chip { background: transparent; color: #7dcf7a; }
-    .stock-act-txn.sell .stock-act-txn-chip { background: transparent; color: #ffb4ae; }
-    .stock-act-txn-hero, .stock-act-txn .stock-act-txn-hero { color: #eef2f5; }
-    .stock-act-txn-hero { font-weight: 700; font-family: "IBM Plex Sans", sans-serif; }
+    .stock-act-txn-chip { border: 0; border-radius: 0; background: transparent; color: #dfddda; text-transform: none; letter-spacing: 0; font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; padding: 0; }
+    .stock-act-txn.buy .stock-act-txn-chip { background: transparent; color: #83cc91; }
+    .stock-act-txn.sell .stock-act-txn-chip { background: transparent; color: #f0bab4; }
+    .stock-act-txn-hero, .stock-act-txn .stock-act-txn-hero { color: #f2f2f0; }
+    .stock-act-txn-hero { font-weight: 700; font-family: "Figtree", "Figtree Fallback", sans-serif; }
     .stock-act-txn-id-line { display: flex; align-items: baseline; min-width: 0; max-width: 100%; overflow: hidden; }
     .stock-act-txn-id-line .stock-act-txn-role { display: none; }
     .stock-act-txn-sh, .stock-act-txn-cols, .stock-act-txn-id-sub, .stock-act-txn-tbl { display: none; }
@@ -1621,7 +1615,7 @@
     .stock-act-txn-tape.stock-act-txn-co-first { grid-template-areas: "when when" "co end" "id id"; }
     .stock-act-txn-sub { grid-area: sub; display: none; }
     .stock-act-txn-who { display: flex; flex-wrap: nowrap; align-items: center; min-width: 0; }
-    .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.32rem; color: #eef2f5; font-weight: 700; }
+    .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.32rem; color: #f2f2f0; font-weight: 700; }
     @media (max-width: 560px) {
       .stock-act-txn-tape .stock-act-txn-hero { font-size: 1.22rem; }
     }
@@ -1634,7 +1628,7 @@
       .stock-act-txn-tape .stock-act-txn-date { grid-area: date; }
       .stock-act-txn-tape .stock-act-txn-hero { grid-area: hero; }
       .stock-act-txn-tape .stock-act-txn-company,
-      .stock-act-txn-tape a.stock-act-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #eef2f5); font-size: 0.84rem; font-weight: 600; font-family: "IBM Plex Sans", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
+      .stock-act-txn-tape a.stock-act-txn-company { display: flex; align-items: baseline; gap: 0.45em; grid-area: co; min-width: 0; overflow: hidden; text-decoration: none; color: var(--white, #f2f2f0); font-size: 0.84rem; font-weight: 600; font-family: "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0; text-transform: none; border-bottom: 0; padding-bottom: 0; width: auto; }
       .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-cols .stock-act-txn-company { display: block; grid-area: co; }
       .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-tk,
       .stock-act-txn-tape .stock-act-txn-company a.stock-act-txn-tk { flex: 0 0 auto; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.05em; color: inherit; }
@@ -1660,7 +1654,7 @@
       .desk .stock-act-txn-tape .stock-act-txn-company { display: contents; }
       .desk .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-tk { grid-area: co; }
       .desk .stock-act-txn-tape .stock-act-txn-company .stock-act-txn-co-name {
-        display: block; grid-area: coname; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: calc(0.82rem + 1px); font-weight: 500; color: #b7c1cc;
+        display: block; grid-area: coname; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: calc(0.82rem + 1px); font-weight: 500; color: #c3c0ba;
       }
       .desk .stock-act-txn-cols .stock-act-txn-coname { grid-area: coname; display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .desk .stock-act-txn-cols .stock-act-txn-hero,
@@ -1669,16 +1663,16 @@
         grid-area: hero; justify-self: end; text-align: right;
       }
       .desk .stock-act-txn-tape .stock-act-txn-hero {
-        font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.01em; color: #eef2f5;
+        font-family: "Red Hat Mono", "Red Hat Mono Fallback", monospace; font-variant-numeric: tabular-nums; font-size: 0.84rem; font-weight: 600; letter-spacing: 0.01em; color: #f2f2f0;
         min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       }
       .desk .stock-act-txn-tape .stock-act-txn-hero.is-empty {
-        font-family: "IBM Plex Sans", sans-serif;
-        color: var(--mute, #8b96a3);
+        font-family: "Figtree", "Figtree Fallback", sans-serif;
+        color: var(--mute, #9a948b);
       }
       .desk .stock-act-txn-tape { cursor: pointer; }
-      .desk .stock-act-txn-tape.on { border-color: var(--caution); background: rgba(227, 180, 26, 0.1); }
-      .desk .stock-act-txn-tape:hover { background: rgba(227, 180, 26, 0.05); }
+      .desk .stock-act-txn-tape.on { border-color: var(--caution); background: rgba(228, 179, 80, 0.1); }
+      .desk .stock-act-txn-tape:hover { background: rgba(228, 179, 80, 0.05); }
       .desk .stock-act-txn-list.stock-act-tape-list .day { padding: 0 12px; }
 
       body.tape-opt .desk {
@@ -1714,7 +1708,7 @@
         min-width: 0;
         white-space: nowrap;
         font-variant-numeric: tabular-nums;
-        color: var(--paper, #d8dde3);
+        color: var(--paper, #deddda);
       }
       body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-exp,
       body.tape-opt .desk .stock-act-txn-exp {
@@ -1724,7 +1718,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: var(--paper, #d8dde3);
+        color: var(--paper, #deddda);
       }
       body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-strike,
       body.tape-opt .desk .stock-act-txn-cols .stock-act-txn-exp {
@@ -1738,9 +1732,9 @@
       }
     }
     .stock-act-txn .opt-tag.opt-call,
-    .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
+    .opt-tag.opt-call { border-color: #c97646; color: #e6c1ab; }
     .stock-act-txn .opt-tag.opt-put,
-    .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
+    .opt-tag.opt-put { border-color: #9a948b; color: #c2beb9; }
     @media (max-width: 899px) {
       body.tape-opt .stock-act-txn-list.stock-act-tape-list > .stock-act-txn-tape .opt-tag {
         display: inline-block !important;
@@ -1753,18 +1747,18 @@
   </style>
   <style id="stock-act-v2-look">
     :root {
-      --v2-card: #222a36;
-      --v2-chart: #18202b;
-      --v2-line: #344050;
-      --v2-border: #3a4452;
-      --v2-sub: #b7c1cc;
-      --v2-sell-text: #ffb4ae;
-      --v2-buy-text: #7dcf7a;
-      --v2-sell-bar: #e0625c;
-      --v2-buy-bar: #3fb35c;
-      --v2-chip-fg: #9be3a2;
-      --v2-chip-bg: #1f3b2c;
-      --v2-chip-bd: #3f7a52;
+      --v2-card: #34271d;
+      --v2-chart: #271e16;
+      --v2-line: #453e38;
+      --v2-border: #49433c;
+      --v2-sub: #c3c0ba;
+      --v2-sell-text: #f0bab4;
+      --v2-buy-text: #83cc91;
+      --v2-sell-bar: #db675a;
+      --v2-buy-bar: #47b25c;
+      --v2-chip-fg: #e4b350;
+      --v2-chip-bg: #433225;
+      --v2-chip-bd: #776d62;
     }
     .sr-only {
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -1774,15 +1768,15 @@
     #board { padding: 18px 0 8px; border: 0; background: transparent; }
     .board-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 16px; }
     #board .board-head h2 {
-      margin: 0; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 30px;
+      margin: 0; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 30px;
       letter-spacing: 0.06em; text-transform: uppercase; color: var(--white);
     }
     .board-more {
       background: transparent; border: 0; padding: 8px 0; min-height: 40px; cursor: pointer;
-      font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--v2-buy-text); white-space: nowrap;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--caution); white-space: nowrap;
     }
-    .board-more:hover { color: #a9e8a6; }
+    .board-more:hover { color: var(--caution); }
     .board-more:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
     .board-more[hidden] { display: none !important; }
     .board-more-foot { display: none; }
@@ -1795,13 +1789,13 @@
     }
     #board .board-col-title {
       display: flex; align-items: center; gap: 10px; margin: 0;
-      font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.08em;
+      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--white);
     }
     .board-chip {
-      font-family: "IBM Plex Sans", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
       line-height: 1; padding: 4px 7px; border-radius: 6px; text-transform: none;
-      color: var(--v2-chip-fg); background: var(--v2-chip-bg); border: 1px solid var(--v2-chip-bd);
+      color: var(--caution); background: rgba(228, 179, 80, 0.12); border: 1px solid var(--caution);
     }
     .board-desc { margin: 8px 0 10px; color: var(--v2-sub); font-size: 14px; line-height: 1.45; }
     #board .board-list { list-style: none; margin: 0; padding: 0; border: 0; background: transparent; max-width: none; }
@@ -1811,23 +1805,23 @@
     }
     #board .board-list > li.board-trader { grid-template-areas: "rank name val"; }
     #board .board-list > li.board-trader.open {
-      grid-template-areas: "rank name val" "sec sec sec"; background: rgba(54, 153, 157, 0.08);
+      grid-template-areas: "rank name val" "sec sec sec"; background: rgba(201, 118, 70, 0.08);
     }
     #board .board-rank,
     #board .board-list > li:first-child .board-rank {
-      color: var(--v2-sub); font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 600;
+      color: var(--v2-sub); font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 600;
       letter-spacing: 0; font-variant-numeric: tabular-nums;
     }
     #board .board-who { min-width: 0; }
     #board .board-list a {
       display: block; overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: anywhere;
-      font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 15px; line-height: 1.3;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 600; font-size: 15px; line-height: 1.3;
       letter-spacing: 0; text-transform: none; color: var(--white); text-decoration: none;
     }
-    #board .board-list a:hover { color: #8fdde0; }
+    #board .board-list a:hover { color: #eacab7; }
     #board .board-stock a.tk-link { display: inline; font-weight: 700; letter-spacing: 0.03em; text-decoration: none; }
     #board .board-val {
-      font-family: "IBM Plex Sans", sans-serif; font-weight: 700; font-size: 15px; color: var(--white);
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; font-size: 15px; color: var(--white);
       white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums;
     }
     #board .board-val b { font-weight: 700; color: inherit; }
@@ -1853,11 +1847,11 @@
         display: grid; grid-template-columns: 18px minmax(0, 1fr); row-gap: 4px; column-gap: 0; align-items: baseline;
         background: var(--v2-card); border: 1px solid var(--v2-border); border-radius: 14px;
         padding: 14px 16px; min-height: 44px; cursor: pointer; list-style: none;
-        font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.1em;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.1em;
         text-transform: uppercase; color: var(--white);
       }
       .board-fold > summary::before,
-      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8"; }
+      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8"; }
       .board-fold[open] > summary::before,
       .filter-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary,
@@ -1865,7 +1859,7 @@
       .board-strip-label { grid-column: 2; color: var(--white); font: inherit; letter-spacing: inherit; }
       .board-peek {
         grid-column: 1 / -1; padding-left: 18px; white-space: normal; overflow: visible; text-overflow: clip;
-        font-family: "IBM Plex Sans", sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 0;
+        font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 0;
         text-transform: none; line-height: 1.4; color: var(--v2-sub);
       }
       .board-fold[open] .board-peek { display: none; }
@@ -1892,7 +1886,7 @@
         min-height: 44px;
         cursor: pointer;
         list-style: none;
-        font-family: "Barlow Condensed", sans-serif;
+        font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
         font-weight: 700;
         font-size: 19px;
         letter-spacing: 0.1em;
@@ -1901,7 +1895,7 @@
       }
       .board-fold > summary.board-strip::-webkit-details-marker { display: none; }
       .board-fold > summary::before {
-        grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8";
+        grid-column: 1; grid-row: 1; color: var(--caution); content: "\25B8";
       }
       .board-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary {
@@ -1915,7 +1909,7 @@
         white-space: normal;
         overflow: visible;
         text-overflow: clip;
-        font-family: "IBM Plex Sans", sans-serif;
+        font-family: "Figtree", "Figtree Fallback", sans-serif;
         font-weight: 400;
         font-size: 14px;
         letter-spacing: 0;
@@ -1937,7 +1931,7 @@
     .filter-fold .filters label,
     .filter-fold .filter-label {
       display: block;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       color: var(--v2-sub);
       font-weight: 600;
       font-size: 13px;
@@ -1959,11 +1953,11 @@
     }
     .picker input, .filters input, .filters select, .seg {
       min-height: 34px; height: 34px; background-color: var(--v2-card); border: 1px solid var(--v2-border);
-      border-radius: 10px; color: var(--white); font-family: "IBM Plex Sans", sans-serif; font-size: 15px;
+      border-radius: 10px; color: var(--white); font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 15px;
     }
     .filters select { padding-top: 0; padding-bottom: 0; line-height: 32px; }
     .picker input:focus, .filters input:focus, .filters select:focus { outline: 2px solid var(--caution); outline-offset: 1px; }
-    .picker-menu { border-radius: 10px; background: #18202b; border-color: var(--v2-border); }
+    .picker-menu { border-radius: 10px; background: #271e16; border-color: var(--v2-border); }
     .tape-search { max-width: none; width: 100%; margin: 0; }
     .tape-search-field { position: relative; }
     .tape-search-icon {
@@ -1985,7 +1979,7 @@
       border: 1px solid var(--v2-border);
       border-radius: 4px;
       color: var(--mute);
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 12px;
       font-weight: 600;
       line-height: 20px;
@@ -2013,7 +2007,7 @@
       border-right: 1px solid var(--v2-border);
       background: transparent;
       color: var(--mute);
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0;
@@ -2023,12 +2017,12 @@
     }
     .seg button:last-child { border-right: 0; }
     .seg button.on {
-      background: rgba(238, 242, 245, 0.06);
-      color: var(--white);
+      background: #e4b350;
+      color: #251b15;
     }
     .seg.is-on button.on {
-      background: rgba(227, 180, 26, 0.12);
-      color: var(--caution);
+      background: #e4b350;
+      color: #251b15;
     }
     .filter-clear-wrap {
       display: flex;
@@ -2042,7 +2036,7 @@
       border: 0;
       background: transparent;
       color: var(--caution);
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
@@ -2067,7 +2061,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       letter-spacing: 0;
       text-transform: none;
       font-size: 14px;
@@ -2122,7 +2116,7 @@
 
     .wire-kicker,
     .desk .wire-kicker {
-      display: block; margin: 0 0 16px; font-family: "Barlow Condensed", sans-serif; font-weight: 700;
+      display: block; margin: 0 0 16px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700;
       font-size: 30px; letter-spacing: 0.06em; color: var(--white);
     }
     .wire-count {
@@ -2147,23 +2141,23 @@
     }
     #wire > li.day:first-child { margin-top: 0; }
     #wire > li.day h2 {
-      margin: 0; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 17px;
+      margin: 0; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 17px;
       letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper);
     }
-    #wire > li.day.fresh h2 { color: var(--v2-buy-text); }
+    #wire > li.day.fresh h2 { color: var(--caution); }
     #wire > li.w-row {
       position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
       align-items: start; padding: 14px 4px 14px 26px; border-bottom: 1px solid var(--v2-line); outline: none;
     }
     #wire > li.w-row::before {
-      content: ""; position: absolute; left: 4px; top: 14px; bottom: 14px; width: 7px; border-radius: 4px; background: #6b7582;
+      content: ""; position: absolute; left: 4px; top: 14px; bottom: 14px; width: 7px; border-radius: 4px; background: #7e7367;
     }
     #wire > li.w-row.sell::before { background: var(--v2-sell-bar); }
     #wire > li.w-row.buy::before { background: var(--v2-buy-bar); }
-    #wire > li.w-row.postex::before { background: #c5726b; }
-    #wire > li.w-row.exercise::before { background: #2a6d72; }
-    #wire > li.w-row.award::before { background: #9a8a4a; }
-    #wire > li.w-row.exch::before { background: #6b7582; }
+    #wire > li.w-row.postex::before { background: #c2746b; }
+    #wire > li.w-row.exercise::before { background: #96522b; }
+    #wire > li.w-row.award::before { background: #94887d; }
+    #wire > li.w-row.exch::before { background: #7e7367; }
     #wire > li.w-row:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
     #wire .w-main { min-width: 0; }
     #wire .w-head { font-size: 17px; font-weight: 600; line-height: 1.35; color: var(--white); overflow-wrap: anywhere; }
@@ -2186,8 +2180,8 @@
     #wire .stock-act-file-note,
     #wire .stock-act-file-note-more {
       display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      border: 1px solid var(--v2-border); border-radius: 6px; padding: 2px 9px; background: rgba(15, 18, 24, 0.45);
-      color: #c5ced6; font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+      border: 1px solid var(--v2-border); border-radius: 6px; padding: 2px 9px; background: rgba(22, 17, 13, 0.45);
+      color: #cfcdc8; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
     }
     #wire .stock-act-file-note.is-extra { display: none !important; }
     #wire .stock-act-file-note-more { display: inline-block !important; }
@@ -2197,7 +2191,7 @@
       display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
     }
     #wire .w-side, #wire .w1-side {
-      font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase; line-height: 1.3; color: var(--paper); white-space: nowrap;
     }
     #wire .w-side.buy, #wire .w1-side.buy { color: var(--v2-buy-text); }
@@ -2218,9 +2212,9 @@
       .desk .wire { grid-column: 1; grid-row: 4; }
       .desk .focus { grid-column: 2; grid-row: 3 / -1; }
       #wire > li.w-row { cursor: pointer; border-radius: 10px; }
-      #wire > li.w-row:hover { background: rgba(255, 255, 255, 0.03); }
+      #wire > li.w-row:hover { background: rgba(255, 255, 254, 0.03); }
       #wire > li.w-row.on {
-        background: rgba(54, 153, 157, 0.11); box-shadow: inset 0 0 0 1px rgba(79, 185, 189, 0.45);
+        background: rgba(201, 118, 70, 0.11); box-shadow: inset 0 0 0 1px rgba(216, 156, 122, 0.45);
         border-bottom-color: transparent;
       }
     }
@@ -2236,21 +2230,21 @@
     }
     .focus .chips { gap: 6px; margin: 0 0 12px; }
     .desk .focus .ch {
-      font-family: "IBM Plex Sans", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; line-height: 1;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; line-height: 1;
       padding: 5px 8px; border: 1px solid var(--v2-border); border-radius: 6px; color: var(--paper);
-      background: rgba(15, 18, 24, 0.35);
+      background: rgba(22, 17, 13, 0.35);
     }
-    .desk .focus .ch.sen { color: #8fdde0; border-color: #2d6f73; }
-    .desk .focus .ch.hot { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
-    .desk .focus .ch.bad { color: #ef7a74; border-color: #ef7a74; }
+    .desk .focus .ch.sen { color: #eacab7; border-color: #98542c; }
+    .desk .focus .ch.hot { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
+    .desk .focus .ch.bad { color: #e38177; border-color: #e38177; }
     .desk .focus .asset { margin: 0 0 2px; font-size: 16px; color: var(--white); overflow-wrap: anywhere; }
     .desk .focus .asset a {
-      font-family: "IBM Plex Sans", sans-serif; font-weight: 700; letter-spacing: 0.03em; text-transform: none; margin-right: 4px;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 700; letter-spacing: 0.03em; text-transform: none; margin-right: 4px;
     }
     .focus .quiet { margin: 0 0 14px; color: var(--v2-sub); font-size: 14px; }
     .focus .range { background: var(--v2-chart); border: 1px solid var(--v2-line); padding: 3px; margin: 0 0 12px; }
     .focus .range button { color: var(--v2-sub); font-size: 14px; padding: 5px 12px; }
-    .focus .range button.on { color: #04140a; background: var(--v2-buy-bar); box-shadow: none; }
+    .focus .range button.on { color: #251b15; background: #e4b350; box-shadow: none; }
     .focus .chart-wrap {
       background: var(--v2-chart); border: 1px solid var(--v2-line); border-radius: 14px;
       padding: 14px 14px 10px 52px; backdrop-filter: none; -webkit-backdrop-filter: none; margin-bottom: 14px;
@@ -2260,7 +2254,7 @@
     .focus .chart-x { color: var(--v2-sub); font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; }
     .focus .chart-note { color: var(--v2-sub); font-size: 15px; }
     .focus .mark-pop {
-      width: max-content; background: #0f151e; border: 1px solid var(--v2-border); border-radius: 12px;
+      width: max-content; background: #1a130f; border: 1px solid var(--v2-border); border-radius: 12px;
       padding: 9px 12px 10px; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55); backdrop-filter: none; -webkit-backdrop-filter: none;
     }
     .focus .mark-pop .pop-header { margin: 0; padding: 0; border: 0; align-items: flex-start; }
@@ -2268,30 +2262,30 @@
     .focus .mark-pop .pop-badge,
     .focus .mark-pop .pop-badge.buy,
     .focus .mark-pop .pop-badge.sell {
-      font-family: "IBM Plex Sans", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
       padding: 3px 7px; border-radius: 6px; box-shadow: none;
     }
-    .focus .mark-pop .pop-badge.sell { color: var(--v2-sell-text); background: rgba(212, 90, 85, 0.16); border: 1px solid rgba(224, 98, 92, 0.45); }
-    .focus .mark-pop .pop-badge.buy { color: var(--v2-buy-text); background: rgba(47, 158, 74, 0.16); border: 1px solid rgba(63, 179, 92, 0.45); }
+    .focus .mark-pop .pop-badge.sell { color: var(--v2-sell-text); background: rgba(207, 95, 82, 0.16); border: 1px solid rgba(219, 103, 90, 0.45); }
+    .focus .mark-pop .pop-badge.buy { color: var(--v2-buy-text); background: rgba(54, 157, 75, 0.16); border: 1px solid rgba(71, 178, 92, 0.45); }
     .focus .mark-pop .pop-title {
-      font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0;
       white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; color: var(--white);
     }
     .focus .mark-pop .pop-close { width: 22px; height: 22px; margin-left: 4px; }
-    .focus .mark-pop .pop-single-detail { margin: 4px 0 0; font-family: "IBM Plex Sans", sans-serif; font-size: 14px; gap: 4px; }
+    .focus .mark-pop .pop-single-detail { margin: 4px 0 0; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 14px; gap: 4px; }
     .focus .mark-pop .pop-single-amt { color: var(--paper); font-weight: 600; }
-    .focus .mark-pop .pop-dot { color: var(--v2-sub); }
-    .focus .mark-pop .pop-single-date { color: var(--v2-sub); font-weight: 400; }
+    .focus .mark-pop .pop-dot { color: #9a948b; }
+    .focus .mark-pop .pop-single-date { color: #d98a5a; font-weight: 400; }
     .focus .mark-pop .pop-link {
-      position: absolute; top: 100%; width: 0; border-left: 1.5px dashed rgba(255, 180, 174, 0.6); pointer-events: none;
+      position: absolute; top: 100%; width: 0; border-left: 1.5px dashed rgba(240, 186, 180, 0.6); pointer-events: none;
     }
-    .focus .mark-pop .pop-link.buy { border-left-color: rgba(125, 207, 122, 0.6); }
+    .focus .mark-pop .pop-link.buy { border-left-color: rgba(131, 204, 145, 0.6); }
     .focus .cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
     .focus .btn {
-      border-radius: 10px; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 15px;
+      border-radius: 10px; font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 700; font-size: 15px;
       letter-spacing: 0.1em; padding: 10px 16px; color: var(--white); border: 1px solid var(--v2-border); background: transparent;
     }
-    .focus .btn.fill { background: var(--v2-buy-bar); border-color: var(--v2-buy-bar); color: #04140a; }
+    .focus .btn.fill { background: #e4b350; border-color: #e4b350; color: #251b15; }
 
     /* .chart-top is display:contents on desktop so the card itself is the sticky grid item. */
     .strip-toggle, .spark { display: none; }
@@ -2316,8 +2310,8 @@
       .chart-top #focus-foot { display: none; }
       .chart-top .strip-toggle {
         display: inline-flex; align-items: center; gap: 6px; position: absolute; top: 10px; right: 10px; z-index: 2;
-        font: 600 12px/1 "IBM Plex Sans", sans-serif; letter-spacing: 0.05em; color: var(--v2-sub, #b7c1cc);
-        padding: 6px 9px; border: 1px solid var(--v2-border, #3a4452); border-radius: 6px; background: rgba(15, 18, 24, 0.35); cursor: pointer;
+        font: 600 12px/1 "Figtree", "Figtree Fallback", sans-serif; letter-spacing: 0.05em; color: var(--v2-sub, #c3c0ba);
+        padding: 6px 9px; border: 1px solid var(--v2-border, #49433c); border-radius: 6px; background: rgba(22, 17, 13, 0.35); cursor: pointer;
       }
       .chart-top .strip-toggle::after { content: "\25BE"; font-size: 11px; }
       .chart-top .focus.open .strip-toggle::after { content: "\25B4"; }
@@ -2328,14 +2322,14 @@
       .chart-top .focus:not(.open) .spark { display: block; }
       .chart-top .spark { height: 52px; }
       .chart-top .spark svg { display: block; width: 100%; height: 52px; }
-      .chart-top .spark-note { display: block; line-height: 52px; color: var(--v2-sub, #b7c1cc); font-size: 13px; }
+      .chart-top .spark-note { display: block; line-height: 52px; color: var(--v2-sub, #c3c0ba); font-size: 13px; }
     }
-    .spark .spark-line { fill: none; stroke: #67e8f9; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
-    .spark .spark-area { fill: rgba(103, 232, 249, 0.10); stroke: none; }
-    .spark .spark-dot { fill: #f0d078; stroke: #0f1218; stroke-width: 2; }
-    .spark .spark-dot.buy { fill: var(--v2-buy-bar, #3fb35c); }
-    .spark .spark-dot.sell { fill: var(--v2-sell-bar, #e0625c); }
-    .spark .spark-end { fill: #f8fafc; }
+    .spark .spark-line { fill: none; stroke: #f4cfb9; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+    .spark .spark-area { fill: rgba(244, 207, 185, 0.10); stroke: none; }
+    .spark .spark-dot { fill: #eecf92; stroke: #16110d; stroke-width: 2; }
+    .spark .spark-dot.buy { fill: var(--v2-buy-bar, #47b25c); }
+    .spark .spark-dot.sell { fill: var(--v2-sell-bar, #db675a); }
+    .spark .spark-end { fill: #faf9fc; }
   </style>
   <style id="stock-act-tape-2b">
     @media (max-width: 899px) {
@@ -2351,25 +2345,25 @@
       #wire .w1-rows { list-style: none; margin: 0; padding: 0; }
       #wire .w1-chip {
         display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-        border: 1px solid var(--v2-border); border-radius: 6px; padding: 1px 8px; background: rgba(15, 18, 24, 0.45);
-        color: #c5ced6; font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
+        border: 1px solid var(--v2-border); border-radius: 6px; padding: 1px 8px; background: rgba(22, 17, 13, 0.45);
+        color: #cfcdc8; font-family: "Figtree", "Figtree Fallback", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5;
       }
-      #wire .w1-clus { color: var(--v2-chip-fg); background: var(--v2-chip-bg); border-color: var(--v2-chip-bd); }
+      #wire .w1-clus { color: var(--caution); background: rgba(228, 179, 80, 0.12); border-color: var(--caution); }
       #wire li.w1 {
-        position: relative; min-height: 44px; padding: 4px 2px 4px 20px; border-top: 1px solid rgba(52, 64, 80, 0.55);
+        position: relative; min-height: 44px; padding: 4px 2px 4px 20px; border-top: 1px solid rgba(69, 62, 56, 0.55);
         display: flex; flex-direction: column; justify-content: center; outline: none;
       }
       #wire li.w1:first-child { border-top: 0; }
       #wire li.w1:focus-visible { outline: 2px solid var(--caution); outline-offset: 2px; }
       #wire li.w1::before {
-        content: ""; position: absolute; left: 2px; top: 9px; bottom: 9px; width: 6px; border-radius: 4px; background: #6b7582;
+        content: ""; position: absolute; left: 2px; top: 9px; bottom: 9px; width: 6px; border-radius: 4px; background: #7e7367;
       }
       #wire li.w1.sell::before { background: var(--v2-sell-bar); }
       #wire li.w1.buy::before { background: var(--v2-buy-bar); }
-      #wire li.w1.postex::before { background: #c5726b; }
-      #wire li.w1.exercise::before { background: #2a6d72; }
-      #wire li.w1.award::before { background: #9a8a4a; }
-      #wire li.w1.exch::before { background: #6b7582; }
+      #wire li.w1.postex::before { background: #c2746b; }
+      #wire li.w1.exercise::before { background: #96522b; }
+      #wire li.w1.award::before { background: #94887d; }
+      #wire li.w1.exch::before { background: #7e7367; }
       #wire .w1-line { display: flex; align-items: center; min-width: 0; }
       #wire .w1-tk {
         flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-width: 0;
@@ -2619,7 +2613,7 @@
   </div>
 
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=126"></script>
+  <script src="chart.js?v=129"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, (c) => ({
