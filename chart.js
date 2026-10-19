@@ -555,7 +555,7 @@ function drawChart(points, marks, opts) {
   const bind = rebindChartEvents(svg);
   bind("click", (e) => {
     if (!e.target.closest(".chart-mark")) {
-      const pop = wrap.querySelector("#mark-pop");
+      const pop = document.getElementById("mark-pop");
       if (pop) pop.hidden = true;
     }
   });
@@ -577,7 +577,7 @@ function ensureInteractiveDomElements(wrap, palette) {
   const leftoverTerm = wrap.querySelector(".stock-act-terminal-pill");
   if (leftoverTerm) leftoverTerm.remove();
 
-  const pop = wrap.querySelector("#mark-pop");
+  const pop = document.getElementById("mark-pop");
   if (pop && palette && palette.popShadow) {
     pop.style.boxShadow = palette.popShadow;
   }
@@ -677,7 +677,7 @@ function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
   const hoverDatePill = wrap.querySelector(".stock-act-hover-date-pill");
 
   function onPointerMove(e) {
-    const pop = wrap.querySelector("#mark-pop");
+    const pop = document.getElementById("mark-pop");
     if (pop && !pop.hidden) {
       onPointerLeave();
       return;
@@ -865,8 +865,33 @@ function sampleSplineInWrap(svg, wrap) {
   return pts;
 }
 
+function dockPopOutside(pop, wrap) {
+  if (!pop || !wrap) return;
+  if (pop.parentElement === wrap && wrap.parentElement) wrap.parentElement.insertBefore(pop, wrap);
+  pop.classList.add("is-docked");
+  pop.style.left = "";
+  pop.style.top = "";
+  pop.style.transform = "none";
+}
+
+function popCoversMarks(pop, svg) {
+  if (!pop || !svg || !svg.querySelectorAll) return false;
+  const pr = pop.getBoundingClientRect();
+  const marks = svg.querySelectorAll(".chart-mark");
+  for (let i = 0; i < marks.length; i++) {
+    const r = marks[i].getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    if (!(pr.right < r.left + 1 || pr.left > r.right - 1 || pr.bottom < r.top + 1 || pr.top > r.bottom - 1)) return true;
+  }
+  return false;
+}
+
 function placeMarkPop(pop, wrap, svg, rec, opts) {
   if (!pop || !wrap || !rec) return;
+  if (pop.classList.contains("is-docked")) {
+    pop.classList.remove("is-docked");
+    wrap.appendChild(pop);
+  }
   opts = opts || {};
   const wr = wrap.getBoundingClientRect();
   const sr = (svg && svg.getBoundingClientRect) ? svg.getBoundingClientRect() : wr;
@@ -931,15 +956,9 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
     if (clearsPin && pathHits(aboveBox) === 0) {
       pop.style.left = aboveLeft + "px";
       pop.style.top = aboveTop + "px";
-      return;
+      if (!popCoversMarks(pop, svg)) return;
     }
-    let dockLeft = pinX > wr.width * 0.45 ? margin : maxLeft;
-    const dockBox = { left: dockLeft, top: margin };
-    if (pathHits(dockBox) > 0) {
-      dockLeft = dockLeft === margin ? maxLeft : margin;
-    }
-    pop.style.left = dockLeft + "px";
-    pop.style.top = margin + "px";
+    dockPopOutside(pop, wrap);
     return;
   }
 
@@ -1009,11 +1028,14 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
     pop.style.width = w + "px";
     pop.style.left = Math.max(visibleLeft, pinX - gap - w) + "px";
   }
+  if (popCoversMarks(pop, svg)) dockPopOutside(pop, wrap);
 }
 
 if (typeof window !== "undefined") {
   window.CHART_PALETTES = CHART_PALETTES;
   window.hideChartHoverUi = hideChartHoverUi;
   window.placeMarkPop = placeMarkPop;
+  window.dockPopOutside = dockPopOutside;
+  window.popCoversMarks = popCoversMarks;
 }
 

@@ -2197,10 +2197,6 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #d8dde3); border-col
   .stock-act-header .mark { max-width: calc(100% - 5rem); }
 }
 
-@media (min-width: 1280px) {
-  .stock-act-nav a { font-size: 13px; }
-}
-
 @media (min-width: 821px) and (max-width: 980px) {
   .stock-act-header-inner { gap: 8px 8px; flex-wrap: nowrap; }
   .stock-act-nav { flex-wrap: nowrap; gap: 0 2px; }
