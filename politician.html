@@ -760,7 +760,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=132"></script>
+  <script src="chart.js?v=133"></script>
   <script>
     const isOptionLike = SA.isOptionLike;
     const isBond = SA.isBond;
@@ -1296,7 +1296,7 @@
       const svg = document.getElementById("chart-svg");
       const popWidth = Math.min(220, Math.max(160, wrap.getBoundingClientRect().width - 20));
       if (typeof placeMarkPop === "function") {
-        placeMarkPop(pop, wrap, svg, rec, { width: popWidth });
+        placeMarkPop(pop, wrap, svg, rec, { width: popWidth, dockDesktop: true });
       } else {
         const wr = wrap.getBoundingClientRect();
         const sr = svg.getBoundingClientRect();
@@ -1327,7 +1327,7 @@
         pop.style.right = "auto";
         pop.style.transform = "none";
         pop.style.left = Math.max(8, pinX - w - 12) + "px";
-        if (typeof popCoversMarks === "function" && popCoversMarks(pop, svg)) dockPopOutside(pop, wrap);
+        if (typeof popCoversMarks === "function" && popCoversMarks(pop, svg, rec)) dockPopOutside(pop, wrap);
       }
       pop.hidden = false;
     }

@@ -874,11 +874,35 @@ function dockPopOutside(pop, wrap) {
   pop.style.transform = "none";
 }
 
-function popCoversMarks(pop, svg) {
+function markNearRec(svg, rec) {
+  if (!svg || !rec || !svg.querySelectorAll) return null;
+  const sr = svg.getBoundingClientRect();
+  const px = sr.left + Number(rec.xPct || 0) * sr.width;
+  const py = sr.top + Number(rec.yPct || 0) * sr.height;
+  const marks = svg.querySelectorAll(".chart-mark");
+  let best = null;
+  let bestD = Infinity;
+  for (let i = 0; i < marks.length; i++) {
+    const r = marks[i].getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const d = (cx - px) * (cx - px) + (cy - py) * (cy - py);
+    if (d < bestD) {
+      bestD = d;
+      best = marks[i];
+    }
+  }
+  return best;
+}
+
+function popCoversMarks(pop, svg, rec) {
   if (!pop || !svg || !svg.querySelectorAll) return false;
+  const skip = markNearRec(svg, rec);
   const pr = pop.getBoundingClientRect();
   const marks = svg.querySelectorAll(".chart-mark");
   for (let i = 0; i < marks.length; i++) {
+    if (marks[i] === skip) continue;
     const r = marks[i].getBoundingClientRect();
     if (r.width < 1 || r.height < 1) continue;
     if (!(pr.right < r.left + 1 || pr.left > r.right - 1 || pr.bottom < r.top + 1 || pr.top > r.bottom - 1)) return true;
@@ -956,7 +980,7 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
     if (clearsPin && pathHits(aboveBox) === 0) {
       pop.style.left = aboveLeft + "px";
       pop.style.top = aboveTop + "px";
-      if (!popCoversMarks(pop, svg)) return;
+      if (!popCoversMarks(pop, svg, rec)) return;
     }
     dockPopOutside(pop, wrap);
     return;
@@ -1028,7 +1052,7 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
     pop.style.width = w + "px";
     pop.style.left = Math.max(visibleLeft, pinX - gap - w) + "px";
   }
-  if (popCoversMarks(pop, svg)) dockPopOutside(pop, wrap);
+  if (opts.dockDesktop && popCoversMarks(pop, svg, rec)) dockPopOutside(pop, wrap);
 }
 
 if (typeof window !== "undefined") {
@@ -1037,5 +1061,21 @@ if (typeof window !== "undefined") {
   window.placeMarkPop = placeMarkPop;
   window.dockPopOutside = dockPopOutside;
   window.popCoversMarks = popCoversMarks;
+  let lastPlace = null;
+  const placeMarkPopOpen = placeMarkPop;
+  window.placeMarkPop = function (pop, wrap, svg, rec, opts) {
+    lastPlace = { pop: pop, wrap: wrap, svg: svg, rec: rec, opts: opts };
+    return placeMarkPopOpen(pop, wrap, svg, rec, opts);
+  };
+  let resizeTimer = 0;
+  window.addEventListener("resize", () => {
+    const last = lastPlace;
+    if (!last || !last.pop || last.pop.hidden) return;
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      if (!last.pop || last.pop.hidden) return;
+      window.placeMarkPop(last.pop, last.wrap, last.svg, last.rec, last.opts);
+    }, 60);
+  });
 }
 

@@ -243,7 +243,6 @@
       z-index: 10;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
-    .mark-pop.is-docked { position: static; transform: none; width: auto !important; margin: 8px 0; }
     .mark-pop {
       position: absolute;
       z-index: 70;
@@ -652,7 +651,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=132"></script>
+  <script src="chart.js?v=133"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();
