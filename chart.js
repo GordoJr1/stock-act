@@ -1074,7 +1074,9 @@ if (typeof window !== "undefined") {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(() => {
       if (!last.pop || last.pop.hidden) return;
-      window.placeMarkPop(last.pop, last.wrap, last.svg, last.rec, last.opts);
+      const o = Object.assign({}, last.opts);
+      if (typeof o.widthFor === "function") o.width = o.widthFor();
+      window.placeMarkPop(last.pop, last.wrap, last.svg, last.rec, o);
     }, 60);
   });
 }

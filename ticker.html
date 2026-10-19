@@ -651,7 +651,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=133"></script>
+  <script src="chart.js?v=134"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();
@@ -846,9 +846,10 @@
       });
 
       const svg = document.getElementById("chart-svg") || wrap.querySelector(".chart-frame");
-      const popWidth = Math.min(isMobile ? 236 : 220, wrap.getBoundingClientRect().width - 24);
+      const popWidthFor = () => Math.min((window.matchMedia("(max-width: 640px)").matches || wrap.clientWidth < 540) ? 236 : 220, wrap.getBoundingClientRect().width - 24);
+      const popWidth = popWidthFor();
       if (typeof placeMarkPop === "function") {
-        placeMarkPop(pop, wrap, svg, rec, { width: popWidth });
+        placeMarkPop(pop, wrap, svg, rec, { width: popWidth, widthFor: popWidthFor });
       } else {
         const wr = wrap.getBoundingClientRect();
         const sr = svg.getBoundingClientRect();
