@@ -724,13 +724,31 @@ function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
 
     if (hoverPricePill) {
       hoverPricePill.style.display = "block";
-      let pillLeft = screenX + 10;
-      if (pillLeft + 72 > wr.width - 8) {
-        pillLeft = screenX - 78;
-      }
-      hoverPricePill.style.left = pillLeft + "px";
-      hoverPricePill.style.top = screenY + "px";
       hoverPricePill.textContent = quotePrice(pt.px);
+      const mobileScrub = window.matchMedia("(max-width: 820px)").matches;
+      if (mobileScrub) {
+        const pillH = hoverPricePill.offsetHeight || 22;
+        const pillW = hoverPricePill.offsetWidth || 72;
+        const above = screenY - 20 - pillH;
+        hoverPricePill.style.transform = "none";
+        if (above >= 4) {
+          let left = screenX - pillW / 2;
+          left = Math.max(4, Math.min(wr.width - pillW - 4, left));
+          hoverPricePill.style.left = left + "px";
+          hoverPricePill.style.top = above + "px";
+        } else {
+          hoverPricePill.style.left = "8px";
+          hoverPricePill.style.top = "6px";
+        }
+      } else {
+        hoverPricePill.style.transform = "translateY(-50%)";
+        let pillLeft = screenX + 10;
+        if (pillLeft + 72 > wr.width - 8) {
+          pillLeft = screenX - 78;
+        }
+        hoverPricePill.style.left = pillLeft + "px";
+        hoverPricePill.style.top = screenY + "px";
+      }
     }
 
     if (hoverDatePill) {
@@ -871,6 +889,7 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
 
   const maxLeft = Math.max(margin, wr.width - popW - margin);
   const maxTop = Math.max(margin, wr.height - popH - margin);
+  const mobilePop = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
   function clampBox(left, top) {
     return {
       left: Math.max(margin, Math.min(maxLeft, left)),
@@ -901,6 +920,27 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
       if (p.x >= box.left && p.x <= box.left + popW && p.y >= box.top && p.y <= box.top + popH) n++;
     }
     return n;
+  }
+
+  if (mobilePop) {
+    const pinClear = 30;
+    const aboveTop = pinY - gap - popH - pinClear;
+    const aboveLeft = Math.max(margin, Math.min(maxLeft, pinX - popW / 2));
+    const aboveBox = { left: aboveLeft, top: aboveTop };
+    const clearsPin = aboveTop >= margin && aboveTop + popH <= pinY - pinClear;
+    if (clearsPin && pathHits(aboveBox) === 0) {
+      pop.style.left = aboveLeft + "px";
+      pop.style.top = aboveTop + "px";
+      return;
+    }
+    let dockLeft = pinX > wr.width * 0.45 ? margin : maxLeft;
+    const dockBox = { left: dockLeft, top: margin };
+    if (pathHits(dockBox) > 0) {
+      dockLeft = dockLeft === margin ? maxLeft : margin;
+    }
+    pop.style.left = dockLeft + "px";
+    pop.style.top = margin + "px";
+    return;
   }
 
   function overflow(left, top) {

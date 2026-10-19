@@ -135,6 +135,7 @@
       font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
     }
     .cell b { color: var(--white); font-weight: 600; font-size: 0.92rem; }
+    .week-sep { color: #a7b1bd; }
     .cell b.up { color: #7dcf7a; }
     .cell b.down { color: #ef7a74; }
     .avoid-row {
@@ -351,7 +352,7 @@
       list-style: none;
     }
     .play-more > summary::-webkit-details-marker { display: none; }
-    .play-more > summary::before { content: "▸ "; }
+    .play-more > summary::before { content: "▸ "; font-size: 1.1em; }
     .play-more[open] > summary::before { content: "▾ "; }
     details.how {
       margin: 0 0 12px;
@@ -439,7 +440,7 @@
       h1 { font-size: 1.35rem; }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=193" />
+  <link rel="stylesheet" href="shell.css?v=194" />
 </head>
 <body class="stock-act-v2">
   <a class="stock-act-skip" href="#main">Skip to content</a>
@@ -616,7 +617,7 @@
           cell("Weekly trend", "<b class=\"" + (w.trend === "UP" ? "up" : w.trend === "DOWN" ? "down" : "") + "\">" + SA.esc(w.trend || "—") + "</b>") +
           cell("vs 20-week", signedPct(w.vs20, true)) +
           cell("20w / 40w", "<b>" + (w.sma20 != null ? w.sma20.toFixed(2) : "—") + " / " + (w.sma40 != null ? w.sma40.toFixed(2) : "—") + "</b>") +
-          cell("4-week / 13-week", (w.ret4w == null ? "<b>—</b>" : signedPct(w.ret4w, true)) + " <span style=\"color:#a7b1bd\">/</span> " + (w.ret13w == null ? "<b>—</b>" : signedPct(w.ret13w, true))) +
+          cell("4-week / 13-week", (w.ret4w == null ? "<b>—</b>" : signedPct(w.ret4w, true)) + " <span class=\"week-sep\">/</span> " + (w.ret13w == null ? "<b>—</b>" : signedPct(w.ret13w, true))) +
           cell("Off 20w high", signedPct(w.fromHigh, true)) +
           cell("Monthly RSI", "<b>" + (m.rsi != null ? m.rsi.toFixed(1) : "—") + "</b>") +
           cell("Monthly trend", "<b class=\"" + (m.trend === "UP" ? "up" : m.trend === "DOWN" ? "down" : "") + "\">" + SA.esc(m.trend || "—") + "</b>") +

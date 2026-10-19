@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("fonts/big-shoulders-display.woff2") format("woff2");
+  src: url("fonts/big-shoulders-display.woff2?v=2") format("woff2");
 }
 @font-face {
   font-family: "Big Shoulders Fallback";
@@ -18,7 +18,7 @@
   font-style: normal;
   font-weight: 300 900;
   font-display: swap;
-  src: url("fonts/figtree.woff2") format("woff2");
+  src: url("fonts/figtree.woff2?v=2") format("woff2");
 }
 @font-face {
   font-family: "Figtree Fallback";
@@ -33,7 +33,7 @@
   font-style: normal;
   font-weight: 300 700;
   font-display: swap;
-  src: url("fonts/red-hat-mono.woff2") format("woff2");
+  src: url("fonts/red-hat-mono.woff2?v=2") format("woff2");
 }
 @font-face {
   font-family: "Red Hat Mono Fallback";
@@ -2195,6 +2195,10 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #d8dde3); border-col
 
 @media (max-width: 820px) {
   .stock-act-header .mark { max-width: calc(100% - 5rem); }
+}
+
+@media (min-width: 1280px) {
+  .stock-act-nav a { font-size: 13px; }
 }
 
 @media (min-width: 821px) and (max-width: 980px) {
