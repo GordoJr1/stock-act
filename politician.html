@@ -103,6 +103,7 @@
     .bio-wrap > summary::-webkit-details-marker { display: none; }
     .bio-wrap > summary::before {
       content: "▸ ";
+      font-size: 1.05em;
     }
     .bio-wrap[open] > summary::before {
       content: "▾ ";
@@ -518,7 +519,7 @@
     .holdings .focus .mark-pop .pop-title-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
     .holdings .focus .mark-pop .pop-badge {
       display: inline-flex; align-items: center; justify-content: center;
-      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif; font-weight: 800; font-size: 11px;
+      font-family: "Figtree", "Figtree Fallback", sans-serif; font-weight: 800; font-size: 12px;
       letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px;
     }
     .holdings .focus .mark-pop .pop-badge.buy {
@@ -656,8 +657,26 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=193" />
+  <link rel="stylesheet" href="shell.css?v=195" />
   <style>
+    @media (max-width: 820px) {
+      body.stock-act-v2 #holdings {
+        padding: 0;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+      }
+      body.stock-act-v2 #holdings .focus {
+        padding: 0;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+      }
+      body.stock-act-v2 #holdings .focus > .mark-pop.is-docked { position: static; transform: none; width: auto !important; margin: 8px 0; }
+    }
+    @media (min-width: 821px) {
+      body.stock-act-v2 #holdings .focus > .mark-pop.is-docked { position: static; transform: none; width: auto !important; margin: 8px 0; }
+    }
     .stock-act-txn .opt-tag.opt-call, .opt-tag.opt-call { border-color: #36999d; color: #8fd4d6; }
     .stock-act-txn .opt-tag.opt-put, .opt-tag.opt-put { border-color: #8b96a3; color: #b8c0c8; }
     @media (max-width: 899px) {
@@ -741,7 +760,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=130"></script>
+  <script src="chart.js?v=134"></script>
   <script>
     const isOptionLike = SA.isOptionLike;
     const isBond = SA.isBond;
@@ -1277,7 +1296,7 @@
       const svg = document.getElementById("chart-svg");
       const popWidth = Math.min(220, Math.max(160, wrap.getBoundingClientRect().width - 20));
       if (typeof placeMarkPop === "function") {
-        placeMarkPop(pop, wrap, svg, rec, { width: popWidth });
+        placeMarkPop(pop, wrap, svg, rec, { width: popWidth, dockDesktop: true });
       } else {
         const wr = wrap.getBoundingClientRect();
         const sr = svg.getBoundingClientRect();
@@ -1300,13 +1319,15 @@
       }
       const wrNow = wrap.getBoundingClientRect();
       const xPct = Number(rec.xPct || 0);
-      if (xPct > 0.5) {
+      const mobilePop = window.matchMedia("(max-width: 820px)").matches;
+      if (!mobilePop && xPct > 0.5 && !pop.classList.contains("is-docked")) {
         const pinX = 8 + xPct * Math.max(0, wrNow.width - 16);
         const w = Math.min(260, Math.max(200, pinX - 20));
         pop.style.width = w + "px";
         pop.style.right = "auto";
         pop.style.transform = "none";
         pop.style.left = Math.max(8, pinX - w - 12) + "px";
+        if (typeof popCoversMarks === "function" && popCoversMarks(pop, svg, rec)) dockPopOutside(pop, wrap);
       }
       pop.hidden = false;
     }

@@ -555,7 +555,7 @@ function drawChart(points, marks, opts) {
   const bind = rebindChartEvents(svg);
   bind("click", (e) => {
     if (!e.target.closest(".chart-mark")) {
-      const pop = wrap.querySelector("#mark-pop");
+      const pop = document.getElementById("mark-pop");
       if (pop) pop.hidden = true;
     }
   });
@@ -577,7 +577,7 @@ function ensureInteractiveDomElements(wrap, palette) {
   const leftoverTerm = wrap.querySelector(".stock-act-terminal-pill");
   if (leftoverTerm) leftoverTerm.remove();
 
-  const pop = wrap.querySelector("#mark-pop");
+  const pop = document.getElementById("mark-pop");
   if (pop && palette && palette.popShadow) {
     pop.style.boxShadow = palette.popShadow;
   }
@@ -677,7 +677,7 @@ function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
   const hoverDatePill = wrap.querySelector(".stock-act-hover-date-pill");
 
   function onPointerMove(e) {
-    const pop = wrap.querySelector("#mark-pop");
+    const pop = document.getElementById("mark-pop");
     if (pop && !pop.hidden) {
       onPointerLeave();
       return;
@@ -724,13 +724,31 @@ function attachScrubberEvents(svg, wrap, pts, w, h, bind) {
 
     if (hoverPricePill) {
       hoverPricePill.style.display = "block";
-      let pillLeft = screenX + 10;
-      if (pillLeft + 72 > wr.width - 8) {
-        pillLeft = screenX - 78;
-      }
-      hoverPricePill.style.left = pillLeft + "px";
-      hoverPricePill.style.top = screenY + "px";
       hoverPricePill.textContent = quotePrice(pt.px);
+      const mobileScrub = window.matchMedia("(max-width: 820px)").matches;
+      if (mobileScrub) {
+        const pillH = hoverPricePill.offsetHeight || 22;
+        const pillW = hoverPricePill.offsetWidth || 72;
+        const above = screenY - 20 - pillH;
+        hoverPricePill.style.transform = "none";
+        if (above >= 4) {
+          let left = screenX - pillW / 2;
+          left = Math.max(4, Math.min(wr.width - pillW - 4, left));
+          hoverPricePill.style.left = left + "px";
+          hoverPricePill.style.top = above + "px";
+        } else {
+          hoverPricePill.style.left = "8px";
+          hoverPricePill.style.top = "6px";
+        }
+      } else {
+        hoverPricePill.style.transform = "translateY(-50%)";
+        let pillLeft = screenX + 10;
+        if (pillLeft + 72 > wr.width - 8) {
+          pillLeft = screenX - 78;
+        }
+        hoverPricePill.style.left = pillLeft + "px";
+        hoverPricePill.style.top = screenY + "px";
+      }
     }
 
     if (hoverDatePill) {
@@ -847,8 +865,57 @@ function sampleSplineInWrap(svg, wrap) {
   return pts;
 }
 
+function dockPopOutside(pop, wrap) {
+  if (!pop || !wrap) return;
+  if (pop.parentElement === wrap && wrap.parentElement) wrap.parentElement.insertBefore(pop, wrap);
+  pop.classList.add("is-docked");
+  pop.style.left = "";
+  pop.style.top = "";
+  pop.style.transform = "none";
+}
+
+function markNearRec(svg, rec) {
+  if (!svg || !rec || !svg.querySelectorAll) return null;
+  const sr = svg.getBoundingClientRect();
+  const px = sr.left + Number(rec.xPct || 0) * sr.width;
+  const py = sr.top + Number(rec.yPct || 0) * sr.height;
+  const marks = svg.querySelectorAll(".chart-mark");
+  let best = null;
+  let bestD = Infinity;
+  for (let i = 0; i < marks.length; i++) {
+    const r = marks[i].getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const d = (cx - px) * (cx - px) + (cy - py) * (cy - py);
+    if (d < bestD) {
+      bestD = d;
+      best = marks[i];
+    }
+  }
+  return best;
+}
+
+function popCoversMarks(pop, svg, rec) {
+  if (!pop || !svg || !svg.querySelectorAll) return false;
+  const skip = markNearRec(svg, rec);
+  const pr = pop.getBoundingClientRect();
+  const marks = svg.querySelectorAll(".chart-mark");
+  for (let i = 0; i < marks.length; i++) {
+    if (marks[i] === skip) continue;
+    const r = marks[i].getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    if (!(pr.right < r.left + 1 || pr.left > r.right - 1 || pr.bottom < r.top + 1 || pr.top > r.bottom - 1)) return true;
+  }
+  return false;
+}
+
 function placeMarkPop(pop, wrap, svg, rec, opts) {
   if (!pop || !wrap || !rec) return;
+  if (pop.classList.contains("is-docked")) {
+    pop.classList.remove("is-docked");
+    wrap.appendChild(pop);
+  }
   opts = opts || {};
   const wr = wrap.getBoundingClientRect();
   const sr = (svg && svg.getBoundingClientRect) ? svg.getBoundingClientRect() : wr;
@@ -871,6 +938,7 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
 
   const maxLeft = Math.max(margin, wr.width - popW - margin);
   const maxTop = Math.max(margin, wr.height - popH - margin);
+  const mobilePop = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
   function clampBox(left, top) {
     return {
       left: Math.max(margin, Math.min(maxLeft, left)),
@@ -901,6 +969,21 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
       if (p.x >= box.left && p.x <= box.left + popW && p.y >= box.top && p.y <= box.top + popH) n++;
     }
     return n;
+  }
+
+  if (mobilePop) {
+    const pinClear = 30;
+    const aboveTop = pinY - gap - popH - pinClear;
+    const aboveLeft = Math.max(margin, Math.min(maxLeft, pinX - popW / 2));
+    const aboveBox = { left: aboveLeft, top: aboveTop };
+    const clearsPin = aboveTop >= margin && aboveTop + popH <= pinY - pinClear;
+    if (clearsPin && pathHits(aboveBox) === 0) {
+      pop.style.left = aboveLeft + "px";
+      pop.style.top = aboveTop + "px";
+      if (!popCoversMarks(pop, svg, rec)) return;
+    }
+    dockPopOutside(pop, wrap);
+    return;
   }
 
   function overflow(left, top) {
@@ -969,11 +1052,32 @@ function placeMarkPop(pop, wrap, svg, rec, opts) {
     pop.style.width = w + "px";
     pop.style.left = Math.max(visibleLeft, pinX - gap - w) + "px";
   }
+  if (opts.dockDesktop && popCoversMarks(pop, svg, rec)) dockPopOutside(pop, wrap);
 }
 
 if (typeof window !== "undefined") {
   window.CHART_PALETTES = CHART_PALETTES;
   window.hideChartHoverUi = hideChartHoverUi;
   window.placeMarkPop = placeMarkPop;
+  window.dockPopOutside = dockPopOutside;
+  window.popCoversMarks = popCoversMarks;
+  let lastPlace = null;
+  const placeMarkPopOpen = placeMarkPop;
+  window.placeMarkPop = function (pop, wrap, svg, rec, opts) {
+    lastPlace = { pop: pop, wrap: wrap, svg: svg, rec: rec, opts: opts };
+    return placeMarkPopOpen(pop, wrap, svg, rec, opts);
+  };
+  let resizeTimer = 0;
+  window.addEventListener("resize", () => {
+    const last = lastPlace;
+    if (!last || !last.pop || last.pop.hidden) return;
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      if (!last.pop || last.pop.hidden) return;
+      const o = Object.assign({}, last.opts);
+      if (typeof o.widthFor === "function") o.width = o.widthFor();
+      window.placeMarkPop(last.pop, last.wrap, last.svg, last.rec, o);
+    }, 60);
+  });
 }
 

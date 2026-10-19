@@ -282,9 +282,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: "Big Shoulders Display", "Big Shoulders Fallback", sans-serif;
+      font-family: "Figtree", "Figtree Fallback", sans-serif;
       font-weight: 800;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 2px 7px;
@@ -496,6 +496,7 @@
         padding: 10px 12px;
         border-radius: 12px;
       }
+      .mark-pop.is-docked { position: static; transform: none; width: auto !important; margin: 8px 0; }
       .mark-pop .pop-header {
         margin-bottom: 6px;
         padding-bottom: 6px;
@@ -578,7 +579,7 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=193" />
+  <link rel="stylesheet" href="shell.css?v=195" />
   <style>
     body.stock-act-v2 .stat b.sell { color: #f87171; }
     body.stock-act-v2 .stat b.up { color: #22c55e; }
@@ -650,7 +651,7 @@
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=130"></script>
+  <script src="chart.js?v=134"></script>
   <script>
     const params = new URLSearchParams(location.search);
     const ticker = String(params.get("t") || "").toUpperCase();
@@ -845,9 +846,10 @@
       });
 
       const svg = document.getElementById("chart-svg") || wrap.querySelector(".chart-frame");
-      const popWidth = Math.min(isMobile ? 236 : 220, wrap.getBoundingClientRect().width - 24);
+      const popWidthFor = () => Math.min((window.matchMedia("(max-width: 640px)").matches || wrap.clientWidth < 540) ? 236 : 220, wrap.getBoundingClientRect().width - 24);
+      const popWidth = popWidthFor();
       if (typeof placeMarkPop === "function") {
-        placeMarkPop(pop, wrap, svg, rec, { width: popWidth });
+        placeMarkPop(pop, wrap, svg, rec, { width: popWidth, widthFor: popWidthFor });
       } else {
         const wr = wrap.getBoundingClientRect();
         const sr = svg.getBoundingClientRect();

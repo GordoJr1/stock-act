@@ -581,7 +581,7 @@
       .filter-fold > summary::-webkit-details-marker,
       .board-fold > summary::-webkit-details-marker { display: none; }
       .filter-fold > summary::before,
-      .board-fold > summary::before { content: "▸ "; }
+      .board-fold > summary::before { content: "▸ "; font-size: 1.05em; }
       .filter-fold[open] > summary::before,
       .board-fold[open] > summary::before { content: "▾ "; }
       .filter-fold[open] > summary,
@@ -1599,7 +1599,7 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=193" />
+  <link rel="stylesheet" href="shell.css?v=195" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
@@ -1852,7 +1852,7 @@
         text-transform: uppercase; color: var(--white);
       }
       .board-fold > summary::before,
-      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8"; }
+      .filter-fold > summary::before { grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8"; font-size: 1.05em; }
       .board-fold[open] > summary::before,
       .filter-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary,
@@ -1896,7 +1896,7 @@
       }
       .board-fold > summary.board-strip::-webkit-details-marker { display: none; }
       .board-fold > summary::before {
-        grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8";
+        grid-column: 1; grid-row: 1; color: var(--v2-buy-text); content: "\25B8"; font-size: 1.05em;
       }
       .board-fold[open] > summary::before { content: "\25BE"; }
       .board-fold[open] > summary {
@@ -2614,7 +2614,7 @@
   </div>
 
   <script src="stock-act.js?v=152"></script>
-  <script src="chart.js?v=130"></script>
+  <script src="chart.js?v=134"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, (c) => ({

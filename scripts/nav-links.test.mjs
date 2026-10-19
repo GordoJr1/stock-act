@@ -40,7 +40,7 @@ const shellMatch = sw.match(/const SHELL = \[([\s\S]*?)\];/);
 const shell = shellMatch ? [...shellMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]) : [];
 check("sw.js SHELL parses", shell.length >= 15, String(shell.length) + " entries");
 for (const item of shell) {
-  const clean = item.replace(/^\.\//, "");
+  const clean = item.replace(/^\.\//, "").split(/[?#]/)[0];
   if (!clean) continue;
   check("sw.js SHELL lists " + item, fs.existsSync(path.join(root, clean)));
 }

@@ -1,4 +1,4 @@
-const CACHE = "stock-act-v24";
+const CACHE = "stock-act-v28";
 const SHELL = [
   "./",
   "./index.html",
@@ -17,9 +17,9 @@ const SHELL = [
   "./icons/icon-512.png",
   "./icons/icon-512-maskable.png",
   "./icons/apple-touch-icon.png",
-  "./fonts/big-shoulders-display.woff2",
-  "./fonts/figtree.woff2",
-  "./fonts/red-hat-mono.woff2"
+  "./fonts/big-shoulders-display.woff2?v=2",
+  "./fonts/figtree.woff2?v=2",
+  "./fonts/red-hat-mono.woff2?v=2"
 ];
 
 self.addEventListener("install", (event) => {
