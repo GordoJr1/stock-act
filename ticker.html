@@ -579,7 +579,7 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=196" />
+  <link rel="stylesheet" href="shell.css?v=197" />
   <style>
     body.stock-act-v2 .stat b.sell { color: #f87171; }
     body.stock-act-v2 .stat b.up { color: #22c55e; }
@@ -651,7 +651,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="stock-act.js?v=153"></script>
+  <script src="stock-act.js?v=154"></script>
   <script src="chart.js?v=134"></script>
   <script>
     const params = new URLSearchParams(location.search);
@@ -919,7 +919,10 @@
     } else Promise.all([
       fetch("tape/tickers/" + encodeURIComponent(ticker) + (/^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/.test(ticker) ? "_" : "") + ".json").then((r) => r.ok ? r.json() : { trades: [] }),
       fetch("prices/" + encodeURIComponent(ticker) + ".json").then((r) => r.ok ? r.json() : null).catch(() => null)
-    ]).then(([data, prices]) => {
+    ]).then(async ([data, prices]) => {
+      try {
+        if (SA.withSenateFields) data = await SA.withSenateFields(data);
+      } catch (e) {}
       if (SA.paintSenateDelay) SA.paintSenateDelay(data);
       const asof = document.getElementById("asof");
       if (asof) asof.textContent = SA.asOfLabel(data.collected);
@@ -1012,6 +1015,7 @@
       paintRange();
       paintChart();
     }).catch((err) => {
+      if (window.SA && SA.paintSenateDelay) SA.paintSenateDelay(null);
       console.error("Failed to load ticker data:", err);
       const note = document.getElementById("note");
       note.hidden = false;

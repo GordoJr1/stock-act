@@ -1599,7 +1599,7 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=196" />
+  <link rel="stylesheet" href="shell.css?v=197" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
@@ -2614,7 +2614,7 @@
   <div class="stripe" hidden></div>
   </div>
 
-  <script src="stock-act.js?v=153"></script>
+  <script src="stock-act.js?v=154"></script>
   <script src="chart.js?v=134"></script>
   <script>
     function escapeHtml(s) {
@@ -4243,6 +4243,7 @@
           renderTape(lastFiltered);
         });
       } catch (err) {
+        if (window.SA && SA.paintSenateDelay) SA.paintSenateDelay(null);
         bindTapeSearch([], []);
         markTapeReady();
         const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";

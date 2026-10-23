@@ -2342,9 +2342,9 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #d8dde3); border-col
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  height: 38px;
+  min-height: 38px;
   margin: 10px 0 0;
-  padding: 0 12px;
+  padding: 8px 12px;
   border: 1px solid rgba(227, 180, 26, 0.45);
   border-left-width: 3px;
   border-left-color: #e3b41a;
@@ -2355,10 +2355,9 @@ body.stock-act-v2 .stock-act-plan-tag { color: var(--paper, #d8dde3); border-col
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: 0;
-  overflow: hidden;
 }
 .senate-delay.is-pending {
-  visibility: hidden;
+  display: none;
 }
 .senate-delay[hidden] {
   display: none !important;

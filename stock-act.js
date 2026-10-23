@@ -2418,14 +2418,46 @@
     return SENATE_DELAY_MONTHS[month - 1] + " " + day + ", " + year;
   }
 
+  var SENATE_FIELD_KEYS = ["senate_status", "senate_last_good_date", "senate_handoff_date"];
+
   function senateDelayText(source) {
-    if (!source || !Object.prototype.hasOwnProperty.call(source, "senate_status")) return "";
+    if (!source) return "";
     var raw = source.senate_status;
     if (raw == null) return "";
-    if (String(raw).trim().toLowerCase() === "ok") return "";
+    if (String(raw).trim().toLowerCase() !== "blocked") return "";
     var date = senateDelayDate(source.senate_last_good_date);
     if (!date) return "Senate data delayed.";
     return "Senate data delayed. Last update: " + date;
+  }
+
+  function senateFieldsMissing(source) {
+    if (!source || typeof source !== "object") return true;
+    for (var i = 0; i < SENATE_FIELD_KEYS.length; i++) {
+      if (!Object.prototype.hasOwnProperty.call(source, SENATE_FIELD_KEYS[i])) return true;
+    }
+    return false;
+  }
+
+  function copySenateFields(target, page) {
+    var out = target && typeof target === "object" ? target : {};
+    if (!page || typeof page !== "object") return out;
+    for (var i = 0; i < SENATE_FIELD_KEYS.length; i++) {
+      var key = SENATE_FIELD_KEYS[i];
+      if (!Object.prototype.hasOwnProperty.call(out, key) && Object.prototype.hasOwnProperty.call(page, key)) {
+        out[key] = page[key];
+      }
+    }
+    return out;
+  }
+
+  function withSenateFields(data) {
+    if (!senateFieldsMissing(data)) return Promise.resolve(data);
+    return fetch("tape/page.json", { credentials: "omit" }).then(function (res) {
+      if (!res.ok) throw new Error("page");
+      return res.json();
+    }).then(function (page) {
+      return copySenateFields(data, page);
+    });
   }
 
   function paintSenateDelay(source) {
@@ -2528,6 +2560,7 @@
     resolveTickerFromName: resolveTickerFromName,
     asOfLabel: asOfLabel,
     paintSenateDelay: paintSenateDelay,
+    withSenateFields: withSenateFields,
     parseAdded: parseAdded,
     isLanded: isLanded,
     lagDays: lagDays,
