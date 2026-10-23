@@ -657,7 +657,7 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=196" />
+  <link rel="stylesheet" href="shell.css?v=197" />
   <style>
     @media (max-width: 820px) {
       body.stock-act-v2 #holdings {
@@ -760,7 +760,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="stock-act.js?v=153"></script>
+  <script src="stock-act.js?v=154"></script>
   <script src="chart.js?v=134"></script>
   <script>
     const isOptionLike = SA.isOptionLike;
@@ -1852,6 +1852,9 @@
         const personRes = await fetch("tape/politicians/" + encodeURIComponent(id) + ".json");
         if (personRes.ok) data = await personRes.json();
       } catch (e) {}
+      try {
+        if (SA.withSenateFields) data = await SA.withSenateFields(data);
+      } catch (e) {}
       if (SA.paintSenateDelay) SA.paintSenateDelay(data);
       const asof = document.getElementById("asof");
       if (asof) asof.textContent = SA.asOfLabel(data.collected || filerIndex.collected);
@@ -1876,6 +1879,7 @@
         document.title = shown + " - Stock Act";
       }
     }).catch(() => {
+      if (window.SA && SA.paintSenateDelay) SA.paintSenateDelay(null);
       document.getElementById("rows").innerHTML =
         "<li class=\"muted\">Could not load the official tape.</li>";
     });
