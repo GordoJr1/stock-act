@@ -2404,6 +2404,55 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootNav);
   else bootNav();
 
+  var SENATE_DELAY_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function senateDelayDate(iso) {
+    var m = String(iso == null ? "" : iso).trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return "";
+    var year = Number(m[1]);
+    var month = Number(m[2]);
+    var day = Number(m[3]);
+    if (month < 1 || month > 12 || day < 1 || day > 31) return "";
+    var dt = new Date(Date.UTC(year, month - 1, day));
+    if (dt.getUTCFullYear() !== year || dt.getUTCMonth() !== month - 1 || dt.getUTCDate() !== day) return "";
+    return SENATE_DELAY_MONTHS[month - 1] + " " + day + ", " + year;
+  }
+
+  function senateDelayText(source) {
+    if (!source || !Object.prototype.hasOwnProperty.call(source, "senate_status")) return "";
+    var raw = source.senate_status;
+    if (raw == null) return "";
+    if (String(raw).trim().toLowerCase() === "ok") return "";
+    var date = senateDelayDate(source.senate_last_good_date);
+    if (!date) return "Senate data delayed.";
+    return "Senate data delayed. Last update: " + date;
+  }
+
+  function paintSenateDelay(source) {
+    var text = senateDelayText(source);
+    var el = document.getElementById("senate-delay");
+    if (!text) {
+      if (el) {
+        el.hidden = true;
+        el.textContent = "";
+        el.classList.remove("is-pending");
+      }
+      return;
+    }
+    if (!el) {
+      var main = document.getElementById("main");
+      if (!main) return;
+      el = document.createElement("p");
+      el.id = "senate-delay";
+      el.className = "senate-delay";
+      el.setAttribute("role", "status");
+      main.insertBefore(el, main.firstChild);
+    }
+    el.textContent = text;
+    el.hidden = false;
+    el.classList.remove("is-pending");
+  }
+
   global.SA = {
     esc: esc,
     isBond: isBond,
@@ -2478,6 +2527,7 @@
     tickerInfo: tickerInfo,
     resolveTickerFromName: resolveTickerFromName,
     asOfLabel: asOfLabel,
+    paintSenateDelay: paintSenateDelay,
     parseAdded: parseAdded,
     isLanded: isLanded,
     lagDays: lagDays,

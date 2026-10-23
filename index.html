@@ -1599,7 +1599,7 @@
       text-align: center;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=195" />
+  <link rel="stylesheet" href="shell.css?v=196" />
   <style id="stock-act-tape-port">
     .stock-act-txn { display: grid; grid-template-columns: minmax(0, 1fr) max-content; grid-template-areas: "id end" "meta meta"; column-gap: 10px; row-gap: 2px; align-items: center; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; border-left-width: 4px; border-radius: 10px; }
     .stock-act-txn-id { grid-area: id; min-width: 0; overflow: hidden; }
@@ -2421,6 +2421,7 @@
     </div>
   </header>
   <div class="wrap" id="main">
+    <p class="senate-delay is-pending" id="senate-delay" role="status"></p>
     <p class="asof" id="asof"></p>
   </div>
   <div class="tape-scroll">
@@ -2613,7 +2614,7 @@
   <div class="stripe" hidden></div>
   </div>
 
-  <script src="stock-act.js?v=152"></script>
+  <script src="stock-act.js?v=153"></script>
   <script src="chart.js?v=134"></script>
   <script>
     function escapeHtml(s) {
@@ -4072,6 +4073,7 @@
         const res = await fetch("tape/page.json", { credentials: "omit" });
         if (!res.ok) throw new Error("page");
         const data = await res.json();
+        if (SA.paintSenateDelay) SA.paintSenateDelay(data);
         const asof = document.getElementById("asof");
         if (asof && data.collected) {
           asof.textContent = SA.asOfLabel(data.collected);

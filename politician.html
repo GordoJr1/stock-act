@@ -657,7 +657,7 @@
       font-family: "Figtree", "Figtree Fallback", sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=195" />
+  <link rel="stylesheet" href="shell.css?v=196" />
   <style>
     @media (max-width: 820px) {
       body.stock-act-v2 #holdings {
@@ -700,6 +700,7 @@
     </div>
   </header>
   <div class="wrap" id="main">
+    <p class="senate-delay is-pending" id="senate-delay" role="status"></p>
     <p class="ident-nav"><a class="back" href="index.html#tape">← Tape</a></p>
     <div class="page-head ident">
       <h1 id="who">Member</h1>
@@ -759,7 +760,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="stock-act.js?v=152"></script>
+  <script src="stock-act.js?v=153"></script>
   <script src="chart.js?v=134"></script>
   <script>
     const isOptionLike = SA.isOptionLike;
@@ -1851,6 +1852,7 @@
         const personRes = await fetch("tape/politicians/" + encodeURIComponent(id) + ".json");
         if (personRes.ok) data = await personRes.json();
       } catch (e) {}
+      if (SA.paintSenateDelay) SA.paintSenateDelay(data);
       const asof = document.getElementById("asof");
       if (asof) asof.textContent = SA.asOfLabel(data.collected || filerIndex.collected);
       const rows = threeYearRows(data);
