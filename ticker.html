@@ -579,7 +579,7 @@
       body { padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px) + 8px); }
     }
   </style>
-  <link rel="stylesheet" href="shell.css?v=195" />
+  <link rel="stylesheet" href="shell.css?v=196" />
   <style>
     body.stock-act-v2 .stat b.sell { color: #f87171; }
     body.stock-act-v2 .stat b.up { color: #22c55e; }
@@ -614,6 +614,7 @@
     </div>
   </header>
   <div class="wrap" id="main">
+    <p class="senate-delay is-pending" id="senate-delay" role="status"></p>
     <p class="asof" id="asof"></p>
     <div class="sub-bar">
       <a class="back" id="back" href="index.html">← Tape</a>
@@ -650,7 +651,7 @@
     </div>
     <footer>Not investment advice · STOCK Act ranges, not share counts</footer>
   </div>
-  <script src="stock-act.js?v=152"></script>
+  <script src="stock-act.js?v=153"></script>
   <script src="chart.js?v=134"></script>
   <script>
     const params = new URLSearchParams(location.search);
@@ -919,6 +920,7 @@
       fetch("tape/tickers/" + encodeURIComponent(ticker) + (/^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/.test(ticker) ? "_" : "") + ".json").then((r) => r.ok ? r.json() : { trades: [] }),
       fetch("prices/" + encodeURIComponent(ticker) + ".json").then((r) => r.ok ? r.json() : null).catch(() => null)
     ]).then(([data, prices]) => {
+      if (SA.paintSenateDelay) SA.paintSenateDelay(data);
       const asof = document.getElementById("asof");
       if (asof) asof.textContent = SA.asOfLabel(data.collected);
       const deals = (data.trades || []).filter((t) => {
