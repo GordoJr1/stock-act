@@ -2051,7 +2051,9 @@
     for (let i = 0; i < spots.length; i++) {
       let el = document.elementFromPoint(x, Math.round(height * spots[i]));
       while (el && el !== document.body && el !== document.documentElement) {
-        if (el.getAttribute && el.getAttribute("data-id")) return el.getAttribute("data-id");
+        if (el.getAttribute && el.getAttribute("data-id")) {
+          return el.getAttribute("data-id") + "|" + Math.round(el.getBoundingClientRect().top);
+        }
         el = el.parentElement;
       }
     }
@@ -2059,6 +2061,7 @@
   }
 
   function saveScrollPos() {
+    // scrollArmed stays set until SA.restoreScroll. Each list page calls it (all 5 do today).
     if (!isListPage() || scrollArmed) return;
     try {
       sessionStorage.setItem(scrollStorageKey(), String(Math.round(window.scrollY || window.pageYOffset || 0)));
@@ -2135,13 +2138,22 @@
     }
   }
 
+  function savedRowParts() {
+    let raw = "";
+    try { raw = sessionStorage.getItem(scrollRowKey()) || ""; } catch (e) { return null; }
+    if (!raw) return null;
+    const bar = raw.lastIndexOf("|");
+    if (bar < 0) return { id: raw, offset: 8 };
+    const n = parseInt(raw.slice(bar + 1), 10);
+    return { id: raw.slice(0, bar), offset: isFinite(n) ? n : 8 };
+  }
+
   function savedRowEl() {
-    let id = "";
-    try { id = sessionStorage.getItem(scrollRowKey()) || ""; } catch (e) { return null; }
-    if (!id) return null;
+    const parts = savedRowParts();
+    if (!parts || !parts.id) return null;
     const nodes = document.querySelectorAll("[data-id]");
     for (let i = 0; i < nodes.length; i++) {
-      if (nodes[i].getAttribute("data-id") !== id) continue;
+      if (nodes[i].getAttribute("data-id") !== parts.id) continue;
       const rect = nodes[i].getBoundingClientRect();
       if (rect.width > 0 && rect.height > 0) return nodes[i];
     }
@@ -2152,7 +2164,9 @@
     const row = savedRowEl();
     if (row) {
       const top = row.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
-      jumpTo(Math.max(0, top - 8));
+      const parts = savedRowParts();
+      const savedOffset = parts ? parts.offset : 8;
+      jumpTo(Math.max(0, top - savedOffset));
       return true;
     }
     // A filtered list can hide the saved row, so fall back to the saved y.
@@ -2282,7 +2296,11 @@
     if (!ref || !isSaHref(ref)) return false;
     const r = parseHref(ref);
     if (!r || r.file === pageFile(location.pathname)) return false;
-    if (LIST_FILES[r.file]) return readStoredKey(SCROLL_BACK) === r.path + r.search;
+    if (LIST_FILES[r.file]) {
+      let back = null;
+      try { back = sessionStorage.getItem(SCROLL_BACK); } catch (e) {}
+      return back === r.path + r.search;
+    }
     if (!dest) return false;
     const d = parseHref(dest);
     if (!d || r.file !== d.file || r.search !== d.search) return false;
