@@ -2010,6 +2010,7 @@
   }
 
   const SCROLL_PREFIX = "sa:sy:";
+  const SCROLL_ROW = "sa:sid:";
   const SCROLL_BACK = "sa:scroll-back";
 
   function readStoredKey(key) {
@@ -2026,10 +2027,7 @@
   }
   let scrollSaveTimer = 0;
   let scrollArmed = false;
-  let scrollYTarget = 0;
-  let scrollUntil = 0;
-  let scrollObs = null;
-  let scrollRaf = 0;
+  let scrollEager = false;
 
   function isListPage() {
     return !!LIST_FILES[pageFile(location.pathname)];
@@ -2039,10 +2037,32 @@
     return SCROLL_PREFIX + location.pathname + location.search;
   }
 
+  function scrollRowKey() {
+    return SCROLL_ROW + location.pathname + location.search;
+  }
+
+  function rowInViewId() {
+    const width = window.innerWidth || 0;
+    const height = window.innerHeight || 0;
+    if (!width || !height || !document.elementFromPoint) return "";
+    const x = Math.max(12, Math.min(width - 12, 28));
+    const spots = [0.42, 0.62, 0.28];
+    for (let i = 0; i < spots.length; i++) {
+      let el = document.elementFromPoint(x, Math.round(height * spots[i]));
+      while (el && el !== document.body && el !== document.documentElement) {
+        if (el.getAttribute && el.getAttribute("data-id")) return el.getAttribute("data-id");
+        el = el.parentElement;
+      }
+    }
+    return "";
+  }
+
   function saveScrollPos() {
     if (!isListPage()) return;
     try {
       sessionStorage.setItem(scrollStorageKey(), String(Math.round(window.scrollY || window.pageYOffset || 0)));
+      const id = rowInViewId();
+      if (id) sessionStorage.setItem(scrollRowKey(), id);
     } catch (e) {}
   }
 
@@ -2095,46 +2115,49 @@
     return Math.max(0, h - (window.innerHeight || 0));
   }
 
-  function stopScrollRestore(done) {
-    if (scrollRaf) {
-      cancelAnimationFrame(scrollRaf);
-      scrollRaf = 0;
+  // The list pages set scroll-behavior:smooth, which would glide this jump.
+  function jumpTo(y) {
+    const top = Math.max(0, Math.round(y) || 0);
+    const nodes = [document.documentElement, document.body];
+    const prev = [];
+    for (let i = 0; i < nodes.length; i++) {
+      prev.push(nodes[i] ? nodes[i].style.scrollBehavior : "");
+      if (nodes[i]) nodes[i].style.scrollBehavior = "auto";
     }
-    if (scrollObs) {
-      scrollObs.disconnect();
-      scrollObs = null;
+    try {
+      window.scrollTo({ top: top, left: 0, behavior: "instant" });
+    } catch (e) {
+      window.scrollTo(0, top);
     }
-    if (done) scrollArmed = false;
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i]) nodes[i].style.scrollBehavior = prev[i];
+    }
   }
 
-  function pumpScrollRestore() {
-    if (!scrollArmed) return;
-    const y = scrollYTarget;
+  function savedRowEl() {
+    let id = "";
+    try { id = sessionStorage.getItem(scrollRowKey()) || ""; } catch (e) { return null; }
+    if (!id) return null;
+    const nodes = document.querySelectorAll("[data-id]");
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].getAttribute("data-id") !== id) continue;
+      const rect = nodes[i].getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) return nodes[i];
+    }
+    return null;
+  }
+
+  function placeScroll(y) {
     const max = maxScrollY();
-    if (max + 2 >= y) {
-      window.scrollTo(0, y);
-      if (Math.abs((window.scrollY || window.pageYOffset || 0) - y) <= 4) {
-        stopScrollRestore(true);
-        return;
-      }
+    if (y && max + 2 >= y) {
+      jumpTo(y);
+      return Math.abs((window.scrollY || window.pageYOffset || 0) - y) <= 4;
     }
-    if (Date.now() >= scrollUntil) {
-      if (max > 0) window.scrollTo(0, Math.min(y, max));
-      const reached = Math.abs((window.scrollY || window.pageYOffset || 0) - y) <= 4;
-      stopScrollRestore(reached);
-      return;
-    }
-    scrollRaf = requestAnimationFrame(pumpScrollRestore);
-  }
-
-  function ensureScrollObs() {
-    if (scrollObs || typeof MutationObserver !== "function") return;
-    const root = document.body || document.documentElement;
-    if (!root) return;
-    scrollObs = new MutationObserver(function () {
-      if (scrollArmed) pumpScrollRestore();
-    });
-    scrollObs.observe(root, { childList: true, subtree: true });
+    const row = savedRowEl();
+    if (!row) return false;
+    const top = row.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
+    jumpTo(Math.max(0, top - 8));
+    return true;
   }
 
   function restoreScroll() {
@@ -2144,12 +2167,14 @@
       scrollArmed = false;
       return;
     }
-    scrollYTarget = y;
-    scrollUntil = Date.now() + 3000;
-    ensureScrollObs();
-    if (scrollRaf) cancelAnimationFrame(scrollRaf);
-    scrollRaf = 0;
-    pumpScrollRestore();
+    if (placeScroll(y)) {
+      scrollArmed = false;
+      return;
+    }
+    if (scrollEager) return;
+    const max = maxScrollY();
+    if (max > 0) jumpTo(Math.min(y, max));
+    scrollArmed = false;
   }
 
   function armScrollRestore(force) {
@@ -2157,7 +2182,9 @@
     if (!force && !shouldRestoreScroll()) return;
     scrollArmed = true;
     try { sessionStorage.removeItem(SCROLL_BACK); } catch (e) {}
+    scrollEager = true;
     restoreScroll();
+    scrollEager = false;
   }
 
   function rememberReturn() {
@@ -2205,15 +2232,6 @@
     }
   }
 
-  function listQueryMatchesStored(ref) {
-    const stored = storedReturn();
-    if (!ref || !stored) return false;
-    const r = parseHref(ref);
-    const s = parseHref(stored);
-    if (!r || !s || !LIST_FILES[r.file] || r.file !== s.file) return false;
-    return r.search === s.search;
-  }
-
   function resolveDest(fallbackHref) {
     const stored = storedReturn();
     const ref = document.referrer;
@@ -2240,13 +2258,13 @@
 
   function canHistoryBack(ref, dest) {
     if (history.length < 2) return false;
-    if (!ref || !dest || !isSaHref(ref)) return false;
+    if (!ref || !isSaHref(ref)) return false;
     const r = parseHref(ref);
+    if (!r || r.file === pageFile(location.pathname)) return false;
+    if (LIST_FILES[r.file]) return true;
+    if (!dest) return false;
     const d = parseHref(dest);
-    if (!r || !d) return false;
-    if (r.file === pageFile(location.pathname)) return false;
-    if (r.file !== d.file || r.search !== d.search) return false;
-    if (LIST_FILES[r.file] && !listQueryMatchesStored(ref)) return false;
+    if (!d || r.file !== d.file || r.search !== d.search) return false;
     return true;
   }
 
