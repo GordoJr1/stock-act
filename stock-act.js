@@ -2191,6 +2191,7 @@
         let obs = null;
         let ignoreScroll = 0;
         let timer = 0;
+        let lastPlacedY = 0;
         function stop(disarm) {
           if (stopped) return;
           stopped = true;
@@ -2202,11 +2203,15 @@
           window.removeEventListener("scroll", onScroll, true);
           window.removeEventListener("wheel", onUser, true);
           window.removeEventListener("touchstart", onUser, true);
+          window.removeEventListener("keydown", onUser, true);
           if (timer) clearTimeout(timer);
           if (disarm !== false && token === scrollAnchorGen) scrollArmed = false;
         }
         function onUser() { stop(true); }
-        function onScroll() { if (!ignoreScroll) stop(true); }
+        function onScroll() {
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          if (!ignoreScroll && Math.abs(scrollY - lastPlacedY) > 4) stop(true);
+        }
         function placeAgain() {
           if (stopped || token !== scrollAnchorGen || !scrollArmed) return;
           ignoreScroll++;
@@ -2215,6 +2220,8 @@
             const max = maxScrollY();
             if (max > 0) jumpTo(Math.min(y3, max));
           }
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          lastPlacedY = scrollY;
           requestAnimationFrame(function () { ignoreScroll = Math.max(0, ignoreScroll - 1); });
         }
         placeAgain();
@@ -2232,6 +2239,7 @@
         window.addEventListener("scroll", onScroll, true);
         window.addEventListener("wheel", onUser, true);
         window.addEventListener("touchstart", onUser, true);
+        window.addEventListener("keydown", onUser, true);
         timer = setTimeout(function () { stop(true); }, 1500);
         endScrollAnchor = stop;
       });
