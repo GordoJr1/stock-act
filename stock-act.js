@@ -2010,6 +2010,7 @@
   }
 
   const SCROLL_PREFIX = "sa:sy:";
+  const SCROLL_ROW = "sa:sid:";
   const SCROLL_BACK = "sa:scroll-back";
 
   function readStoredKey(key) {
@@ -2026,10 +2027,8 @@
   }
   let scrollSaveTimer = 0;
   let scrollArmed = false;
-  let scrollYTarget = 0;
-  let scrollUntil = 0;
-  let scrollObs = null;
-  let scrollRaf = 0;
+  let scrollEager = false;
+  let scrollAnchorGen = 0;
 
   function isListPage() {
     return !!LIST_FILES[pageFile(location.pathname)];
@@ -2039,10 +2038,35 @@
     return SCROLL_PREFIX + location.pathname + location.search;
   }
 
+  function scrollRowKey() {
+    return SCROLL_ROW + location.pathname + location.search;
+  }
+
+  function rowInViewId() {
+    const width = window.innerWidth || 0;
+    const height = window.innerHeight || 0;
+    if (!width || !height || !document.elementFromPoint) return "";
+    const x = Math.max(12, Math.min(width - 12, 28));
+    const spots = [0.42, 0.62, 0.28];
+    for (let i = 0; i < spots.length; i++) {
+      let el = document.elementFromPoint(x, Math.round(height * spots[i]));
+      while (el && el !== document.body && el !== document.documentElement) {
+        if (el.getAttribute && el.getAttribute("data-id")) {
+          return el.getAttribute("data-id") + "|" + Math.round(el.getBoundingClientRect().top);
+        }
+        el = el.parentElement;
+      }
+    }
+    return "";
+  }
+
   function saveScrollPos() {
-    if (!isListPage()) return;
+    // scrollArmed stays set until SA.restoreScroll. Each list page calls it (all 5 do today).
+    if (!isListPage() || scrollArmed) return;
     try {
       sessionStorage.setItem(scrollStorageKey(), String(Math.round(window.scrollY || window.pageYOffset || 0)));
+      const id = rowInViewId();
+      if (id) sessionStorage.setItem(scrollRowKey(), id);
     } catch (e) {}
   }
 
@@ -2095,46 +2119,125 @@
     return Math.max(0, h - (window.innerHeight || 0));
   }
 
-  function stopScrollRestore(done) {
-    if (scrollRaf) {
-      cancelAnimationFrame(scrollRaf);
-      scrollRaf = 0;
+  // The list pages set scroll-behavior:smooth, which would glide this jump.
+  function jumpTo(y) {
+    const top = Math.max(0, Math.round(y) || 0);
+    const nodes = [document.documentElement, document.body];
+    const prev = [];
+    for (let i = 0; i < nodes.length; i++) {
+      prev.push(nodes[i] ? nodes[i].style.scrollBehavior : "");
+      if (nodes[i]) nodes[i].style.scrollBehavior = "auto";
     }
-    if (scrollObs) {
-      scrollObs.disconnect();
-      scrollObs = null;
+    try {
+      window.scrollTo({ top: top, left: 0, behavior: "instant" });
+    } catch (e) {
+      window.scrollTo(0, top);
     }
-    if (done) scrollArmed = false;
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i]) nodes[i].style.scrollBehavior = prev[i];
+    }
   }
 
-  function pumpScrollRestore() {
-    if (!scrollArmed) return;
-    const y = scrollYTarget;
-    const max = maxScrollY();
-    if (max + 2 >= y) {
-      window.scrollTo(0, y);
-      if (Math.abs((window.scrollY || window.pageYOffset || 0) - y) <= 4) {
-        stopScrollRestore(true);
-        return;
-      }
-    }
-    if (Date.now() >= scrollUntil) {
-      if (max > 0) window.scrollTo(0, Math.min(y, max));
-      const reached = Math.abs((window.scrollY || window.pageYOffset || 0) - y) <= 4;
-      stopScrollRestore(reached);
-      return;
-    }
-    scrollRaf = requestAnimationFrame(pumpScrollRestore);
+  function savedRowParts() {
+    let raw = "";
+    try { raw = sessionStorage.getItem(scrollRowKey()) || ""; } catch (e) { return null; }
+    if (!raw) return null;
+    const bar = raw.lastIndexOf("|");
+    if (bar < 0) return { id: raw, offset: 8 };
+    const n = parseInt(raw.slice(bar + 1), 10);
+    return { id: raw.slice(0, bar), offset: isFinite(n) && n >= 0 && n <= (window.innerHeight || 0) ? n : 8 };
   }
 
-  function ensureScrollObs() {
-    if (scrollObs || typeof MutationObserver !== "function") return;
-    const root = document.body || document.documentElement;
-    if (!root) return;
-    scrollObs = new MutationObserver(function () {
-      if (scrollArmed) pumpScrollRestore();
-    });
-    scrollObs.observe(root, { childList: true, subtree: true });
+  function savedRowEl() {
+    const parts = savedRowParts();
+    if (!parts || !parts.id) return null;
+    const nodes = document.querySelectorAll("[data-id]");
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].getAttribute("data-id") !== parts.id) continue;
+      const rect = nodes[i].getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) return nodes[i];
+    }
+    return null;
+  }
+
+  function placeScroll(y) {
+    const row = savedRowEl();
+    if (row) {
+      const top = row.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
+      const parts = savedRowParts();
+      const savedOffset = parts ? parts.offset : 8;
+      jumpTo(Math.max(0, top - savedOffset));
+      return true;
+    }
+    // A filtered list can hide the saved row, so fall back to the saved y.
+    if (y && maxScrollY() + 2 >= y) {
+      jumpTo(y);
+      return Math.abs((window.scrollY || window.pageYOffset || 0) - y) <= 4;
+    }
+    return false;
+  }
+
+  let endScrollAnchor = null;
+
+  function scheduleReanchor(y) {
+    if (endScrollAnchor) endScrollAnchor(false);
+    const token = ++scrollAnchorGen;
+    const finish = function () {
+      if (token !== scrollAnchorGen || !scrollArmed) return;
+      requestAnimationFrame(function () {
+        if (token !== scrollAnchorGen || !scrollArmed) return;
+        const y2 = readScrollTarget() || y;
+        let stopped = false;
+        let obs = null;
+        let ignoreScroll = 0;
+        let timer = 0;
+        function stop(disarm) {
+          if (stopped) return;
+          stopped = true;
+          if (endScrollAnchor === stop) endScrollAnchor = null;
+          if (obs) {
+            obs.disconnect();
+            obs = null;
+          }
+          window.removeEventListener("scroll", onScroll, true);
+          window.removeEventListener("wheel", onUser, true);
+          window.removeEventListener("touchstart", onUser, true);
+          if (timer) clearTimeout(timer);
+          if (disarm !== false && token === scrollAnchorGen) scrollArmed = false;
+        }
+        function onUser() { stop(true); }
+        function onScroll() { if (!ignoreScroll) stop(true); }
+        function placeAgain() {
+          if (stopped || token !== scrollAnchorGen || !scrollArmed) return;
+          ignoreScroll++;
+          const y3 = readScrollTarget() || y2;
+          if (!placeScroll(y3)) {
+            const max = maxScrollY();
+            if (max > 0) jumpTo(Math.min(y3, max));
+          }
+          requestAnimationFrame(function () { ignoreScroll = Math.max(0, ignoreScroll - 1); });
+        }
+        placeAgain();
+        if (typeof ResizeObserver === "function" && document.body) {
+          let lastH = document.body.offsetHeight || 0;
+          obs = new ResizeObserver(function () {
+            if (stopped || token !== scrollAnchorGen || !scrollArmed) return;
+            const h = document.body.offsetHeight || 0;
+            if (h === lastH) return;
+            lastH = h;
+            placeAgain();
+          });
+          obs.observe(document.body);
+        }
+        window.addEventListener("scroll", onScroll, true);
+        window.addEventListener("wheel", onUser, true);
+        window.addEventListener("touchstart", onUser, true);
+        timer = setTimeout(function () { stop(true); }, 1500);
+        endScrollAnchor = stop;
+      });
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(finish);
+    else finish();
   }
 
   function restoreScroll() {
@@ -2144,12 +2247,13 @@
       scrollArmed = false;
       return;
     }
-    scrollYTarget = y;
-    scrollUntil = Date.now() + 3000;
-    ensureScrollObs();
-    if (scrollRaf) cancelAnimationFrame(scrollRaf);
-    scrollRaf = 0;
-    pumpScrollRestore();
+    placeScroll(y);
+    if (scrollEager) return;
+    if (!savedRowEl()) {
+      const max = maxScrollY();
+      if (max > 0 && max + 2 < y) jumpTo(Math.min(y, max));
+    }
+    scheduleReanchor(y);
   }
 
   function armScrollRestore(force) {
@@ -2157,7 +2261,10 @@
     if (!force && !shouldRestoreScroll()) return;
     scrollArmed = true;
     try { sessionStorage.removeItem(SCROLL_BACK); } catch (e) {}
+    scrollEager = true;
     restoreScroll();
+    scrollEager = false;
+    if (force && scrollArmed) scheduleReanchor(readScrollTarget());
   }
 
   function rememberReturn() {
@@ -2199,19 +2306,10 @@
   function parseHref(href) {
     try {
       const u = new URL(href, location.href);
-      return { file: pageFile(u.pathname), search: u.search, hash: u.hash };
+      return { file: pageFile(u.pathname), path: u.pathname, search: u.search, hash: u.hash };
     } catch (e) {
       return null;
     }
-  }
-
-  function listQueryMatchesStored(ref) {
-    const stored = storedReturn();
-    if (!ref || !stored) return false;
-    const r = parseHref(ref);
-    const s = parseHref(stored);
-    if (!r || !s || !LIST_FILES[r.file] || r.file !== s.file) return false;
-    return r.search === s.search;
   }
 
   function resolveDest(fallbackHref) {
@@ -2240,13 +2338,17 @@
 
   function canHistoryBack(ref, dest) {
     if (history.length < 2) return false;
-    if (!ref || !dest || !isSaHref(ref)) return false;
+    if (!ref || !isSaHref(ref)) return false;
     const r = parseHref(ref);
+    if (!r || r.file === pageFile(location.pathname)) return false;
+    if (LIST_FILES[r.file]) {
+      let back = null;
+      try { back = sessionStorage.getItem(SCROLL_BACK); } catch (e) {}
+      return back === r.path + r.search;
+    }
+    if (!dest) return false;
     const d = parseHref(dest);
-    if (!r || !d) return false;
-    if (r.file === pageFile(location.pathname)) return false;
-    if (r.file !== d.file || r.search !== d.search) return false;
-    if (LIST_FILES[r.file] && !listQueryMatchesStored(ref)) return false;
+    if (!d || r.file !== d.file || r.search !== d.search) return false;
     return true;
   }
 
@@ -2279,7 +2381,6 @@
   }
 
   function watchListReturn() {
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     rememberReturn();
     window.addEventListener("pagehide", function () {
       markScrollBack();
@@ -2287,7 +2388,11 @@
     });
     window.addEventListener("pageshow", function (e) {
       rememberReturn();
-      if (e && e.persisted) armScrollRestore(true);
+      if (!(e && e.persisted)) return;
+      const y = readScrollTarget();
+      const here = window.scrollY || window.pageYOffset || 0;
+      if (y && Math.abs(here - y) <= 4) return;
+      armScrollRestore(true);
     });
     document.addEventListener("visibilitychange", function () {
       if (document.visibilityState === "hidden") saveScrollPos();
