@@ -2177,18 +2177,63 @@
     return false;
   }
 
+  let endScrollAnchor = null;
+
   function scheduleReanchor(y) {
+    if (endScrollAnchor) endScrollAnchor(false);
     const token = ++scrollAnchorGen;
     const finish = function () {
       if (token !== scrollAnchorGen || !scrollArmed) return;
       requestAnimationFrame(function () {
         if (token !== scrollAnchorGen || !scrollArmed) return;
         const y2 = readScrollTarget() || y;
-        if (!placeScroll(y2)) {
-          const max = maxScrollY();
-          if (max > 0) jumpTo(Math.min(y2, max));
+        let stopped = false;
+        let obs = null;
+        let ignoreScroll = 0;
+        let timer = 0;
+        function stop(disarm) {
+          if (stopped) return;
+          stopped = true;
+          if (endScrollAnchor === stop) endScrollAnchor = null;
+          if (obs) {
+            obs.disconnect();
+            obs = null;
+          }
+          window.removeEventListener("scroll", onScroll, true);
+          window.removeEventListener("wheel", onUser, true);
+          window.removeEventListener("touchstart", onUser, true);
+          if (timer) clearTimeout(timer);
+          if (disarm !== false && token === scrollAnchorGen) scrollArmed = false;
         }
-        scrollArmed = false;
+        function onUser() { stop(true); }
+        function onScroll() { if (!ignoreScroll) stop(true); }
+        function placeAgain() {
+          if (stopped || token !== scrollAnchorGen || !scrollArmed) return;
+          ignoreScroll++;
+          const y3 = readScrollTarget() || y2;
+          if (!placeScroll(y3)) {
+            const max = maxScrollY();
+            if (max > 0) jumpTo(Math.min(y3, max));
+          }
+          requestAnimationFrame(function () { ignoreScroll = Math.max(0, ignoreScroll - 1); });
+        }
+        placeAgain();
+        if (typeof ResizeObserver === "function" && document.body) {
+          let lastH = document.body.offsetHeight || 0;
+          obs = new ResizeObserver(function () {
+            if (stopped || token !== scrollAnchorGen || !scrollArmed) return;
+            const h = document.body.offsetHeight || 0;
+            if (h === lastH) return;
+            lastH = h;
+            placeAgain();
+          });
+          obs.observe(document.body);
+        }
+        window.addEventListener("scroll", onScroll, true);
+        window.addEventListener("wheel", onUser, true);
+        window.addEventListener("touchstart", onUser, true);
+        timer = setTimeout(function () { stop(true); }, 1500);
+        endScrollAnchor = stop;
       });
     };
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(finish);
