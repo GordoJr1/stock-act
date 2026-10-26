@@ -2028,6 +2028,7 @@
   let scrollSaveTimer = 0;
   let scrollArmed = false;
   let scrollEager = false;
+  let scrollAnchorGen = 0;
 
   function isListPage() {
     return !!LIST_FILES[pageFile(location.pathname)];
@@ -2058,7 +2059,7 @@
   }
 
   function saveScrollPos() {
-    if (!isListPage()) return;
+    if (!isListPage() || scrollArmed) return;
     try {
       sessionStorage.setItem(scrollStorageKey(), String(Math.round(window.scrollY || window.pageYOffset || 0)));
       const id = rowInViewId();
@@ -2148,16 +2149,36 @@
   }
 
   function placeScroll(y) {
-    const max = maxScrollY();
-    if (y && max + 2 >= y) {
+    const row = savedRowEl();
+    if (row) {
+      const top = row.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
+      jumpTo(Math.max(0, top - 8));
+      return true;
+    }
+    // A filtered list can hide the saved row, so fall back to the saved y.
+    if (y && maxScrollY() + 2 >= y) {
       jumpTo(y);
       return Math.abs((window.scrollY || window.pageYOffset || 0) - y) <= 4;
     }
-    const row = savedRowEl();
-    if (!row) return false;
-    const top = row.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
-    jumpTo(Math.max(0, top - 8));
-    return true;
+    return false;
+  }
+
+  function scheduleReanchor(y) {
+    const token = ++scrollAnchorGen;
+    const finish = function () {
+      if (token !== scrollAnchorGen || !scrollArmed) return;
+      requestAnimationFrame(function () {
+        if (token !== scrollAnchorGen || !scrollArmed) return;
+        const y2 = readScrollTarget() || y;
+        if (!placeScroll(y2)) {
+          const max = maxScrollY();
+          if (max > 0) jumpTo(Math.min(y2, max));
+        }
+        scrollArmed = false;
+      });
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(finish);
+    else finish();
   }
 
   function restoreScroll() {
@@ -2167,14 +2188,13 @@
       scrollArmed = false;
       return;
     }
-    if (placeScroll(y)) {
-      scrollArmed = false;
-      return;
-    }
+    placeScroll(y);
     if (scrollEager) return;
-    const max = maxScrollY();
-    if (max > 0) jumpTo(Math.min(y, max));
-    scrollArmed = false;
+    if (!savedRowEl()) {
+      const max = maxScrollY();
+      if (max > 0 && max + 2 < y) jumpTo(Math.min(y, max));
+    }
+    scheduleReanchor(y);
   }
 
   function armScrollRestore(force) {
@@ -2185,6 +2205,7 @@
     scrollEager = true;
     restoreScroll();
     scrollEager = false;
+    if (force && scrollArmed) scheduleReanchor(readScrollTarget());
   }
 
   function rememberReturn() {
@@ -2226,7 +2247,7 @@
   function parseHref(href) {
     try {
       const u = new URL(href, location.href);
-      return { file: pageFile(u.pathname), search: u.search, hash: u.hash };
+      return { file: pageFile(u.pathname), path: u.pathname, search: u.search, hash: u.hash };
     } catch (e) {
       return null;
     }
@@ -2261,7 +2282,7 @@
     if (!ref || !isSaHref(ref)) return false;
     const r = parseHref(ref);
     if (!r || r.file === pageFile(location.pathname)) return false;
-    if (LIST_FILES[r.file]) return true;
+    if (LIST_FILES[r.file]) return readStoredKey(SCROLL_BACK) === r.path + r.search;
     if (!dest) return false;
     const d = parseHref(dest);
     if (!d || r.file !== d.file || r.search !== d.search) return false;
@@ -2297,7 +2318,6 @@
   }
 
   function watchListReturn() {
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     rememberReturn();
     window.addEventListener("pagehide", function () {
       markScrollBack();
@@ -2305,7 +2325,11 @@
     });
     window.addEventListener("pageshow", function (e) {
       rememberReturn();
-      if (e && e.persisted) armScrollRestore(true);
+      if (!(e && e.persisted)) return;
+      const y = readScrollTarget();
+      const here = window.scrollY || window.pageYOffset || 0;
+      if (y && Math.abs(here - y) <= 4) return;
+      armScrollRestore(true);
     });
     document.addEventListener("visibilitychange", function () {
       if (document.visibilityState === "hidden") saveScrollPos();
