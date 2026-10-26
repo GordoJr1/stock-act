@@ -2145,7 +2145,7 @@
     const bar = raw.lastIndexOf("|");
     if (bar < 0) return { id: raw, offset: 8 };
     const n = parseInt(raw.slice(bar + 1), 10);
-    return { id: raw.slice(0, bar), offset: isFinite(n) ? n : 8 };
+    return { id: raw.slice(0, bar), offset: isFinite(n) && n >= 0 && n <= (window.innerHeight || 0) ? n : 8 };
   }
 
   function savedRowEl() {
